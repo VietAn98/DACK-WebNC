@@ -6,15 +6,16 @@ module.exports = {
   },
   extends: ["plugin:react/recommended", "airbnb", "prettier", "prettier/react"],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
-  },
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true
-    },
-    ecmaVersion: 2018,
-    sourceType: "module"
+    window: true,
+    document: true,
+    localStorage: true,
+    FormData: true,
+    FileReader: true,
+    Blob: true,
+    navigator: true,
+    Headers: true,
+    Request: true,
+    fetch: true
   },
   plugins: ["react", "prettier"],
   rules: {
@@ -31,5 +32,6 @@ module.exports = {
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
     semi: "error"
-  }
+  },
+  parser: "babel-eslint"
 };
