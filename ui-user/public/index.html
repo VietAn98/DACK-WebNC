@@ -1,159 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>
-      Stereo Entertainment Category Bootstrap responsive Website Template | Home
-      :: W3layouts
-    </title>
-    <!-- Meta-Tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
     <meta
-      name="keywords"
-      content="Stereo Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"
+      name="description"
+      content="Web site created using create-react-app"
     />
-    <script type="application/x-javascript">
-      addEventListener("load", function () {
-      	setTimeout(hideURLbar, 0);
-      }, false);
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-      function hideURLbar() {
-      	window.scrollTo(0, 1);
-      }
-    </script>
-    <!-- js -->
-    <script
-      type="text/javascript"
-      src="../src/public/js/jquery-2.1.4.min.js"
-    ></script>
-    <!--search-bar-->
-    <script src="../src/public/js/main.js"></script>
-    <!--//search-bar-->
-    <!-- FlexSlider -->
-    <script defer src="../src/public/js/jquery.flexslider.js"></script>
-    <script type="text/javascript">
-      $(function() {});
-      $(window).load(function() {
-        $(".flexslider").flexslider({
-          animation: "slide",
-          start: function(slider) {
-            $("body").removeClass("loading");
-          }
-        });
-      });
-    </script>
-    <!-- FlexSlider -->
-    <!-- about-section-flexisel-slider-->
-    <script type="text/javascript">
-      $(window).load(function() {
-        $("#flexiselDemo1").flexisel({
-          visibleItems: 3,
-          animationSpeed: 1000,
-          autoPlay: false,
-          autoPlaySpeed: 3000,
-          pauseOnHover: true,
-          enableResponsiveBreakpoints: true,
-          responsiveBreakpoints: {
-            portrait: {
-              changePoint: 480,
-              visibleItems: 1
-            },
-            landscape: {
-              changePoint: 640,
-              visibleItems: 2
-            },
-            tablet: {
-              changePoint: 768,
-              visibleItems: 2
-            }
-          }
-        });
-      });
-    </script>
-    <script
-      type="text/javascript"
-      src="../src/public/js/jquery.flexisel.js"
-    ></script>
-    <!-- //about-section-flexisel-slider-->
-    <script src="../src/public/js/jzBox.js"></script>
-    <!-- start-smoth-scrolling -->
-    <script type="text/javascript" src="../src/public/js/move-top.js"></script>
-    <script type="text/javascript" src="../src/public/js/easing.js"></script>
-    <script type="text/javascript">
-      jQuery(document).ready(function($) {
-        $(".scroll").click(function(event) {
-          event.preventDefault();
-          $("html,body").animate(
-            {
-              scrollTop: $(this.hash).offset().top
-            },
-            1000
-          );
-        });
-      });
-    </script>
-    <!-- start-smoth-scrolling -->
-    <!-- smooth scrolling -->
-    <script type="text/javascript">
-      $(document).ready(function() {
-        /*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/
-        $().UItoTop({
-          easingType: "easeOutQuart"
-        });
-      });
-    </script>
-    <!-- <a href="#home" class="scroll" id="toTop" style="display: block;">
-      <span id="toTopHover" style="opacity: 1;"> </span>
-    </a> -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <!-- //smooth scrolling -->
-    <script src="../src/public/js/bootstrap.js"></script>
-    <!-- //Meta-Tags -->
-    <link
-      href="../src/public/css/bootstrap.css"
-      rel="stylesheet"
-      type="text/css"
-      media="all"
-    />
-    <!--bootstrap-css-->
-    <link href="../src/public/css/font-awesome.css" rel="stylesheet" />
-    <!--font-awesome-css-->
-    <link
-      rel="stylesheet"
-      href="../src/public/css/flexslider.css"
-      type="text/css"
-      media="screen"
-    />
-    <!--flexslider-css-->
-    <link
-      href="../src/public/css/style.css"
-      rel="stylesheet"
-      type="text/css"
-      media="all"
-    />
-    <!--style-sheet-->
-    <!--fonts-->
-    <link
-      href="//fonts.googleapis.com/css?family=Raleway:200,300,400,600,700,800,900"
-      rel="stylesheet"
-    />
-    <!--//fonts-->
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Gia Sư Online</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   </body>
 </html>

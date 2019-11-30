@@ -1,0 +1,12 @@
+.carousel-indicators li {
+	background-color: gray;
+	cursor: pointer;
+	transition: 0.3s ease-in-out;
+}
+.carousel-indicators li:hover {
+	background-color: #ee4540;
+}
+.carousel-indicators .active {
+	background-color: #ee4540;
+	width: 45px;
+}
