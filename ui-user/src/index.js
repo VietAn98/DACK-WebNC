@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import App from './App';
 import './public/css/style.css';
+import "./public/css/bootstrap.css";
+import "./public/css/flexslider.css";
+import "./public/css/font-awesome.css";
 
 ReactDOM.render(
   <Provider store={store}>

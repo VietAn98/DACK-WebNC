@@ -262,9 +262,9 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-
+/* src: url('../fonts/fontawesome-webfont.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg'); */
 }
 .glyphicon {
   position: relative;
@@ -2641,10 +2641,12 @@ input[type="search"] {
 .radio label,
 .checkbox label {
   min-height: 20px;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
+  font-size: 15px;
+  color: #fff;
 }
 .radio input[type="radio"],
 .radio-inline input[type="radio"],

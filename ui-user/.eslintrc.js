@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ["plugin:react/recommended", "airbnb", "prettier", "prettier/react"],
+  extends: ["plugin:react/recommended", "airbnb"],
   globals: {
     window: true,
     document: true,
