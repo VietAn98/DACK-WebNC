@@ -34,12 +34,18 @@ module.exports = app => {
   );
   app.get("/api/getList", registerController.list);
   app.post("/api/register-user", registerController.createAccount);
-  app.get("/api/verify-account", registerController.verifyAccount);
+  app.get("/api/verify-account", registerController.verifyAccount); // chưa có trong file word
   app.post("/api/login", loginController.login);
+  
+  // chưa có trong file word
   app.get("/api/profile",
     passports.authenticate('jwt', { session: false }),
     loginController.getProfile
   );
+  
+  app.post("/api/forget-password", loginController.forgetPassw);
+  app.post("/api/update-new-password" , loginController.updateNewPassw)
+  
 
   // app.post('/api/todos', todosController.create);
   // // app.get('/api/todos/:todoId', todosController.retrieve);
