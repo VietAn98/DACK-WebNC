@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 
 import './AboutUs.css';
 
-export class AboutUs extends React.PureComponent {
+class AboutUs extends React.PureComponent {
   render() {
     return (
       <section>

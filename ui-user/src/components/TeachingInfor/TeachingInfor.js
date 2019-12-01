@@ -18,7 +18,7 @@ class TeachingInfor extends React.PureComponent {
             }}
           >
             <h3 className="w3layouts-heading white-title">
-              <span>Đăng Ký</span>
+              <span>Đăng Ký Thông Tin Dạy Học</span>
             </h3>
             <div className="w3-agile_mail_grids justify-center">
               <div className="col-md-7 w3-agile_mail_grid_right">

@@ -4,23 +4,26 @@ import './FeatureTuitor.css';
 
 import CardList from '../CardList';
 
-export class FeatureTuitor extends Component {
-	render() {
-		return (
-			<section style={this.props.style}>
-				<Container>
-					<h2>
-						<div className="title">
-							Giáo Viên <span>Nổi Bật</span>
-						</div>
-					</h2>
-					<div style={{ marginTop: '2rem' }}>
-						<CardList />
-					</div>
-				</Container>
-			</section>
-		);
-	}
+class FeatureTuitor extends React.PureComponent {
+  render() {
+    const { style } = this.props;
+    return (
+      <section style={style}>
+        <Container>
+          <h2>
+            <div className="title">
+              Giáo Viên
+              {' '}
+              <span>Nổi Bật</span>
+            </div>
+          </h2>
+          <div style={{ marginTop: '2rem' }}>
+            <CardList />
+          </div>
+        </Container>
+      </section>
+    );
+  }
 }
 
 export default FeatureTuitor;
