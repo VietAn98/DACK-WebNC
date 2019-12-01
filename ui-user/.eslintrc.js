@@ -17,7 +17,7 @@ module.exports = {
     Request: true,
     fetch: true
   },
-  plugins: ["react", "prettier"],
+  plugins: ["react"],
   rules: {
     "linebreak-style": 0,
     "react/jsx-filename-extension": [
@@ -31,7 +31,8 @@ module.exports = {
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
-    semi: "error"
+    semi: "error",
+    "singleQuote": 0
   },
   parser: "babel-eslint"
 };
