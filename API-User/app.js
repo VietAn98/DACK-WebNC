@@ -16,6 +16,6 @@ app.use(function(req, res, next) {
 //passw mysql: C5f6HMl1wA
 require('./routes')(app);
 
-app.listen(4000, () => {
-  console.log("App listening on port 4000!!!!");
+app.listen(3001, () => {
+  console.log("App listening on port 3001!!!!");
 });

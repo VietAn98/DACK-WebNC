@@ -52,6 +52,8 @@ module.exports = {
           console.log("err", err);
         }
       });
+      console.log("++++++++++++", req.body)
+      console.log("................", req.body.name)
       
       var salt = bcrypt.genSaltSync(10);
       var hashPassw = bcrypt.hashSync(req.body.password,salt);
