@@ -1,7 +1,7 @@
-const db = require("../model/account.model");
 const randomstring = require("randomstring");
 const nodemailer = require("nodemailer");
 const bcrypt = require('bcryptjs');
+const db = require("../model/account.model");
 
 module.exports = {
   // get list account
@@ -63,7 +63,7 @@ module.exports = {
         categoryUser: req.body.categoryUser,
         state: 0,
         gender: req.body.gender,
-
+        keyPass: randomstring.generate(100),
       };
 
       return db

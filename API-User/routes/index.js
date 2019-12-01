@@ -1,6 +1,6 @@
-
 const registerController = require("../controllers").registerController;
-// const todoItemsController = require("../controllers").todoItems;
+const loginController = require("../controllers").loginController;
+const passports = require("passport");
 
 module.exports = app => {
   // Add headers
@@ -25,18 +25,24 @@ module.exports = app => {
     res.setHeader("Access-Control-Allow-Credentials", true);
 
     // Pass to next layer of middleware
-    next(); 
+    next();
   });
   app.get("/api", (req, res) =>
     res.status(200).send({
       message: "Welcome to the Todos API!"
     })
   );
-  app.get('/api/getList', registerController.list);
-  app.post('/api/register-user', registerController.createAccount)
-  app.get('/api/verify-account', registerController.verifyAccount)
+  app.get("/api/getList", registerController.list);
+  app.post("/api/register-user", registerController.createAccount);
+  app.get("/api/verify-account", registerController.verifyAccount);
+  app.post("/api/login", loginController.login);
+  app.get("/api/profile",
+    passports.authenticate('jwt', { session: false }),
+    loginController.getProfile
+  );
+
   // app.post('/api/todos', todosController.create);
-   // // app.get('/api/todos/:todoId', todosController.retrieve);
+  // // app.get('/api/todos/:todoId', todosController.retrieve);
   // app.get('/api/todos/:todoId', todosController.show);
   // app.put('/api/todos/:todoId', todosController.update);
   // app.delete('/api/todos/:todoId', todosController.destroy);
