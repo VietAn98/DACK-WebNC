@@ -60,7 +60,7 @@ module.exports = {
         name: req.body.name,
         gmail: req.body.gmail,
         password: hashPassw,
-        addressId: req.body.addressId,
+        districtId: req.body.districtId,
         categoryUser: req.body.categoryUser,
         state: 0,
         gender: req.body.gender,

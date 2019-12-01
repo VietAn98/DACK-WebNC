@@ -40,10 +40,10 @@ passport.use(
           var userId = rows[0].userId;
           var name = rows[0].name;
           var gender = rows[0].gender;
-          var addressId = rows[0].addressId;
+          var districtId = rows[0].districtId;
           
           if (rows[0] != null && bcrypt.compareSync(password, rows[0].password)) {
-            user = { gmail, userId, name, gender, addressId};
+            user = { gmail, userId, name, gender, districtId};
           }
 
           // console.log(user)
