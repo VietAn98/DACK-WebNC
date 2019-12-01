@@ -13,6 +13,10 @@ module.exports = {
     return db.update("account", "userId", account);
   },
 
+  getAccByEmailRegister: email => {
+    return db.load(`select * from account where gmail= '${email}' and state= '1'`);
+  },
+
   getAccByEmail: email => {
     return db.load(`select * from account where gmail= '${email}'`);
   },

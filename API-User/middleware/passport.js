@@ -34,7 +34,7 @@ passport.use(
     function(gmail, password, cb) {
       
       //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
-      UserModel.getAccByEmail(gmail)
+      UserModel.getAccByEmailRegister(gmail)
         .then(rows => {
           var user = null;
           var userId = rows[0].userId;

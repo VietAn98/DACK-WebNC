@@ -26,6 +26,7 @@ module.exports = {
       });
     });
     if (check) {
+      let keyPass = randomstring.generate(100);
       // config mail server
       var transporter = nodemailer.createTransport({
         service: "Gmail",
@@ -35,20 +36,20 @@ module.exports = {
         }
       });
       var url =
-        "http://localhost:3000/api/verify-account?email=" + req.body.gmail;
+        "http://localhost:3000/api/verify-account?email=" + req.body.gmail + '&key=' + keyPass;
       var mainOptions = {
         // thiết lập đối tượng, nội dung gửi mail
         from: "AH!BreakingNews",
         to: req.body.gmail, //đến đâu
-        subject: "Email lấy lại mật khẩu từ báo điện tử AH!BreakingNews",
+        subject: "Email xác thực tài khoản từ website gia sư online",
         html:
           '<p>Đây là thông tin bảo mật, đừng để nó public ra ngoài</p></br><a href="' +
           url +
-          '"><b>Click here to reset password</b></a>'
+          '"><b>Click here to verify account!!!</b></a>'
       };
       transporter.sendMail(mainOptions, function(err, info) {
         if (err) {
-          console.log("err đừng xuất hiện ", err);
+          console.log("err", err);
         }
       });
       
@@ -63,7 +64,7 @@ module.exports = {
         categoryUser: req.body.categoryUser,
         state: 0,
         gender: req.body.gender,
-        keyPass: randomstring.generate(100),
+        keyPass: keyPass
       };
 
       return db
@@ -76,13 +77,27 @@ module.exports = {
   //confirm accout by email
   verifyAccount(req, res) {
     let mail = req.query.email;
-    db.getAccByEmail(mail).then(row => {
-      let entity = {
-        userId: row[0].userId,
-        state: 1
-      };
-      db.updateAcc(entity).catch(error => res.status(400).send(error));
-    });
-    res.send("Xác thực thành công, bạn có thể đăng nhập vào trang web....");
+    let keyPass = req.query.key
+    if(keyPass && mail)
+    {
+      db.getAccByEmail(mail).then(row => {
+        if(keyPass === row[0].keyPass)
+        {
+          let entity = {
+            userId: row[0].userId,
+            state: 1
+          };
+          db.updateAcc(entity).catch(error => res.status(400).send(error));
+          res.send("Xác thực thành công, bạn có thể đăng nhập vào trang web....");
+        }
+        else 
+        {
+          res.send("Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực....");
+        }
+      });
+    }
+    else {
+      res.send("Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực....");
+    }
   }
 };
