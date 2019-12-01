@@ -1,11 +1,10 @@
 import React from 'react';
 import { Container, Form } from 'react-bootstrap';
-import './SignUp.css';
 
-class Register extends React.PureComponent {
+class TeachingInfor extends React.PureComponent {
   onChangeSelection = (e) => {
     console.log(e.target.value);
-  }
+  };
 
   render() {
     return (
@@ -15,7 +14,7 @@ class Register extends React.PureComponent {
             style={{
               backgroundColor: 'rgba(0,0,0,0.5)',
               borderRadius: '20px',
-              paddingBottom: '3rem'
+              paddingBottom: '3rem',
             }}
           >
             <h3 className="w3layouts-heading white-title">
@@ -117,7 +116,7 @@ class Register extends React.PureComponent {
                   />
                 </Form>
 
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: "center" }}>
                   <h4 className="mt-4 text-white">Hoặc</h4>
                   <h5 className="text-white">Đăng kí tài khoản bằng</h5>
                   <a href="#" className="fb-btn">
@@ -140,4 +139,4 @@ class Register extends React.PureComponent {
   }
 }
 
-export default Register;
+export default TeachingInfor;
