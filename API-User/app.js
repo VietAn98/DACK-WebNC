@@ -4,8 +4,12 @@ const passport = require("passport");
 
 require('./middleware/passport');
 const app = express();
+<<<<<<< HEAD
 
 var allowCrossDomain = function(req, res, next) {
+=======
+var allowCrossDomain = function (req, res, next) {
+>>>>>>> 2ba35a70934415be2e2e23bababbd2d853a3a024
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -22,16 +26,19 @@ var allowCrossDomain = function(req, res, next) {
 };
 
 app.use(allowCrossDomain);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ba35a70934415be2e2e23bababbd2d853a3a024
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "*");
-  next(); 
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "*");
+//   next(); 
+// });
 //passw mysql: C5f6HMl1wA
 require('./routes/account.router')(app);
 require('./routes/district.router')(app);

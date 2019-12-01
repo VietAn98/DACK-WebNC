@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import './SignUp.css';
 
 class Register extends React.PureComponent {
@@ -17,16 +18,17 @@ class Register extends React.PureComponent {
     const districtId = document.getElementById('district').value;
     const gender = document.getElementById('selectGender').value;
     const categoryUser = document.getElementById('categoryUser').value;
-    // console.log(
-    //   "password",
-    //   name,
-    //   password,
-    //   gmail,
-    //   districtId,
-    //   gender,
-    //   categoryUser
-    // );
-    registerRequest(name, gmail, password, districtId, gender, categoryUser);
+
+    Promise.resolve(
+      registerRequest(name, gmail, password, districtId, gender, categoryUser)
+    ).then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Đăng Kí Thành Công',
+        text: 'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!',
+        // footer: '<a href>Đến Trang Chủ</a>',
+      });
+    });
   };
 
   render() {
@@ -37,7 +39,7 @@ class Register extends React.PureComponent {
             style={{
               backgroundColor: 'rgba(0,0,0,0.5)',
               borderRadius: '20px',
-              paddingBottom: '3rem'
+              paddingBottom: '3rem',
             }}
           >
             <h3 className="w3layouts-heading white-title">

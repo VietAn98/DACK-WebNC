@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import Validator from '../../utils/validator';
 import './SignIn.css';
 
@@ -23,6 +24,32 @@ class Login extends React.PureComponent {
     this.validator = new Validator(rules);
   }
 
+  onSubmitSignInForm = (e) => {
+    e.preventDefault();
+    const { loginRequest } = this.props;
+    const gmail = document.getElementById('gmail').value;
+    const password = document.getElementById('password').value;
+
+    console.log('gmail, password:', gmail, password);
+    Promise.resolve(
+      loginRequest(gmail, password),
+    ).then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Đăng Nhập Thành Công',
+        text: 'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!',
+        // footer: '<a href>Đến Trang Chủ</a>',
+      });
+    }).catch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Đăng Nhập Thất Bại',
+        text: 'Xin hãy kiểm tra lại thông tin!',
+        // footer: '<a href>Đến Trang Chủ</a>',
+      });
+    });
+  }
+
   render() {
     return (
       <div className="contact-sectn" id="contact">
@@ -33,14 +60,14 @@ class Login extends React.PureComponent {
             </h3>
             <div className="w3-agile_mail_grids justify-center">
               <div className="col-md-7 w3-agile_mail_grid_right">
-                <Form action="#" method="post" className="justify-center flex-wrap">
+                <Form action="#" method="post" className="justify-center flex-wrap" onSubmit={this.onSubmitSignInForm}>
                   <div className="col-md-10 col-sm-10 pb-5">
-                    <input type="email" name="email" placeholder="Email" required="" />
+                    <input type="email" id="gmail" placeholder="Email" required="" />
                   </div>
                   <div className="col-md-10 col-sm-10 pb-5">
                     <input
                       type="password"
-                      name="password"
+                      id="password"
                       placeholder="Nhập mật khẩu"
                       required=""
                     />
