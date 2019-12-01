@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import './Banner.css';
 
-import banner1 from '../../images/banner1.png';
-import banner2 from '../../images/banner2.png';
-import banner3 from '../../images/banner3.png';
+import banner1 from '../../public/images/banner1.png';
+import banner2 from '../../public/images/banner2.png';
+import banner3 from '../../public/images/banner3.png';
 
 export class Banner extends Component {
 	render() {

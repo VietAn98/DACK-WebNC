@@ -60,7 +60,7 @@ h3.white-title {
 }
 
 .contact-sectn {
-	background: url(../../images/trianglify.png) no-repeat;
+	background: url(../../public/images/trianglify.png) no-repeat;
 	background-position: center;
 	background-size: cover !important;
 	-webkit-background-size: cover;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './CardTuitor.css';
-import avatar from '../images/avatar.jpg';
+import avatar from '../public/images/avatar.jpg';
 import { Button } from 'react-bootstrap';
 
 export class Card extends Component {
