@@ -52,8 +52,6 @@ module.exports = {
           console.log("err", err);
         }
       });
-      console.log("++++++++++++", req.body)
-      console.log("................", req.body.name)
       
       var salt = bcrypt.genSaltSync(10);
       var hashPassw = bcrypt.hashSync(req.body.password,salt);
@@ -73,7 +71,7 @@ module.exports = {
         .createAcc(entity)
         .then(id => res.status(200).send({ status: "200" }))
         .catch(error => res.status(400).send(error));
-    } else return res.status(400).send({ error: "Tài khoản đã tồn tại" });
+    } else return res.status(400).send({ message: "Tài khoản đã tồn tại" });
   },
 
   //confirm accout by email
@@ -90,16 +88,16 @@ module.exports = {
             state: 1
           };
           db.updateAcc(entity).catch(error => res.status(400).send(error));
-          res.send("Xác thực thành công, bạn có thể đăng nhập vào trang web....");
+          res.send({message: "Xác thực thành công, bạn có thể đăng nhập vào trang web...."});
         }
         else 
         {
-          res.send("Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực....");
+          res.send({message:"Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực...."});
         }
       });
     }
     else {
-      res.send("Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực....");
+      res.send({message:"Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực...."});
     }
   }
 };

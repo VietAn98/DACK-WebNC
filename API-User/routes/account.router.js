@@ -1,6 +1,6 @@
 const registerController = require("../controllers").registerController;
 const loginController = require("../controllers").loginController;
-const passports = require("passport");
+const passport = require("passport");
 
 module.exports = app => {
   // Add headers
@@ -35,33 +35,14 @@ module.exports = app => {
   app.get("/api/getList", registerController.list);
   app.post("/api/register-user", registerController.createAccount);
   app.get("/api/verify-account", registerController.verifyAccount); // chưa có trong file word
-  app.post("/api/login", loginController.login);
-  
+  app.post("/api/login-user", loginController.login);
+
   // chưa có trong file word
   app.get("/api/profile",
-    passports.authenticate('jwt', { session: false }),
+    passport.authenticate("jwt", { session: false }),
     loginController.getProfile
   );
-  
+
   app.post("/api/forget-password", loginController.forgetPassw);
-  app.post("/api/update-new-password" , loginController.updateNewPassw)
-  
-
-  // app.post('/api/todos', todosController.create);
-  // // app.get('/api/todos/:todoId', todosController.retrieve);
-  // app.get('/api/todos/:todoId', todosController.show);
-  // app.put('/api/todos/:todoId', todosController.update);
-  // app.delete('/api/todos/:todoId', todosController.destroy);
-
-  // app.post('/api/todos/:todoId/items', todoItemsController.create);
-  // app.put('/api/todos/:todoId/items/:todoItemId', todoItemsController.update);
-  // app.delete(
-  //     '/api/todos/:todoId/items/:todoItemId', todoItemsController.destroy
-  // );
-
-  // // For any other request method on todo items, we're going to return "Method Not Allowed"
-  // app.all('/api/todos/:todoId/items', (req, res) =>
-  // res.status(405).send({
-  //     message: 'Method Not Allowed',
-  // }));
+  app.post("/api/update-new-password", loginController.updateNewPassw);
 };
