@@ -19,7 +19,7 @@ export const registerRequest = (
       gender,
       categoryUser,
     })
-    .then(respond => console.log('Respond:', respond))
+    .then((respond) => console.log('Respond:', respond))
     // .then(status => dispatch(REGISTER_FETCH))
     .catch((err) => console.log('Error occured', err));
 };
