@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import SignUp from '../components/SignUp/SignUp';
+import React from 'react';
+import SignUp from '../containers/SignUpContainer';
 
 class SignUpPage extends React.PureComponent {
   render() {
