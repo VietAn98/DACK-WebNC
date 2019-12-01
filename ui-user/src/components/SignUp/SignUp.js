@@ -5,7 +5,29 @@ import './SignUp.css';
 class Register extends React.PureComponent {
   onChangeSelection = (e) => {
     console.log(e.target.value);
-  }
+  };
+
+  onSubmitSignUpForm = (e) => {
+    e.preventDefault();
+    // console.log(document.getElementById("selectGender").value);
+    const { registerRequest } = this.props;
+    const name = document.getElementById('name').value;
+    const gmail = document.getElementById('gmail').value;
+    const password = document.getElementById('password').value;
+    const districtId = document.getElementById('district').value;
+    const gender = document.getElementById('selectGender').value;
+    const categoryUser = document.getElementById('categoryUser').value;
+    // console.log(
+    //   "password",
+    //   name,
+    //   password,
+    //   gmail,
+    //   districtId,
+    //   gender,
+    //   categoryUser
+    // );
+    registerRequest(name, gmail, password, districtId, gender, categoryUser);
+  };
 
   render() {
     return (
@@ -23,71 +45,73 @@ class Register extends React.PureComponent {
             </h3>
             <div className="w3-agile_mail_grids justify-center">
               <div className="col-md-7 w3-agile_mail_grid_right">
-                <Form action="#" method="post">
+                <Form
+                  action="#"
+                  method="post"
+                  onSubmit={this.onSubmitSignUpForm}
+                  className="signupForm"
+                >
                   <div className="col-md-9 col-sm-9 contact_left_grid">
                     <input
                       type="text"
-                      name="name"
+                      id="name"
                       placeholder="Họ và tên"
                       required=""
                     />
                   </div>
                   <div className="col-md-3 col-sm-3 contact_left_grid">
-                    <div className="form-checkbox float-left">
-                      <Form.Check
-                        className="checkbox"
-                        type="checkbox"
-                        id="male"
-                        label="Nam"
-                      />
-                      <Form.Check
-                        className="mt-3 ml-5 checkbox"
-                        type="checkbox"
-                        id="female"
-                        label="Nữ"
-                      />
+                    <div className="form-checkbox">
+                      <Form.Control
+                        as="select"
+                        className="select-form"
+                        id="selectGender"
+                      >
+                        <option className="black-title" value="Nam">
+                          Nam
+                        </option>
+                        <option className="black-title" value="Nữ">
+                          Nữ
+                        </option>
+                      </Form.Control>
                     </div>
                   </div>
                   <br />
                   <div className="col-md-12 col-sm-12">
                     <input
                       type="email"
-                      name="email"
+                      id="gmail"
                       placeholder="Email"
                       required=""
                     />
                   </div>
-                  {/* <div className="col-md-12 col-sm-12 pt-4"></div> */}
                   <div className="col-md-6 col-sm-6 contact_left_grid pt-3">
-                    <input
-                      type="text"
-                      name="address"
-                      placeholder="Địa chỉ"
-                      required=""
-                    />
+                    <Form.Control as="select" className="select-form" id="city">
+                      <option className="black-title" value="1">
+                        TP Hồ Chí Minh
+                      </option>
+                      <option className="black-title" value="0">
+                        ...
+                      </option>
+                    </Form.Control>
                     <input
                       type="password"
-                      name="password"
+                      id="password"
                       placeholder="Nhập mật khẩu"
                       required=""
                     />
                   </div>
-                  <div className="col-md-3 col-sm-3 contact_left_grid pt-3">
-                    <Form.Control as="select" className="select-form">
-                      <option className="black-title">Thành phố</option>
-                      <option className="black-title">...</option>
+                  <div className="col-md-6 col-sm-6 contact_left_grid pt-3">
+                    <Form.Control as="select" className="select-form" id="district">
+                      <option className="black-title" value="1">
+                        Quận Bình Thạnh
+                      </option>
+                      <option className="black-title" value="0">
+                        ...
+                      </option>
                     </Form.Control>
-                  </div>
-                  <div className="col-md-3 col-sm-3 contact_left_grid pt-3">
-                    <Form.Control as="select" className="select-form">
-                      <option className="black-title">Quận</option>
-                      <option className="black-title">...</option>
-                    </Form.Control>
-                  </div>
-                  <div className="col-md-6 col-sm-6 contact_left_grid pt-1">
                     <input
                       type="password"
-                      name="re-password"
+                      id="re-password"
                       placeholder="Nhập lại mật khẩu"
                       required=""
                     />
@@ -100,11 +124,12 @@ class Register extends React.PureComponent {
                       as="select"
                       className="select-form"
                       onChange={this.onChangeSelection}
+                      id="categoryUser"
                     >
-                      <option className="black-title" value="hocvien">
+                      <option className="black-title" value="0">
                         Học viên
                       </option>
-                      <option className="black-title" value="giaovien">
+                      <option className="black-title" value="1">
                         Giáo viên
                       </option>
                     </Form.Control>
@@ -121,14 +146,10 @@ class Register extends React.PureComponent {
                   <h4 className="mt-4 text-white">Hoặc</h4>
                   <h5 className="text-white">Đăng kí tài khoản bằng</h5>
                   <a href="#" className="fb-btn">
-                    <i className="fa fa-facebook fa-fw" />
-                    {' '}
-                    Facebook
+                    <i className="fa fa-facebook fa-fw" /> Facebook
                   </a>
                   <a href="#" className="google-btn">
-                    <i className="fa fa-google fa-fw" />
-                    {' '}
-                    Google+
+                    <i className="fa fa-google fa-fw" /> Google+
                   </a>
                 </div>
               </div>

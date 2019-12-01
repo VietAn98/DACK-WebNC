@@ -1,6 +1,6 @@
-import React from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import "./TeachingInfor.css";
+import React from 'react';
+import { Container, Form, Button } from 'react-bootstrap';
+import './TeachingInfor.css';
 
 class TeachingInfor extends React.PureComponent {
   onChangeSelection = (e) => {
@@ -15,9 +15,9 @@ class TeachingInfor extends React.PureComponent {
         <Container>
           <div
             style={{
-              backgroundColor: "rgba(0,0,0,0.5)",
-              borderRadius: "20px",
-              paddingBottom: "3rem"
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              borderRadius: '20px',
+              paddingBottom: '3rem',
             }}
           >
             <h3 className="w3layouts-heading white-title">
