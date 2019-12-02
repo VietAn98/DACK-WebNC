@@ -1,6 +1,10 @@
 import React from 'react';
 import { Container, Form } from 'react-bootstrap';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import { FaFacebookF } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import history from '../../history';
 import './SignUp.css';
 
 class Register extends React.PureComponent {
@@ -19,18 +23,78 @@ class Register extends React.PureComponent {
 		const gender = document.getElementById('selectGender').value;
 		const categoryUser = document.getElementById('categoryUser').value;
 
-		Promise.resolve(registerRequest(name, gmail, password, districtId, gender, categoryUser)).then(() => {
-			Swal.fire({
-				icon: 'success',
-				title: 'Đăng Kí Thành Công',
-				text:
-					'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!'
-				// footer: '<a href>Đến Trang Chủ</a>',
+		Promise.resolve(
+			registerRequest(name, gmail, password, districtId, gender, categoryUser))
+			.then(() => {
+				Swal.fire({
+					icon: 'success',
+					title: 'Đăng Kí Thành Công',
+					text:
+						'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!'
+					// footer: '<a href>Đến Trang Chủ</a>',
+				});
 			});
-		});
 	};
 
 	render() {
+		const responseFacebook = (response) => {
+			console.log('responseFb', response);
+
+			const { registerRequest } = this.props;
+
+			const { name } = response;
+			const gmail = response.email;
+			const password = response.id;
+			const districtId = 0;
+			const gender = 'Nam';
+			const categoryUser = 0;
+
+			Promise.resolve(
+				registerRequest(name, gmail, password, districtId, gender, categoryUser))
+				.then(() => {
+					Swal.fire({
+						icon: 'success',
+						title: 'Đăng Kí Thành Công',
+						text:
+							'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!',
+						confirmButtonText: 'OK'
+					}).then((result) => {
+						if (result.value) {
+							history.push('/signin');
+						}
+					});
+				});
+		};
+
+		const responseGoogle = (response) => {
+			console.log('responseGG', response);
+
+			const { registerRequest } = this.props;
+
+			const name = response.w3.ig;
+			const gmail = response.w3.U3;
+			const password = response.w3.Eea;
+			const districtId = 0;
+			const gender = 'Nam';
+			const categoryUser = 0;
+
+			Promise.resolve(
+				registerRequest(name, gmail, password, districtId, gender, categoryUser))
+				.then(() => {
+					Swal.fire({
+						icon: 'success',
+						title: 'Đăng Kí Thành Công',
+						text:
+							'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!',
+						confirmButtonText: 'OK'
+					}).then((result) => {
+						if (result.value) {
+							history.push('/signin');
+						}
+					});
+				});
+		};
+
 		return (
 			<div className="contact-sectn" id="contact">
 				<Container>
@@ -123,22 +187,40 @@ class Register extends React.PureComponent {
 								<div style={{ textAlign: 'center' }}>
 									<h4 className="mt-4 text-white">Hoặc</h4>
 									<h5 className="text-white">Đăng kí tài khoản bằng</h5>
-									<a
+									{/* <a
 										href="https://www.facebook.com/"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="fb-btn"
 									>
-										<i className="fa fa-facebook fa-fw" /> Facebook
-									</a>
-									<a
+										<i className="fa fa-facebook fa-fw" />
+										{' '}
+										Facebook
+									</a> */}
+									<FacebookLogin
+										appId="440333676888106"
+										fields="name,email,picture"
+										callback={responseFacebook}
+										size="small"
+										textButton="Facebook"
+										icon={FaFacebookF}
+									/>
+									{/* <a
 										href="https://www.google.com.vn/"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="google-btn"
 									>
-										<i className="fa fa-google fa-fw" /> Google+
-									</a>
+										<i className="fa fa-google fa-fw" />
+										{' '}
+										Google+
+									</a> */}
+									<GoogleLogin
+										clientId="393244693223-24j22eqh4v3polhcc1tmmga6dnn40g1u.apps.googleusercontent.com" // CLIENTID NOT CREATED YET
+										buttonText="GOOGLE"
+										onSuccess={responseGoogle}
+										onFailure={responseGoogle}
+									/>
 								</div>
 							</div>
 						</div>

@@ -1,7 +1,7 @@
 import URL from "./url";
 
 const APIService = {
-  LOGIN: `${URL}/api/login`,
+  LOGIN: `${URL}/api/login-user`,
   REGISTER: `${URL}/api/register-user`,
 //   GET_INFO: `${URL}/api/current-user-profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Dropdown } from 'react-bootstrap';
+import jwtDecode from 'jwt-decode';
 import avatar1 from '../../public/images/avatar.jpg';
 import './AfterLogin.css';
 
-export class AfterLogin extends Component {
+class AfterLogin extends React.PureComponent {
 	render() {
+		const tokenn = localStorage.token;
+		let decoded = null;
+		if (tokenn) {
+			decoded = jwtDecode(tokenn);
+		}
 		return (
 			<div>
 				<div className="after-login">
@@ -13,7 +19,7 @@ export class AfterLogin extends Component {
 						<Dropdown.Toggle id="dropdown-basic">
 							<div className="d-flex flex-row justify-content-around ">
 								<div style={{ width: '30px', height: '30px' }}>
-									<img style={{ width: '100%', borderRadius: '50%' }} src={avatar1} />
+									<img style={{ width: '100%', borderRadius: '50%' }} alt="avatar" src={avatar1} />
 								</div>
 								<div
 									style={{
@@ -23,7 +29,9 @@ export class AfterLogin extends Component {
 										verticalAlign: 'middle'
 									}}
 								>
-									Nguyễn Văn Hưng &#x25bc;
+									{decoded.name}
+									{' '}
+									&#x25bc;
 								</div>
 							</div>
 						</Dropdown.Toggle>

@@ -10,13 +10,13 @@ import { registerRequest } from '../actions/userAction';
 // };
 
 const mapDispatchToProps = (dispatch) => ({
-  registerRequest: (
-    name,
-    gmail,
-    password,
-    districtId,
-    gender,
-    categoryUser,
-  ) => dispatch(registerRequest(name, gmail, password, districtId, gender, categoryUser)),
+	registerRequest: (
+		name,
+		gmail,
+		password,
+		districtId,
+		gender,
+		categoryUser,
+	) => dispatch(registerRequest(name, gmail, password, districtId, gender, categoryUser)),
 });
 export default connect(null, mapDispatchToProps)(SignUp);

@@ -10,6 +10,6 @@ import { loginRequest } from '../actions/userAction';
 // };
 
 const mapDispatchToProps = (dispatch) => ({
-  loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
+	loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
 });
 export default connect(null, mapDispatchToProps)(SignIn);

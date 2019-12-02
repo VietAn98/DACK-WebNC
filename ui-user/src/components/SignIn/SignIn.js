@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container, Form } from 'react-bootstrap';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 import Swal from 'sweetalert2';
+import history from '../../history';
 import Validator from '../../utils/validator';
 import './SignIn.css';
 
@@ -33,25 +36,52 @@ class Login extends React.PureComponent {
 		console.log('gmail, password:', gmail, password);
 		Promise.resolve(loginRequest(gmail, password))
 			.then(() => {
-				Swal.fire({
-					icon: 'success',
-					title: 'Đăng Nhập Thành Công',
-					text:
-						'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!'
-					// footer: '<a href>Đến Trang Chủ</a>',
-				});
-			})
-			.catch(() => {
-				Swal.fire({
-					icon: 'error',
-					title: 'Đăng Nhập Thất Bại',
-					text: 'Xin hãy kiểm tra lại thông tin!'
-					// footer: '<a href>Đến Trang Chủ</a>',
-				});
+				history.push('/');
+				window.location.reload();
 			});
+		// .catch(() => {
+		// 	Swal.fire({
+		// 		icon: 'error',
+		// 		title: 'Đăng Nhập Thất Bại',
+		// 		text: 'Xin hãy kiểm tra lại thông tin!'
+		// 		// footer: '<a href>Đến Trang Chủ</a>',
+		// 	});
+		// });
 	};
 
 	render() {
+		const responseFacebook = (response) => {
+			console.log('responseFb', response);
+
+			const { loginRequest } = this.props;
+
+			const gmail = response.email;
+			const password = response.id;
+
+			Promise.resolve(
+				loginRequest(gmail, password)
+			).then(() => {
+				history.push('/');
+				window.location.reload();
+			});
+		};
+
+		const responseGoogle = (response) => {
+			console.log('responseGG', response);
+
+			const { loginRequest } = this.props;
+
+			const gmail = response.w3.U3;
+			const password = response.w3.Eea;
+
+			Promise.resolve(
+				loginRequest(gmail, password)
+			).then(() => {
+				history.push('/');
+				window.location.reload();
+			});
+		};
+
 		return (
 			<div className="contact-sectn" id="contact">
 				<Container>
@@ -79,7 +109,7 @@ class Login extends React.PureComponent {
 								<div style={{ textAlign: 'center' }}>
 									<h4 className="mt-4 text-white">Hoặc</h4>
 									<h5 className="text-white">Đăng nhập tài khoản bằng</h5>
-									<a
+									{/* <a
 										href="https://facebook.com"
 										target="_blank"
 										rel="noopener noreferrer"
@@ -100,7 +130,20 @@ class Login extends React.PureComponent {
 											<i className="fa fa-google fa-fw" />
 											Google+
 										</div>
-									</a>
+									</a> */}
+									<FacebookLogin
+										appId="440333676888106"
+										fields="name,email,picture"
+										callback={responseFacebook}
+										size="small"
+										textButton="Facebook"
+									/>
+									<GoogleLogin
+										clientId="393244693223-24j22eqh4v3polhcc1tmmga6dnn40g1u.apps.googleusercontent.com" // CLIENTID NOT CREATED YET
+										buttonText="GOOGLE"
+										onSuccess={responseGoogle}
+										onFailure={responseGoogle}
+									/>
 									<h5 className="text-white">
 										Bạn chưa có tài khoản? Hãy
 										<a href="/signup" target="_blank" rel="noopener noreferrer" className="a-href">

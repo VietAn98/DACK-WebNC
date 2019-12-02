@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import history from './history';
 import App from './App';
 import './public/css/style.css';
 import './public/css/bootstrap.css';
@@ -11,9 +12,9 @@ import './public/css/font-awesome.css';
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<Router history={history}>
 			<App />
-		</BrowserRouter>
+		</Router>
 	</Provider>,
 	document.getElementById('root')
 );
