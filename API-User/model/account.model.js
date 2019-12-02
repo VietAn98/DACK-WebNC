@@ -14,7 +14,7 @@ module.exports = {
   },
 
   getAccByEmailRegister: email => {
-    return db.load(`select * from account where gmail= '${email}' and categoryUser = '2' and state= '1'`);
+    return db.load(`select * from account where gmail= '${email}' and categoryUser != '2' and state= '1'`);
   },
 
   getAccByEmail: email => {
