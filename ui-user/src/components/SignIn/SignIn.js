@@ -79,21 +79,33 @@ class Login extends React.PureComponent {
 								<div style={{ textAlign: 'center' }}>
 									<h4 className="mt-4 text-white">Hoặc</h4>
 									<h5 className="text-white">Đăng nhập tài khoản bằng</h5>
-									<a href="#" target="_blank" rel="noopener noreferrer" className="fb-btn">
+									<a
+										href="https://facebook.com"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="fb-btn"
+									>
 										<div>
-											<i className="fa fa-facebook fa-fw" /> Facebook
+											<i className="fa fa-facebook fa-fw" />
+											Facebook
 										</div>
 									</a>
-									<a href="#" target="_blank" rel="noopener noreferrer" className="google-btn">
+									<a
+										href="https://google.com.vn"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="google-btn"
+									>
 										<div>
-											<i className="fa fa-google fa-fw" /> Google+
+											<i className="fa fa-google fa-fw" />
+											Google+
 										</div>
 									</a>
 									<h5 className="text-white">
-										Bạn chưa có tài khoản? Hãy{' '}
+										Bạn chưa có tài khoản? Hãy
 										<a href="/signup" target="_blank" rel="noopener noreferrer" className="a-href">
-											<span>  Đăng ký</span>
-										</a>{' '}
+											<span> Đăng ký</span>
+										</a>
 										cho mình một tài khoản nhé!
 									</h5>
 								</div>

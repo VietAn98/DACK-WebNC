@@ -8,7 +8,7 @@ import './Header.css';
 
 class Header extends React.PureComponent {
 	render() {
-		//get user, if login
+		// get user, if login
 		const isLogin = false;
 		return (
 			<div>
