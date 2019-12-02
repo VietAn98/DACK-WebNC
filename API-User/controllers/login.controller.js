@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 const db = require("../model/account.model");
-
+const dbSkill_teacher = require("../model/skill_teacher.model");
 module.exports = {
   login: async (req, res) => {
     passport.authenticate("local", { session: false }, (err, user, info) => {
@@ -60,7 +60,9 @@ module.exports = {
             console.log(err);
           } else {
             console.log("Message sent: " + info);
-            res.status(200).send({ message: "Gửi thông tin xác thực đến email thành công" });
+            res
+              .status(200)
+              .send({ message: "Gửi thông tin xác thực đến email thành công" });
           }
         });
       } else {
@@ -73,14 +75,12 @@ module.exports = {
   updateNewPassw: (req, res) => {
     var mail = req.query.email;
     var keyPass = req.query.key;
-    console.log('+++++++++=',mail,keyPass)
     if (mail && keyPass) {
       var pass = req.body.newPass;
       var salt = bcrypt.genSaltSync(10);
-      var hashPassw = bcrypt.hashSync(pass,salt);
+      var hashPassw = bcrypt.hashSync(pass, salt);
       db.getAccByEmailRegister(mail).then(row => {
-        if(keyPass === row[0].keyPass)
-        {
+        if (keyPass === row[0].keyPass) {
           var entity = {
             userId: row[0].userId,
             password: hashPassw
@@ -93,15 +93,45 @@ module.exports = {
               console.log(err);
               res.status(400).json({ message: "Cập nhật mật khẩu thất bại" });
             });
+        } else {
+          res.status(400).json({ message: "Cập nhật mật khẩu thất bại" });
         }
-        else {
-          res.status(400).json({ message: "Cập nhật mật khẩu thất bại" });           
-        }       
       });
-    }
-    else {
+    } else {
       res.status(400).json({ message: "Đường truyền không chính xác" });
     }
-   
+  },
+
+  // đăng kí thông tin người dạy
+  addProfileTeacher: (req, res) => {
+    var gmail = req.body.gmail;
+    let skills = req.body.skill;
+    var listSkill = skills.toString().split(",");
+    console.log(listSkill);
+
+    return db.getAccByEmail(gmail).then(user => {
+      let entity = {
+        userId: user[0].userId,
+        introduce: req.body.introduce,
+        avatar: req.body.avatar,
+        price: req.body.price
+      };
+      listSkill.forEach(element => {
+        dbSkill_teacher.getSkillTeacher(element, user[0].userId).then(row => {
+          if (row.length === 0) {
+            let skill_teacher = {
+              userId: user[0].userId,
+              skillId: element
+            };
+            dbSkill_teacher.updateSkillTeacher(skill_teacher);
+          }
+        });
+      });
+      db.updateAcc(entity)
+        .then(id => res.status(200).json({ message: "đăng kí dạy thành công" }))
+        .catch(err =>
+          res.status(400).json({ message: "đăng kí thất bại", err: err })
+        );
+    });
   }
 };
