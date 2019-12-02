@@ -1,5 +1,11 @@
+.banner .carousel-caption {
+	background-color: rgba(0, 0, 0, 0.6);
+	left: 0;
+	right: 0;
+	width: 100%;
+}
 .carousel-indicators li {
-	background-color: gray;
+	background-color: white;
 	cursor: pointer;
 	transition: 0.3s ease-in-out;
 }
