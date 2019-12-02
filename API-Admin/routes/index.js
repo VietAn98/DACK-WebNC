@@ -1,5 +1,5 @@
 const adminLogin = require("../controllers").adminLogin;
-const passports = require("passport");
+const passport = require("passport");
 
 module.exports = app => {
   // Add headers
@@ -32,7 +32,9 @@ module.exports = app => {
     })
   );
 
-  app.post('/api/admin-login', adminLogin.adminLogin)
-
+  app.post('/api-admin/login', adminLogin.adminLogin);
+  app.get('/api-admin/profile', 
+  passport.authenticate("jwt", { session: false }),
+  adminLogin.getProfileAdmin)
   
 };

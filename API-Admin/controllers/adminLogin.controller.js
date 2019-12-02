@@ -24,7 +24,8 @@ module.exports = {
   },
 
   // lấy thông tin người bằng xác thực token
-  getProfile: (req, res) => {
+  getProfileAdmin: (req, res) => {
+    
     res.json(req.user);
   },
 
@@ -73,7 +74,6 @@ module.exports = {
   updateNewPassw: (req, res) => {
     var mail = req.query.email;
     var keyPass = req.query.key;
-    console.log('+++++++++=',mail,keyPass)
     if (mail && keyPass) {
       var pass = req.body.newPass;
       var salt = bcrypt.genSaltSync(10);

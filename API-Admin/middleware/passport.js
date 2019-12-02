@@ -14,8 +14,9 @@ passport.use(
     },
     function(jwtPayload, cb) {
       //find the user in db if needed
-      UserModel.getAccByEmailAdmin(jwtPayload.id)
+      UserModel.getAccByEmailAdmin(jwtPayload.gmail)
         .then(user => {
+          console.log('/////////////////',user);
           return cb(null, user[0]);
         })
         .catch(err => {

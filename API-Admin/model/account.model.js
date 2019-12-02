@@ -14,7 +14,7 @@ module.exports = {
   },
 
   getAccByEmailAdmin: email => {
-    return db.load(`select * from account where gmail= '${email}' and categoryUser= '3'`);
+    return db.load(`select * from account where gmail= '${email}' and categoryUser= '2'`);
   },
 
   getAccByEmail: email => {
