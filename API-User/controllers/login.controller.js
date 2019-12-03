@@ -2,6 +2,7 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
+var { generateToken, sendToken } = require("../utils/token.utils");
 const db = require("../model/account.model");
 const dbSkill_teacher = require("../model/skill_teacher.model");
 module.exports = {
@@ -107,7 +108,7 @@ module.exports = {
     var gmail = req.body.gmail;
     let skills = req.body.skill;
     var listSkill = skills.toString().split(",");
-    console.log(listSkill);
+    // console.log(listSkill);
 
     return db.getAccByEmail(gmail).then(user => {
       let entity = {
@@ -117,15 +118,17 @@ module.exports = {
         price: req.body.price
       };
       listSkill.forEach(element => {
-        dbSkill_teacher.getSkillTeacher(element, user[0].userId).then(row => {
-          if (row.length === 0) {
-            let skill_teacher = {
-              userId: user[0].userId,
-              skillId: element
-            };
-            dbSkill_teacher.updateSkillTeacher(skill_teacher);
-          }
-        });
+        if (element) {
+          dbSkill_teacher.getSkillTeacher(element, user[0].userId).then(row => {
+            if (row.length === 0) {
+              let skill_teacher = {
+                userId: user[0].userId,
+                skillId: element
+              };
+              dbSkill_teacher.updateSkillTeacher(skill_teacher);
+            }
+          });
+        }
       });
       db.updateAcc(entity)
         .then(id => res.status(200).json({ message: "đăng kí dạy thành công" }))
@@ -140,5 +143,23 @@ module.exports = {
     return res.json({
       avatar: req.file.path
     });
+  },
+
+  //đăng nhập bằng fb
+  authFacebook: (req, res) => {
+    console.log("----------------");
+    passport.authenticate("facebook-token", { session: false }),
+      function(req, res, next) {
+        console.log(req.user);
+        if (!req.user) {
+          return res.send(401, "User Not Authenticated");
+        }
+        req.auth = {
+          id: req.user.id
+        };
+        next();
+      },
+      generateToken,
+      sendToken;
   }
 };

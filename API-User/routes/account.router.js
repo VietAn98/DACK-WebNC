@@ -57,4 +57,5 @@ module.exports = app => {
   app.post("/api/update-new-password", loginController.updateNewPassw);
   app.post("/api/image",upload.single("avatar"),  loginController.addImage)
   app.post("/api/add-profile-teacher", loginController.addProfileTeacher)
+  app.post("/api/auth/facebook", loginController.authFacebook)
 };

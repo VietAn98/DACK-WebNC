@@ -4,7 +4,30 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+var FacebookTokenStrategy = require('passport-facebook-token');
+// var GoogleTokenStrategy = require('passport-google-token').Strategy;
+var config = require('../config.js');
 var UserModel = require("../model/account.model");
+
+
+passport.use(
+  new FacebookTokenStrategy(
+    {
+      clientID: config.facebookAuth.clientID,
+      clientSecret: config.facebookAuth.clientSecret,
+      callbackURL: config.facebookAuth.callback_url
+    },
+    function(accessToken, refreshToken, profile, done) {
+      console.log("++++++", accessToken, refreshToken, profile, done);
+      // User.upsertFbUser(accessToken, refreshToken, profile, function(
+      //   err,
+      //   user
+      // ) {
+      //   return done(err, user);
+      // });
+    }
+  )
+);
 
 passport.use(
   new JWTStrategy(
@@ -32,7 +55,6 @@ passport.use(
       passwordField: "password"
     },
     function(gmail, password, cb) {
-      
       //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
       UserModel.getAccByEmailRegister(gmail)
         .then(rows => {
@@ -42,8 +64,11 @@ passport.use(
           var gender = rows[0].gender;
           var districtId = rows[0].districtId;
           var categoryUser = rows[0].categoryUser;
-          if (rows[0] != null && bcrypt.compareSync(password, rows[0].password)) {
-            user = { gmail, userId, name, gender, districtId, categoryUser};
+          if (
+            rows[0] != null &&
+            bcrypt.compareSync(password, rows[0].password)
+          ) {
+            user = { gmail, userId, name, gender, districtId, categoryUser };
           }
 
           // console.log(user)
@@ -56,3 +81,4 @@ passport.use(
     }
   )
 );
+
