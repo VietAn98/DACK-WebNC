@@ -117,6 +117,7 @@ module.exports = {
         price: req.body.price
       };
       listSkill.forEach(element => {
+        if (element) {
         dbSkill_teacher.getSkillTeacher(element, user[0].userId).then(row => {
           if (row.length === 0) {
             let skill_teacher = {
@@ -126,6 +127,7 @@ module.exports = {
             dbSkill_teacher.updateSkillTeacher(skill_teacher);
           }
         });
+        }
       });
       db.updateAcc(entity)
         .then(id => res.status(200).json({ message: "đăng kí dạy thành công" }))
