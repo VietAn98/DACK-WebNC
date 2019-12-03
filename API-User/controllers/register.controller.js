@@ -88,16 +88,16 @@ module.exports = {
             state: 1
           };
           db.updateAcc(entity).catch(error => res.status(400).send(error));
-          res.send({message: "Xác thực thành công, bạn có thể đăng nhập vào trang web...."});
+          res.send("Xác thực thành công, bạn có thể đăng nhập vào trang web....");
         }
         else 
         {
-          res.send({message:"Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực...."});
+          res.send("Xác thực không thành công, vui lòng vào chính xác eamil để xác thực....");
         }
       });
     }
     else {
-      res.send({message:"Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực...."});
+      res.send("Xác thực không thành công, vui lòng vào chính xác  eamil để xác thực....");
     }
   }
 };

@@ -133,5 +133,12 @@ module.exports = {
           res.status(400).json({ message: "đăng kí thất bại", err: err })
         );
     });
+  },
+
+  //thêm link avatar
+  addImage: (req, res) => {
+    return res.json({
+      avatar: req.file.path
+    });
   }
 };

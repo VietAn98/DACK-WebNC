@@ -1,6 +1,16 @@
 const registerController = require("../controllers").registerController;
 const loginController = require("../controllers").loginController;
 const passport = require("passport");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/images/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 module.exports = app => {
   // Add headers
@@ -45,5 +55,6 @@ module.exports = app => {
 
   app.post("/api/forget-password", loginController.forgetPassw);
   app.post("/api/update-new-password", loginController.updateNewPassw);
+  app.post("/api/image",upload.single("avatar"),  loginController.addImage)
   app.post("/api/add-profile-teacher", loginController.addProfileTeacher)
 };
