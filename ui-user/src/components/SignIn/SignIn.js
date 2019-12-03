@@ -98,10 +98,10 @@ class Login extends React.PureComponent {
 									onSubmit={this.onSubmitSignInForm}
 								>
 									<div className="col-md-10 col-sm-10 pb-5">
-										<input type="email" id="gmail" placeholder="Email" required="" />
+										<input type="email" id="gmail" placeholder="Email" required />
 									</div>
 									<div className="col-md-10 col-sm-10 pb-5">
-										<input type="password" id="password" placeholder="Nhập mật khẩu" required="" />
+										<input type="password" id="password" placeholder="Nhập mật khẩu" required />
 									</div>
 									<input type="submit" value="Đăng nhập" />
 								</Form>

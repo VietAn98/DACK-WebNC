@@ -63,3 +63,52 @@ export const loginRequest = (gmail, password) => (dispatch) => {
 			throw error;
 		});
 };
+
+export const chosenTagList = (stringTags) => ({
+	type: 'CHOSEN_TAG_LIST',
+	stringTags
+});
+
+export const avatarName = (avtName) => ({
+	type: 'AVATAR_NAME',
+	avtName
+});
+
+export const uploadAvatar = (fd) => (dispatch) => {
+	return fetch(API.UPLOAD_AVATAR, {
+		method: 'POST',
+		// headers: {
+		// 	Accept: 'application/json', 'Content-Type': 'application/json',
+		// },
+		body: fd
+
+	}).then((respond) => console.log('Respond from uploadAvatar:', respond))
+		// .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
+		.catch((err) => console.log('Error occured', err));
+};
+
+
+export const registerTeachingRequest = (
+	gmail,
+	introduce,
+	skill,
+	price,
+	avatar
+) => (dispatch) => {
+	return fetch(API.REGISTER_TEACHING, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json', 'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			gmail,
+			introduce,
+			skill,
+			price,
+			avatar
+		}),
+
+	}).then((respond) => console.log('Respond:', respond))
+		// .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
+		.catch((err) => console.log('Error occured', err));
+};

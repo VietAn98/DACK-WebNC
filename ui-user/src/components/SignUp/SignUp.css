@@ -72,6 +72,7 @@ h3.white-title {
 .w3-agile_mail_grid_right input[type="text"],
 .w3-agile_mail_grid_right input[type="email"],
 .w3-agile_mail_grid_right input[type="password"],
+.w3-agile_mail_grid_right input[type="number"],
 .w3-agile_mail_grid_right textarea {
 	outline: none;
 	padding: 10px;
@@ -133,7 +134,7 @@ h3.white-title {
 .w3-agile_mail_grid_right input[type="text"]:nth-child(2),
 .w3-agile_mail_grid_right input[type="email"],
 .w3-agile_mail_grid_right input[type="password"] {
-	margin: 1em 0 0;
+	margin: 0 0 0;
 }
 
 .google-btn .fa,

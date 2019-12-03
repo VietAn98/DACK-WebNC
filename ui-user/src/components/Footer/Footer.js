@@ -19,22 +19,22 @@ class Footer extends React.PureComponent {
           }}
         >
           <Container>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between p-3">
               <h2 style={{ marginTop: '0' }}>Liên hệ</h2>
               <div className="d-flex justify-content-between social-group">
-                <div>
+                <div className="p-3">
                   <a href="facebook.com">
-                    <i className="fa fa-facebook-square" />
+                    <i className="fab fa-facebook-square" />
                   </a>
                 </div>
-                <div>
+                <div className="p-3">
                   <a href="youtube.com">
-                    <i className="fa fa-youtube" />
+                    <i className="fab fa-youtube-square" />
                   </a>
                 </div>
-                <div>
-                  <a href="linkedin.com">
-                    <i className="fa fa-linkedin" />
+                <div className="p-3">
+                  <a href="https://github.com/VietAn98/DACK-WebNC">
+                    <i className="fab fa-github-square" />
                   </a>
                 </div>
               </div>

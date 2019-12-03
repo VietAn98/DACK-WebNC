@@ -24,7 +24,8 @@ class Register extends React.PureComponent {
 		const categoryUser = document.getElementById('categoryUser').value;
 
 		Promise.resolve(
-			registerRequest(name, gmail, password, districtId, gender, categoryUser))
+			registerRequest(name, gmail, password, districtId, gender, categoryUser)
+		)
 			.then(() => {
 				Swal.fire({
 					icon: 'success',
@@ -50,7 +51,8 @@ class Register extends React.PureComponent {
 			const categoryUser = 0;
 
 			Promise.resolve(
-				registerRequest(name, gmail, password, districtId, gender, categoryUser))
+				registerRequest(name, gmail, password, districtId, gender, categoryUser)
+			)
 				.then(() => {
 					Swal.fire({
 						icon: 'success',
@@ -79,7 +81,8 @@ class Register extends React.PureComponent {
 			const categoryUser = 0;
 
 			Promise.resolve(
-				registerRequest(name, gmail, password, districtId, gender, categoryUser))
+				registerRequest(name, gmail, password, districtId, gender, categoryUser)
+			)
 				.then(() => {
 					Swal.fire({
 						icon: 'success',
@@ -117,11 +120,11 @@ class Register extends React.PureComponent {
 									className="signupForm"
 								>
 									<div className="col-md-9 col-sm-9 contact_left_grid">
-										<input type="text" id="name" placeholder="Họ và tên" required="" />
+										<input type="text" id="name" placeholder="Họ và tên" required />
 									</div>
 									<div className="col-md-3 col-sm-3 contact_left_grid">
 										<div className="form-checkbox">
-											<Form.Control as="select" className="select-form" id="selectGender">
+											<Form.Control as="select" className="select-form" id="selectGender" required>
 												<option className="black-title" value="Nam">
 													Nam
 												</option>
@@ -133,10 +136,10 @@ class Register extends React.PureComponent {
 									</div>
 									<br />
 									<div className="col-md-12 col-sm-12">
-										<input type="email" id="gmail" placeholder="Email" required="" />
+										<input type="email" id="gmail" placeholder="Email" required />
 									</div>
 									<div className="col-md-6 col-sm-6 contact_left_grid pt-3">
-										<Form.Control as="select" className="select-form" id="city">
+										<Form.Control as="select" className="select-form" id="city" required>
 											<option className="black-title" value="1">
 												TP Hồ Chí Minh
 											</option>
@@ -144,10 +147,10 @@ class Register extends React.PureComponent {
 												...
 											</option>
 										</Form.Control>
-										<input type="password" id="password" placeholder="Nhập mật khẩu" required="" />
+										<input type="password" id="password" placeholder="Nhập mật khẩu" required />
 									</div>
 									<div className="col-md-6 col-sm-6 contact_left_grid pt-3">
-										<Form.Control as="select" className="select-form" id="district">
+										<Form.Control as="select" className="select-form" id="district" required>
 											<option className="black-title" value="1">
 												Quận Bình Thạnh
 											</option>
@@ -159,7 +162,7 @@ class Register extends React.PureComponent {
 											type="password"
 											id="re-password"
 											placeholder="Nhập lại mật khẩu"
-											required=""
+											required
 										/>
 									</div>
 									<div className="col-md-12 col-sm-12 pb-4">
