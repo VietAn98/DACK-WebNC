@@ -33,6 +33,7 @@ module.exports = app => {
   );
 
   app.post('/api-admin/login', adminLogin.adminLogin);
+  app.post('/api-admin/admin-register', adminLogin.adminRegister)
   app.get('/api-admin/profile', 
   passport.authenticate("jwt", { session: false }),
   adminLogin.getProfileAdmin)
