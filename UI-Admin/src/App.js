@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import AdminSignIn from "./containers/SignInContainer";
+import CreateAccountContainer from "./containers/CreateAccountContainer";
+import PageNotFound from "./components/PageNotFound"
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends React.PureComponent {
+  render() {
+    return (
+      <main>
+        <Switch>
+          <Route path="/admin/login" exact component={AdminSignIn} />
+          <Route path="/admin/create-admin" exact component={CreateAccountContainer} />
+          <Route component={PageNotFound} />
+        </Switch>
+      </main>
+    );
+  }
 }
 
 export default App;
