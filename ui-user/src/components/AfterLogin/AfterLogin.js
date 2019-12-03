@@ -37,8 +37,17 @@ class AfterLogin extends React.PureComponent {
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu>
-							<Dropdown.Item href="#/action-1">Setting</Dropdown.Item>
-							<Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
+							<Dropdown.Item href="#/action-1">
+								<i className="fas fa-user-cog" />
+								{' '}
+								Setting
+								{' '}
+							</Dropdown.Item>
+							<Dropdown.Item href="#/action-2">
+								<i className="fas fa-sign-out-alt" />
+								{' '}
+								Log Out
+							</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>
 				</div>

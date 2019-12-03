@@ -7,7 +7,7 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Footer from './components/Footer/Footer';
 import PageNotFound from './pages/PageNotFound';
-import TeachingInfor from './components/TeachingInfor/TeachingInfor';
+import TeachingInfor from './containers/TeachingInforContainer';
 
 export class App extends React.PureComponent {
 	render() {

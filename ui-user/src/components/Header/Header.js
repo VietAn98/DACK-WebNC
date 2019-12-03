@@ -7,12 +7,12 @@ import './Header.css';
 
 class Header extends React.PureComponent {
 	render() {
-		// const tokenn = localStorage.token;
-		// let decoded = null;
-		// if (tokenn) {
-		// 	decoded = jwtDecode(tokenn);
-		// 	// console.log('decoded', decoded);
-		// }
+		const tokenn = localStorage.token;
+		let decoded = null;
+		if (tokenn) {
+			decoded = jwtDecode(tokenn);
+			// console.log('decoded', decoded);
+		}
 		const { userProfile } = this.props;
 		console.log('userProfile', userProfile);
 
@@ -33,7 +33,7 @@ class Header extends React.PureComponent {
 										<NavLink to="/" className="nav-link" exact>
 											Trang Chủ
 										</NavLink>
-										{/* {decoded.categoryUser === 0
+										{decoded.categoryUser === 0
 											? (
 												<NavLink to="/abc" className="nav-link">
 													Danh Sách Giáo Viên
@@ -43,14 +43,14 @@ class Header extends React.PureComponent {
 												<NavLink to="/abc" className="nav-link">
 													Thống Kê Doanh Thu Dạy
 												</NavLink>
-											)} */}
+											)}
 									</div>
 								</Nav>
 								<Nav className="ml-auto">
 									<div>
-										{/* {tokenn ? (
+										{tokenn ? (
 											<AfterLogin />
-										) : ( */}
+										) : (
 											<div className="d-flex flex-row justify-content-end">
 												<NavLink to="/signin" className="nav-link signIn">
 														Đăng nhập
@@ -59,7 +59,7 @@ class Header extends React.PureComponent {
 														Đăng Ký
 												</NavLink>
 											</div>
-										{/* )} */}
+										)}
 									</div>
 								</Nav>
 							</Navbar.Collapse>
