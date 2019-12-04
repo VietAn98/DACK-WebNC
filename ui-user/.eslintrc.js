@@ -38,7 +38,9 @@ module.exports = {
 		'no-tabs': 0,
 		'react/jsx-indent': 'off',
 		'react/jsx-indent-props': 'off',
-		'import/no-named-as-default': 0
+		'import/no-named-as-default': 0,
+		"template-curly-spacing": 0,
+		indent: 0
 	},
 	parser: 'babel-eslint'
 };

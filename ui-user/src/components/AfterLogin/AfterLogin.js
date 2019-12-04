@@ -12,6 +12,7 @@ class AfterLogin extends React.PureComponent {
 		if (tokenn) {
 			decoded = jwtDecode(tokenn);
 		}
+		const { signOut } = this.props;
 		return (
 			<div>
 				<div className="after-login">
@@ -43,7 +44,7 @@ class AfterLogin extends React.PureComponent {
 								Setting
 								{' '}
 							</Dropdown.Item>
-							<Dropdown.Item href="#/action-2">
+							<Dropdown.Item href="/" onClick={signOut()}>
 								<i className="fas fa-sign-out-alt" />
 								{' '}
 								Log Out

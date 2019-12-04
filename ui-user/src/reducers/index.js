@@ -1,10 +1,10 @@
-const createInitialState = () => ({
-	name: '',
-	gmail: '',
-	districtId: '',
-	gender: '',
-	categoryUser: '',
-});
+// const createInitialState = () => ({
+// 	name: '',
+// 	gmail: '',
+// 	districtId: '',
+// 	gender: '',
+// 	categoryUser: '',
+// });
 
 // const userProfile = (state = createInitialState(), action) => {
 // 	switch (action.type) {
