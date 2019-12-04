@@ -14,7 +14,7 @@ export class AdminSignIn extends React.PureComponent {
 
 	render() {
 		return (
-			<div className="adminSignIn" style={{ transform: 'translateY(50%)' }}>
+			<div className="adminSignIn" style={{ marginTop: "10rem" }}>
 				<Container>
 					<div className="">
 						<div
