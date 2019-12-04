@@ -36,6 +36,4 @@ app.use(function(req, res, next) {
 
 require("./routes")(app);
 
-app.listen(3303, () => {
-    console.log("App listening on port 3303!!!!");
-  });
+module.exports = app;
