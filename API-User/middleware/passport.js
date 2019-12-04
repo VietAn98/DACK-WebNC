@@ -3,31 +3,54 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const bcrypt = require("bcryptjs");
-var FacebookTokenStrategy = require('passport-facebook-token');
+var FacebookTokenStrategy = require("passport-facebook-token");
 // var GoogleTokenStrategy = require('passport-google-token').Strategy;
-var config = require('../config.js');
+// var config = require('../config.js');
 var UserModel = require("../model/account.model");
 
-
 passport.use(
-  new FacebookTokenStrategy(
-    {
-      clientID: config.facebookAuth.clientID,
-      clientSecret: config.facebookAuth.clientSecret,
-      callbackURL: config.facebookAuth.callback_url
-    },
-    function(accessToken, refreshToken, profile, done) {
-      console.log("++++++", accessToken, refreshToken, profile, done);
-      // User.upsertFbUser(accessToken, refreshToken, profile, function(
-      //   err,
-      //   user
-      // ) {
-      //   return done(err, user);
-      // });
-    }
-  )
+new FacebookStrategy(
+  {
+    clientID: "440333676888106",
+    clientSecret: "0fc3157f9bba91b8f8c475b44c519b25",
+    callbackURL: "http://localhost:3001/auth/facebook/callback"
+  },(accessToken, refreshToken, profile, done) => {
+    console.log("++++++", profile);
+    // User.upsertFbUser(accessToken, refreshToken, profile, function(
+    //   err,
+    //   user
+    // ) {
+    //   return done(err, user);
+    // });
+  })
 );
+// );
+
+// passport.use(new FacebookTokenStrategy({
+//   clientID: "440333676888106",
+//   clientSecret: "0fc3157f9bba91b8f8c475b44c519b25",
+//   callbackURL: "http://localhost:3001/auth/facebook/callback",
+//   proxy:true,
+//   profileFields: ['id', 'displayName', 'photos', 'email']
+// },
+// function (accessToken, refreshToken, profile, cb) {
+//   console.log('++++++++++++++===',accessToken)
+//   // profile.photos[0].value = "https://graph.facebook.com/" + profile.id + "/picture" + "?width=500&height=500" + "&access_token=" + accessToken;
+//   // userController.findOrCreate(profile, function (user) {
+//   //     cb(null, user);
+//   // });
+// }
+// ));
+
+// passport.serializeUser(function (user, done) {
+// done(null, user);
+// });
+
+// passport.deserializeUser(function (user, done) {
+// done(null, user);
+// });
 
 passport.use(
   new JWTStrategy(
@@ -55,6 +78,7 @@ passport.use(
       passwordField: "password"
     },
     function(gmail, password, cb) {
+      console.log("oooooooooooooooo");
       //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
       UserModel.getAccByEmailRegister(gmail)
         .then(rows => {
@@ -81,4 +105,3 @@ passport.use(
     }
   )
 );
-

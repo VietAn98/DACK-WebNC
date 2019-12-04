@@ -6,6 +6,7 @@ var { generateToken, sendToken } = require("../utils/token.utils");
 const db = require("../model/account.model");
 const dbSkill_teacher = require("../model/skill_teacher.model");
 module.exports = {
+
   login: async (req, res) => {
     passport.authenticate("local", { session: false }, (err, user, info) => {
       if (err || !user) {
@@ -146,11 +147,11 @@ module.exports = {
   },
 
   //đăng nhập bằng fb
-  authFacebook: (req, res) => {
-    console.log("----------------");
-    passport.authenticate("facebook-token", { session: false }),
-      function(req, res, next) {
-        console.log(req.user);
+  authFacebook: (req, res, next) => {
+    console.log("----------------", req.body);
+    // console.log("----------------", res);
+      // function(req, res, next) {
+        console.log('------------',req.user);
         if (!req.user) {
           return res.send(401, "User Not Authenticated");
         }
@@ -158,8 +159,5 @@ module.exports = {
           id: req.user.id
         };
         next();
-      },
-      generateToken,
-      sendToken;
-  }
+      }
 };
