@@ -36,6 +36,26 @@ export const registerRequest = (
 		.catch((err) => console.log('Error occured', err));
 };
 
+export const getInfor = (tokenn) => (dispatch) => {
+	// const tokenn = localStorage.token;
+	if (tokenn) {
+		return fetch(API.GET_INFO, {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${tokenn}`,
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+
+		}).then((respond) => respond.json())
+			.then((res) => {
+				localStorage.setItem('user', res);
+				console.log('getInfor', res);
+			})
+			.catch((err) => console.log('Error occured', err));
+	}
+	return null;
+};
+
 export const loginRequest = (gmail, password) => (dispatch) => {
 	// dispatch({ type: 'LOGIN_FETCHING' });
 	return fetch(API.LOGIN, {
@@ -52,7 +72,7 @@ export const loginRequest = (gmail, password) => (dispatch) => {
 			if (res.hasOwnProperty('token')) {
 				// Swal.fire('Thông báo', 'Thành công', 'success');
 				localStorage.setItem('token', res.token);
-				// dispatch({ type: 'LOGIN_COMPLETED' });
+				dispatch(getInfor(res.token));
 			} else {
 				// dispatch({ type: 'LOGIN_COMPLETED' });
 				Swal.fire('Thông báo', 'Không thành công', 'error');
@@ -87,7 +107,6 @@ export const uploadAvatar = (fd) => (dispatch) => {
 		.catch((err) => console.log('Error occured', err));
 };
 
-
 export const registerTeachingRequest = (
 	gmail,
 	introduce,
@@ -111,4 +130,9 @@ export const registerTeachingRequest = (
 	}).then((respond) => console.log('Respond:', respond))
 		// .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
 		.catch((err) => console.log('Error occured', err));
+};
+
+export const signOut = () => {
+  localStorage.removeItem('token');
+	localStorage.removeItem('user');
 };

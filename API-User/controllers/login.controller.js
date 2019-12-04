@@ -27,7 +27,7 @@ module.exports = {
 
   // lấy thông tin người bằng xác thực token
   getProfile: (req, res) => {
-    res.json(req.user);
+    res.send(req.user);
   },
 
   //quên mật khẩu

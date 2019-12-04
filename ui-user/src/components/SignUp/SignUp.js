@@ -59,11 +59,11 @@ class Register extends React.PureComponent {
 						title: 'Đăng Kí Thành Công',
 						text:
 							'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!',
-						confirmButtonText: 'OK'
-					}).then((result) => {
-						if (result.value) {
-							history.push('/signin');
-						}
+					// 	confirmButtonText: 'OK'
+					// }).then((result) => {
+					// 	if (result.value) {
+					// 		history.push('/signin');
+					// 	}
 					});
 				});
 		};

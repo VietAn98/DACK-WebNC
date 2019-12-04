@@ -2,7 +2,7 @@ import React from 'react';
 import jwtDecode from 'jwt-decode';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import AfterLogin from '../AfterLogin/AfterLogin';
+import AfterLogin from '../../containers/AfterLoginContainer';
 import './Header.css';
 
 class Header extends React.PureComponent {
@@ -33,7 +33,7 @@ class Header extends React.PureComponent {
 										<NavLink to="/" className="nav-link" exact>
 											Trang Chủ
 										</NavLink>
-										{decoded.categoryUser === 0
+										{(decoded === null || decoded.categoryUser === 0)
 											? (
 												<NavLink to="/abc" className="nav-link">
 													Danh Sách Giáo Viên
