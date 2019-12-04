@@ -50,11 +50,14 @@ class Login extends React.PureComponent {
 
   render() {
     const responseFacebook = response => {
-		console.log(response)
+      console.log(response);
       const tokenBlob = new Blob(
         [JSON.stringify({ access_token: response.accessToken }, null, 2)],
         { type: "application/json" }
       );
+      console.log("response", tokenBlob);        
+      console.log("response", response.accessToken);  
+
       const options = {
         method: "POST",
         body: tokenBlob,
@@ -65,9 +68,8 @@ class Login extends React.PureComponent {
         const token = r.headers.get("x-auth-token");
         r.json().then(user => {
           if (token) {
-			// this.setState({ isAuthenticated: true, user, token });
-			console.log('--------------------',token,user);
-			
+            // this.setState({ isAuthenticated: true, user, token });
+            console.log("--------------------", token, user);
           }
         });
       });
