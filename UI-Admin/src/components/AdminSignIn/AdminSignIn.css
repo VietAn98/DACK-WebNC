@@ -78,13 +78,14 @@
 	font-size: 14px;
 	color: #fff;
 	background: rgba(255, 255, 255, 0.08);
-	width: 100%;
+	width: 70%;
 	border-bottom: 2px solid #fff;
 	letter-spacing: 1px;
 	border: none;
 	border-bottom: 2px solid #fff;
 	box-sizing: border-box;
 	border-radius: 5px;
+	margin-left: 15% !important;
 }
 
 .adminSignIn .w3-agile_mail_grid_right textarea {
@@ -206,4 +207,9 @@
 	opacity: 1;
 	color: rgb(17, 21, 245);
 	text-decoration: none;
+}
+
+.justify-center {
+	display: flex;
+	justify-content: center;
 }

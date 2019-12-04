@@ -20,11 +20,11 @@ export class AdminCreate extends React.PureComponent {
 
   render() {
     return (
-      <div className="adminSignUp" style={{ marginTop: "7rem" }}>
+      <div className="adminSignUp" style={{ marginTop: "4rem" }}>
         <Container>
           <div
             style={{
-              backgroundColor: "rgba(0,0,0,0.5)",
+              backgroundColor: "rgba(0,0,0,0.3)",
               borderRadius: "20px",
               paddingBottom: "3rem"
             }}
