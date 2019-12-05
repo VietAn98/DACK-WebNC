@@ -81,7 +81,10 @@ class Login extends React.PureComponent {
         method: "POST",
         body: tokenBlob,
         mode: "cors",
-        cache: "default"
+		cache: "default",
+		headers: {
+			Accept: 'application/json', 'Content-Type': 'application/json',
+		},
       };
       fetch("http://localhost:3001/api/auth/facebook", options).then(r => {
         const token = r.headers.get("x-auth-token");

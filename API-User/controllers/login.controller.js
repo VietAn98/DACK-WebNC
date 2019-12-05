@@ -27,7 +27,7 @@ module.exports = {
 
   // lấy thông tin người bằng xác thực token
   getProfile: (req, res) => {
-    res.send(req.user);
+    res.status(200).json(req.user);
   },
 
   //quên mật khẩu
@@ -150,6 +150,7 @@ module.exports = {
   authFacebook: (req, res, next) => {
     console.log("----------------", req.body);
     // console.log("----------------", res);
+    // passport.authenticate("facebook", { session: false }),
       // function(req, res, next) {
         console.log('------------',req.user);
         if (!req.user) {
@@ -160,4 +161,5 @@ module.exports = {
         };
         next();
       }
+    //}
 };
