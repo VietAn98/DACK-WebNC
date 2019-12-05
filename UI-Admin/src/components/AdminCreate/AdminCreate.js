@@ -4,18 +4,18 @@ import { Container, Form } from "react-bootstrap";
 import "./AdminSignUp.css";
 
 export class AdminCreate extends React.PureComponent {
-  onSubmitSignUpForm = e => {
+  onSubmitSignUpForm = async e => {
     e.preventDefault();
     const { adminCreateAccount } = this.props;
     const gmail = document.getElementById("gmail").value;
     const password = document.getElementById("password").value;
-	const name = document.getElementById("name").value;
-	adminCreateAccount(name,gmail,password)
-	
-	document.getElementById("gmail").value = "";
-    document.getElementById("password").value = "";
-	document.getElementById("name").value = "";
+    const name = document.getElementById("name").value;
+    await adminCreateAccount(name, gmail, password);
 
+    document.getElementById("gmail").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("re-password").value = "";
+    document.getElementById("name").value = "";
   };
 
   render() {

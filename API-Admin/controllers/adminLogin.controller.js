@@ -1,4 +1,5 @@
 const passport = require("passport");
+const randomstring = require("randomstring");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
@@ -32,6 +33,7 @@ module.exports = {
     const gmail = req.body.gmail;
     let keyPass = randomstring.generate(100);
     return db.getAccByEmail(gmail).then(gmails =>{
+      console.log(gmails.length);
       if(gmails.length === 0) 
       {
         var salt = bcrypt.genSaltSync(10);
@@ -54,7 +56,7 @@ module.exports = {
     
       }
       else {
-        res.status(400).json({message: "Tài khoản đã tồn tại"});
+        res.status(400).json({message: "Tạo không thành công"});
       } 
     })
 

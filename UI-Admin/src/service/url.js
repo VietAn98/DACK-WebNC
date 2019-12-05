@@ -1,3 +1,3 @@
-const URL = 'https://uber-for-tuitor-api-admin.herokuapp.com/';
+const URL = 'http://localhost:5000';
 
 export default URL;
