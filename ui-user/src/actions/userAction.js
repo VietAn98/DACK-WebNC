@@ -48,8 +48,9 @@ export const getInfor = (tokenn) => (dispatch) => {
 
 		}).then((respond) => respond.json())
 			.then((res) => {
-				localStorage.setItem('user', res);
+				localStorage.setItem('user', JSON.stringify(res));
 				console.log('getInfor', res);
+				console.log('localStorage', localStorage);
 			})
 			.catch((err) => console.log('Error occured', err));
 	}
@@ -66,13 +67,13 @@ export const loginRequest = (gmail, password) => (dispatch) => {
 		},
 	})
 		.then((response) => response.json())
-		.then((res) => {
+		.then(async (res) => {
 			console.log('res login', res);
 			// eslint-disable-next-line no-prototype-builtins
 			if (res.hasOwnProperty('token')) {
 				// Swal.fire('Thông báo', 'Thành công', 'success');
 				localStorage.setItem('token', res.token);
-				dispatch(getInfor(res.token));
+				await dispatch(getInfor(res.token));
 			} else {
 				// dispatch({ type: 'LOGIN_COMPLETED' });
 				Swal.fire('Thông báo', 'Không thành công', 'error');
