@@ -20,7 +20,7 @@ export class AdminCreate extends React.PureComponent {
 
   render() {
     return (
-      <div className="adminSignUp" style={{ marginTop: "4rem" }}>
+      <div className="adminSignUp" style={{ padding: "4rem" }}>
         <Container>
           <div
             style={{
