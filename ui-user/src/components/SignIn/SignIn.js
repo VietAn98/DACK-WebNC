@@ -39,7 +39,7 @@ class Login extends React.PureComponent {
 			if (user) {
 				if (user.categoryUser === 1) {
 					if (user.state === 1) {
-						if (user.introduce === '') {
+						if (user.introduce === '' || user.introduce === null) {
 							history.push('/settings');
 							window.location.reload();
 						} else {

@@ -3,13 +3,16 @@ import URL from './url';
 const APIService = {
   LOGIN: `${URL}/api/login-user`,
   REGISTER: `${URL}/api/register-user`,
-  REGISTER_TEACHING: `${URL}/api/add-profile-teacher`,
+  UPDATE_INFOR_TEACHER: `${URL}/api/update-infor-teacher`,
   GET_INFO: `${URL}/api/profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,
   UPLOAD_AVATAR: `${URL}/api/image`,
 //   CHANGE_PASSWORD: `${URL}/api/password`,
-//   GET_LIST_FIELD_BY_DIST: `${URL}/api/get-list-field-`,
-//   GET_LIST_DISTRICT: `${URL}/api/list-district-in-city-`
+  GET_DISTRICT_BY_IDCITY: `${URL}/api/get-districts-by-city/`,
+  GET_CITY_BY_IDDISTRICT: `${URL}/api/get-city-by-district/`,
+  GET_LIST_DISTRICT: `${URL}/api/get-list-district`,
+  GET_LIST_CITY: `${URL}/api/get-list-city`,
+  GET_SKILLS: `${URL}/api/get-List-Skill-ByUser/`,
 };
 
 export default APIService;
