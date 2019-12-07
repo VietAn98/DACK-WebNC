@@ -7,5 +7,9 @@ module.exports = {
 
     getSkillTeacher: (skill,teacher) => {
         return db.load(`select * from skill_teacher where skillId = '${skill}' and userId = '${teacher}'`);
+    }, 
+
+    getListSkillTeacher: (id) => {
+        return db.load(`select * from skill_teacher where userId='${id}'`);
     }
 }

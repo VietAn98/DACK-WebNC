@@ -60,7 +60,6 @@ module.exports = app => {
   app.post("/api/forget-password", loginController.forgetPassw);
   app.post("/api/update-new-password", loginController.updateNewPassw);
   app.post("/api/image", upload.single("avatar"), loginController.addImage);
-  app.post("/api/add-profile-teacher", loginController.addProfileTeacher);
   app.post(
     "/api/auth/facebook",cors(),
     passport.authenticate(

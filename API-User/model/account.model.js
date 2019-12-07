@@ -23,5 +23,13 @@ module.exports = {
 
   getAccById: id => {
     return db.load(`select * from account where userId = '${id}' `);
+  },
+
+  getListTeaching: () => {
+    return db.load(`select * from account where categoryUser = 1`);
+  },
+
+  getDetailTeacher: id => {
+    return db.load(`select * from account where userId = '${id}'`);
   }
 };

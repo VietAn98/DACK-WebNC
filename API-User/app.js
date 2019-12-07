@@ -50,6 +50,7 @@ app.use(function(req, res, next) {
 //passw mysql: C5f6HMl1wA
 require('./routes/account.router')(app);
 require('./routes/district.router')(app);
+require('./routes/teaching/teaching.router')(app);
 
 
 app.listen(3001, () => {
