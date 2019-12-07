@@ -1,0 +1,10 @@
+.pt-6 {
+    padding-top: 6%;
+}
+
+.avatarHolder{
+    width: 100%;
+    height: 100%;
+    border: 1px dashed white;
+    margin-top: 5%;
+}

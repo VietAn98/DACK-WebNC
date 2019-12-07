@@ -1,7 +1,7 @@
 import React from 'react';
-import Banner from '../components/Banner/Banner.js';
-import FeatureTuitor from '../components/FeatureTuitor/FeatureTuitor.js';
-import AboutUs from '../components/AboutUs/AboutUs.js';
+import Banner from '../components/Banner/Banner';
+import FeatureTuitor from '../components/FeatureTuitor/FeatureTuitor';
+import AboutUs from '../components/AboutUs/AboutUs';
 
 class HomePage extends React.PureComponent {
 	render() {

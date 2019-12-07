@@ -1842,3 +1842,21 @@ textarea:-ms-input-placeholder {
 /*-- //to-top --*/
 
 /*--responsive--*/
+
+.list-group-tabs-example{
+	position: inherit;
+	overflow-x: hidden;
+	padding-top: 56px;
+	padding-bottom: 56px;
+	background: url(../../public/images/trianglify-lowres.png) no-repeat;
+	background-position: center;
+	background-size: cover !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+}
+
+.list-group-item-action{
+	font-size: 16px;
+}

@@ -50,10 +50,10 @@ class AfterLogin extends React.PureComponent {
 						</Dropdown.Toggle>
 
 						<Dropdown.Menu>
-							<Dropdown.Item href="#/action-1">
+							<Dropdown.Item href="/Settings#myinformation">
 								<i className="fas fa-user-cog" />
 								{' '}
-								Setting
+								Settings
 								{' '}
 							</Dropdown.Item>
 							<Dropdown.Item href="/" onClick={signOut}>

@@ -39,8 +39,8 @@ class Login extends React.PureComponent {
 			if (user) {
 				if (user.categoryUser === 1) {
 					if (user.state === 1) {
-						if (user.introduce === "") {
-							history.push('/teaching');
+						if (user.introduce === '') {
+							history.push('/settings');
 							window.location.reload();
 						} else {
 							history.push('/');
@@ -68,30 +68,30 @@ class Login extends React.PureComponent {
 	};
 
   render() {
-    const responseFacebook = response => {
+    const responseFacebook = (response) => {
       console.log(response);
       const tokenBlob = new Blob(
         [JSON.stringify({ access_token: response.accessToken }, null, 2)],
-        { type: "application/json" }
+        { type: 'application/json' }
       );
-      console.log("response", tokenBlob);        
-      console.log("response", response.accessToken);  
+      console.log('response', tokenBlob);
+      console.log('response', response.accessToken);
 
       const options = {
-        method: "POST",
+        method: 'POST',
         body: tokenBlob,
-        mode: "cors",
-		cache: "default",
+        mode: 'cors',
+		cache: 'default',
 		headers: {
 			Accept: 'application/json', 'Content-Type': 'application/json',
 		},
       };
-      fetch("http://localhost:3001/api/auth/facebook", options).then(r => {
-        const token = r.headers.get("x-auth-token");
-        r.json().then(user => {
+      fetch('http://localhost:3001/api/auth/facebook', options).then((r) => {
+        const token = r.headers.get('x-auth-token');
+        r.json().then((user) => {
           if (token) {
             // this.setState({ isAuthenticated: true, user, token });
-            console.log("--------------------", token, user);
+            console.log('--------------------', token, user);
           }
         });
       });
@@ -202,14 +202,14 @@ class Login extends React.PureComponent {
 									/>
 									<h5 className="text-white">
 										Bạn chưa có tài khoản? Hãy
-  									<a
+								<a
 											href="/signup"
 											target="_blank"
 											rel="noopener noreferrer"
 											className="a-href"
-  									>
+								>
 											<span> Đăng ký</span>
-           </a>
+        </a>
 										cho mình một tài khoản nhé!
          </h5>
 								</div>

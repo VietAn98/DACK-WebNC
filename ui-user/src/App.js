@@ -7,7 +7,7 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Footer from './components/Footer/Footer';
 import PageNotFound from './pages/PageNotFound';
-import TeachingInfor from './containers/TeachingInforContainer';
+import Settings from './pages/Settings';
 
 export class App extends React.PureComponent {
 	render() {
@@ -15,7 +15,7 @@ export class App extends React.PureComponent {
 			<main>
 				<Header />
 				<Switch>
-					<Route path="/teaching" exact component={TeachingInfor} />
+					<Route path="/settings" exact component={Settings} />
 					<Route path="/signin" exact component={SignInPage} />
 					<Route path="/signup" exact component={SignUpPage} />
 					<Route path="/" exact component={HomePage} />
