@@ -5,5 +5,5 @@ module.exports = app => {
     app.post('/api/update-infor-teacher', teachingController.updateInforTeacher);
     app.get('/api/get-detail-teacher/:id', teachingController.getTeacherByid);
     app.get('/api/get-List-Skill-ByUser/:id',teachingController.getListSkillByUser)
-
+    app.get('/api/get-list-skills', teachingController.getListSkills);
 }

@@ -31,5 +31,9 @@ module.exports = {
 
   getDetailTeacher: id => {
     return db.load(`select * from account where userId = '${id}'`);
+  },
+
+  getListSkill: ()=> {
+    return db.load('select * from skill');
   }
 };

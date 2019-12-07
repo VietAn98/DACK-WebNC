@@ -73,6 +73,15 @@ module.exports = {
         res.status(400).json({message: "Không có chi tiết giáo  viên", error: err});
     })
 
+  },
+
+  // lấy danh sách skill
+  getListSkills: (req,res) => {
+    return db.getListSkill().then(result => {
+      res.status(200).json(result);
+    }).catch(err => {
+      res.status(400).json(err);
+  })
   }
 
 };

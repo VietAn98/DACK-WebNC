@@ -51,6 +51,7 @@ app.use(function(req, res, next) {
 require('./routes/account.router')(app);
 require('./routes/district.router')(app);
 require('./routes/teaching/teaching.router')(app);
+require('./routes/student.router')(app);
 
 
 app.listen(3001, () => {
