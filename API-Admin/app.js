@@ -34,6 +34,9 @@ app.use(function(req, res, next) {
     next(); 
   });
 
-require("./routes")(app);
+require("./routes/index")(app);
+require("./routes/account")(app);
+require("./routes/skill")(app);
+
 
 module.exports = app;
