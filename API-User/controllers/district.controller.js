@@ -43,9 +43,9 @@ module.exports = {
   getCityByDistrict: async(req,res) => {
     const id = req.params.id;
     return await db.getCityByDistrict(id).then(result => {
-      res.status(200).json(result);
+      res.status(200).json(result[0]);
     }).catch(err => {
-      res.status(400).json({ message: "Thất bại", err: err });
+      res.status(400).send({ message: "Thất bại", err: err });
     });
   }
 };
