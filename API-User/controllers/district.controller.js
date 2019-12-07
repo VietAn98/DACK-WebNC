@@ -2,7 +2,7 @@ const db = require("../model/district.model");
 
 module.exports = {
   get_list_districts: async (req, res) => {
-    let cityId = req.body.cityId;
+    let cityId = req.params.id;
     return await db
       .getDistrictsByCity(cityId)
       .then(districts => {
