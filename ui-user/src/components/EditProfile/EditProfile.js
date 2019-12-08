@@ -4,23 +4,47 @@ import { Form, Button } from 'react-bootstrap';
 import './EditProfile.css';
 
 const user = JSON.parse(localStorage.getItem('user'));
+const gender = [
+    {
+        value: 'Nam', text: 'Nam'
+    },
+    {
+        value: 'Nữ', text: 'Nữ'
+    }
+];
 
 class EditProfile extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
-    componentWillMount = () => {
+    componentWillMount = async () => {
         const {
             getListDisctrict,
             getListCity,
             getCityByIdDistrict,
             getSkills,
-            userLogin
+            userLogin,
+            getListSkills,
+            listTemp,
+
         } = this.props;
         getListDisctrict();
         getListCity();
         getCityByIdDistrict(user.districtId);
-        getSkills(user.userId);
+        await getSkills(user.userId);
         userLogin(user);
+        getListSkills();
+        const { teacherSkills } = this.props;
+        await listTemp(teacherSkills);
     }
+
+    onGetAvatar = (e) => {
+        const { avatarName, uploadAvatar } = this.props;
+        avatarName(e.target.files[0]);
+
+        const fd = new FormData();
+        fd.append('avatar', e.target.files[0], e.target.files[0].name);
+        uploadAvatar(fd);
+    };
+
 
     onChangeCity = (e) => {
         const { getDistrictByIdCity } = this.props;
@@ -37,18 +61,36 @@ class EditProfile extends React.PureComponent {
 
     onSubmitInforTeaching = (e) => {
         e.preventDefault();
-    }
+    };
 
     render() {
         const {
-            listDistrict, listCity, cityName, districtNames, teacherSkills, currentUser
+            listDistrict,
+            listCity,
+            cityName,
+            districtNames,
+            teacherSkills,
+            currentUser,
+            listSkills
         } = this.props;
         const tokenn = localStorage.token;
         let decoded = null;
         if (tokenn) {
             decoded = jwtDecode(tokenn);
         }
-        console.log('currentUser', currentUser);
+        const arraty = [];
+        listSkills.forEach((item) => {
+            let arr = {};
+            teacherSkills.forEach((val) => {
+                if (item.skillId === val.skillId) {
+                    arr = Object.assign(item, { checked: true });
+                    arraty.push(arr);
+                }
+                // arr = Object.assign(item, { checked: false });
+                // arraty.push(arr);
+            });
+        });
+        console.log('arraty', arraty);
 
         return (
             <div
@@ -81,12 +123,20 @@ class EditProfile extends React.PureComponent {
                                     <b>Giới tính:</b>
                                 </h5>
                                 <Form.Control as="select" className="select-form" id="selectGender" required>
-                                    <option className="black-title" value="Nam">
-                                        Nam
-                                    </option>
-                                    <option className="black-title" value="Nữ">
-                                        Nữ
-                                    </option>
+                                    {gender ? (gender.map((item) => {
+                                        if (item.value === currentUser.gender) {
+                                            return (
+                                                <option selected className="black-title" value={item.value}>
+                                                    {item.text}
+                                                </option>
+                                            );
+                                        }
+                                        return (
+                                            <option className="black-title" value={item.value}>
+                                                {item.text}
+                                            </option>
+                                        );
+                                    })) : null}
                                 </Form.Control>
                             </div>
                             <div className="col-md-5 col-sm-5 contact_left_grid mt-4">
@@ -225,58 +275,45 @@ class EditProfile extends React.PureComponent {
                                         )}
 
                                     <div className="col-md-12 col-sm-12">
-                                        <div className="col-md-5 col-sm-5 pb-4">
-                                            <h5 className="float-left pt-4 text-white">
-                                                <b>Hãy chọn các kỹ năng của bạn:</b>
-                                            </h5>
-                                            <Form.Control
-                                                as="select"
-                                                multiple
-                                                className="select-form"
-                                                onChange={this.onChangeSelection}
-                                                id="selectTagList"
-                                                required
-                                            >
-                                                <option value="1">Công nghệ phần mềm</option>
-                                                <option value="2">Hệ thống thông tin</option>
-                                                <option value="3">Mạng máy tính</option>
-                                            </Form.Control>
-                                            <div className="clearfix" />
+                                        <h5 className="float-left pt-4 text-white">
+                                            <b>Hãy chọn các kỹ năng của bạn:</b>
+                                        </h5>
+                                        <div className="mt-5 pt-4 font-size-13">
+                                            {listSkills ? (
+                                                listSkills.forEach((item) => {
+                                                    teacherSkills.forEach((itm) => {
+                                                        if (itm.skillId === item.skillId) {
+                                                            return (
+                                                                <div className="col-md-2 col-sm-2">
+                                                                    <input
+                                                                        checked
+                                                                        type="checkbox"
+                                                                        id={item.skillId}
+                                                                    />
+                                                                    <p>
+                                                                        {' '}
+                                                                        {item.name}
+                                                                    </p>
+                                                                </div>
+                                                            );
+                                                        }
+                                                        return (
+                                                            <div className="col-md-2 col-sm-2">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    id={item.skillId}
+                                                                />
+                                                                <p>
+                                                                    {' '}
+                                                                    {item.name}
+                                                                </p>
+                                                            </div>
+                                                        );
+                                                    });
+                                                })
+                                            ) : null}
                                         </div>
-                                        <div className="col-md-2 col-sm-2 pt-6">
-                                            <Button
-                                                onClick={this.onChooseTag}
-                                                id="btnChoose"
-                                            >
-                                                {'>'}
-                                            </Button>
-                                            <Button
-                                                onClick={this.onUnchooseTag}
-                                                id="btnUnchoose"
-                                                className="float-right"
-                                            >
-                                                {'<'}
-                                            </Button>
-                                        </div>
-                                        <div className="col-md-5 col-sm-5 pb-4 float-right">
-                                            <h5 className="float-left pt-4 text-white">
-                                                <b>Kỹ năng được chọn:</b>
-                                            </h5>
-                                            <Form.Control
-                                                as="select"
-                                                multiple
-                                                className="select-form"
-                                                onChange={this.onChangeSelection}
-                                                id="selectedTagList"
-                                                required
-                                            >
-                                                {/* {teacherSkills? (
-                                                    teacherSkills.map((item) => {
-                                                        return <option value={item.skillId}>Công nghệ phần mềm</option>;
-                                                    })
-                                                ) : ()} */}
-                                            </Form.Control>
-                                        </div>
+                                        <div className="clearfix" />
                                     </div>
 
                                     <div className="col-md-12 col-sm-12 contact_left_grid">

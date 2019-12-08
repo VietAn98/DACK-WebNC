@@ -13,6 +13,7 @@ const APIService = {
   GET_LIST_DISTRICT: `${URL}/api/get-list-district`,
   GET_LIST_CITY: `${URL}/api/get-list-city`,
   GET_SKILLS: `${URL}/api/get-List-Skill-ByUser/`,
+  GET_LIST_SKILLS: `${URL}/api/get-list-skills`,
 };
 
 export default APIService;

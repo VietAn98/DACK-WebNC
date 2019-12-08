@@ -82,12 +82,21 @@ export const loginRequest = (gmail, password) => (dispatch) => fetch(API.LOGIN, 
 	})
 	.catch((error) => {
 		throw error;
-	})
-	;
+	});
 
 export const chosenTagList = (stringTags) => ({
 	type: 'CHOSEN_TAG_LIST',
 	stringTags
+});
+
+export const listTemp = (list) => ({
+	type: 'LIST_TEMP',
+	list
+});
+
+export const listTempUnchoose = (list) => ({
+	type: 'LIST_TEMP_UNCHOOSE',
+	list
 });
 
 export const avatarName = (avtName) => ({
@@ -200,4 +209,17 @@ export const getSkills = (idTeacher) => (dispatch) => {
 			console.log('teacherSkills', res);
 			dispatch({ type: 'GET_SKILLS', teacherSkills: res });
 		}).catch((err) => console.log('Error getSkills occured', err));
+};
+
+export const getListSkills = () => (dispatch) => {
+	return fetch(API.GET_LIST_SKILLS, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((res) => {
+			console.log('listSkills', res);
+			dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
+		}).catch((err) => console.log('Error getListSkills occured', err));
 };

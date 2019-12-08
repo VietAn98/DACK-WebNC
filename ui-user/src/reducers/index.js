@@ -91,10 +91,43 @@ export const teacherSkills = (state = [], action) => {
 	}
 };
 
+export const tempList = (state = [], action) => {
+	switch (action.type) {
+		case 'LIST_TEMP': {
+			// console.log('action.list', action.list);
+			return action.list;
+		}
+		default:
+			return state;
+	}
+};
+
+export const tempListUnChoose = (state = [], action) => {
+	switch (action.type) {
+		case 'LIST_TEMP_UNCHOOSE': {
+			// console.log('LIST_TEMP_UNCHOOSE', action.list);
+			return action.list;
+		}
+		default:
+			return state;
+	}
+};
+
+
 export const currentUser = (state = {}, action) => {
 	switch (action.type) {
 		case 'USER_LOGIN': {
 			return action.payload;
+		}
+		default:
+			return state;
+	}
+};
+
+export const listSkills = (state = [], action) => {
+	switch (action.type) {
+		case 'GET_LIST_SKILLS': {
+			return action.listSkills;
 		}
 		default:
 			return state;
