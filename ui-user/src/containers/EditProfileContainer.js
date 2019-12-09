@@ -10,9 +10,9 @@ import {
     getListSkills,
     avatarName,
     uploadAvatar,
-    chosenTagList,
-    listTemp,
-    listTempUnchoose
+    updateStudentInfor,
+    updateTeacherInfor,
+    getUserInfor
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -24,9 +24,7 @@ const mapStateToProps = (state) => ({
     currentUser: state.currentUser,
     listSkills: state.listSkills,
     nameAvatar: state.nameAvatar,
-    stringTag: state.stringTag,
-    tempList: state.tempList,
-    tempListUnChoose: state.tempListUnChoose
+    userProfiles: state.userProfiles
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,8 +37,30 @@ const mapDispatchToProps = (dispatch) => ({
     getListSkills: () => dispatch(getListSkills()),
     avatarName: (avt) => dispatch(avatarName(avt)),
     uploadAvatar: (fd) => dispatch(uploadAvatar(fd)),
-    chosenTagList: (tags) => dispatch(chosenTagList(tags)),
-    listTemp: (list) => dispatch(listTemp(list)),
-    listTempUnchoose: (list) => dispatch(listTempUnchoose(list))
+    updateStudentInfor: (gmail,
+        name,
+        gender,
+        districtId,
+        avatar) => dispatch(updateStudentInfor(gmail,
+            name,
+            gender,
+            districtId,
+            avatar)),
+    updateTeacherInfor: (gmail,
+        name,
+        gender,
+        districtId,
+        introduce,
+        skill,
+        price,
+        avatar) => dispatch(updateTeacherInfor(gmail,
+            name,
+            gender,
+            districtId,
+            introduce,
+            skill,
+            price,
+            avatar)),
+    getUserInfor: (user) => dispatch(getUserInfor(user))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

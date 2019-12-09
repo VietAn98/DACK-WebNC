@@ -1,6 +1,7 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode';
 import { Form, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import './EditProfile.css';
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -21,19 +22,18 @@ class EditProfile extends React.PureComponent {
             getListCity,
             getCityByIdDistrict,
             getSkills,
-            userLogin,
             getListSkills,
-            listTemp,
-
+            getUserInfor,
         } = this.props;
         getListDisctrict();
         getListCity();
-        getCityByIdDistrict(user.districtId);
+        await getUserInfor(user.userId);
+        const { userProfiles } = await this.props;
+        getCityByIdDistrict(userProfiles.districtId);
         await getSkills(user.userId);
-        userLogin(user);
         getListSkills();
-        const { teacherSkills } = this.props;
-        await listTemp(teacherSkills);
+
+        // console.log('user/ProfilesuserProfilesuserProfiles', userProfiles);
     }
 
     onGetAvatar = (e) => {
@@ -59,8 +59,118 @@ class EditProfile extends React.PureComponent {
         });
     }
 
-    onSubmitInforTeaching = (e) => {
+    onHandleChange = async (e) => {
+        const { userLogin, currentUser } = this.props;
+
+        await userLogin({
+            ...currentUser,
+            [e.target.id]: e.target.value
+        });
+        // await checkFieldsValueFormUpdateInfor(
+        //     document.getElementById('name').value,
+        //     document.getElementById('pAddress').value,
+        //     document.getElementById('pPhoneNumber').value
+        // );
+    };
+
+    onSubmitInforTeaching = async (e) => {
         e.preventDefault();
+
+        const {
+            nameAvatar,
+            currentUser,
+            updateStudentInfor,
+            updateTeacherInfor,
+            userLogin,
+        } = this.props;
+
+        const { gmail } = user;
+
+        let avatar = '';
+        if (currentUser.avatar === '' || currentUser.avatar === null) {
+            avatar = `http://localhost:3001/images/${nameAvatar.name}`;
+        } else {
+            avatar = currentUser.avatar;
+        }
+
+        const name = document.getElementById('name').value;
+        const intro = document.getElementById('introduce').value;
+        const price = document.getElementById('price').value;
+        const genderSelected = document.getElementById('selectGender').value;
+        const idDistrict = document.getElementById('selectDistrict').value;
+
+        const skills = document.getElementsByClassName('checkedbox');
+        let stringSkill = '';
+        for (let i = 0; i < skills.length; i += 1) {
+            if (skills[i].checked === true) {
+                // eslint-disable-next-line radix
+                const a = `${parseInt(skills[i].id)},`;
+                stringSkill += a;
+            }
+        }
+
+        if (user.categoryUser === 0) {
+            Promise.resolve(updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar))
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cập Nhật Thành Công',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.reload();
+                        }
+                    });
+                });
+
+            // await userLogin({
+            //     ...currentUser,
+            //     name,
+            //     genderSelected,
+            //     idDistrict,
+            //     avatar
+            // });
+        }
+
+        if (user.categoryUser === 1) {
+            Promise.resolve(updateTeacherInfor(gmail,
+                name,
+                genderSelected,
+                idDistrict,
+                intro,
+                stringSkill,
+                price,
+                avatar)).then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cập Nhật Thành Công',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.reload();
+                        }
+                    });
+                });
+            await updateTeacherInfor(gmail,
+                name,
+                genderSelected,
+                idDistrict,
+                intro,
+                stringSkill,
+                price,
+                avatar);
+            // await userLogin({
+            //     ...currentUser,
+            //     name,
+            //     genderSelected,
+            //     idDistrict,
+            //     intro,
+            //     stringSkill,
+            //     price,
+            //     avatar
+            // });
+            console.log('currentUser submit', currentUser);
+        }
     };
 
     render() {
@@ -85,13 +195,21 @@ class EditProfile extends React.PureComponent {
                 if (item.skillId === val.skillId) {
                     arr = Object.assign(item, { checked: true });
                     arraty.push(arr);
-                }
-                // arr = Object.assign(item, { checked: false });
-                // arraty.push(arr);
+                } else { arraty.push(item); }
             });
         });
-        console.log('arraty', arraty);
+        // console.log('arraty', arraty);
 
+        const newArr = [];
+        arraty.forEach((element) => {
+            if (!newArr.includes(element)) {
+                newArr.push(element);
+            }
+        });
+        console.log('cityName: ', cityName);
+
+        // const checkedbox = document.getElementsByClassName('checkedbox');
+        // console.log('checkedbox', checkedbox);
         return (
             <div
                 style={{
@@ -116,6 +234,7 @@ class EditProfile extends React.PureComponent {
                                     id="name"
                                     value={currentUser.name}
                                     required
+                                    onChange={this.onHandleChange}
                                 />
                             </div>
                             <div className="col-md-2 col-sm-2 mt-4">
@@ -139,7 +258,7 @@ class EditProfile extends React.PureComponent {
                                     })) : null}
                                 </Form.Control>
                             </div>
-                            <div className="col-md-5 col-sm-5 contact_left_grid mt-4">
+                            <div className="col-md-5 col-sm-5 mt-4 contact_left_grid">
                                 {currentUser.avatar === null || currentUser.avatar === '' ? (
                                     <div>
                                         <h5 className="float-left text-white">
@@ -152,7 +271,7 @@ class EditProfile extends React.PureComponent {
                                             <div className="avatarHolder">
                                                 <img
                                                     style={{
-                                                        width: '33%', height: '33%', padding: '1%'
+                                                        width: '100%', height: '100%', padding: '1%'
                                                     }}
                                                     alt="avatar"
                                                     src={currentUser.avatar}
@@ -180,7 +299,7 @@ class EditProfile extends React.PureComponent {
                                     value={user.}
                                 />
                             </div> */}
-                            <div className="col-md-5 col-sm-5 contact_left_grid mt-4">
+                            <div className="col-md-4 col-sm-4 mt-4">
                                 <h5 className="float-left text-white">
                                     <b>Tỉnh/Thành phố:</b>
                                 </h5>
@@ -205,14 +324,14 @@ class EditProfile extends React.PureComponent {
                                     ) : null}
                                 </Form.Control>
                             </div>
-                            <div className="col-md-2 col-sm-2 contact_left_grid mt-4">
+                            <div className="col-md-3 col-sm-3 mt-4">
                                 <h5 className="float-left text-white">
                                     <b>Quận:</b>
                                 </h5>
                                 <Form.Control
                                     as="select"
                                     className="select-form"
-                                    id="selectCity"
+                                    id="selectDistrict"
                                     required
                                 >
                                     {districtNames.length !== 0 ? (
@@ -223,7 +342,7 @@ class EditProfile extends React.PureComponent {
                                         ))) : (
                                             listDistrict.map((item) => {
                                                 if (item.cityId === cityName.cityId) {
-                                                    if (item.districtId === user.districtId) {
+                                                    if (item.districtId === currentUser.districtId) {
                                                         return (
                                                             <option selected value={item.districtId} className="black-title">
                                                                 {item.name}
@@ -238,9 +357,9 @@ class EditProfile extends React.PureComponent {
                                 </Form.Control>
                             </div>
 
-                            {decoded.categoryUser === 1 ? (
+                            {user.categoryUser === 1 ? (
                                 <div>
-                                    {user.avatar === '' || user.avatar === null ? (
+                                    {currentUser.avatar === '' || currentUser.avatar === null ? (
                                         <div className="col-md-5 col-sm-5 contact_left_grid">
                                             <h5 className="float-left pt-4 text-white">
                                                 <b>Giá tiền thuê/giờ:</b>
@@ -250,7 +369,9 @@ class EditProfile extends React.PureComponent {
                                                 id="price"
                                                 placeholder="VND"
                                                 required
-                                                value={currentUser.price}
+                                                // eslint-disable-next-line radix
+                                                value={parseInt(currentUser.price)}
+                                                onChange={this.onHandleChange}
                                             />
                                             <div className="invalid-feedback text-white">
                                                 Please choose.
@@ -266,7 +387,9 @@ class EditProfile extends React.PureComponent {
                                                     id="price"
                                                     placeholder="VND"
                                                     required
-                                                    value={currentUser.price}
+                                                    // eslint-disable-next-line radix
+                                                    value={parseInt(currentUser.price)}
+                                                    onChange={this.onHandleChange}
                                                 />
                                                 <div className="invalid-feedback text-white">
                                                     Please choose.
@@ -279,37 +402,22 @@ class EditProfile extends React.PureComponent {
                                             <b>Hãy chọn các kỹ năng của bạn:</b>
                                         </h5>
                                         <div className="mt-5 pt-4 font-size-13">
-                                            {listSkills ? (
-                                                listSkills.forEach((item) => {
-                                                    teacherSkills.forEach((itm) => {
-                                                        if (itm.skillId === item.skillId) {
-                                                            return (
-                                                                <div className="col-md-2 col-sm-2">
-                                                                    <input
-                                                                        checked
-                                                                        type="checkbox"
-                                                                        id={item.skillId}
-                                                                    />
-                                                                    <p>
-                                                                        {' '}
-                                                                        {item.name}
-                                                                    </p>
-                                                                </div>
-                                                            );
-                                                        }
-                                                        return (
-                                                            <div className="col-md-2 col-sm-2">
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id={item.skillId}
-                                                                />
-                                                                <p>
-                                                                    {' '}
-                                                                    {item.name}
-                                                                </p>
-                                                            </div>
-                                                        );
-                                                    });
+                                            {newArr ? (
+                                                newArr.map((item) => {
+                                                    return (
+                                                        <div className="col-md-2 col-sm-2">
+                                                            <input
+                                                                className="checkedbox"
+                                                                defaultChecked={item.checked ? true : false}
+                                                                type="checkbox"
+                                                                id={item.skillId}
+                                                            />
+                                                            <p>
+                                                                {' '}
+                                                                {item.name}
+                                                            </p>
+                                                        </div>
+                                                    );
                                                 })
                                             ) : null}
                                         </div>
@@ -322,10 +430,11 @@ class EditProfile extends React.PureComponent {
                                         </h5>
                                         <textarea
                                             type="textarea"
-                                            id="intro"
+                                            id="introduce"
                                             placeholder="Viết tại đây"
                                             value={currentUser.introduce}
                                             required
+                                            onChange={this.onHandleChange}
                                         />
                                     </div>
                                 </div>

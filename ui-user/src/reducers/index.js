@@ -6,38 +6,33 @@
 // 	categoryUser: '',
 // });
 
-// const userProfile = (state = createInitialState(), action) => {
-// 	switch (action.type) {
-// 	case 'USER_PROFILE': {
-// 		return {
-// 			...state,
-// 			name: action.name,
-// 			gmail: action.gmail,
-// 			categoryUser: action.categoryUser
-// 		};
-// 	}
-// 	default:
-// 		return state;
-// 	}
-// };
-
-export const stringTag = (state = '', action) => {
+export const userProfiles = (state = {}, action) => {
 	switch (action.type) {
-	case 'CHOSEN_TAG_LIST': {
-		return action.stringTags;
-	}
-	default:
-		return state;
+		case 'USER_PROFILE': {
+			return action.payload;
+		}
+		default:
+			return state;
 	}
 };
 
+// export const stringTag = (state = '', action) => {
+// 	switch (action.type) {
+// 		case 'CHOSEN_TAG_LIST': {
+// 			return action.stringTags;
+// 		}
+// 		default:
+// 			return state;
+// 	}
+// };
+
 export const nameAvatar = (state = {}, action) => {
 	switch (action.type) {
-	case 'AVATAR_NAME': {
-		return action.avtName;
-	}
-	default:
-		return state;
+		case 'AVATAR_NAME': {
+			return action.avtName;
+		}
+		default:
+			return state;
 	}
 };
 
@@ -91,27 +86,27 @@ export const teacherSkills = (state = [], action) => {
 	}
 };
 
-export const tempList = (state = [], action) => {
-	switch (action.type) {
-		case 'LIST_TEMP': {
-			// console.log('action.list', action.list);
-			return action.list;
-		}
-		default:
-			return state;
-	}
-};
+// export const tempList = (state = [], action) => {
+// 	switch (action.type) {
+// 		case 'LIST_TEMP': {
+// 			// console.log('action.list', action.list);
+// 			return action.list;
+// 		}
+// 		default:
+// 			return state;
+// 	}
+// };
 
-export const tempListUnChoose = (state = [], action) => {
-	switch (action.type) {
-		case 'LIST_TEMP_UNCHOOSE': {
-			// console.log('LIST_TEMP_UNCHOOSE', action.list);
-			return action.list;
-		}
-		default:
-			return state;
-	}
-};
+// export const tempListUnChoose = (state = [], action) => {
+// 	switch (action.type) {
+// 		case 'LIST_TEMP_UNCHOOSE': {
+// 			// console.log('LIST_TEMP_UNCHOOSE', action.list);
+// 			return action.list;
+// 		}
+// 		default:
+// 			return state;
+// 	}
+// };
 
 
 export const currentUser = (state = {}, action) => {

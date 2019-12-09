@@ -6,13 +6,22 @@ import avatar1 from '../../public/images/avatar.jpg';
 import './AfterLogin.css';
 
 class AfterLogin extends React.PureComponent {
+	// eslint-disable-next-line react/no-deprecated
+	componentWillMount = () => {
+		const { getUserInfor } = this.props;
+		const user = JSON.parse(localStorage.getItem('user'));
+		console.log('user', user);
+		getUserInfor(user.userId);
+	}
+
 	render() {
 		const tokenn = localStorage.token;
 		let decoded = null;
 		if (tokenn) {
 			decoded = jwtDecode(tokenn);
 		}
-		const { signOut } = this.props;
+		const { signOut, userProfiles } = this.props;
+		console.log('userProfiles', userProfiles);
 		return (
 			<div>
 				<div className="after-login">
@@ -32,7 +41,7 @@ class AfterLogin extends React.PureComponent {
 									}}
 								>
 
-									{decoded.name}
+										{userProfiles.name}
 									{' '}
 									&#x25bc;
 								</div>

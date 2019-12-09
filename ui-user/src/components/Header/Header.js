@@ -13,8 +13,6 @@ class Header extends React.PureComponent {
 			decoded = jwtDecode(tokenn);
 			// console.log('decoded', decoded);
 		}
-		const { userProfile } = this.props;
-		console.log('userProfile', userProfile);
 
 		return (
 			<div>

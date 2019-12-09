@@ -2,11 +2,9 @@ import Swal from 'sweetalert2';
 import API from '../service/api';
 
 
-export const userProfile = (name, gmail, categoryUser) => ({
+export const userProfile = (infor) => ({
 	type: 'USER_PROFILE',
-	name,
-	gmail,
-	categoryUser
+	payload: infor
 });
 
 export const registerRequest = (
@@ -84,20 +82,20 @@ export const loginRequest = (gmail, password) => (dispatch) => fetch(API.LOGIN, 
 		throw error;
 	});
 
-export const chosenTagList = (stringTags) => ({
-	type: 'CHOSEN_TAG_LIST',
-	stringTags
-});
+// export const chosenTagList = (stringTags) => ({
+// 	type: 'CHOSEN_TAG_LIST',
+// 	stringTags
+// });
 
-export const listTemp = (list) => ({
-	type: 'LIST_TEMP',
-	list
-});
+// export const listTemp = (list) => ({
+// 	type: 'LIST_TEMP',
+// 	list
+// });
 
-export const listTempUnchoose = (list) => ({
-	type: 'LIST_TEMP_UNCHOOSE',
-	list
-});
+// export const listTempUnchoose = (list) => ({
+// 	type: 'LIST_TEMP_UNCHOOSE',
+// 	list
+// });
 
 export const avatarName = (avtName) => ({
 	type: 'AVATAR_NAME',
@@ -144,6 +142,28 @@ export const updateTeacherInfor = (
 	// .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
 	.catch((err) => console.log('Error updateTeacherInfor occured', err));
 
+export const updateStudentInfor = (
+	gmail,
+	name,
+	gender,
+	districtId,
+	avatar
+) => (dispatch) => fetch(API.UPDATE_INFOR_STUDENT, {
+	method: 'POST',
+	headers: {
+		Accept: 'application/json', 'Content-Type': 'application/json',
+	},
+	body: JSON.stringify({
+		gmail,
+		name,
+		gender,
+		districtId,
+		avatar
+	}),
+
+}).then((respond) => console.log('Respond from updateStudentInfor:', respond))
+	.catch((err) => console.log('Error updateStudentInfor occured', err));
+
 export const signOut = () => {
 	localStorage.removeItem('token');
 	localStorage.removeItem('user');
@@ -179,7 +199,7 @@ export const getCityByIdDistrict = (idDistrict) => (dispatch) => {
 		},
 	}).then((respond) => respond.json())
 		.then((res) => {
-			// console.log('cityName', res);
+			console.log('cityNamecityNamecityName', res);
 			dispatch({ type: 'GET_CITY_BY_DISTRICT', cityName: res });
 		}).catch((err) => console.log('Error getCityByIdDistrict occured', err));
 };
@@ -222,4 +242,19 @@ export const getListSkills = () => (dispatch) => {
 			console.log('listSkills', res);
 			dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
 		}).catch((err) => console.log('Error getListSkills occured', err));
+};
+
+export const getUserInfor = (id) => (dispatch) => {
+	console.log('id', id);
+	return fetch(API.GET_USER_INFO_BY_ID + id, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then(async (resr) => {
+			console.log('getUserInfor', resr);
+			await dispatch(userLogin(resr));
+			await dispatch(userProfile(resr));
+		}).catch((err) => console.log('Error getUserInfor occured', err));
 };

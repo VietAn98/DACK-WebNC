@@ -3,7 +3,7 @@ import Header from '../components/Header/Header';
 // import { loginRequest } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
-	userProfile: state.userProfile
+	// userProfile: state.userProfile
 });
 
 // const mapDispatchToProps = (dispatch) => ({
