@@ -68,7 +68,7 @@ module.exports = {
   getTeacherByid: (req,res) => {
     const id = req.params.id;
     return db.getDetailTeacher(id).then(teacher => {
-        res.status(200).json(teacher);
+        res.status(200).json(teacher[0]);
     }).catch(err => {
         res.status(400).json({message: "Không có chi tiết giáo  viên", error: err});
     })
