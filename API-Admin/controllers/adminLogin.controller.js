@@ -33,7 +33,6 @@ module.exports = {
     const gmail = req.body.gmail;
     let keyPass = randomstring.generate(100);
     return db.getAccByEmail(gmail).then(gmails =>{
-      console.log(gmails.length);
       if(gmails.length === 0) 
       {
         var salt = bcrypt.genSaltSync(10);
