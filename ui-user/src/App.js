@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import PageNotFound from './pages/PageNotFound';
 import Settings from './pages/Settings';
 import TeacherInfoPage from './pages/TeacherInfoPage';
+import TeacherList from './containers/TeacherListContainer';
 
 export class App extends React.PureComponent {
 	render() {
@@ -16,6 +17,7 @@ export class App extends React.PureComponent {
 			<main>
 				<Header />
 				<Switch>
+					<Route path="/teacherslist" exact component={TeacherList} />
 					<Route path="/settings" exact component={Settings} />
 					<Route path="/signin" exact component={SignInPage} />
 					<Route path="/signup" exact component={SignUpPage} />

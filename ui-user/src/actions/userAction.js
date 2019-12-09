@@ -82,21 +82,6 @@ export const loginRequest = (gmail, password) => (dispatch) => fetch(API.LOGIN, 
 		throw error;
 	});
 
-// export const chosenTagList = (stringTags) => ({
-// 	type: 'CHOSEN_TAG_LIST',
-// 	stringTags
-// });
-
-// export const listTemp = (list) => ({
-// 	type: 'LIST_TEMP',
-// 	list
-// });
-
-// export const listTempUnchoose = (list) => ({
-// 	type: 'LIST_TEMP_UNCHOOSE',
-// 	list
-// });
-
 export const avatarName = (avtName) => ({
 	type: 'AVATAR_NAME',
 	avtName
@@ -253,8 +238,21 @@ export const getUserInfor = (id) => (dispatch) => {
 		},
 	}).then((respond) => respond.json())
 		.then(async (resr) => {
-			console.log('getUserInfor', resr);
 			await dispatch(userLogin(resr));
 			await dispatch(userProfile(resr));
+		}).catch((err) => console.log('Error getUserInfor occured', err));
+};
+
+export const getListTeacher = () => (dispatch) => {
+	// console.log('id', id);
+	return fetch(API.GET_LIST_TEACHERS, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((res) => {
+			console.log('getListTeacher', res);
+			dispatch({ type: 'GET_LIST_TEACHERS', listTeachers: res });
 		}).catch((err) => console.log('Error getUserInfor occured', err));
 };

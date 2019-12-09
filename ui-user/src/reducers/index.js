@@ -128,3 +128,13 @@ export const listSkills = (state = [], action) => {
 			return state;
 	}
 };
+
+export const listTeachers = (state = [], action) => {
+	switch (action.type) {
+		case 'GET_LIST_TEACHERS': {
+			return action.listTeachers;
+		}
+		default:
+			return state;
+	}
+};

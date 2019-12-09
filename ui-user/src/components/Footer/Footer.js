@@ -1,9 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-
-import './Footer.css';
 import Jello from 'react-reveal/Jello';
 import { FaHeart } from 'react-icons/fa';
+import './Footer.css';
 
 class Footer extends React.PureComponent {
   render() {
@@ -16,6 +15,7 @@ class Footer extends React.PureComponent {
             paddingTop: '2rem',
             paddingBottom: '2rem',
             borderTop: '2px solid #ee4540',
+            zIndex: '19999',
           }}
         >
           <Container>

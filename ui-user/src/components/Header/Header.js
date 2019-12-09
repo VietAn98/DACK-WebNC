@@ -33,7 +33,7 @@ class Header extends React.PureComponent {
 										</NavLink>
 										{(decoded === null || decoded.categoryUser === 0)
 											? (
-												<NavLink to="/abc" className="nav-link">
+												<NavLink to="/teacherslist" className="nav-link">
 													Danh Sách Giáo Viên
 												</NavLink>
 											)
@@ -49,15 +49,15 @@ class Header extends React.PureComponent {
 										{tokenn ? (
 											<AfterLogin />
 										) : (
-											<div className="d-flex flex-row justify-content-end">
-												<NavLink to="/signin" className="nav-link signIn">
+												<div className="d-flex flex-row justify-content-end">
+													<NavLink to="/signin" className="nav-link signIn">
 														Đăng nhập
-												</NavLink>
-												<NavLink to="/signup" className="nav-link signUp">
+													</NavLink>
+													<NavLink to="/signup" className="nav-link signUp">
 														Đăng Ký
-												</NavLink>
-											</div>
-										)}
+													</NavLink>
+												</div>
+											)}
 									</div>
 								</Nav>
 							</Navbar.Collapse>
