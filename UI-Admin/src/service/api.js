@@ -3,6 +3,11 @@ import URL from "./url";
 const APIService = {
   LOGIN: `${URL}/api-admin/login`,
   REGISTER: `${URL}/api-admin/admin-register`,
+  GET_STUDENtS: `${URL}/api-admin/get-list-account-student`,
+  GET_DETAIL_USER: `${URL}/api-admin/get-detail-account/`,
+  GET_ADDRESS_USER: `${URL}/api-admin/get-district-city-byUser/`,
+  GET_DISTRICT_USER: `${URL}/api-admin/get-district-byUser/`,
+  UPDATE_STATE:  `${URL}/api-admin/update-state-account`,
 //   GET_INFO: `${URL}/api/current-user-profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,
 //   // CHANGE_AVATAR: `${URL}/user/uploadavatar`,

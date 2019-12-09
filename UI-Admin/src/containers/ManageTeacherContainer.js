@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import HomePage from '../components/HomePage/HomePage';
+import teacher from '../components/manageAcc/teacher';
 
 const mapStateToProps = () => {
   return {
@@ -11,4 +11,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(teacher);
