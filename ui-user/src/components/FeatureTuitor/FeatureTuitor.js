@@ -6,7 +6,7 @@ import CardList from '../CardList';
 
 class FeatureTuitor extends React.PureComponent {
 	render() {
-		const { style } = this.props;
+		const { style, listTeachers } = this.props;
 		return (
 			<section style={style}>
 				<Container>
@@ -16,7 +16,7 @@ class FeatureTuitor extends React.PureComponent {
 						</div>
 					</h2>
 					<div style={{ marginTop: '2rem' }}>
-						<CardList />
+						<CardList listTeachers={listTeachers} />
 					</div>
 				</Container>
 			</section>

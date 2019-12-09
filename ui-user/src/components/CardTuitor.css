@@ -1,55 +1,64 @@
 .cardTuitor {
-	border: black solid 2px;
-	margin-bottom: 2rem;
-	position: relative;
-	overflow: hidden;
+  border: rgb(197, 197, 197) solid 2px;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  border-collapse: collapse;
+  /* transition: width 1s, height 1s, transform 0.5s; */
 }
+
 .cardTuitor img {
-	width: 100%;
-}
-.cardTuitor .cardCaption {
-	background-color: rgba(0, 0, 0, 0.7);
-	position: absolute;
-	left: 0;
-	bottom: 0%;
-	width: 100%;
-	height: 88px;
-	text-align: center;
-	transition: all 0.5s ease-in-out;
-}
-.cardTuitor .cardCaption .cardInfo {
-	position: absolute;
-	left: 0;
-	bottom: 0%;
-	width: 100%;
-	height: 100%;
-	transition: all 0.5s ease-in-out;
+  width: 100%;
 }
 
-.cardTuitor .cardCaption:hover {
-	height: 100%;
-	border: #ee4540 2px dashed;
+.cardCaption {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  left: 0;
+  bottom: 0%;
+  width: 100%;
+  height: 88px;
+  text-align: center;
+  transition: all 0.5s;
+}
+.cardCaption .cardInfo {
+  position: absolute;
+  left: 0;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
 }
 
-.cardTuitor .cardCaption:hover .cardInfo {
-	transform: translateY(30%);
+.cardTuitor:hover .cardCaption:hover {
+  transition: all 0.2s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: #ee4540 2px solid;
+  transform: rotate(-90deg);
 }
-.cardTuitor .cardCaption .cardInfo h6 {
-	margin: 0;
-	color: #ee4540;
-	font-size: 23px;
-	text-transform: capitalize;
-	line-height: 1.8em;
-	font-weight: 600;
-	letter-spacing: 1px;
+
+.cardCaption:hover .cardInfo {
+  transform: rotate(90deg);
 }
-.cardTuitor .cardCaption .cardInfo div {
-	color: #ffffff;
-	font-size: 1em;
-	margin: 0;
+.cardCaption .cardInfo h6 {
+  margin: 0;
+  color: #ee4540;
+  font-size: 23px;
+  text-transform: capitalize;
+  line-height: 1.8em;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
-.cardTuitor .cardCaption .cardInfo button {
-	color: #ffffff;
-	font-size: 1em;
-	margin: 0;
+.cardCaption .cardInfo {
+  color: #ffffff;
+  font-size: 1em;
+  margin: 0;
+}
+.cardCaption .cardInfo button {
+  color: #ffffff;
+  font-size: 1em;
+  margin: 0;
 }

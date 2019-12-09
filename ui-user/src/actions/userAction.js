@@ -237,9 +237,10 @@ export const getUserInfor = (id) => (dispatch) => {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
 	}).then((respond) => respond.json())
-		.then(async (resr) => {
-			await dispatch(userLogin(resr));
-			await dispatch(userProfile(resr));
+		.then((resr) => {
+			console.log('----------', resr);
+			dispatch(userLogin(resr));
+			dispatch(userProfile(resr));
 		}).catch((err) => console.log('Error getUserInfor occured', err));
 };
 
@@ -254,5 +255,5 @@ export const getListTeacher = () => (dispatch) => {
 		.then((res) => {
 			console.log('getListTeacher', res);
 			dispatch({ type: 'GET_LIST_TEACHERS', listTeachers: res });
-		}).catch((err) => console.log('Error getUserInfor occured', err));
+		}).catch((err) => console.log('Error getListTeacher occured', err));
 };
