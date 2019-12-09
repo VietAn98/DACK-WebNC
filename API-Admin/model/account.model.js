@@ -33,5 +33,17 @@ module.exports = {
     return db.load(`select * from account where userId = '${id}' `);
   },
 
+  getAddressByUser: idDistrict => {
+    return db.load(`SELECT ct.* FROM district as dt  JOIN city as ct  on dt.cityId = ct.cityId WHERE dt.districtId = "${idDistrict}"`);
+  } ,
+
+  getDistrictByUser: idDistrict => {
+    return db.load(`SELECT dt.* FROM district as dt WHERE dt.districtId = "${idDistrict}"`);
+  }, 
+
+  updateState: state => {
+    return db.update("account", "userId", state);
+  }
+
 
 };
