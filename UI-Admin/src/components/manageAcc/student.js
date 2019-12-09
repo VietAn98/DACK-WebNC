@@ -9,13 +9,13 @@ class student extends React.PureComponent {
     getStudents();
   }
 
-  onnclicks = (index) => {
-    history.push(`/manage-student/detail/${index}`)
-  }
+  onnclicks = index => {
+    history.push(`/manage-student-teacher/detail/${index}`);
+  };
 
   render() {
     const { students } = this.props;
-
+    let i = 0;
     return (
       <div
         style={{ padding: "10px" }}
@@ -27,7 +27,7 @@ class student extends React.PureComponent {
           <b>Danh sách học viên</b>
         </h1>
         <Table striped bordered hover>
-          <thead style={{background: "#88888A"}}>
+          <thead style={{ background: "#88888A" }}>
             <tr style={{ textAlign: "center" }}>
               <th style={{ textAlign: "center", width: "5%" }}>STT</th>
               <th style={{ textAlign: "center" }}>Name</th>
@@ -36,20 +36,18 @@ class student extends React.PureComponent {
             </tr>
           </thead>
           <tbody>
-            {students ? (
-              students.map(std => {
-                return (
-                  <tr onClick={this.onnclicks.bind(this,std.userId)}>
-                    <td style={{ textAlign: "center" }}>1</td>
-                    <td>{std.name}</td>
-                    <td>{std.gmail}</td>
-                    <td>{std.gender}</td>
-                  </tr>
-                );
-              })
-            ) :
-            null
-            }
+            {students
+              ? students.map(std => {
+                  return (
+                    <tr style={{cursor: "pointer"}} onClick={this.onnclicks.bind(this, std.userId)}>
+                      <td style={{ textAlign: "center" }}>{(i += 1)}</td>
+                      <td>{std.name}</td>
+                      <td>{std.gmail}</td>
+                      <td>{std.gender}</td>
+                    </tr>
+                  );
+                })
+              : null}
           </tbody>
         </Table>
       </div>

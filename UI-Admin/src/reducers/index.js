@@ -1,3 +1,27 @@
+const initStatelogin = () => ({
+  isLogin: false
+})
+
+export const isSigIn = (state = initStatelogin(), action) => {
+  switch (action.type) {
+    case "IS_LOGIN": {
+      return {
+        ...state,
+        isLogin: true,
+      }
+    }
+
+    case "DONT_LOGIN": {
+      return {
+        ...state,
+        isLogin: false,
+      }
+    }
+    default:
+      return state;
+  }
+}
+
 export const students = (state = [], action) => {
   switch (action.type) {
     case "GET_LIST_STUDENTS": {
@@ -38,3 +62,13 @@ export const getDistrict = (state = {}, action) => {
       return state
   }
 }
+
+export const teachers = (state = [], action) => {
+  switch (action.type) {
+    case "GET_LIST_TEACHER": {
+      return action.teacher;
+    }
+    default:
+      return state;
+  }
+};

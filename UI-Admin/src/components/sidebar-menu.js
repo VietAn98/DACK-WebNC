@@ -57,7 +57,7 @@ class SideBarMenu extends React.PureComponent {
                 </ul>
               </li>
               <li>
-                <a href="maps.html">
+                <a href="/manage-skills">
                 <i class="fa fa-tags"></i>
                   <span>Quản lý Tag kĩ năng</span>
                 </a>

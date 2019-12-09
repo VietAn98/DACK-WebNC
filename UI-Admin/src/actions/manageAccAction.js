@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import API from "../service/api";
 import history from "../history";
 import student from "../components/manageAcc/teacher";
+import { teachers } from "../reducers";
 
 // export const getAddress = () => {
 
@@ -35,7 +36,6 @@ export const getDetailUser = id => {
     })
       .then(response => response.json())
       .then(user => {
-        console.log(".........ssssssss", user);
         dispatch({ type: "GET_DETAIL_USER", user });
       })
       .catch(error => {
@@ -83,7 +83,6 @@ export const getDistrictByUser = id => {
 
 export const updateStateAccount = (userId, adLock) => {
   return dispatch => {
-    console.log('==============+++++++++++',JSON.stringify({ userId, adLock }));
     return (
       fetch(API.UPDATE_STATE, {
         method: "POST",
@@ -98,3 +97,21 @@ export const updateStateAccount = (userId, adLock) => {
     );
   };
 };
+
+export const getListTeacher = () => {
+  return dispatch => {
+    return fetch(API.GET_TEACHERS, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      }
+    })
+      .then(response => response.json())
+      .then(teacher => {
+        dispatch({ type: "GET_LIST_TEACHER", teacher });
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+}
