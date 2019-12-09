@@ -1,1 +1,29 @@
+.listStyle ul li {
+	margin: 10px -1em;
+}
+.listStyle ul i {
+	margin-right: 10px;
+}
 
+.stars {
+	font-size: small;
+}
+.stars li {
+	display: inline-block;
+	margin: 0.1em -1.5em;
+	padding: 0;
+}
+
+.stars li span {
+	font-size: 0.7em;
+	color: orange;
+}
+.stars li span:hover {
+	opacity: 0.8;
+}
+.money {
+	font-size: 1.3em;
+	font-weight: 600;
+	color: #ff4c4c;
+	letter-spacing: 2px;
+}
