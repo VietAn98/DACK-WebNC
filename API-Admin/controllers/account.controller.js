@@ -10,7 +10,7 @@ module.exports = {
     getDetailAccount: (req,res) => {
         const id = req.params.id;
         return db.getAccById(id).then(resp => {
-            res.status(200).json(resp)
+            res.status(200).json(resp[0])
         }).catch(err => res.status(400).json({message: 'thất bại', err: err}))
 
     },
