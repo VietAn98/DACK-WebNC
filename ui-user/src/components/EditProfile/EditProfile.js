@@ -81,7 +81,6 @@ class EditProfile extends React.PureComponent {
             currentUser,
             updateStudentInfor,
             updateTeacherInfor,
-            userLogin,
         } = this.props;
 
         const { gmail } = user;
@@ -159,17 +158,6 @@ class EditProfile extends React.PureComponent {
                 stringSkill,
                 price,
                 avatar);
-            // await userLogin({
-            //     ...currentUser,
-            //     name,
-            //     genderSelected,
-            //     idDistrict,
-            //     intro,
-            //     stringSkill,
-            //     price,
-            //     avatar
-            // });
-            console.log('currentUser submit', currentUser);
         }
     };
 
@@ -183,11 +171,7 @@ class EditProfile extends React.PureComponent {
             currentUser,
             listSkills
         } = this.props;
-        const tokenn = localStorage.token;
-        let decoded = null;
-        if (tokenn) {
-            decoded = jwtDecode(tokenn);
-        }
+
         const arraty = [];
         listSkills.forEach((item) => {
             let arr = {};

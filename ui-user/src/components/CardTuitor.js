@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import history from '../history';
 import './CardTuitor.css';
 import avatar from '../public/images/avatar.jpg';
 
 class Card extends React.PureComponent {
 	onClickCard = () => {
-		alert('Ok');
+		history.push('/teacherinfo');
 	}
 
 	render() {
