@@ -18,7 +18,7 @@ module.exports = {
   },
 
   getAccByEmail: email => {
-    return db.load(`select * from account where gmail= '${email}' and adLock=1`);
+    return db.load(`select * from account where gmail= '${email}' and adLock = '1'`);
   },
 
   getAccById: id => {
@@ -35,5 +35,23 @@ module.exports = {
 
   getListSkill: ()=> {
     return db.load('select * from skill');
+  },
+
+  //
+  getTopTeacher: () => {
+    return db.load('select * from account ORDER BY userId DESC LIMIT 6 where categoryUser=1');
+  },
+
+  getTeacherByPrice: (min,max) => {
+    return null;
+  },
+
+  getTeacherIncreaseByRateSuccess:()=>{
+    return {};
+  },
+
+  getTeacherDecreaseByRateSuccess:()=>{
+    return {};
   }
+
 };
