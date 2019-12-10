@@ -7,13 +7,19 @@ import star from '../../public/images/star.png';
 class TeacherList extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
     componentWillMount = () => {
-        const { getListTeacher } = this.props;
+        const { getListTeacher, getListCity } = this.props;
         getListTeacher();
+        getListCity();
+    }
+
+    onChangeCity = (e) => {
+        const { getDistrictByIdCity } = this.props;
+        getDistrictByIdCity(e.target.value);
     }
 
     render() {
-        const { listTeachers } = this.props;
-
+        const { listTeachers, listCity, districtNames } = this.props;
+        // console.log('cityListcityListcityList', cityList);
         return (
             <Container>
                 <div className="flex-nowrap">
@@ -212,12 +218,21 @@ class TeacherList extends React.PureComponent {
                                                     <Form.Control
                                                         as="select"
                                                         className="select-form-city"
-                                                        id="selectDistrict"
+                                                        id="selectCity"
                                                         required
+                                                        onChange={this.onChangeCity}
                                                     >
-                                                        <option value="{item.districtId}" className="black-title">
-                                                            TP HCM
-                                                        </option>
+                                                        <option value="0" className="black-title" />
+                                                        {listCity ? (
+                                                            listCity.map((item) => {
+                                                                return (
+                                                                    <option value={item.cityId} className="black-title">
+                                                                        {item.name}
+                                                                    </option>
+                                                                );
+                                                            })
+                                                        ) : null}
+
                                                     </Form.Control>
                                                 </div>
                                                 <div className="pt-3">
@@ -228,9 +243,13 @@ class TeacherList extends React.PureComponent {
                                                         id="selectDistrict"
                                                         required
                                                     >
-                                                        <option value="{item.districtId}" className="black-title">
-                                                            TP HCM
-                                                        </option>
+                                                        {districtNames.length !== 0 ? (districtNames.map((item) => {
+                                                            return (
+                                                                <option value={item.districtId} className="black-title">
+                                                                    {item.name}
+                                                                </option>
+                                                            );
+                                                        })) : null}
                                                     </Form.Control>
                                                 </div>
                                             </Form>

@@ -171,9 +171,9 @@ export const getListCity = () => (dispatch) => fetch(API.GET_LIST_CITY, {
 		'Content-Type': 'application/x-www-form-urlencoded'
 	},
 }).then((respond) => respond.json())
-	.then((res) => {
-		console.log('cityList', res);
-		dispatch({ type: 'CITY_LIST', cityList: res });
+	.then(async (res) => {
+		// console.log('cityList', res);
+		await dispatch({ type: 'CITY_LIST', cityList: res });
 	}).catch((err) => console.log('Error getListCity occured', err));
 
 export const getCityByIdDistrict = (idDistrict) => (dispatch) => {
