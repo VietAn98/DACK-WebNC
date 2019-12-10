@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import teacher from '../components/manageAcc/teacher';
-import {getListTeacher} from '../actions/manageAccAction';
+import { getListTeacher } from '../actions/manageAccAction';
 
 
 const mapStateToProps = (state) => ({
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getListTeacher : () =>  dispatch(getListTeacher()),
+  getListTeacher: () => dispatch(getListTeacher()),
 
 });
 

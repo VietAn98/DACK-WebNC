@@ -1,5 +1,5 @@
-import React from "react";
-import "./HomePage/HomePage.css";
+import React from 'react';
+import './HomePage/HomePage.css';
 
 class SideBarMenu extends React.PureComponent {
   render() {
@@ -10,18 +10,18 @@ class SideBarMenu extends React.PureComponent {
             <ul id="menu">
               <li id="menu-home">
                 <a href="/">
-                  <i className="fa fa-tachometer"></i>
+                  <i className="fa fa-tachometer" />
                   <span>Dashboard</span>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <i className="fa fa-cogs"></i>
+                  <i className="fa fa-cogs" />
                   <span>Quản lý Tài khoản</span>
                   <span
                     className="fa fa-angle-right"
-                    style={{ float: "right" }}
-                  ></span>
+                    style={{ float: 'right' }}
+                   />
                 </a>
                 <ul>
                   <li>
@@ -31,21 +31,21 @@ class SideBarMenu extends React.PureComponent {
                     <a href="portlet.html" href="/manage-teacher">Giáo viên</a>
                   </li>
                   <li>
-                    <a href="portlet.html" href="/manage-admin" >Quản trị viên</a>
+                    <a href="portlet.html" href="/manage-admin">Quản trị viên</a>
                   </li>
                 </ul>
               </li>
               <li id="menu-comunicacao">
                 <a href="#">
-                  <i className="fa fa-book nav_icon"></i>
+                  <i className="fa fa-book nav_icon" />
                   <span>Quản lý Hợp đồng học</span>
                   <span
                     className="fa fa-angle-right"
-                    style={{ float: "right" }}
-                  ></span>
+                    style={{ float: 'right' }}
+                  />
                 </a>
                 <ul id="menu-comunicacao-sub">
-                  <li id="menu-mensagens" style={{ width: "120px" }}>
+                  <li id="menu-mensagens" style={{ width: '120px' }}>
                     <a href="buttons.html">Buttons</a>
                   </li>
                   <li id="menu-arquivos">
@@ -58,18 +58,18 @@ class SideBarMenu extends React.PureComponent {
               </li>
               <li>
                 <a href="/manage-skills">
-                <i class="fa fa-tags"></i>
+                <i className="fa fa-tags" />
                   <span>Quản lý Tag kĩ năng</span>
                 </a>
               </li>
               <li id="menu-academico">
                 <a href="#">
-                  <i className="fa fa-file-text"></i>
+                  <i className="fa fa-file-text" />
                   <span>Quản lý Kiếu nại</span>
                   <span
                     className="fa fa-angle-right"
-                    style={{ float: "right" }}
-                  ></span>
+                    style={{ float: 'right' }}
+                   />
                 </a>
               </li>
             </ul>

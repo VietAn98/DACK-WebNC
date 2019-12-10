@@ -34,19 +34,19 @@
   <!-- Custom Theme files -->
   <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
   <!--js-->
-  <script src="js/jquery-2.1.1.min.js"></script>
+  <!-- <script src="js/jquery-2.1.1.min.js"></script> -->
   <!--icons-css-->
   <link href="css/font-awesome.css" rel="stylesheet">
   <!--Google Fonts-->
   <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
   <!--static chart-->
-  <script src="js/Chart.min.js"></script>
+  <!-- <script src="js/Chart.min.js"></script> -->
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <!--//charts-->
 
   <!--skycons-icons-->
-  <script src="js/skycons.js"></script>
+  <!-- <script src="js/skycons.js"></script> -->
   <!--//skycons-icons-->
 
 </head>
@@ -64,60 +64,11 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script>
-    var barChartData = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "jul"],
-      datasets: [
-        {
-          fillColor: "#FC8213",
-          data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-          fillColor: "#337AB7",
-          data: [28, 48, 40, 19, 96, 27, 100]
-        }
-      ]
-
-    };
-    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-
-  </script>
-  <script>
-    $(document).ready(function () {
-      var navoffeset = $(".header-main").offset().top;
-      $(window).scroll(function () {
-        var scrollpos = $(window).scrollTop();
-        if (scrollpos >= navoffeset) {
-          $(".header-main").addClass("fixed");
-        } else {
-          $(".header-main").removeClass("fixed");
-        }
-      });
-
-    });
-  </script>
-  <script>
-    var toggle = true;
-
-    $(".sidebar-icon").click(function () {
-      if (toggle) {
-        $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-        $("#menu span").css({ "position": "absolute" });
-      }
-      else {
-        $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-        setTimeout(function () {
-          $("#menu span").css({ "position": "relative" });
-        }, 400);
-      }
-      toggle = !toggle;
-    });
-  </script>
   <!--scrolling js-->
-  <script src="js/jquery.nicescroll.js"></script>
-  <script src="js/scripts.js"></script>
+  <!-- <script src="js/jquery.nicescroll.js"></script> -->
+  <!-- <script src="js/scripts.js"></script> -->
   <!--//scrolling js-->
-  <script src="js/bootstrap.js"> </script>
+  <!-- <script src="js/bootstrap.js"> </script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

@@ -1,4 +1,4 @@
-import URL from "./url";
+import URL from './url';
 
 const APIService = {
   LOGIN: `${URL}/api-admin/login`,
@@ -7,13 +7,13 @@ const APIService = {
   GET_DETAIL_USER: `${URL}/api-admin/get-detail-account/`,
   GET_ADDRESS_USER: `${URL}/api-admin/get-district-city-byUser/`,
   GET_DISTRICT_USER: `${URL}/api-admin/get-district-byUser/`,
-  UPDATE_STATE:  `${URL}/api-admin/update-state-account`,
+  UPDATE_STATE: `${URL}/api-admin/update-state-account`,
 
-  //teacher
+  // teacher
   GET_TEACHERS: `${URL}/api-admin/get-list-account-teacher`,
 
-  //skill
-  GET_SKILLS:  `${URL}/api-admin/get-list-skill`,
+  // skill
+  GET_SKILLS: `${URL}/api-admin/get-list-skill`,
   DELE_SKILL: `${URL}/api-admin/delete-skill`,
   UPDATE_SKILL: `${URL}/api-admin/update-skill`,
   ADD_SKILL: `${URL}/api-admin/add-skill`,

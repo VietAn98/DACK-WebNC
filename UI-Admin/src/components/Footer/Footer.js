@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 
 class Footer extends React.PureComponent {
   render() {
     return (
-        <div className="copyrights">
+      <div className="copyrights">
         <p>
-          © 2016 Shoppy. All Rights Reserved | Design by{" "}
+          © 2016 Shoppy. All Rights Reserved | Design by
+{' '}
           <a href="http://w3layouts.com/" target="_blank">
             W3layouts
           </a>

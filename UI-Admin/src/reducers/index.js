@@ -1,30 +1,30 @@
 const initStatelogin = () => ({
   isLogin: false
-})
+});
 
 export const isSigIn = (state = initStatelogin(), action) => {
   switch (action.type) {
-    case "IS_LOGIN": {
+    case 'IS_LOGIN': {
       return {
         ...state,
         isLogin: true,
-      }
+      };
     }
 
-    case "DONT_LOGIN": {
+    case 'DONT_LOGIN': {
       return {
         ...state,
         isLogin: false,
-      }
+      };
     }
     default:
       return state;
   }
-}
+};
 
 export const students = (state = [], action) => {
   switch (action.type) {
-    case "GET_LIST_STUDENTS": {
+    case 'GET_LIST_STUDENTS': {
       return action.students;
     }
     default:
@@ -35,7 +35,7 @@ export const students = (state = [], action) => {
 
 export const detailUser = (state = {}, action) => {
   switch (action.type) {
-    case "GET_DETAIL_USER": {
+    case 'GET_DETAIL_USER': {
       return action.user;
     }
     default:
@@ -45,27 +45,27 @@ export const detailUser = (state = {}, action) => {
 
 export const getAddress = (state = {}, action) => {
   switch (action.type) {
-    case "GET_ADDRESS_USER": {
+    case 'GET_ADDRESS_USER': {
       return action.address;
     }
-    default: 
-      return state
+    default:
+      return state;
   }
-}
+};
 
 export const getDistrict = (state = {}, action) => {
   switch (action.type) {
-    case "GET_DISTRICT_USER": {
+    case 'GET_DISTRICT_USER': {
       return action.district;
     }
-    default: 
-      return state
+    default:
+      return state;
   }
-}
+};
 
 export const teachers = (state = [], action) => {
   switch (action.type) {
-    case "GET_LIST_TEACHER": {
+    case 'GET_LIST_TEACHER': {
       return action.teacher;
     }
     default:

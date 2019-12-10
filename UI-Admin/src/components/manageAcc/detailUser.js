@@ -1,6 +1,5 @@
-import React from "react";
-import Swal from "sweetalert2";
-
+import React from 'react';
+import Swal from 'sweetalert2';
 import {
   Table,
   Spinner,
@@ -10,13 +9,15 @@ import {
   Container,
   Row,
   Image
-} from "react-bootstrap";
-import { getAddressByUser } from "../../actions/manageAccAction";
-class detailUser extends React.PureComponent {
+} from 'react-bootstrap';
+import { getAddressByUser } from '../../actions/manageAccAction';
+import './style.css';
+
+class detailsUser extends React.PureComponent {
   constructor(props) {
     super(props);
     const { getDetailUsers } = this.props;
-    const path = window.location.pathname.split("/");
+    const path = window.location.pathname.split('/');
     const id = path[path.length - 1];
     Promise.resolve(getDetailUsers(id))
       .then(() => {
@@ -30,34 +31,38 @@ class detailUser extends React.PureComponent {
       });
   }
 
-  onhandleClick = e => {
+  onhandleClick = (e) => {
     e.preventDefault();
-    const path = window.location.pathname.split("/");
+    const path = window.location.pathname.split('/');
     const id = path[path.length - 1];
     const { updateStateAccount } = this.props;
-    updateStateAccount(id, document.getElementById("status").value).then(rs => {
-      Swal.fire("Thông báo", "Thành công", "Cập  nhật thông tin thành công");
+    updateStateAccount(id, document.getElementById('status').value).then((rs) => {
+      Swal.fire('Thông báo', 'Thành công', 'Cập  nhật thông tin thành công');
     });
   };
 
   render() {
     const { detailUser, getAddress, getDistrict } = this.props;
-    console.log("000000000000000000000000", detailUser.introduce);
+    console.log('000000000000000000000000', detailUser.introduce);
     return (
-      <div style={{ padding: "10px" }}>
-        <Container>
+      <div className="inner-block">
+        <Container className="my-container">
           <Row>
-            <Col xs={6} md={4}>
+            <Col md={12} sm={12} className="justify-center mb-5 mt-2">
               <Image
+                className="ml--15"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBs5C5a5e45YfpmPpgQCfmScqN3cqHuFIq7FRAlCWFEGh-mllE&s"
                 roundedCircle
               />
             </Col>
           </Row>
-        </Container>
-        <Form onSubmit={this.onhandleClick}>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+
+          <Form
+            action="#"
+            method="post"
+            onSubmit={this.onhandleClick}
+          >
+            <Form.Group className="col-md-6 col-sm-6">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 readOnly
@@ -67,7 +72,7 @@ class detailUser extends React.PureComponent {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Group className="col-md-6 col-sm-6">
               <Form.Label>Tên </Form.Label>
               <Form.Control
                 readOnly
@@ -76,10 +81,8 @@ class detailUser extends React.PureComponent {
                 value={detailUser.name}
               />
             </Form.Group>
-          </Form.Row>
 
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group className="col-md-3 col-sm-3">
               <Form.Label>Thành Phố/Tỉnh</Form.Label>
               <Form.Control
                 readOnly
@@ -89,7 +92,7 @@ class detailUser extends React.PureComponent {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Group className="col-md-3 col-sm-3">
               <Form.Label>Quận </Form.Label>
               <Form.Control
                 readOnly
@@ -98,79 +101,82 @@ class detailUser extends React.PureComponent {
                 value={getDistrict.name}
               />
             </Form.Group>
-          </Form.Row>
 
-          {detailUser.categoryUser ? (
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Giá (/h)</Form.Label>
-                <Form.Control
-                  readOnly
-                  type="text"
-                  placeholder="Chưa cập nhật"
-                  value={detailUser.price}
-                />
-              </Form.Group>
+            {detailUser.categoryUser ? (
+              <div>
+                <Form.Group className="col-md-3 col-sm-3">
+                  <Form.Label>Giá (/h)</Form.Label>
+                  <Form.Control
+                    readOnly
+                    type="text"
+                    placeholder="Chưa cập nhật"
+                    value={detailUser.price}
+                  />
+                </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Tỉ lệ thành công </Form.Label>
-                <Form.Control
-                  readOnly
-                  type="text"
-                  placeholder="Chưa cập nhật"
-                  value={detailUser.rateSuccess}
-                />
-              </Form.Group>
-            </Form.Row>
-          ) : null}
+                <Form.Group className="col-md-3 col-sm-3">
+                  <Form.Label>Tỉ lệ thành công </Form.Label>
+                  <Form.Control
+                    readOnly
+                    type="text"
+                    placeholder="Chưa cập nhật"
+                    value={detailUser.rateSuccess}
+                  />
+                </Form.Group>
+              </div>
+            ) : null}
 
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>Giới tính</Form.Label>
+            <Form.Group className="col-md-3 col-sm-3">
+              <Form.Label>Giới tính</Form.Label>
 
-            <Form.Control
-              readOnly
-              placeholder="nam/nữ"
-              value={detailUser.gender}
-            />
-          </Form.Group>
-
-          {detailUser.categoryUser ? (
-            <Form.Group
-            
-              controlId="formGridAddress2"
-              style={{ display: "grid" }}
-              
-            >
-              <Form.Label>Giới thiệu bản thân</Form.Label>
-              <textarea style={{height: "200px"}} readOnly value={detailUser.introduce}></textarea>
+              <Form.Control
+                readOnly
+                placeholder="nam/nữ"
+                value={detailUser.gender}
+              />
             </Form.Group>
-          ) : null}
 
-          <Form.Group>
-            <Form.Label>Trạng thái hoạt động</Form.Label>
-            {detailUser.adLock ? (
-              <Form.Control as="select" id="status">
-                <option selected value="1">
-                  Đang hoạt động
-                </option>
-                <option value="0">Đang khóa</option>
-              </Form.Control>
-            ) : (
-              <Form.Control as="select" id="status">
-                <option value="1">Đang hoạt động</option>
-                <option selected value="0">
-                  Đang khóa
-                </option>
-              </Form.Control>
-            )}
-          </Form.Group>
+            {detailUser.categoryUser ? (
+              <Form.Group
+                className="col-md-6 col-sm-6"
+                controlId="formGridAddress2"
+                style={{ display: 'grid' }}
 
-          <Button variant="primary" type="submit">
-            Lưu lại
-          </Button>
-        </Form>
+              >
+                <Form.Label>Giới thiệu bản thân</Form.Label>
+                <textarea style={{ height: '200px' }} readOnly value={detailUser.introduce} />
+              </Form.Group>
+            ) : null}
+
+            <Form.Group className="col-md-3 col-sm-3">
+              <Form.Label>Trạng thái tài khoản</Form.Label>
+              {detailUser.adLock ? (
+                <Form.Control as="select" id="status">
+                  <option value="1">
+                    Cho phép hoạt động
+                  </option>
+                  <option value="0">Khóa tài khoản</option>
+                </Form.Control>
+              ) : (
+                  <Form.Control as="select" id="status">
+                    <option value="0">
+                      Khóa tài khoản
+                    </option>
+                    <option value="1">Cho phép hoạt động</option>
+                  </Form.Control>
+                )}
+            </Form.Group>
+
+            <div className="col-md-12 col-sm-12 justify-center mt-4">
+              <Button className="btn-submit-detailUser" type="submit" >
+                Lưu lại
+            </Button>
+            </div>
+
+          </Form>
+        </Container>
       </div>
     );
   }
 }
-export default detailUser;
+export default detailsUser;

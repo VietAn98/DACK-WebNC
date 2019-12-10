@@ -1,16 +1,16 @@
-import React from "react";
-import { Container, Form, Spinner } from "react-bootstrap";
+import React from 'react';
+import { Container, Form, Spinner } from 'react-bootstrap';
 // import { connect } from "react-redux";
-import "./AdminSignIn.css";
+import './AdminSignIn.css';
 
 export class AdminSignIn extends React.PureComponent {
-  onSubmitSignInForm = e => {
+  onSubmitSignInForm = (e) => {
     e.preventDefault();
     const { login, noLogin } = this.props;
     login();
     const { adminLogin } = this.props;
-    const gmail = document.getElementById("gmail").value;
-    const password = document.getElementById("password").value;
+    const gmail = document.getElementById('gmail').value;
+    const password = document.getElementById('password').value;
     adminLogin(gmail, password);
     // noLogin();
   };
@@ -21,21 +21,15 @@ export class AdminSignIn extends React.PureComponent {
     console.log(isSigInn);
 
     return (
-      <div className="adminSignIn" style={{ padding: "8rem" }}>
-        <Container>
-          <div className="">
-            <div
-              style={{
-                backgroundColor: "rgba(0,0,0,0.3)",
-                borderRadius: "20px",
-                paddingBottom: "3rem"
-              }}
-            >
+      <div className="adminSignIn" style={{ padding: '5rem' }}>
+        <div className="cover-sigin">
+          <div>
+            <div className="col-md-12 col-sm-12">
               <h3 className="w3layouts-heading white-title mb-3">
                 <span>Đăng Nhập</span>
               </h3>
               <div className="w3-agile_mail_grids justify-center">
-                <div className="col-md-7 w3-agile_mail_grid_right">
+                <div className="col-md-12 col-sm-12 w3-agile_mail_grid_right">
                   <Form
                     action="#"
                     method="post"
@@ -46,7 +40,7 @@ export class AdminSignIn extends React.PureComponent {
                       <input
                         type="email"
                         id="gmail"
-                        placeholder="Email"
+                        placeholder="Gmail"
                         required=""
                       />
                     </div>
@@ -60,7 +54,7 @@ export class AdminSignIn extends React.PureComponent {
                     </div>
                     {isSigInn.isLogin ? (
                       <div>
-                        {" "}
+                        {' '}
                         <Spinner animation="border" role="status">
                           <span className="sr-only">Loading...</span>
                         </Spinner>
@@ -68,11 +62,12 @@ export class AdminSignIn extends React.PureComponent {
                     ) : null}
                     <input type="submit" value="Đăng nhập" />
                   </Form>
+                  <div className="text-center mt-2"><a href="#" className="forget-pass">Quên mật khẩu?</a></div>
                 </div>
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 export const skills = (state = [], action) => {
     switch (action.type) {
-      case "GET_LIST_SKILL": {
+      case 'GET_LIST_SKILL': {
         return action.skills;
       }
       default:

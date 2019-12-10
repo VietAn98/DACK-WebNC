@@ -1,16 +1,16 @@
-import { connect } from "react-redux";
-import AdminSignIn from "../components/AdminSignIn/AdminSignIn";
-import { adminLoginRequest, login, noLogin } from "../actions/adminAction";
+import { connect } from 'react-redux';
+import AdminSignIn from '../components/AdminSignIn/AdminSignIn';
+import { adminLoginRequest, login, noLogin } from '../actions/adminAction';
 
-const mapStateToProps = state =>({
-	
+const mapStateToProps = (state) => ({
+
 	isSigInn: state.isSigIn,
 	// isBusy: state.isBusy,
 	// isSucceed: state.isRegisterSucceed
-})
+});
 
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   adminLogin: (gmail, password) => dispatch(adminLoginRequest(gmail, password)),
   login: () => dispatch(login()),
   noLogin: () => dispatch(noLogin())

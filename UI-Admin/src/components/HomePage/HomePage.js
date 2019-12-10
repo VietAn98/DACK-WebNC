@@ -1,5 +1,5 @@
-import React from "react";
-import "./HomePage.css";
+import React from 'react';
+import './HomePage.css';
 
 class HomePage extends React.PureComponent {
   render() {
@@ -142,27 +142,20 @@ class HomePage extends React.PureComponent {
               </div>
             </div>
           </div>
-          <div className="clearfix"> </div>
-        </div>
-
-        <div className="main-page-charts">
-          <div className="main-page-chart-layer1">
-            <div className="col-md-6 chart-layer1-left">
-              <div className="glocy-chart">
-                <div className="span-2c">
-                  <h3 className="tlt">Sales Analytics</h3>
-                  <canvas
-                    id="bar"
-                    height="300"
-                    width="400"
-                    style={{ width: "400px", height: "300px" }}
-                  ></canvas>
-                </div>
+          <div className="col-md-6">
+            <div className="glocy-chart">
+              <div className="span-2c">
+                <h3 className="tlt">Sales Analytics</h3>
+                <canvas
+                  id="bar"
+                  height="200"
+                  width="400"
+                  style={{ width: '400px', height: '200px' }}
+                />
               </div>
             </div>
-
-            <div className="clearfix"> </div>
           </div>
+          <div className="clearfix"> </div>
         </div>
       </div>
     );

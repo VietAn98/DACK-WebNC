@@ -1,33 +1,33 @@
-import React from "react";
-import { Container, Form } from "react-bootstrap";
+import React from 'react';
+import { Container, Form } from 'react-bootstrap';
 
-import "./AdminSignUp.css";
+import './AdminSignUp.css';
 
 export class AdminCreate extends React.PureComponent {
-  onSubmitSignUpForm = async e => {
+  onSubmitSignUpForm = async (e) => {
     e.preventDefault();
     const { adminCreateAccount } = this.props;
-    const gmail = document.getElementById("gmail").value;
-    const password = document.getElementById("password").value;
-    const name = document.getElementById("name").value;
+    const gmail = document.getElementById('gmail').value;
+    const password = document.getElementById('password').value;
+    const name = document.getElementById('name').value;
     await adminCreateAccount(name, gmail, password);
 
-    document.getElementById("gmail").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("re-password").value = "";
-    document.getElementById("name").value = "";
+    document.getElementById('gmail').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('re-password').value = '';
+    document.getElementById('name').value = '';
   };
 
   render() {
     return (
-      <div className="adminSignUp" style={{ padding: "7em 2em 2em 1em" }}>
-        <Container>
+      <div className="adminSignUp inner-block" style={{ padding: '2em 2em 2em 1em' }}>
+        <Container className="my-container">
           <div
             style={{
               // border: "1px dashed black",
               // backgroundColor: "rgba(0,0,0,0.3)",
-              borderRadius: "20px",
-              paddingBottom: "3rem"
+              borderRadius: '20px',
+              paddingBottom: '3rem'
             }}
           >
             <h3 className="w3layouts-heading black-title mb-4">
@@ -81,8 +81,8 @@ export class AdminCreate extends React.PureComponent {
                     value="Đăng ký"
                     className="signUpSubmit"
                     style={{
-                      textAlign: "center",
-                      transform: "translateX(50%)"
+                      textAlign: 'center',
+                      transform: 'translateX(50%)'
                     }}
                   />
                 </Form>
