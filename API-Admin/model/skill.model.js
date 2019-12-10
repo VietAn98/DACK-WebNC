@@ -17,6 +17,10 @@ module.exports = {
     return db.delete("skill", "skillId", id);
   },
 
+  deleteSkill_Teacher: id => {
+    return db.delete("skill_teacher", "skillId", id);
+  },
+
   updateSkill: skill => {
     return db.update("skill", "skillId", skill);
   }

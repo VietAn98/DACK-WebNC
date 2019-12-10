@@ -4,7 +4,6 @@ import {getListStudent} from '../actions/manageAccAction';
 import { bindActionCreators} from "redux"
 
 const mapStateToProps = (state) => ({
-  
     students : state.students
   
 });

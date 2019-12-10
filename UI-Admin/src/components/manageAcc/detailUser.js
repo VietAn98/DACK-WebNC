@@ -1,4 +1,6 @@
 import React from "react";
+import Swal from "sweetalert2";
+
 import {
   Table,
   Spinner,
@@ -19,7 +21,6 @@ class detailUser extends React.PureComponent {
     Promise.resolve(getDetailUsers(id))
       .then(() => {
         const { detailUser, getAddressByUser, getDistrictByUser } = this.props;
-        console.log(detailUser.districtId);
         getAddressByUser(detailUser.districtId);
       })
       .then(() => {
@@ -33,13 +34,15 @@ class detailUser extends React.PureComponent {
     e.preventDefault();
     const path = window.location.pathname.split("/");
     const id = path[path.length - 1];
-    const {updateStateAccount} = this.props;    
-    updateStateAccount(id,document.getElementById('status').value);
-    window.location.reload();
+    const { updateStateAccount } = this.props;
+    updateStateAccount(id, document.getElementById("status").value).then(rs => {
+      Swal.fire("Thông báo", "Thành công", "Cập  nhật thông tin thành công");
+    });
   };
 
   render() {
     const { detailUser, getAddress, getDistrict } = this.props;
+    console.log("000000000000000000000000", detailUser.introduce);
     return (
       <div style={{ padding: "10px" }}>
         <Container>
@@ -97,6 +100,30 @@ class detailUser extends React.PureComponent {
             </Form.Group>
           </Form.Row>
 
+          {detailUser.categoryUser ? (
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Giá (/h)</Form.Label>
+                <Form.Control
+                  readOnly
+                  type="text"
+                  placeholder="Chưa cập nhật"
+                  value={detailUser.price}
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Tỉ lệ thành công </Form.Label>
+                <Form.Control
+                  readOnly
+                  type="text"
+                  placeholder="Chưa cập nhật"
+                  value={detailUser.rateSuccess}
+                />
+              </Form.Group>
+            </Form.Row>
+          ) : null}
+
           <Form.Group controlId="formGridAddress2">
             <Form.Label>Giới tính</Form.Label>
 
@@ -106,6 +133,18 @@ class detailUser extends React.PureComponent {
               value={detailUser.gender}
             />
           </Form.Group>
+
+          {detailUser.categoryUser ? (
+            <Form.Group
+            
+              controlId="formGridAddress2"
+              style={{ display: "grid" }}
+              
+            >
+              <Form.Label>Giới thiệu bản thân</Form.Label>
+              <textarea style={{height: "200px"}} readOnly value={detailUser.introduce}></textarea>
+            </Form.Group>
+          ) : null}
 
           <Form.Group>
             <Form.Label>Trạng thái hoạt động</Form.Label>

@@ -2,6 +2,13 @@ import Swal from "sweetalert2";
 import API from "../service/api";
 import history from "../history";
 
+export const login = () => ({
+  type: "IS_LOGIN",
+});
+export const noLogin = () => ({
+  type: "DONT_LOGIN",
+});
+
 export const adminLoginRequest = (gmail, password) => dispatch => {
   // dispatch({ type: 'LOGIN_FETCHING' });
   return fetch(API.LOGIN, {
@@ -14,12 +21,12 @@ export const adminLoginRequest = (gmail, password) => dispatch => {
   })
     .then(response => response.json())
     .then(res => {
-      console.log("res login", res);
       // eslint-disable-next-line no-prototype-builtins
       if (res.hasOwnProperty("token")) {
         // Swal.fire('Thông báo', 'Thành công', 'success');
         localStorage.setItem("token", res.token);
-        history.push("/admin/create-admin");
+        history.push("/");
+        window.location.reload();
       } else {
         // dispatch({ type: 'LOGIN_COMPLETED' });
         Swal.fire("Thông báo", "Không thành công", "error");
@@ -47,7 +54,6 @@ export const adminCreateAccount = (name, gmail, password) => dispatch => {
     })
       .then(respond => respond.json())
       .then(data => {
-        console.log("abc", data);
         if (data) {
           Swal.fire("Thông báo", "Thành công", "success");
         } else {

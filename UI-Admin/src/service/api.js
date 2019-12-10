@@ -8,6 +8,16 @@ const APIService = {
   GET_ADDRESS_USER: `${URL}/api-admin/get-district-city-byUser/`,
   GET_DISTRICT_USER: `${URL}/api-admin/get-district-byUser/`,
   UPDATE_STATE:  `${URL}/api-admin/update-state-account`,
+
+  //teacher
+  GET_TEACHERS: `${URL}/api-admin/get-list-account-teacher`,
+
+  //skill
+  GET_SKILLS:  `${URL}/api-admin/get-list-skill`,
+  DELE_SKILL: `${URL}/api-admin/delete-skill`,
+  UPDATE_SKILL: `${URL}/api-admin/update-skill`,
+  ADD_SKILL: `${URL}/api-admin/add-skill`,
+
 //   GET_INFO: `${URL}/api/current-user-profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,
 //   // CHANGE_AVATAR: `${URL}/user/uploadavatar`,

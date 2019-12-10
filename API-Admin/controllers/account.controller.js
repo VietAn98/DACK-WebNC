@@ -53,7 +53,6 @@ module.exports = {
         userId: req.body.userId,
         adLock: req.body.adLock
       };
-      console.log(newState);
       return db
         .updateState(newState)
         .then(result => {

@@ -14,17 +14,18 @@ module.exports = {
   },
 
   deleteSkill: (req, res) => {
-    const id = req.params.id;
+    const id = req.body.skillId;
     return db
-      .deleteSkill(id)
-      .then(result => {
-        res.status(200).json({ mesage: "Xóa thành công" });
+      .deleteSkill_Teacher(id)
+      .then(() => {
+        db.deleteSkill(id).then(() => {
+          res.status(200).json({ mesage: "Xóa thành công" });
+        });
       })
       .catch(err => res.status(400).json(err));
   },
 
   updateSkill: (req, res) => {
-    
     const newSkill = {
       skillId: req.body.skillId,
       name: req.body.name
@@ -47,10 +48,12 @@ module.exports = {
   },
 
   getSkillById: (req, res) => {
-    const id = req.params.id
-    return db.getSkillById(id).then(resp => {
-        console.log(resp);
-      res.status(200).json(resp[0]);
-    }).catch(err => res.status(400).json(err));
+    const id = req.params.id;
+    return db
+      .getSkillById(id)
+      .then(resp => {
+        res.status(200).json(resp[0]);
+      })
+      .catch(err => res.status(400).json(err));
   }
 };
