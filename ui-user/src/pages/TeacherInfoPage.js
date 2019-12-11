@@ -33,9 +33,9 @@ export class TeacherInfoPage extends React.PureComponent {
     const { detailTeacher, nameSkill, listTeachers, cityName } = this.props;
     console.log(cityName);
     return (
-      <section style={{ marginTop: "60px" }}>
+      <section style={{ marginTop: '8em', marginBottom: '4em' }}>
         {detailTeacher ? (
-          <Container className="my-5">
+          <Container className="p-5" style={{ boxShadow: '0px 1px 5px 2px grey' }}>
             <div className="row">
               <div className="col-md-3 col-xl-3 col-lg-3 my-3">
                 <img
@@ -95,11 +95,11 @@ export class TeacherInfoPage extends React.PureComponent {
                   <ul style={{ listStyle: "none" }}>
                     {nameSkill
                       ? nameSkill.map(skl => (
-                          <li>
-                            <i className="fa fa-caret-right" />
-                            {skl.name}
-                          </li>
-                        ))
+                        <li>
+                          <i className="fa fa-caret-right" />
+                          {skl.name}
+                        </li>
+                      ))
                       : null}
                   </ul>
                 </div>
@@ -314,121 +314,121 @@ export class TeacherInfoPage extends React.PureComponent {
                   </span>
                   <span className="money"> {detailTeacher.price} VND</span>
                   {detailTeacher.rateSuccess <= 20 &&
-                  detailTeacher.rateSuccess > 0 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <span
-                        style={{
-                          fontWeight: "200",
-                          fontSize: "small",
-                          marginLeft: "5px"
-                        }}
-                      >
-                        3 đánh giá
+                    detailTeacher.rateSuccess > 0 ? (
+                      <div className="stars mt-2">
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <span
+                          style={{
+                            fontWeight: "200",
+                            fontSize: "small",
+                            marginLeft: "5px"
+                          }}
+                        >
+                          3 đánh giá
                       </span>
-                    </div>
-                  ) : null}
+                      </div>
+                    ) : null}
                   {detailTeacher.rateSuccess <= 40 &&
-                  detailTeacher.rateSuccess > 20 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <span
-                        style={{
-                          fontWeight: "200",
-                          fontSize: "small",
-                          marginLeft: "5px"
-                        }}
-                      >
-                        3 đánh giá
+                    detailTeacher.rateSuccess > 20 ? (
+                      <div className="stars mt-2">
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <span
+                          style={{
+                            fontWeight: "200",
+                            fontSize: "small",
+                            marginLeft: "5px"
+                          }}
+                        >
+                          3 đánh giá
                       </span>
-                    </div>
-                  ) : null}
+                      </div>
+                    ) : null}
                   {detailTeacher.rateSuccess <= 60 &&
-                  detailTeacher.rateSuccess > 40 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <span
-                        style={{
-                          fontWeight: "200",
-                          fontSize: "small",
-                          marginLeft: "5px"
-                        }}
-                      >
-                        3 đánh giá
+                    detailTeacher.rateSuccess > 40 ? (
+                      <div className="stars mt-2">
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <span
+                          style={{
+                            fontWeight: "200",
+                            fontSize: "small",
+                            marginLeft: "5px"
+                          }}
+                        >
+                          3 đánh giá
                       </span>
-                    </div>
-                  ) : null}
+                      </div>
+                    ) : null}
                   {detailTeacher.rateSuccess <= 80 &&
-                  detailTeacher.rateSuccess > 60 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <span
-                        style={{
-                          fontWeight: "200",
-                          fontSize: "small",
-                          marginLeft: "5px"
-                        }}
-                      >
-                        3 đánh giá
+                    detailTeacher.rateSuccess > 60 ? (
+                      <div className="stars mt-2">
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star" aria-hidden="true" />
+                        </li>
+                        <li>
+                          <span className="fa fa-star-o" aria-hidden="true" />
+                        </li>
+                        <span
+                          style={{
+                            fontWeight: "200",
+                            fontSize: "small",
+                            marginLeft: "5px"
+                          }}
+                        >
+                          3 đánh giá
                       </span>
-                    </div>
-                  ) : null}
+                      </div>
+                    ) : null}
                   {detailTeacher.rateSuccess === 100 ? (
                     <div className="stars mt-2">
                       <li>
@@ -471,21 +471,23 @@ export class TeacherInfoPage extends React.PureComponent {
                 </div>
               </div>
             </div>
+          </Container>
+          <Container>
             <div className="mt-5">
               <h3 style={{ fontWeight: "bolder" }}>Gợi ý giáo viên:</h3>
               <div className="mt-3">
                 {listTeachers
                   ? listTeachers.map(item => {
-                      return (
-                        <div className="col-md-3 col-sm-3">
-                          <div className="row">
-                            <div>
-                              <CardTuitor listTeachers={item} />
-                            </div>
+                    return (
+                      <div className="col-md-3 col-sm-3">
+                        <div className="row">
+                          <div>
+                            <CardTuitor listTeachers={item} />
                           </div>
                         </div>
-                      );
-                    })
+                      </div>
+                    );
+                  })
                   : null}
               </div>
             </div>

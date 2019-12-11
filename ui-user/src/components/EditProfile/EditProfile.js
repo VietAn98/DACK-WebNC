@@ -1,5 +1,5 @@
 import React from 'react';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 import { Form, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import './EditProfile.css';
@@ -242,7 +242,7 @@ class EditProfile extends React.PureComponent {
                                     })) : null}
                                 </Form.Control>
                             </div>
-                            <div className="col-md-5 col-sm-5 mt-4 contact_left_grid">
+                            <div className="col-md-4 col-sm-4 mt-4 contact_right_grid float-right">
                                 {currentUser.avatar === null || currentUser.avatar === '' ? (
                                     <div>
                                         <h5 className="float-left text-white">
@@ -345,7 +345,7 @@ class EditProfile extends React.PureComponent {
                                 <div>
                                     {currentUser.avatar === '' || currentUser.avatar === null ? (
                                         <div className="col-md-5 col-sm-5 contact_left_grid">
-                                            <h5 className="float-left pt-4 text-white">
+                                            <h5 className="float-left pt-3 text-white">
                                                 <b>Giá tiền thuê/giờ:</b>
                                             </h5>
                                             <input
@@ -363,7 +363,7 @@ class EditProfile extends React.PureComponent {
                                         </div>
                                     ) : (
                                             <div className="col-md-7 col-sm-7 contact_left_grid">
-                                                <h5 className="float-left pt-4 text-white">
+                                                <h5 className="float-left pt-3 text-white">
                                                     <b>Giá tiền thuê/giờ:</b>
                                                 </h5>
                                                 <input
