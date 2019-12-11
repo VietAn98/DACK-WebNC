@@ -85,6 +85,40 @@
   -ms-background-size: cover;
 }
 
+.btn-loading{
+  outline: none;
+  /* padding: 13px 0; */
+  /* color: #fff; */
+  background-color: #ff8a1d;
+  width: 100%;
+  border: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+  transition: 0.5s all;
+  border-radius: 15px;
+}
+
+.btn-loading:hover{
+  outline: none;
+  /* padding: 13px 0; */
+  /* color: #fff; */
+  background-color: #ff8a1d;
+  width: 100%;
+  border: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+  transition: 0.5s all;
+  border-radius: 15px;
+}
+
 .adminSignIn .w3-agile_mail_grid_right input[type="text"],
 .adminSignIn .w3-agile_mail_grid_right input[type="email"],
 .adminSignIn .w3-agile_mail_grid_right input[type="password"],

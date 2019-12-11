@@ -1,16 +1,16 @@
-import React from 'react';
-import { Container, Form, Spinner } from 'react-bootstrap';
+import React from "react";
+import { Container, Form, Spinner, Button } from "react-bootstrap";
 // import { connect } from "react-redux";
-import './AdminSignIn.css';
+import "./AdminSignIn.css";
 
 export class AdminSignIn extends React.PureComponent {
-  onSubmitSignInForm = (e) => {
+  onSubmitSignInForm = e => {
     e.preventDefault();
     const { login, noLogin } = this.props;
     login();
     const { adminLogin } = this.props;
-    const gmail = document.getElementById('gmail').value;
-    const password = document.getElementById('password').value;
+    const gmail = document.getElementById("gmail").value;
+    const password = document.getElementById("password").value;
     adminLogin(gmail, password);
     // noLogin();
   };
@@ -21,7 +21,7 @@ export class AdminSignIn extends React.PureComponent {
     console.log(isSigInn);
 
     return (
-      <div className="adminSignIn" style={{ padding: '5rem' }}>
+      <div className="adminSignIn" style={{ padding: "5rem" }}>
         <div className="cover-sigin">
           <div>
             <div className="col-md-12 col-sm-12">
@@ -54,15 +54,41 @@ export class AdminSignIn extends React.PureComponent {
                     </div>
                     {isSigInn.isLogin ? (
                       <div>
-                        {' '}
-                        <Spinner animation="border" role="status">
-                          <span className="sr-only">Loading...</span>
-                        </Spinner>
+                        {" "}
+                        <Button className="btn-loading" value="Đăng nhập">
+                          loading
+                          <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                        </Button>
                       </div>
-                    ) : null}
-                    <input type="submit" value="Đăng nhập" />
+                    ) : (
+                      <input type="submit" value="Đăng nhập" />
+                    )}
                   </Form>
-                  <div className="text-center mt-2"><a href="#" className="forget-pass">Quên mật khẩu?</a></div>
+                  <div className="text-center mt-2">
+                    <a href="#" className="forget-pass">
+                      Quên mật khẩu?
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

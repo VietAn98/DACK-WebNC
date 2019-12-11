@@ -108,11 +108,15 @@ module.exports = {
 
   getTeacherByDistrict: (id) => {
     return db.load(`select * from account where categoryUser=1 and districtId="${id}"`)
+  },
+
+  //
+  getCommentByUser: (id) => {
+    return db.load (`SELECT cm.* from comment as cm JOIN account as ac on cm.idTeacher = ac.userId WHERE ac.categoryUser = 1 and ac.userId = "${id}"`);
+  },
+
+  getStudentByComment: (id) => {
+    return db.load(`SELECT ac.* from comment as cm JOIN account as ac on cm.idTeacher = ac.userId where cm.idCmt = ${id}`)
   }
-
- 
-  
-
-  
 
 };

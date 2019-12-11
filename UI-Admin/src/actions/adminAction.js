@@ -31,6 +31,7 @@ export const adminLoginRequest = (gmail, password) => (dispatch) =>
         // dispatch({ type: 'LOGIN_COMPLETED' });
         Swal.fire('Thông báo', 'Không thành công', 'error');
         localStorage.removeItem('token');
+        dispatch(noLogin());
       }
     })
     .catch((error) => {
