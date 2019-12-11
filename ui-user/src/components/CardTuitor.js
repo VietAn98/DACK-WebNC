@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import numeral from 'numeral';
 import history from '../history';
 import './CardTuitor.css';
 import avatar from '../public/images/avatar.jpg';
@@ -30,8 +31,8 @@ class Card extends React.PureComponent {
                 <div>
                   Giá thuê:
 {' '}
-                  {listTeachers.price}
-                  {' '}
+                  {numeral(`${listTeachers.price}`).format('(0,0)')}
+{' '}
                   VND/giờ
                 </div>
                 <div style={{ marginTop: '2.5rem' }}>

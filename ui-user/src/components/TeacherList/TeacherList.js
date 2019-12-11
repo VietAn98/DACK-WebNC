@@ -1,8 +1,10 @@
-import React from "react";
-import "./TeacherList.css";
-import { Container, Row, Col, Form } from "react-bootstrap";
-import CardTuitor from "../../containers/CardTuitorContainer";
-import star from "../../public/images/star.png";
+import React from 'react';
+import './TeacherList.css';
+import {
+  Container, Row, Col, Form
+} from 'react-bootstrap';
+import CardTuitor from '../../containers/CardTuitorContainer';
+import star from '../../public/images/star.png';
 
 class TeacherList extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated
@@ -12,7 +14,7 @@ class TeacherList extends React.PureComponent {
     getListCity();
   };
 
-  onChangeCity = e => {
+  onChangeCity = (e) => {
     const { getDistrictByIdCity } = this.props;
     getDistrictByIdCity(e.target.value);
   };
@@ -72,7 +74,7 @@ class TeacherList extends React.PureComponent {
     filterByFiveStar();
   };
 
-  onChangeDistrict = obj => {
+  onChangeDistrict = (obj) => {
     const { getTeacherByDistrict } = this.props;
     const id = obj.target.value;
     getTeacherByDistrict(id);
@@ -87,7 +89,9 @@ class TeacherList extends React.PureComponent {
           <div className="mt-5em">
             <div className="title">
               <h1>
-                DANH SÁCH <span>GIÁO VIÊN</span>
+                DANH SÁCH
+{' '}
+                <span>GIÁO VIÊN</span>
               </h1>
             </div>
           </div>
@@ -161,7 +165,7 @@ class TeacherList extends React.PureComponent {
                           />
                           <label>
                             Dưới
-                            <b> 100 000đ</b>
+                            <b> 100,000đ</b>
                           </label>
                         </div>
 
@@ -175,8 +179,13 @@ class TeacherList extends React.PureComponent {
                           onClick={this.filterByMiddlePrice}
                         />
                         <label>
-                          Từ <b>100 000đ</b>{" "}
-                          <i className="fas fa-arrow-right" /> <b>500 000đ</b>
+                          Từ
+{' '}
+                          <b>100,000đ</b>
+                          {' '}
+                          <i className="fas fa-arrow-right" />
+                          {' '}
+                          <b>500,000đ</b>
                         </label>
 
                         <Form.Check
@@ -189,7 +198,9 @@ class TeacherList extends React.PureComponent {
                           onClick={this.filterByMaxPrice}
                         />
                         <label>
-                          Trên <b> 500 000đ </b>
+                          Trên
+{' '}
+                          <b> 500,000đ </b>
                         </label>
                       </Form>
 
@@ -287,16 +298,14 @@ class TeacherList extends React.PureComponent {
                           >
                             <option value="0" className="black-title" />
                             {listCity
-                              ? listCity.map(item => {
-                                  return (
-                                    <option
-                                      value={item.cityId}
-                                      className="black-title"
-                                    >
-                                      {item.name}
-                                    </option>
-                                  );
-                                })
+                              ? listCity.map((item) => (
+                                <option
+                                  value={item.cityId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              ))
                               : null}
                           </Form.Control>
                         </div>
@@ -307,19 +316,17 @@ class TeacherList extends React.PureComponent {
                             className="select-form-city"
                             id="selectDistrict"
                             required
-                            onChange={ this.onChangeDistrict.bind(this) }
+                            onChange={this.onChangeDistrict.bind(this)}
                           >
                             {districtNames.length !== 0
-                              ? districtNames.map(item => {
-                                  return (
-                                    <option
-                                      value={item.districtId}
-                                      className="black-title"
-                                    >
-                                      {item.name}
-                                    </option>
-                                  );
-                                })
+                              ? districtNames.map((item) => (
+                                <option
+                                  value={item.districtId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              ))
                               : null}
                           </Form.Control>
                         </div>
@@ -332,16 +339,14 @@ class TeacherList extends React.PureComponent {
           </div>
           <div className="col-md-9 col-sm-9 mt-5 mb-5">
             {listTeachers ? (
-              listTeachers.map(item => {
-                return (
-                  <div className="col-md-4 col-sm-4">
-                    <CardTuitor listTeachers={item} />
-                  </div>
-                );
-              })
+              listTeachers.map((item) => (
+                <div className="col-md-4 col-sm-4">
+                  <CardTuitor listTeachers={item} />
+                </div>
+              ))
             ) : (
-              <h1>Không có trong danh sách</h1>
-            )}
+                <h1>Không có trong danh sách</h1>
+              )}
           </div>
         </div>
       </Container>

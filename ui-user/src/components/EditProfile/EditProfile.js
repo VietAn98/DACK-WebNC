@@ -1,6 +1,7 @@
 import React from 'react';
 // import jwtDecode from 'jwt-decode';
 import { Form, Button } from 'react-bootstrap';
+import numeral from 'numeral';
 import Swal from 'sweetalert2';
 import './EditProfile.css';
 
@@ -346,7 +347,7 @@ class EditProfile extends React.PureComponent {
                                     {currentUser.avatar === '' || currentUser.avatar === null ? (
                                         <div className="col-md-5 col-sm-5 contact_left_grid">
                                             <h5 className="float-left pt-3 text-white">
-                                                <b>Giá tiền thuê/giờ:</b>
+                                                <b>Giá tiền thuê/giờ (VND/h):</b>
                                             </h5>
                                             <input
                                                 type="number"
@@ -354,7 +355,7 @@ class EditProfile extends React.PureComponent {
                                                 placeholder="VND"
                                                 required
                                                 // eslint-disable-next-line radix
-                                                value={parseInt(currentUser.price)}
+                                                value={numeral(`${currentUser.price}`).format('(0,0)')}
                                                 onChange={this.onHandleChange}
                                             />
                                             <div className="invalid-feedback text-white">
@@ -364,7 +365,7 @@ class EditProfile extends React.PureComponent {
                                     ) : (
                                             <div className="col-md-7 col-sm-7 contact_left_grid">
                                                 <h5 className="float-left pt-3 text-white">
-                                                    <b>Giá tiền thuê/giờ:</b>
+                                                    <b>Giá tiền thuê/giờ (VND/h):</b>
                                                 </h5>
                                                 <input
                                                     type="number"
@@ -372,7 +373,7 @@ class EditProfile extends React.PureComponent {
                                                     placeholder="VND"
                                                     required
                                                     // eslint-disable-next-line radix
-                                                    value={parseInt(currentUser.price)}
+                                                    value={numeral(`${currentUser.price}`).format('(0 0)')}
                                                     onChange={this.onHandleChange}
                                                 />
                                                 <div className="invalid-feedback text-white">

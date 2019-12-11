@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import numeral from 'numeral';
 import history from '../history';
 import avatar from '../public/images/avatar.jpg';
 import CardTuitor from '../components/CardTuitor';
@@ -318,7 +319,7 @@ export class TeacherInfoPage extends React.PureComponent {
                   </span>
                   <span className="money">
                     {' '}
-                    {detailTeacher.price}
+                    {numeral(`${detailTeacher.price}`).format('(0,0)')}
                     {' '}
                     VND
                   </span>
