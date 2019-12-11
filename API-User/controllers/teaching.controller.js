@@ -74,6 +74,18 @@ module.exports = {
       );
   },
 
+  getNameSkillByUser: (req, res) => {
+    const id = req.params.id;
+    return dbSkill_teacher
+      .getNameSkillTeacher(id)
+      .then(skills => {
+        res.status(200).json(skills);
+      })
+      .catch(err =>
+        res.status(400).json({ message: "Không có skill nào", error: err })
+      );
+  },
+
   // lấy chi tiết giáo viên
   getTeacherByid: (req, res) => {
     const id = req.params.id;
@@ -113,21 +125,21 @@ module.exports = {
       });
   },
 
-  getTeaherbyPrice: (req, res) => {
-    const minPrice = req.body.minPrice;
-    const maxPrice = req.body.maxPrice;
-    return db
-      .getTeacherByPrice(minPrice, maxPrice)
-      .then(teachers => {
-        res.status(200).json(teachers);
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      });
-  },
+  // getTeaherbyPrice: (req, res) => {
+  //   const minPrice = req.body.minPrice;
+  //   const maxPrice = req.body.maxPrice;
+  //   return db
+  //     .getTeacherByPrice(minPrice, maxPrice)
+  //     .then(teachers => {
+  //       res.status(200).json(teachers);
+  //     })
+  //     .catch(err => {
+  //       res.status(400).json(err);
+  //     });
+  // },
 
   getTeacherPriceIncrease: (req, res) => {
-    db.getTeacherIncreaseByPrice()
+    db.getTeacherByPriceIncrease()
       .then(teachers => {
         res.status(200).json(teachers);
       })
@@ -137,7 +149,7 @@ module.exports = {
   },
 
   getTeacherPriceDecrease: (req, res) => {
-    db.getTeacherDecreaseByPrice()
+    db.getTeacherByPriceDecrease()
       .then(teachers => {
         res.status(200).json(teachers);
       })
@@ -146,8 +158,8 @@ module.exports = {
       });
   },
 
-  getTeacherRateSuccessIncrease: (req, res) => {
-    db.getTeacherDecreaseByPrice()
+  getTeacherByMinPrice: (req, res) => {
+    db.getTeacherByMinPrice()
       .then(teachers => {
         res.status(200).json(teachers);
       })
@@ -155,14 +167,96 @@ module.exports = {
         res.status(400).json(err);
       });
   },
-  
-  getTeacherRateSuccessDecrease: (req, res) => {
-    db.getTeacherDecreaseByPrice()
+
+  getTeacherByMiddlePrice: (req, res) => {
+    db.getTeacherByMiddlePrice()
       .then(teachers => {
         res.status(200).json(teachers);
       })
       .catch(err => {
         res.status(400).json(err);
       });
-  }
+  },
+
+  getTeacherByMaxPrice: (req, res) => {
+    db.getTeacherByMaxPrice()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+  getTeachersByOneStar: (req, res) => {
+    db.getTeachersByOneStart()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+  getTeachersByTwoStar: (req, res) => {
+    db.getTeachersByTwoStart()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+  getTeachersByThreeStar: (req, res) => {
+    db.getTeachersByThreeStart()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+  getTeachersByfourStar: (req, res) => {
+    db.getTeachersByFourStart()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+  getTeachersByfiveStar: (req, res) => {
+    db.getTeachersByFiveStart()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+  getTeacherByDistrict: (req, res) => {
+    const id = req.params.id;
+    db.getTeacherByDistrict(id)
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+  getTeacherRateSuccessDecrease: (req, res) => {
+    db.getTeacherRateSuccessDecrease()
+      .then(teachers => {
+        res.status(200).json(teachers);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
+
 };

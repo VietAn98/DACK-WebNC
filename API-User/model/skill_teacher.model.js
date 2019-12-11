@@ -15,6 +15,10 @@ module.exports = {
     return db.load(`select * from skill_teacher where userId='${id}'`);
   },
 
+  getNameSkillTeacher: id => {
+    return db.load(`select sk.* from skill_teacher as st JOIN skill as sk on st.skillId = sk.skillId where st.userId='${id}'`);
+  },
+
   deleteSkillTeacher: id => {
     return db.delete("skill_teacher", "userId", id);
   }
