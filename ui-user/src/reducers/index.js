@@ -134,6 +134,66 @@ export const listTeachers = (state = [], action) => {
 		case 'GET_LIST_TEACHERS': {
 			return action.listTeachers;
 		}
+		case 'GET_TEACHERS_TOP': {
+			return action.TopTeacher;
+		}
+		case 'GET_TEACHERS_PRICE_INCREASE': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_PRICE_DECREASE': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_REATESUCCESS_DECREASE': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_MINPRICE': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_MIDDLEPRICE': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_MAXPRICE': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_ONE_STAR': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_TWO_STAR': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_THREE_STAR': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_FOUR_STAR': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_FIVE_STAR': {
+			return action.teacher;
+		}
+		case 'GET_TEACHERS_BY_DISTRICT': {
+			return action.teacher;
+		}
+		default:
+			return state;
+	}
+};
+
+export const listNameSkill = (state = [], action) => {
+	switch (action.type) {
+		case 'GET_NAME_SKILLS': {
+			return action.nameSkills;
+		}
+		default:
+			return state;
+	}
+};
+
+export const detailTeacher = (state = {}, action) => {
+	switch (action.type) {
+		case 'GET_INFOR_TEACHER': {
+			console.log('kkkkkkkkkkkkkkkk', action.infor);
+			return action.infor;
+		}
 		default:
 			return state;
 	}

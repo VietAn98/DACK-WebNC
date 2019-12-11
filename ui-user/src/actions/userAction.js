@@ -238,7 +238,6 @@ export const getUserInfor = (id) => (dispatch) => {
 		},
 	}).then((respond) => respond.json())
 		.then((resr) => {
-			console.log('----------', resr);
 			dispatch(userLogin(resr));
 			dispatch(userProfile(resr));
 		}).catch((err) => console.log('Error getUserInfor occured', err));
@@ -255,5 +254,204 @@ export const getListTeacher = () => (dispatch) => {
 		.then((res) => {
 			console.log('getListTeacher', res);
 			dispatch({ type: 'GET_LIST_TEACHERS', listTeachers: res });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const listNameSkill = (id) => (dispatch) => {
+	return fetch(API.GET_NAME_SKILLS + id, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((nameSkills) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_NAME_SKILLS', nameSkills });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const getInforTeacher = (infor) => ({
+	type: 'GET_INFOR_TEACHER',
+	infor
+});
+
+export const getInforUserById = (id) => (dispatch) => {
+	return fetch(API.GET_USER_INFO_BY_ID + id, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then(async (inforTeacher) => {
+			console.log('getInforUserById', inforTeacher);
+			await dispatch(getInforTeacher(inforTeacher));
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const listTeacherTop = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_TOP, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((TopTeacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_TOP', TopTeacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const sortIncreaseByPrice = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_PRICE_INCREASE, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_PRICE_INCREASE', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const sortDecreaseByPrice = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_PRICE_DECREASE, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_PRICE_DECREASE', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+export const sortDecreaseByRateSuccess = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_REATESUCCESS_DECREASE, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_REATESUCCESS_DECREASE', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+//
+export const filterPriceMax = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_MAXPRICE, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			console.log('Teacher', teacher);
+			dispatch({ type: 'GET_TEACHERS_BY_MAXPRICE', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const filterPriceMin = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_MINPRICE, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_BY_MINPRICE', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const filterPriceMiddle = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_MIDDLEPRICE, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_BY_MIDDLEPRICE', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+//
+export const filterByOneStar = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_ONE_STAR, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_BY_ONE_STAR', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const filterByTwoStar = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_TWO_STAR, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_BY_TWO_STAR', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const filterByThreeStar = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_THREE_STAR, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_BY_THREE_STAR', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const filterByFourStar = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_FOUR_STAR, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_BY_FOUR_STAR', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const filterByFiveStar = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_FIVE_STAR, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			dispatch({ type: 'GET_TEACHERS_BY_FIVE_STAR', teacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
+export const getTeacherByDistrict = (id) => (dispatch) => {
+	return fetch(API.GET_TEACHERS_BY_DISTRICT + id, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((teacher) => {
+			dispatch({ type: 'GET_TEACHERS_BY_DISTRICT', teacher });
 		}).catch((err) => console.log('Error getListTeacher occured', err));
 };
