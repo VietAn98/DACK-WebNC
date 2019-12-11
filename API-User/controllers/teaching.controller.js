@@ -125,6 +125,17 @@ module.exports = {
       });
   },
 
+  getTopSixTeacher: (req, res) => {
+    return db
+      .getTopSixTeacher()
+      .then(listTop => {
+        res.status(200).json(listTop);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  },
+
   // getTeaherbyPrice: (req, res) => {
   //   const minPrice = req.body.minPrice;
   //   const maxPrice = req.body.maxPrice;

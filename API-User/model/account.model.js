@@ -42,6 +42,10 @@ module.exports = {
     return db.load('select * from account where categoryUser=1 ORDER BY rateSuccess DESC LIMIT 4');
   },
 
+  getTopSixTeacher: () => {
+    return db.load('select * from account where categoryUser=1 ORDER BY rateSuccess DESC LIMIT 6');
+  },
+
   getTeacherByPrice: (min,max) => {
     return null;
   },

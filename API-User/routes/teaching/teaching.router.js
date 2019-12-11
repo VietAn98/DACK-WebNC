@@ -8,7 +8,9 @@ module.exports = app => {
     app.get('/api/get-name-Skill-ByUser/:id',teachingController.getNameSkillByUser)
     app.get('/api/get-list-skills', teachingController.getListSkills);
     //chưa test sắp xếp
-    app.get('/api/get-list-top-teacher', teachingController.getTopTeacher);
+    app.get('/api/get-list-top-teacher', teachingController.getTopTeacher); // top 4
+    app.get('/api/get-list-top-six-teachers', teachingController.getTopSixTeacher); // top 6
+
     // app.get('/api/get-teachers-by-gia', teachingController.getTeaherbyPrice);
     app.get('/api/get-teachers-price-increase', teachingController.getTeacherPriceIncrease);
     app.get('/api/get-teachers-price-decrease', teachingController.getTeacherPriceDecrease);
