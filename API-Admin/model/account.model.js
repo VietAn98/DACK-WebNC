@@ -9,6 +9,10 @@ module.exports = {
     return db.load("select * from account where categoryUser = 1");
   },
 
+  getAccById: (id) => {
+    return db.load(`select * from account where userId = ${id}`);
+  },
+
   getListAccstudent: () => {
     return db.load("select * from account where categoryUser = 0");
   },

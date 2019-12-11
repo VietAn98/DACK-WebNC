@@ -92,7 +92,7 @@ class ListSkill extends React.PureComponent {
         >
           <b>Danh sách các kỹ năng</b>
         </h1>
-        <Button type="button" onClick={this.AddSkill}>Thêm</Button>
+        <Button type="button" onClick={this.AddSkill}>Thêm kỹ năng</Button>
         <Table striped bordered hover>
           <thead style={{ background: "#88888A" }}>
             <tr style={{ textAlign: "center" }}>
