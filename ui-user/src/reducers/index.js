@@ -137,6 +137,9 @@ export const listTeachers = (state = [], action) => {
 		case 'GET_TEACHERS_TOP': {
 			return action.TopTeacher;
 		}
+		case 'GET_TEACHERS_TOP_SIX': {
+			return action.TopTeacher;
+		}
 		case 'GET_TEACHERS_PRICE_INCREASE': {
 			return action.teacher;
 		}

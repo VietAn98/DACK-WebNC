@@ -19,6 +19,7 @@ const APIService = {
   GET_LIST_SKILLS: `${URL}/api/get-list-skills`,
   GET_LIST_TEACHERS: `${URL}/api/get-list-teaching`,
   GET_TEACHERS_TOP: `${URL}/api/get-list-top-teacher`,
+  GET_TEACHERS_TOP_SIX: `${URL}/api/get-list-top-six-teachers`,
   GET_TEACHERS_PRICE_INCREASE: `${URL}/api/get-teachers-price-increase`,
   GET_TEACHERS_PRICE_DECREASE: `${URL}/api/get-teachers-price-decrease`,
   GET_TEACHERS_REATESUCCESS_DECREASE: `${URL}/api/get-teachers-rate-success-decrease`,

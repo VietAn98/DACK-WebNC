@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import HomePage from '../pages/HomePage';
-import { getListTeacher } from '../actions/userAction';
+import { getListTeacher, listSixTeacherTop } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
     listTeachers: state.listTeachers
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getListTeacher: () => dispatch(getListTeacher())
+    getListTeacher: () => dispatch(getListTeacher()),
+    listSixTeacherTop: () => dispatch(listSixTeacherTop())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

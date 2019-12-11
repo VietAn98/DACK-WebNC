@@ -301,6 +301,19 @@ export const listTeacherTop = () => (dispatch) => {
 		}).catch((err) => console.log('Error getListTeacher occured', err));
 };
 
+export const listSixTeacherTop = () => (dispatch) => {
+	return fetch(API.GET_TEACHERS_TOP_SIX, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+	}).then((respond) => respond.json())
+		.then((TopTeacher) => {
+			// console.log('getListTeacher', res);
+			dispatch({ type: 'GET_TEACHERS_TOP_SIX', TopTeacher });
+		}).catch((err) => console.log('Error getListTeacher occured', err));
+};
+
 export const sortIncreaseByPrice = () => (dispatch) => {
 	return fetch(API.GET_TEACHERS_PRICE_INCREASE, {
 		method: 'GET',

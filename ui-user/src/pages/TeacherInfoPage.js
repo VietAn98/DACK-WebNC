@@ -26,7 +26,7 @@ export class TeacherInfoPage extends React.PureComponent {
   };
 
   bookTeacher = () => {
-    history.push("/signin");
+    history.push('/signin');
   };
 
   render() {

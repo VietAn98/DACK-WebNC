@@ -5,11 +5,11 @@ import "./CardTuitor.css";
 import avatar from "../public/images/avatar.jpg";
 
 class Card extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    const { listTeachers, listNameSkill } = this.props;
-    // listNameSkill(listTeachers.userId);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // const { listTeachers, listNameSkill } = this.props;
+  //   // listNameSkill(listTeachers.userId);
+  // }
 
   onnclicks = id => {
     history.push(`/teacher-info/${id}`);
