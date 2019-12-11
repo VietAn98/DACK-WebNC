@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-import history from "../history";
-import "./CardTuitor.css";
-import avatar from "../public/images/avatar.jpg";
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import history from '../history';
+import './CardTuitor.css';
+import avatar from '../public/images/avatar.jpg';
 
 class Card extends React.PureComponent {
   // constructor(props) {
@@ -11,7 +11,7 @@ class Card extends React.PureComponent {
   //   // listNameSkill(listTeachers.userId);
   // }
 
-  onnclicks = id => {
+  onnclicks = (id) => {
     history.push(`/teacher-info/${id}`);
   };
 
@@ -27,13 +27,19 @@ class Card extends React.PureComponent {
               <div className="cardInfo">
                 <h6>{listTeachers.name}</h6>
                 {/* {nameSkill ? (<div>{nameSkill.name}</div>) : null} */}
-                <div>Giá thuê: {listTeachers.price} VND/giờ</div>
-                <div style={{ marginTop: "1.5rem" }}>
+                <div>
+                  Giá thuê:
+{' '}
+                  {listTeachers.price}
+                  {' '}
+                  VND/giờ
+                </div>
+                <div style={{ marginTop: '2.5rem' }}>
                   <Button
                     variant="primary"
                     className="mx-2"
                     size="sm"
-                    onClick = {this.onnclicks.bind(this, listTeachers.userId)}
+                    onClick={this.onnclicks.bind(this, listTeachers.userId)}
                   >
                     Thông Tin
                   </Button>
