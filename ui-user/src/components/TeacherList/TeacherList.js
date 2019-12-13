@@ -95,7 +95,7 @@ class TeacherList extends React.PureComponent {
       districtNames,
       listSkills
     } = this.props;
-    console.log('listSkillslistSkillslistSkills', listSkills);
+    // console.log('listSkillslistSkillslistSkills', listSkills);
     return (
       <Container>
         <div className="flex-nowrap">

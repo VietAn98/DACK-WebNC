@@ -211,7 +211,7 @@ export const getSkills = (idTeacher) => (dispatch) => {
 		},
 	}).then((respond) => respond.json())
 		.then((res) => {
-			console.log('teacherSkills', res);
+			// console.log('teacherSkills', res);
 			dispatch({ type: 'GET_SKILLS', teacherSkills: res });
 		}).catch((err) => console.log('Error getSkills occured', err));
 };
@@ -225,7 +225,7 @@ export const getListSkills = () => (dispatch) => {
 	}).then((respond) => respond.json())
 		.then((res) => {
 			console.log('listSkills', res);
-			dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
+			// dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
 		}).catch((err) => console.log('Error getListSkills occured', err));
 };
 
@@ -252,7 +252,7 @@ export const getListTeacher = () => (dispatch) => {
 		},
 	}).then((respond) => respond.json())
 		.then((res) => {
-			console.log('getListTeacher', res);
+			// console.log('getListTeacher', res);
 			dispatch({ type: 'GET_LIST_TEACHERS', listTeachers: res });
 		}).catch((err) => console.log('Error getListTeacher occured', err));
 };
@@ -265,9 +265,9 @@ export const listNameSkill = (id) => (dispatch) => {
 		},
 	}).then((respond) => respond.json())
 		.then((nameSkills) => {
-			// console.log('getListTeacher', res);
+			console.log('listNameSkill', nameSkills);
 			dispatch({ type: 'GET_NAME_SKILLS', nameSkills });
-		}).catch((err) => console.log('Error getListTeacher occured', err));
+		}).catch((err) => console.log('Error listNameSkill occured', err));
 };
 
 export const getInforTeacher = (infor) => ({
@@ -285,7 +285,7 @@ export const getInforUserById = (id) => (dispatch) => {
 		.then(async (inforTeacher) => {
 			console.log('getInforUserById', inforTeacher);
 			await dispatch(getInforTeacher(inforTeacher));
-		}).catch((err) => console.log('Error getListTeacher occured', err));
+		}).catch((err) => console.log('Error getInforUserById occured', err));
 };
 
 export const listTeacherTop = () => (dispatch) => {

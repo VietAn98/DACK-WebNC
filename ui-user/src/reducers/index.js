@@ -181,7 +181,7 @@ export const listTeachers = (state = [], action) => {
 	}
 };
 
-export const listNameSkill = (state = [], action) => {
+export const listNameOfSkill = (state = [], action) => {
 	switch (action.type) {
 		case 'GET_NAME_SKILLS': {
 			return action.nameSkills;
