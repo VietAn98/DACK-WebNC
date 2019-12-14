@@ -1,11 +1,26 @@
 const db = require("../model/account.model");
 const dbSkill_teacher = require("../model/skill_teacher.model");
+const db_comment = require("../model/comment.model");
 
 module.exports = {
   getListTeaching: async (req, res) => {
     return await db
       .getListTeaching()
       .then(teachers => {
+        // teachers.map(item => {
+        //   item.listSkill = [];
+        //   dbSkill_teacher.getNameSkillTeacher(item[i].userId).then(skills => {
+        //     skills.forEach(it => {
+        //       item[i].listSkill.push(it);
+        //       console.log(
+        //         "1111111111111111111111111111111111111111111111111111",
+        //         "trong"
+        //       );
+        //     });
+        //   });
+        // });
+        // console.log("222222222222222222222222222222222222222", "Ngoài");
+
         res.status(200).json(teachers);
       })
       .catch(err =>
@@ -79,7 +94,8 @@ module.exports = {
     return dbSkill_teacher
       .getNameSkillTeacher(id)
       .then(skills => {
-        res.status(200).json(skills);
+        console.log(skills);
+        res.status(200).json({ skills, id });
       })
       .catch(err =>
         res.status(400).json({ message: "Không có skill nào", error: err })
@@ -269,5 +285,28 @@ module.exports = {
       });
   },
 
-
+  getCommentByUser: (req, res) => {
+    const id = req.params.id;
+    return db_comment
+      .commentsByUserTeacher(id)
+      .then(comments => {
+        // let loop = Promise.resolve();
+        // for (const i in comments) {
+        //   // console.log(comments[i].idUser);
+        //   loop = loop.then(() =>
+        //     db.getDetailStudent(comments[i].idUser).then(std => {
+        //       console.log(std);
+        //       comments[i].user = std;
+        //       console.log("trong");
+        //     })
+        //   );
+        // }
+        // console.log("trongsssssssss");
+        // loop.then(() => 
+        res.status(200).json(comments);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  }
 };

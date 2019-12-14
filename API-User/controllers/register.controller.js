@@ -36,7 +36,7 @@ module.exports = {
         }
       });
       var url =
-        "http://localhost:3000/api/verify-account?email=" + req.body.gmail + '&key=' + keyPass;
+        "http://localhost:3000";
       var mainOptions = {
         // thiết lập đối tượng, nội dung gửi mail
         from: "AH!BreakingNews",

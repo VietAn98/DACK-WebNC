@@ -31,6 +31,7 @@ module.exports = app => {
 
     //
     app.get('/api/get-teachers-by-district/:id', teachingController.getTeacherByDistrict);
-    
+    //
+    app.get('/api/get-comment-by-user/:id', teachingController.getCommentByUser);
 
 }

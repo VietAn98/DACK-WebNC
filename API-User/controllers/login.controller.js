@@ -31,11 +31,12 @@ module.exports = {
 
   //quên mật khẩu
   forgetPassw: (req, res) => {
+    console.log(req.body.gmail);
     const gmail = req.body.gmail;
     db.getAccByEmailRegister(gmail).then(row => {
       if (row.length > 0) {
         var url =
-          "http://localhost:3000/api/update-new-password?email=" +
+          "http://localhost:3000/update-new-password?email=" +
           req.body.gmail +
           "&key=" +
           row[0].keyPass;
@@ -67,7 +68,7 @@ module.exports = {
           }
         });
       } else {
-        res.status(200).send("email không chính xác");
+        res.status(400).json("email không chính xác");
       }
     });
   },
