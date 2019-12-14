@@ -1,35 +1,49 @@
-import React from "react";
-import { Container, Form } from "react-bootstrap";
-import FacebookLogin from "react-facebook-login";
-import GoogleLogin from "react-google-login";
-import { FaFacebookF } from "react-icons/fa";
-import Swal from "sweetalert2";
-import history from "../../history";
-import "./SignUp.css";
+import React from 'react';
+import { Container, Form } from 'react-bootstrap';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import { FaFacebookF } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import history from '../../history';
+import './SignUp.css';
 
 class Register extends React.PureComponent {
-  onChangeSelection = e => {
-    console.log(e.target.value);
-  };
+  // eslint-disable-next-line react/no-deprecated
+  componentWillMount = () => {
+    const { getListCity } = this.props;
+    getListCity();
+  }
 
-  onSubmitSignUpForm = e => {
+  onChangeCity = (e) => {
+    const { getDistrictByIdCity } = this.props;
+    getDistrictByIdCity(e.target.value);
+  }
+
+  // onChangeSelection = (e) => {
+  //   console.log(e.target.value);
+  // };
+
+  onSubmitSignUpForm = (e) => {
     e.preventDefault();
     // console.log(document.getElementById("selectGender").value);
     const { registerRequest } = this.props;
-    const name = document.getElementById("name").value;
-    const gmail = document.getElementById("gmail").value;
-    const password = document.getElementById("password").value;
-    const districtId = document.getElementById("district").value;
-    const gender = document.getElementById("selectGender").value;
-    const categoryUser = document.getElementById("categoryUser").value;
-	registerRequest(name, gmail, password, districtId, gender, categoryUser);
-	Swal.fire('Đang kiểm tra tài khoản');
+    const name = document.getElementById('name').value;
+    const gmail = document.getElementById('gmail').value;
+    const password = document.getElementById('password').value;
+    const districtId = document.getElementById('district').value;
+    const gender = document.getElementById('selectGender').value;
+    const categoryUser = document.getElementById('categoryUser').value;
+    registerRequest(name, gmail, password, districtId, gender, categoryUser);
+    Swal.fire('Đang kiểm tra tài khoản');
     Swal.showLoading();
   };
 
   render() {
-    const responseFacebook = response => {
-      console.log("responseFb", response);
+    const { listCity, districtNames } = this.props;
+    const tokenn = localStorage.token;
+
+    const responseFacebook = (response) => {
+      console.log('responseFb', response);
 
       const { registerRequest } = this.props;
 
@@ -37,28 +51,23 @@ class Register extends React.PureComponent {
       const gmail = response.email;
       const password = response.id;
       const districtId = 0;
-      const gender = "Nam";
+      const gender = 'Nam';
       const categoryUser = 0;
 
       Promise.resolve(
         registerRequest(name, gmail, password, districtId, gender, categoryUser)
       ).then(() => {
         Swal.fire({
-          icon: "success",
-          title: "Đăng Kí Thành Công",
+          icon: 'success',
+          title: 'Đăng Kí Thành Công',
           text:
-            "Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!"
-          // 	confirmButtonText: 'OK'
-          // }).then((result) => {
-          // 	if (result.value) {
-          // 		history.push('/signin');
-          // 	}
+            'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!'
         });
       });
     };
 
-    const responseGoogle = response => {
-      console.log("responseGG", response);
+    const responseGoogle = (response) => {
+      console.log('responseGG', response);
 
       const { registerRequest } = this.props;
 
@@ -66,21 +75,21 @@ class Register extends React.PureComponent {
       const gmail = response.w3.U3;
       const password = response.w3.Eea;
       const districtId = 0;
-      const gender = "Nam";
+      const gender = 'Nam';
       const categoryUser = 0;
 
       Promise.resolve(
         registerRequest(name, gmail, password, districtId, gender, categoryUser)
       ).then(() => {
         Swal.fire({
-          icon: "success",
-          title: "Đăng Kí Thành Công",
+          icon: 'success',
+          title: 'Đăng Kí Thành Công',
           text:
-            "Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!",
-          confirmButtonText: "OK"
-        }).then(result => {
+            'Một đường dẫn kích hoạt tài khoản đã được gửi đến Email của bạn. Xin hãy kiểm tra email và kích hoạt tài khoản để tiếp tục sử dụng trang web!',
+          confirmButtonText: 'OK'
+        }).then((result) => {
           if (result.value) {
-            history.push("/signin");
+            history.push('/signin');
           }
         });
       });
@@ -91,9 +100,9 @@ class Register extends React.PureComponent {
         <Container>
           <div
             style={{
-              backgroundColor: "rgba(0,0,0,0.5)",
-              borderRadius: "20px",
-              paddingBottom: "3rem"
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              borderRadius: '20px',
+              paddingBottom: '3rem'
             }}
           >
             <h3 className="w3layouts-heading white-title">
@@ -133,7 +142,7 @@ class Register extends React.PureComponent {
                     </div>
                   </div>
                   <br />
-                  <div className="col-md-12 col-sm-12">
+                  <div className="col-md-12 col-sm-12 mt-3">
                     <input
                       type="email"
                       id="gmail"
@@ -146,16 +155,20 @@ class Register extends React.PureComponent {
                       as="select"
                       className="select-form"
                       id="city"
+                      onChange={this.onChangeCity}
                       required
                     >
-                      <option className="black-title" value="1">
-                        TP Hồ Chí Minh
-                      </option>
                       <option className="black-title" value="0">
-                        ...
+                        Tỉnh/Thành phố
                       </option>
+                      {listCity ? listCity.map((item) => (
+                        <option className="black-title" value={item.cityId}>
+                          {item.name}
+                        </option>
+                      )) : null}
                     </Form.Control>
                     <input
+                      className="mt-3"
                       type="password"
                       id="password"
                       placeholder="Nhập mật khẩu"
@@ -169,14 +182,16 @@ class Register extends React.PureComponent {
                       id="district"
                       required
                     >
-                      <option className="black-title" value="1">
-                        Quận Bình Thạnh
-                      </option>
-                      <option className="black-title" value="0">
-                        ...
-                      </option>
+                      {districtNames.length !== 0 ? (
+                        districtNames.map((item) => (
+                          <option value={item.districtId} className="black-title">
+                            {item.name}
+                          </option>
+                        ))
+                      ) : null}
                     </Form.Control>
                     <input
+                      className="mt-3"
                       type="password"
                       id="re-password"
                       placeholder="Nhập lại mật khẩu"
@@ -190,7 +205,6 @@ class Register extends React.PureComponent {
                     <Form.Control
                       as="select"
                       className="select-form"
-                      onChange={this.onChangeSelection}
                       id="categoryUser"
                     >
                       <option className="black-title" value="0">
@@ -209,7 +223,7 @@ class Register extends React.PureComponent {
                   />
                 </Form>
 
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: 'center' }}>
                   <h4 className="mt-4 text-white">Hoặc</h4>
                   <h5 className="text-white">Đăng kí tài khoản bằng</h5>
                   {/* <a

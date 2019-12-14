@@ -255,8 +255,8 @@ export const getListSkills = () => (dispatch) => fetch(API.GET_LIST_SKILLS, {
 		},
 	}).then((respond) => respond.json())
 		.then((res) => {
-			console.log('listSkills', res);
-			// dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
+			// console.log('listSkills', res);
+			dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
 		}).catch((err) => console.log('Error getListSkills occured', err));
 
 export const getUserInfor = (id) => (dispatch) => {
