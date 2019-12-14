@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
-// import { signOut, getUserInfor } from '../actions/userAction';
+import { changeOldPassword } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
     // currentUser: state.currentUser,
@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // signOut: () => dispatch(signOut()),
-    // getUserInfor: (idUser) => dispatch(getUserInfor(idUser))
+ changeOldPassword: (gmail, newPass, oldPass) => { dispatch(changeOldPassword(gmail,newPass, oldPass))}
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);
