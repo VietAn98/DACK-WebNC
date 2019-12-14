@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import SignUp from '../components/SignUp/SignUp';
-import { registerRequest, login } from '../actions/userAction';
+import { registerRequest, getListCity, getDistrictByIdCity } from '../actions/userAction';
 
-// const mapStateToProps = state => {
-//   return {
-//     // isBusy: state.isBusy,
-//     // isSucceed: state.isRegisterSucceed
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    listCity: state.listCity,
+    districtNames: state.districtNames
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	registerRequest: (
@@ -18,5 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
 		gender,
 		categoryUser,
 	) => dispatch(registerRequest(name, gmail, password, districtId, gender, categoryUser)),
+	getListCity: () => dispatch(getListCity()),
+	getDistrictByIdCity: (id) => dispatch(getDistrictByIdCity(id))
 });
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

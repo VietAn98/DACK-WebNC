@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-import TeacherList from "../components/TeacherList/TeacherList";
+import { connect } from 'react-redux';
+import TeacherList from '../components/TeacherList/TeacherList';
 import {
   getListTeacher,
   getListCity,
@@ -17,19 +17,19 @@ import {
   filterByFiveStar,
   getTeacherByDistrict,
   getListSkills
-} from "../actions/userAction";
+} from '../actions/userAction';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   listTeachers: state.listTeachers,
   listCity: state.listCity,
   districtNames: state.districtNames,
   listSkills: state.listSkills
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getListTeacher: () => dispatch(getListTeacher()),
   getListCity: () => dispatch(getListCity()),
-  getDistrictByIdCity: idCity => dispatch(getDistrictByIdCity(idCity)),
+  getDistrictByIdCity: (idCity) => dispatch(getDistrictByIdCity(idCity)),
   sortIncreaseByPrice: () => dispatch(sortIncreaseByPrice()),
   sortDecreaseByPrice: () => dispatch(sortDecreaseByPrice()),
   sortDecreaseByRateSuccess: () => dispatch(sortDecreaseByRateSuccess()),
