@@ -11,7 +11,8 @@ class HomePage extends React.PureComponent {
   };
 
   render() {
-	const { listTeachers } = this.props;
+  const { listTeachers } = this.props;
+  console.log('--------------1',listTeachers);
     return (
       <div>
         <Banner style={{ height: '100%' }} />

@@ -31,6 +31,7 @@ const APIService = {
   GET_TEACHERS_BY_TWO_STAR: `${URL}/api/get-teachers-by-two-start`,
   GET_TEACHERS_BY_THREE_STAR: `${URL}/api/get-teachers-by-three-start`,
   GET_TEACHERS_BY_FOUR_STAR: `${URL}/api/get-teachers-by-four-start`,
+  GET_TEAHCERS_BY_SKILL: `${URL}/api/get-teachers-by-skill/`,
   GET_TEACHERS_BY_FIVE_STAR: `${URL}/api/get-teachers-by-five-start`,
   GET_TEACHERS_BY_DISTRICT: `${URL}/api/get-teachers-by-district/`,
   FORGOT_PASSWORD: `${URL}/api/forget-password`,

@@ -193,6 +193,9 @@ export const listTeachers = (state = [], action) => {
     case 'GET_TEACHERS_BY_DISTRICT': {
       return action.teacher;
     }
+    case 'GET_TEAHCERS_BY_SKILL': {
+      return action.teacher;
+    }
     default:
       return state;
   }

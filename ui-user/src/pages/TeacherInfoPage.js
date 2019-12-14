@@ -339,7 +339,7 @@ export class TeacherInfoPage extends React.PureComponent {
                         </span>
                       </div>
                     ) : null}
-                  {detailTeacher.rateSuccess === 100 ? (
+                  {detailTeacher.rateSuccess > 80 ? (
                     <div className="stars mt-2">
                       <li>
                         <span className="fa fa-star" aria-hidden="true" />
@@ -383,7 +383,7 @@ export class TeacherInfoPage extends React.PureComponent {
             </div>
           </Container>
         ) : null}
-        {/* <Container>
+        <Container>
           <div className="mt-5">
             <h3 style={{ fontWeight: 'bolder' }}>Gợi ý giáo viên:</h3>
             <div className="mt-3">
@@ -400,7 +400,7 @@ export class TeacherInfoPage extends React.PureComponent {
                 : null}
             </div>
           </div>
-        </Container> */}
+        </Container>
       </section>
     );
   }

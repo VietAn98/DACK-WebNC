@@ -1,13 +1,11 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
-import {
-  Container, Row, Col, Form
-} from 'react-bootstrap';
-import './TeacherList.css';
-import CardTuitor from '../../containers/CardTuitorContainer';
-import star from '../../public/images/star.png';
+import React from "react";
+import { Container, Row, Col, Form } from "react-bootstrap";
+import "./TeacherList.css";
+import CardTuitor from '../CardTuitor';
+import star from "../../public/images/star.png";
 
 class TeacherList extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated
@@ -18,7 +16,7 @@ class TeacherList extends React.PureComponent {
     getListSkills();
   };
 
-  onChangeCity = (e) => {
+  onChangeCity = e => {
     const { getDistrictByIdCity } = this.props;
     getDistrictByIdCity(e.target.value);
   };
@@ -78,33 +76,31 @@ class TeacherList extends React.PureComponent {
     filterByFiveStar();
   };
 
-  onChangeDistrict = (obj) => {
+  onChangeDistrict = obj => {
     const { getTeacherByDistrict } = this.props;
     const id = obj.target.value;
     getTeacherByDistrict(id);
   };
 
-  onChangeSkills = () => {
+  onChangeSkills = obj => {
+    const id = obj.target.value;
+    const { filterSkillTeacher } = this.props;
+    filterSkillTeacher(id);
     // getTeaacherBySkill
-  }
+  };
 
   render() {
-    const {
-      listTeachers,
-      listCity,
-      districtNames,
-      listSkills
-    } = this.props;
-    console.log('listSkillslistSkillslistSkills', listSkills);
+    const { listTeachers, listCity, districtNames, listSkills } = this.props;
+    // console.log("listSkillslistSkillslistSkills", listTeachers);
     return (
       <Container>
         <div className="flex-nowrap">
           <div className="mt-5em">
             <div className="title">
               <h1>
-                DANH SÁCH
+                DANH SÁCH 
 {' '}
-                <span>GIÁO VIÊN</span>
+<span>GIÁO VIÊN</span>
               </h1>
             </div>
           </div>
@@ -192,13 +188,13 @@ class TeacherList extends React.PureComponent {
                           onClick={this.filterByMiddlePrice}
                         />
                         <label>
-                          Từ
+                          Từ 
 {' '}
-                          <b>100,000đ</b>
-                          {' '}
-                          <i className="fas fa-arrow-right" />
-                          {' '}
-                          <b>500,000đ</b>
+<b>100,000đ</b>
+{" "}
+                          <i className="fas fa-arrow-right" /> 
+{' '}
+<b>500,000đ</b>
                         </label>
 
                         <Form.Check
@@ -211,9 +207,9 @@ class TeacherList extends React.PureComponent {
                           onClick={this.filterByMaxPrice}
                         />
                         <label>
-                          Trên
+                          Trên 
 {' '}
-                          <b> 500,000đ </b>
+<b> 500,000đ </b>
                         </label>
                       </Form>
 
@@ -231,7 +227,9 @@ class TeacherList extends React.PureComponent {
                             id="star1"
                             name="radSort"
                             onClick={this.filterByOneStars}
-                          />
+                            style={{ cursor: 'pointer'}}
+                          >
+                          </Form.Check>
                           <img className="img-star" alt="star" src={star} />
                         </div>
 
@@ -311,14 +309,14 @@ class TeacherList extends React.PureComponent {
                           >
                             <option value="0" className="black-title" />
                             {listCity
-                              ? listCity.map((item) => (
-                                <option
-                                  value={item.cityId}
-                                  className="black-title"
-                                >
-                                  {item.name}
-                                </option>
-                              ))
+                              ? listCity.map(item => (
+                                  <option
+                                    value={item.cityId}
+                                    className="black-title"
+                                  >
+                                    {item.name}
+                                  </option>
+                                ))
                               : null}
                           </Form.Control>
                         </div>
@@ -331,14 +329,14 @@ class TeacherList extends React.PureComponent {
                             onChange={this.onChangeDistrict.bind(this)}
                           >
                             {districtNames.length !== 0
-                              ? districtNames.map((item) => (
-                                <option
-                                  value={item.districtId}
-                                  className="black-title"
-                                >
-                                  {item.name}
-                                </option>
-                              ))
+                              ? districtNames.map(item => (
+                                  <option
+                                    value={item.districtId}
+                                    className="black-title"
+                                  >
+                                    {item.name}
+                                  </option>
+                                ))
                               : null}
                           </Form.Control>
                         </div>
@@ -354,20 +352,18 @@ class TeacherList extends React.PureComponent {
                             as="select"
                             className="select-form-city"
                             id="selectSkills"
-                            onChange={this.onChangeSkills}
+                            onChange={this.onChangeSkills.bind(this)}
                           >
-                            <option
-                              value="0"
-                              className="black-title"
-                            />
-                            {listSkills ? listSkills.map((item) => (
-                              <option
-                                value={item.skillId}
-                                className="black-title"
-                              >
-                                {item.name}
-                              </option>
-                            ))
+                            <option value="0" className="black-title" />
+                            {listSkills
+                              ? listSkills.map(item => (
+                                  <option
+                                    value={item.skillId}
+                                    className="black-title"
+                                  >
+                                    {item.name}
+                                  </option>
+                                ))
                               : null}
                           </Form.Control>
                         </div>
@@ -380,14 +376,14 @@ class TeacherList extends React.PureComponent {
           </div>
           <div className="col-md-9 col-sm-9 mt-5 mb-5">
             {listTeachers ? (
-              listTeachers.map((item) => (
+              listTeachers.map(item => (
                 <div className="col-md-4 col-sm-4">
                   <CardTuitor listTeachers={item} />
                 </div>
               ))
             ) : (
-                <h1>Không có trong danh sách</h1>
-              )}
+              <h1>Không có trong danh sách</h1>
+            )}
           </div>
         </div>
       </Container>

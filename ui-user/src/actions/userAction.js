@@ -288,9 +288,6 @@ export const listNameSkill = (id) => (dispatch) => fetch(API.GET_NAME_SKILLS + i
 		},
 	}).then((respond) => respond.json())
 		.then((nameSkills) => {
-      if (nameSkills === null) {
-        console.log('1111111111111111111111111111111111111111');
-      }
       dispatch({ type: 'GET_NAME_SKILLS', nameSkills });
 		}).catch((err) => console.log('Error listNameSkill occured', err));
 
@@ -529,3 +526,16 @@ export const updatePassword = (newPass) => (dispatch) => {
     }
   });
 };
+
+export const filterSkillTeacher = (id) => (dispatch) => fetch(API.GET_TEAHCERS_BY_SKILL + id, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+})
+  .then((respond) => respond.json())
+  .then((teacher) => {
+    // console.log('getListTeacher', res);
+    dispatch({ type: 'GET_TEAHCERS_BY_SKILL', teacher });
+  })
+  .catch((err) => console.log('Error getListTeacher occured', err));
