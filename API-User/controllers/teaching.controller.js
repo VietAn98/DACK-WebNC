@@ -303,10 +303,20 @@ module.exports = {
         // }
         // console.log("trongsssssssss");
         // loop.then(() => 
+        console.log(comments);
         res.status(200).json(comments);
       })
       .catch(err => {
         res.status(400).json(err);
       });
+  },
+
+  filterTeacherBySkill: (req, res) => {
+    const id = req.params.id
+    db.getTeacherBySkill(id).then(teachers => {
+      res.status(200).json(teachers);
+    }).catch(err => {
+      res.status(400).json(err);
+    });
   }
 };

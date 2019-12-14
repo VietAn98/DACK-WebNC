@@ -23,7 +23,8 @@ module.exports = app => {
     app.get('/api/get-teachers-by-three-start', teachingController.getTeachersByThreeStar);
     app.get('/api/get-teachers-by-four-start', teachingController.getTeachersByfourStar);
     app.get('/api/get-teachers-by-five-start', teachingController.getTeachersByfiveStar);
-    
+    //
+    app.get('/api/get-teachers-by-skill/:id', teachingController.filterTeacherBySkill);
     //
     app.get('/api/get-teachers-min-price', teachingController.getTeacherByMinPrice);
     app.get('/api/get-teachers-middle-price', teachingController.getTeacherByMiddlePrice);
