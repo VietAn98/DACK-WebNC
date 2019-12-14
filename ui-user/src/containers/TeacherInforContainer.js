@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import TeacherInfor from '../pages/TeacherInfoPage';
 import {
-  getInforUserById,
+  getUserInfor,
   listNameSkill,
   listTeacherTop,
   getCityByIdDistrict,
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getSingleTeacherById: (id) => dispatch(getSingleTeacherById(id)),
-  getInforUserById: (id) => dispatch(getInforUserById(id)),
+  getUserInfor: (id) => dispatch(getUserInfor(id)),
   listNameSkill: (id) => dispatch(listNameSkill(id)),
   listTeacherTop: () => dispatch(listTeacherTop()),
   getCityByIdDistrict: (id) => dispatch(getCityByIdDistrict(id)),
