@@ -80,7 +80,7 @@ module.exports = {
     return dbSkill_teacher
       .getNameSkillTeacher(id)
       .then(skills => {
-        console.log(skills);
+        // console.log(skills);
         res.status(200).json({ skills, id });
       })
       .catch(err =>
@@ -303,7 +303,7 @@ module.exports = {
         // }
         // console.log("trongsssssssss");
         // loop.then(() => 
-        console.log(comments);
+        // console.log(comments);
         res.status(200).json(comments);
       })
       .catch(err => {

@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 var { generateToken, sendToken } = require("../utils/token.utils");
 const db = require("../model/account.model");
 module.exports = {
-
   login: async (req, res) => {
     passport.authenticate("local", { session: false }, (err, user, info) => {
       if (err || !user) {
@@ -73,6 +72,36 @@ module.exports = {
     });
   },
 
+  updatePasswAfterLogin: (req, res) => {
+    const gmail = req.body.gmail;
+    var pass = req.body.newPass;
+    var oldPass = req.body.oldPass;
+    var salt = bcrypt.genSaltSync(10);
+    var hashNewPassw = bcrypt.hashSync(pass, salt);
+    var hashOldPass = bcrypt.hashSync(oldPass, salt);
+    
+    db.getAccByEmail(gmail).then(account => {
+      if (bcrypt.compareSync(oldPass, account[0].password)) {
+        var entity = {
+          userId: account[0].userId,
+          password: hashNewPassw
+        };
+        db.updateAcc(entity)
+          .then(id => {
+            res.status(200).json({ message: "cập nhật mật khẩu thành công" });
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(400).json({ message: "Cập nhật mật khẩu thất bại" });
+          });
+      } else {
+        res
+          .status(400)
+          .json({ message: "Cập nhật thất bai, vui lòng kiểm tra lại!" });
+      }
+    });
+  },
+
   //cập nhật password mới
   updateNewPassw: (req, res) => {
     var mail = req.query.email;
@@ -105,7 +134,6 @@ module.exports = {
   },
 
   // đăng kí thông tin người dạy
- 
 
   //thêm link avatar
   addImage: (req, res) => {
@@ -116,18 +144,18 @@ module.exports = {
 
   //đăng nhập bằng fb
   authFacebook: (req, res, next) => {
-    console.log("----------------", req.body);
+    // console.log("----------------", req.body);
     // console.log("----------------", res);
     // passport.authenticate("facebook", { session: false }),
-      // function(req, res, next) {
-        console.log('------------',req.user);
-        if (!req.user) {
-          return res.send(401, "User Not Authenticated");
-        }
-        req.auth = {
-          id: req.user.id
-        };
-        next();
-      }
-    //}
+    // function(req, res, next) {
+    console.log("------------", req.user);
+    if (!req.user) {
+      return res.send(401, "User Not Authenticated");
+    }
+    req.auth = {
+      id: req.user.id
+    };
+    next();
+  }
+  //}
 };
