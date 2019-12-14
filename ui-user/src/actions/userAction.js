@@ -4,7 +4,7 @@ import history from '../history';
 
 export const userProfile = (infor) => ({
   type: 'USER_PROFILE',
-  payload: infor
+  infor
 });
 
 export const login = () => ({
@@ -205,24 +205,28 @@ export const getListCity = () => (dispatch) => fetch(API.GET_LIST_CITY, {
     })
     .catch((err) => console.log('Error getListCity occured', err));
 
-export const getCityByIdDistrict = (idDistrict) => (dispatch) => fetch(API.GET_CITY_BY_IDDISTRICT + idDistrict, {
+export const getCityByIdDistrict = (idDistrict) => (dispatch) => fetch(
+  API.GET_CITY_BY_IDDISTRICT + idDistrict, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-  })
+  }
+  )
     .then((respond) => respond.json())
     .then((res) => {
       dispatch({ type: 'GET_CITY_BY_DISTRICT', cityName: res });
     })
     .catch((err) => console.log('Error getCityByIdDistrict occured', err));
 
-export const getDistrictByIdCity = (idCity) => (dispatch) => fetch(API.GET_DISTRICT_BY_IDCITY + idCity, {
+export const getDistrictByIdCity = (idCity) => (dispatch) => fetch(
+  API.GET_DISTRICT_BY_IDCITY + idCity, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-  })
+  }
+  )
     .then((respond) => respond.json())
     .then((res) => {
       dispatch({ type: 'GET_DISTRICT_BY_CITY', districtNames: res });
@@ -230,26 +234,35 @@ export const getDistrictByIdCity = (idCity) => (dispatch) => fetch(API.GET_DISTR
     .catch((err) => console.log('Error getDistrictByIdCity occured', err));
 
 
-export const getSkills = (idTeacher) => (dispatch) => fetch(API.GET_SKILLS + idTeacher, {
+export const getSkills = (idTeacher) => (dispatch) => fetch(
+  API.GET_SKILLS + idTeacher, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
-	}).then((respond) => respond.json())
+  }
+  ).then((respond) => respond.json())
 		.then((res) => {
 			dispatch({ type: 'GET_SKILLS', teacherSkills: res });
 		}).catch((err) => console.log('Error getSkills occured', err));
 
-export const getListSkills = () => (dispatch) => fetch(API.GET_LIST_SKILLS, {
+export const getListSkills = () => (dispatch) => fetch(
+  API.GET_LIST_SKILLS, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
-	}).then((respond) => respond.json())
+  }
+  ).then((respond) => respond.json())
 		.then((res) => {
 			// console.log('listSkills', res);
 			dispatch({ type: 'GET_LIST_SKILLS', listSkills: res });
-		}).catch((err) => console.log('Error getListSkills occured', err));
+    }).catch((err) => console.log('Error getListSkills occured', err));
+
+export const getInforTeacher = (infor) => ({
+  type: 'GET_INFOR_TEACHER',
+  infor
+});
 
 export const getUserInfor = (id) => (dispatch) => {
   console.log('id', id);
@@ -263,6 +276,7 @@ export const getUserInfor = (id) => (dispatch) => {
     .then((resr) => {
       dispatch(userLogin(resr));
       dispatch(userProfile(resr));
+      dispatch(getInforTeacher(resr));
     })
     .catch((err) => console.log('Error getUserInfor occured', err));
 };
@@ -290,21 +304,30 @@ export const listNameSkill = (id) => (dispatch) => fetch(API.GET_NAME_SKILLS + i
       dispatch({ type: 'GET_NAME_SKILLS', nameSkills });
 		}).catch((err) => console.log('Error listNameSkill occured', err));
 
-export const getInforTeacher = (infor) => ({
-  type: 'GET_INFOR_TEACHER',
-  infor
-});
+export const getSingleTeacherById = (id) => (dispatch) => fetch(
+  API.GET_TEACHER_INFO_BY_ID + id, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+}).then((respond) => respond.json())
+  .then(async (inforTeacher) => {
+    await dispatch(getInforTeacher(inforTeacher));
+  }).catch((err) => console.log('Error getSingleTeacherById occured', err));
 
-export const getInforUserById = (id) => (dispatch) => fetch(API.GET_USER_INFO_BY_ID + id, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-	}).then((respond) => respond.json())
-		.then(async (inforTeacher) => {
-			console.log('getInforUserById', inforTeacher);
-			await dispatch(getInforTeacher(inforTeacher));
-		}).catch((err) => console.log('Error getInforUserById occured', err));
+
+// export const getInforUserById = (id) => (dispatch) => fetch(
+//   API.GET_USER_INFO_BY_ID + id, {
+// 		method: 'GET',
+// 		headers: {
+// 			'Content-Type': 'application/x-www-form-urlencoded'
+// 		},
+//   }
+//   ).then((respond) => respond.json())
+// 		.then(async (inforTeacher) => {
+// 			console.log('getInforUserById', inforTeacher);
+// 			await dispatch(getInforTeacher(inforTeacher));
+// 		}).catch((err) => console.log('Error getInforUserById occured', err));
 
 export const listTeacherTop = () => (dispatch) => fetch(API.GET_TEACHERS_TOP, {
     method: 'GET',

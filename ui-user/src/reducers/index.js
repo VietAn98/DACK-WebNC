@@ -27,7 +27,7 @@ export const isSigIn = (state = initStatelogin(), action) => {
 export const userProfiles = (state = {}, action) => {
   switch (action.type) {
     case 'USER_PROFILE': {
-      return action.payload;
+      return action.infor;
     }
     default:
       return state;

@@ -6,7 +6,8 @@ const APIService = {
   UPDATE_INFOR_TEACHER: `${URL}/api/update-infor-teacher`,
   UPDATE_INFOR_STUDENT: `${URL}/api/update-infor-student`,
   GET_INFO: `${URL}/api/profile`,
-  GET_USER_INFO_BY_ID: `${URL}/api/get-detail-teacher/`,
+  GET_USER_INFO_BY_ID: `${URL}/api/get-detail-teacher/`, //lấy thông tin teacher + student
+  GET_TEACHER_INFO_BY_ID: `${URL}/api/get-detail-single-teacher/`,
   //   CHANGE_INFO: `${URL}/api/updateInfor`,
   UPLOAD_AVATAR: `${URL}/api/image`,
   //   CHANGE_PASSWORD: `${URL}/api/password`,

@@ -7,14 +7,23 @@ import './Contract.css';
 class Contract extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
     componentWillMount = () => {
-        const { getListCity } = this.props;
+        const { getListCity, getUserInfor, getListDisctrict } = this.props;
+        const path = window.location.pathname.split('-');
+        const id = path[path.length - 1];
         getListCity();
+        getUserInfor(id);
+        getListDisctrict();
+    }
+
+    onChangeCity1 = (e) => {
+        const { getDistrictByIdCity } = this.props;
+        getDistrictByIdCity(e.target.value);
     }
 
     // eslint-disable-next-line consistent-return
     render() {
         const tokenn = localStorage.token;
-        const { listCity } = this.props;
+        const { listCity, districtNames, userProfiles, listDistrict } = this.props;
 
         if (tokenn) {
             return (
@@ -44,8 +53,12 @@ class Contract extends React.PureComponent {
                                             <Form.Label>Địa chỉ:</Form.Label>
                                         </div>
                                         <div className="col-md-7 col-sm-7">
-                                            <Form.Control as="select">
-                                                <option value="0">Thành phố</option>
+                                            <Form.Control
+                                                as="select"
+                                                id="city1"
+                                                onChange={this.onChangeCity1}
+                                                required
+                                            >
                                                 {listCity ? (listCity.map((item) => (
                                                     <option value={item.cityId}>{item.name}</option>
                                                 ))) : null}
@@ -53,7 +66,16 @@ class Contract extends React.PureComponent {
                                         </div>
                                         <div className="col-md-5 col-sm-5">
                                             <Form.Control as="select">
-                                                <option>Quận</option>
+                                                {districtNames.length !== 0 ? (
+                                                    districtNames.map((item) => (
+                                                        <option value={item.districtId} className="black-title">
+                                                            {item.name}
+                                                        </option>
+                                                    ))
+                                                ) : (
+                                                        // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                                                        <option value="0" className="black-title" />
+                                                    )}
                                             </Form.Control>
                                         </div>
                                     </div>
@@ -66,22 +88,37 @@ class Contract extends React.PureComponent {
                                         </div>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Tên người dạy:</Form.Label>
-                                            <Form.Control type="text" placeholder="Họ và tên" />
+                                            <Form.Control type="text" value={userProfiles.name} disabled />
                                         </Form.Group>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Email:</Form.Label>
-                                            <Form.Control type="text" placeholder="Họ và tên" />
+                                            <Form.Control type="text" value={userProfiles.gmail} disabled />
                                         </Form.Group>
                                         <div className="col-md-12 col-sm-12">
                                             <Form.Label>Địa chỉ:</Form.Label>
                                         </div>
                                         <div className="col-md-7 col-sm-7">
-                                            <Form.Control as="select">
-                                                <option>Thành phố</option>
+                                            <Form.Control
+                                                as="select"
+                                                id="city2"
+                                                disabled
+                                            >
+                                                {/* <option value="0">Thành phố</option>
+                                                {listCity ? (listCity.map((item) => (
+                                                    <option value={item.cityId}>{item.name}</option>
+                                                ))) : null} */}
                                             </Form.Control>
                                         </div>
                                         <div className="col-md-5 col-sm-5">
-                                            <Form.Control as="select">
+                                            <Form.Control as="select" disabled>
+                                                {listDistrict ? listDistrict.map((item) => {
+                                                    if (item.districtId === userProfiles.districtId) {
+                                                        return (
+                                                            <option value={item.districtId}>{item.name}</option>
+                                                        );
+                                                    }
+                                                    return null;
+                                                }) : null}
                                                 <option>Quận</option>
                                             </Form.Control>
                                         </div>
@@ -174,7 +211,7 @@ class Contract extends React.PureComponent {
                                         </p>
                                         <p>
                                             - Trong trường hợp bên B không hoàn thành đúng trách nhiệm,
-                                            bên A có quyền khiếu nại lên hệ thống.
+                                             bên A có quyền khiếu nại lên hệ thống.
                                         </p>
                                         <p>
                                             - Bên A sẽ không được nhận lại chi phí

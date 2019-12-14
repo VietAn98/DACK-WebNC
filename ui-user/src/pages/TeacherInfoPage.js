@@ -23,18 +23,18 @@ export class TeacherInfoPage extends React.PureComponent {
   componentWillMount = () => {
     const path = window.location.pathname.split('/');
     const id = path[path.length - 1];
-    const { getInforUserById } = this.props;
-    Promise.resolve(getInforUserById(id)).then(async () => {
+    const { getSingleTeacherById } = this.props;
+    Promise.resolve(getSingleTeacherById(id)).then(async () => {
       const { detailTeacher, getCityByIdDistrict, listNameSkill } = this.props;
       getCityByIdDistrict(detailTeacher.districtId);
       await listNameSkill(id);
     });
   };
 
-  bookTeacher = async () => {
+  onClickHire = async (id) => {
     const tokenn = localStorage.token;
     if (tokenn) {
-      history.push('/contract');
+      history.push(`/contract/teacher-${id}`);
     } else {
       history.push('/signin');
     }
@@ -46,7 +46,7 @@ export class TeacherInfoPage extends React.PureComponent {
     } = this.props;
     const { skills } = listNameOfSkill;
     return (
-      <section style={{ marginTop: '8em', marginBottom: '4em' }}>
+      <section style={{ marginTop: '6em', marginBottom: '4em' }}>
         {detailTeacher ? (
           <Container className="p-5" style={{ boxShadow: '0px 1px 5px 2px grey' }}>
             <div className="row">
@@ -444,7 +444,8 @@ export class TeacherInfoPage extends React.PureComponent {
                       variant="danger"
                       size="lg"
                       className="px-5 my-3"
-                      onClick={this.bookTeacher}
+                      // eslint-disable-next-line react/jsx-no-bind
+                      onClick={this.onClickHire.bind(this, detailTeacher.userId)}
                     >
                       Thuê Ngay
                     </Button>

@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import TeacherInfor from '../pages/TeacherInfoPage';
 import {
-  getInforUserById,
+  getUserInfor,
   listNameSkill,
   listTeacherTop,
   getCityByIdDistrict,
   getListDisctrict,
   filterSkillTeacher,
-  getUserComment
+  getUserComment,
+  getSingleTeacherById
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -20,7 +21,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getInforUserById: (id) => dispatch(getInforUserById(id)),
+  getSingleTeacherById: (id) => dispatch(getSingleTeacherById(id)),
+  getUserInfor: (id) => dispatch(getUserInfor(id)),
   listNameSkill: (id) => dispatch(listNameSkill(id)),
   listTeacherTop: () => dispatch(listTeacherTop()),
   getCityByIdDistrict: (id) => dispatch(getCityByIdDistrict(id)),
