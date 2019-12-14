@@ -7,21 +7,7 @@ module.exports = {
     return await db
       .getListTeaching()
       .then(teachers => {
-        // teachers.map(item => {
-        //   item.listSkill = [];
-        //   dbSkill_teacher.getNameSkillTeacher(item[i].userId).then(skills => {
-        //     skills.forEach(it => {
-        //       item[i].listSkill.push(it);
-        //       console.log(
-        //         "1111111111111111111111111111111111111111111111111111",
-        //         "trong"
-        //       );
-        //     });
-        //   });
-        // });
-        // console.log("222222222222222222222222222222222222222", "Ngoài");
-
-        res.status(200).json(teachers);
+      res.status(200).json(teachers);
       })
       .catch(err =>
         res.status(400).json({ message: "Không có giáo viên nào", error: err })
@@ -100,6 +86,20 @@ module.exports = {
       .catch(err =>
         res.status(400).json({ message: "Không có skill nào", error: err })
       );
+  },
+
+  getTeacherSingleByid : (req,res) => {
+    const id = req.params.id;
+    return db
+      .getDetailSingleTeacher(id)
+      .then(teacher => {
+        res.status(200).json(teacher[0]);
+      })
+      .catch(err => {
+        res
+          .status(400)
+          .json({ message: "Không có chi tiết giáo  viên", error: err });
+      });
   },
 
   // lấy chi tiết giáo viên
