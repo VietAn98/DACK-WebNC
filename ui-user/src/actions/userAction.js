@@ -74,7 +74,6 @@ export const getInfor = (tokenn) => (dispatch) => {
       .then((respond) => respond.json())
       .then(async (res) => {
         await localStorage.setItem('user', JSON.stringify(res));
-        console.log('getInfor', res);
       })
       .catch((err) => console.log('Error getInfor occured', err));
   }
@@ -91,7 +90,6 @@ export const loginRequest = (gmail, password) => (dispatch) => fetch(API.LOGIN, 
   })
     .then((response) => response.json())
     .then(async (res) => {
-      console.log('res login', res);
       // eslint-disable-next-line no-prototype-builtins
       if (res.hasOwnProperty('token')) {
         // Swal.fire('Thông báo', 'Thành công', 'success');
@@ -192,7 +190,6 @@ export const getListDisctrict = () => (dispatch) => fetch(API.GET_LIST_DISTRICT,
   })
     .then((respond) => respond.json())
     .then((res) => {
-      console.log('districtList', res);
       dispatch({ type: 'DISTRICT_LIST', districtList: res });
     })
     .catch((err) => console.log('Error getListDisctrict occured', err));
@@ -205,7 +202,6 @@ export const getListCity = () => (dispatch) => fetch(API.GET_LIST_CITY, {
   })
     .then((respond) => respond.json())
     .then(async (res) => {
-      // console.log('cityList', res);
       await dispatch({ type: 'CITY_LIST', cityList: res });
     })
     .catch((err) => console.log('Error getListCity occured', err));
@@ -218,7 +214,6 @@ export const getCityByIdDistrict = (idDistrict) => (dispatch) => fetch(API.GET_C
   })
     .then((respond) => respond.json())
     .then((res) => {
-      console.log('cityNamecityNamecityName', res);
       dispatch({ type: 'GET_CITY_BY_DISTRICT', cityName: res });
     })
     .catch((err) => console.log('Error getCityByIdDistrict occured', err));
@@ -231,7 +226,6 @@ export const getDistrictByIdCity = (idCity) => (dispatch) => fetch(API.GET_DISTR
   })
     .then((respond) => respond.json())
     .then((res) => {
-      console.log('districtNames', res);
       dispatch({ type: 'GET_DISTRICT_BY_CITY', districtNames: res });
     })
     .catch((err) => console.log('Error getDistrictByIdCity occured', err));
@@ -244,7 +238,6 @@ export const getSkills = (idTeacher) => (dispatch) => fetch(API.GET_SKILLS + idT
 		},
 	}).then((respond) => respond.json())
 		.then((res) => {
-			// console.log('teacherSkills', res);
 			dispatch({ type: 'GET_SKILLS', teacherSkills: res });
 		}).catch((err) => console.log('Error getSkills occured', err));
 
@@ -286,8 +279,7 @@ export const getListTeacher = () => (dispatch) =>
 		.then((res) => {
 			// console.log('getListTeacher', res);
 			dispatch({ type: 'GET_LIST_TEACHERS', listTeachers: res });
-		}).catch((err) => console.log('Error getListTeacher occured', err))
-;
+		}).catch((err) => console.log('Error getListTeacher occured', err));
 
 export const listNameSkill = (id) => (dispatch) => fetch(API.GET_NAME_SKILLS + id, {
 		method: 'GET',
@@ -296,8 +288,10 @@ export const listNameSkill = (id) => (dispatch) => fetch(API.GET_NAME_SKILLS + i
 		},
 	}).then((respond) => respond.json())
 		.then((nameSkills) => {
-			console.log('listNameSkill', nameSkills);
-			dispatch({ type: 'GET_NAME_SKILLS', nameSkills });
+      if (nameSkills === null) {
+        console.log('1111111111111111111111111111111111111111');
+      }
+      dispatch({ type: 'GET_NAME_SKILLS', nameSkills });
 		}).catch((err) => console.log('Error listNameSkill occured', err));
 
 export const getInforTeacher = (infor) => ({

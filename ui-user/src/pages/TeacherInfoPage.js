@@ -15,6 +15,7 @@ export class TeacherInfoPage extends React.PureComponent {
     // getInforUserById(id);
     listTeacherTop();
     getListDisctrict();
+    listNameSkill(id);
   }
 
   // eslint-disable-next-line react/no-deprecated
@@ -42,8 +43,7 @@ export class TeacherInfoPage extends React.PureComponent {
     const {
       detailTeacher, listNameOfSkill, listTeachers, cityName, listDistrict
     } = this.props;
-    console.log('listNameOfSkill', listNameOfSkill);
-
+    const { skills } = listNameOfSkill;
     return (
       <section style={{ marginTop: '8em', marginBottom: '4em' }}>
         {detailTeacher ? (
@@ -115,8 +115,8 @@ export class TeacherInfoPage extends React.PureComponent {
                 </h3>
                 <div className="listStyle">
                   <ul style={{ listStyle: 'none' }}>
-                    {listNameOfSkill
-                      ? listNameOfSkill.map((skl) => (
+                    {skills
+                      ? skills.map((skl) => (
                         <li>
                           <i className="fa fa-caret-right" />
                           {skl.name}
