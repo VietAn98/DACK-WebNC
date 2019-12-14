@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import Contract from '../components/Contract/Contract';
-// import { loginRequest } from '../actions/userAction';
+import { getListCity } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
-    // userProfile: state.userProfile
+    listCity: state.listCity
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
+    getListCity: () => dispatch(getListCity()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Contract);

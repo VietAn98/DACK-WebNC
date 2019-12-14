@@ -217,3 +217,15 @@ h3.white-title {
 .signUpSubmit {
 	transform: translateX(50%);
 }
+
+.loader {
+  border: 7px solid #f3f3f3;
+  border-radius: 50%;
+  border: 5px solid #af211c;
+  border-left: 5px solid rgba(255, 166, 166, 0.507);
+  border-bottom: 5px solid rgba(255, 166, 166, 0.507);
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}

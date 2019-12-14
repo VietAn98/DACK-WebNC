@@ -6,7 +6,8 @@ import {
   listTeacherTop,
   getCityByIdDistrict,
   getListDisctrict,
-  filterSkillTeacher
+  filterSkillTeacher,
+  getUserComment
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -14,7 +15,8 @@ const mapStateToProps = (state) => ({
   listNameOfSkill: state.listNameOfSkill,
   listTeachers: state.listTeachers,
   cityName: state.cityName,
-  listDistrict: state.listDistrict
+  listDistrict: state.listDistrict,
+  userComment: state.userComment
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +26,6 @@ const mapDispatchToProps = (dispatch) => ({
   getCityByIdDistrict: (id) => dispatch(getCityByIdDistrict(id)),
   getListDisctrict: () => dispatch(getListDisctrict()),
   filterSkillTeacher: () => dispatch(filterSkillTeacher()),
-  // loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
+  getUserComment: (idTeacher) => dispatch(getUserComment(idTeacher)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherInfor);

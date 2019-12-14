@@ -36,7 +36,7 @@ const APIService = {
   GET_TEACHERS_BY_DISTRICT: `${URL}/api/get-teachers-by-district/`,
   FORGOT_PASSWORD: `${URL}/api/forget-password`,
   FORGOT_FORGOT_PASSWORD: `${URL}/api/update-new-password`,
-
+  GET_USER_COMMENT: `${URL}/api/get-comment-by-user/`,
 };
 
 export default APIService;

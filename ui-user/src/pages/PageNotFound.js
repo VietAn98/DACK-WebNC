@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 class PageNotFound extends React.PureComponent {
   render() {
     return (
-      <div>
-        <h1>This is 404</h1>
-        <Link to="/">Go back to Home Page</Link>
+      <div className="page-error">
       </div>
     );
   }

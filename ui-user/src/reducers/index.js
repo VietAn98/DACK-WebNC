@@ -214,8 +214,18 @@ export const listNameOfSkill = (state = [], action) => {
 export const detailTeacher = (state = {}, action) => {
   switch (action.type) {
     case 'GET_INFOR_TEACHER': {
-      console.log('kkkkkkkkkkkkkkkk', action.infor);
+      // console.log('kkkkkkkkkkkkkkkk', action.infor);
       return action.infor;
+    }
+    default:
+      return state;
+  }
+};
+
+export const userComment = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_USER_COMMENT': {
+      return action.userComment;
     }
     default:
       return state;

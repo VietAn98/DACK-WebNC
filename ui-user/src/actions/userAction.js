@@ -179,7 +179,6 @@ export const signOut = () => (dispatch) => {
   dispatch(login());
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  history.push('/signin');
 };
 
 export const getListDisctrict = () => (dispatch) => fetch(API.GET_LIST_DISTRICT, {
@@ -268,14 +267,14 @@ export const getUserInfor = (id) => (dispatch) => {
     .catch((err) => console.log('Error getUserInfor occured', err));
 };
 
-export const getListTeacher = () => (dispatch) => 
-	// console.log('id', id);
-	 fetch(API.GET_LIST_TEACHERS, {
+export const getListTeacher = () => (dispatch) => fetch(
+  API.GET_LIST_TEACHERS, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
-	}).then((respond) => respond.json())
+  }
+  ).then((respond) => respond.json())
 		.then((res) => {
 			// console.log('getListTeacher', res);
 			dispatch({ type: 'GET_LIST_TEACHERS', listTeachers: res });
@@ -539,3 +538,18 @@ export const filterSkillTeacher = (id) => (dispatch) => fetch(API.GET_TEAHCERS_B
     dispatch({ type: 'GET_TEAHCERS_BY_SKILL', teacher });
   })
   .catch((err) => console.log('Error getListTeacher occured', err));
+
+export const getUserComment = (idTeacher) => (dispatch) => fetch(
+  API.GET_USER_COMMENT + idTeacher, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
+)
+  .then((respond) => respond.json())
+  .then((userComment) => {
+    console.log('userComment action', userComment);
+    dispatch({ type: 'GET_USER_COMMENT', userComment });
+  })
+  .catch((err) => console.log('Error getUserComment occured', err));

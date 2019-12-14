@@ -1,12 +1,21 @@
 import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import history from '../../history';
+// import history from '../../history';
+import PageNotFound from '../../pages/PageNotFound';
 import './Contract.css';
 
 class Contract extends React.PureComponent {
+    // eslint-disable-next-line react/no-deprecated
+    componentWillMount = () => {
+        const { getListCity } = this.props;
+        getListCity();
+    }
+
     // eslint-disable-next-line consistent-return
     render() {
         const tokenn = localStorage.token;
+        const { listCity } = this.props;
+
         if (tokenn) {
             return (
                 <div className="div-container">
@@ -36,7 +45,10 @@ class Contract extends React.PureComponent {
                                         </div>
                                         <div className="col-md-7 col-sm-7">
                                             <Form.Control as="select">
-                                                <option>Thành phố</option>
+                                                <option value="0">Thành phố</option>
+                                                {listCity ? (listCity.map((item) => (
+                                                    <option value={item.cityId}>{item.name}</option>
+                                                ))) : null}
                                             </Form.Control>
                                         </div>
                                         <div className="col-md-5 col-sm-5">
@@ -186,7 +198,7 @@ class Contract extends React.PureComponent {
                 </div>
             );
         }
-        history.pushState('/signin');
+        return <PageNotFound />;
     }
 }
 

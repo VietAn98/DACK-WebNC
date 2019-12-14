@@ -1860,3 +1860,14 @@ textarea:-ms-input-placeholder {
 .list-group-item-action{
 	font-size: 16px;
 }
+
+.page-error {
+  padding: 26em;
+  background: url(../../public/images/404-error.png) no-repeat;
+  background-position: center;
+  /* background-size: cover !important; */
+  /* -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover; */
+}
