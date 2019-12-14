@@ -30,6 +30,9 @@ module.exports = {
   },
 
   getDetailTeacher: id => {
+    return db.load(`SELECT * FROM account where userId= ${id}`);
+  },
+  getDetailSingleTeacher: id => {
     return db.load(`select DISTINCT 100*(select sum(starNumber) from comment c1 where idTeacher = c.idTeacher)/((SELECT COUNT(*) FROM comment WHERE idTeacher = c.idTeacher)*5) as rateSuccess, a.* from comment c join account a on c.idTeacher = a.userId where a.userId = '${id}' and a.adLock=1`);
   },
   getDetailStudent: id => {

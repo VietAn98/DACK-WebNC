@@ -4,6 +4,9 @@ module.exports = app => {
     app.get('/api/get-list-teaching', teachingController.getListTeaching);
     app.post('/api/update-infor-teacher', teachingController.updateInforTeacher);
     app.get('/api/get-detail-teacher/:id', teachingController.getTeacherByid);
+    //
+    app.get('/api/get-detail-single-teacher/:id', teachingController.getTeacherSingleByid);
+    //
     app.get('/api/get-List-Skill-ByUser/:id',teachingController.getListSkillByUser)
     app.get('/api/get-name-Skill-ByUser/:id',teachingController.getNameSkillByUser)
     app.get('/api/get-list-skills', teachingController.getListSkills);
