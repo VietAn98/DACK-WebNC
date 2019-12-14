@@ -1,11 +1,12 @@
 import React from 'react';
 import SignIn from '../containers/SignInContainer';
+import HomePage from '../containers/HomePageContainer';
 
 class SignInPage extends React.PureComponent {
   render() {
     return (
       <div>
-        <SignIn />
+        {localStorage.token ? <HomePage /> : <SignIn /> }
       </div>
     );
   }

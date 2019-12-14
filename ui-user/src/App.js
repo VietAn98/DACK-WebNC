@@ -10,9 +10,11 @@ import PageNotFound from './pages/PageNotFound';
 import Settings from './pages/Settings';
 import TeacherInfoPage from './containers/TeacherInforContainer';
 import TeacherList from './containers/TeacherListContainer';
+import NewPassword from './containers/NewPasswordContainer';
 
 export class App extends React.PureComponent {
 	render() {
+		// localStorage.clear();
 		return (
 			<main>
 				<Header />
@@ -22,6 +24,7 @@ export class App extends React.PureComponent {
 					<Route path="/signin" exact component={SignInPage} />
 					<Route path="/signup" exact component={SignUpPage} />
 					<Route path="/teacher-info/:id" exact component={TeacherInfoPage} />
+					<Route path="/update-new-password/" exact component={NewPassword} />
 					<Route path="/" exact component={HomePage} />
 					<Route component={PageNotFound} />
 				</Switch>

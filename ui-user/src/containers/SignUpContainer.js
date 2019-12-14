@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import SignUp from '../components/SignUp/SignUp';
-import { registerRequest } from '../actions/userAction';
+import { registerRequest, login } from '../actions/userAction';
 
 // const mapStateToProps = state => {
 //   return {
-//     isBusy: state.isBusy,
-//     isSucceed: state.isRegisterSucceed
+//     // isBusy: state.isBusy,
+//     // isSucceed: state.isRegisterSucceed
 //   };
 // };
 
