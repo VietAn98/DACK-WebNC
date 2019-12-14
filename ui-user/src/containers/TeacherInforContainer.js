@@ -7,7 +7,8 @@ import {
   getCityByIdDistrict,
   getListDisctrict,
   filterSkillTeacher,
-  getUserComment
+  getUserComment,
+  getSingleTeacherById
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -20,6 +21,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getSingleTeacherById: (id) => dispatch(getSingleTeacherById(id)),
   getInforUserById: (id) => dispatch(getInforUserById(id)),
   listNameSkill: (id) => dispatch(listNameSkill(id)),
   listTeacherTop: () => dispatch(listTeacherTop()),

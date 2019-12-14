@@ -16,7 +16,7 @@ class TeacherList extends React.PureComponent {
     getListSkills();
   };
 
-  onChangeCity = e => {
+  onChangeCity = (e) => {
     const { getDistrictByIdCity } = this.props;
     getDistrictByIdCity(e.target.value);
   };

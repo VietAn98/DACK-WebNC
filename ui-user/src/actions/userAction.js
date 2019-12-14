@@ -295,6 +295,17 @@ export const getInforTeacher = (infor) => ({
   infor
 });
 
+export const getSingleTeacherById = (id) => (dispatch) => fetch(API.GET_TEACHER_INFO_BY_ID + id, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+}).then((respond) => respond.json())
+  .then(async (inforTeacher) => {
+    await dispatch(getInforTeacher(inforTeacher));
+  }).catch((err) => console.log('Error getInforUserById occured', err));
+
+
 export const getInforUserById = (id) => (dispatch) => fetch(API.GET_USER_INFO_BY_ID + id, {
 		method: 'GET',
 		headers: {

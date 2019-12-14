@@ -23,8 +23,8 @@ export class TeacherInfoPage extends React.PureComponent {
   componentWillMount = () => {
     const path = window.location.pathname.split('/');
     const id = path[path.length - 1];
-    const { getInforUserById } = this.props;
-    Promise.resolve(getInforUserById(id)).then(async () => {
+    const { getSingleTeacherById } = this.props;
+    Promise.resolve(getSingleTeacherById(id)).then(async () => {
       const { detailTeacher, getCityByIdDistrict, listNameSkill } = this.props;
       getCityByIdDistrict(detailTeacher.districtId);
       await listNameSkill(id);
