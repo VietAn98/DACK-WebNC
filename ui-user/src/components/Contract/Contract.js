@@ -6,13 +6,23 @@ import './Contract.css';
 
 class Contract extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
-    componentWillMount = () => {
-        const { getListCity, getSingleTeacherById, getListDisctrict } = this.props;
+    componentWillMount = async () => {
+        const {
+            getListCity,
+            getSingleTeacherById,
+            getListDisctrict,
+            getUserInfor,
+            getListSkills
+        } = this.props;
         const path = window.location.pathname.split('-');
         const id = path[path.length - 1];
+        const user = JSON.parse(localStorage.getItem('user'));
+
         getListCity();
         getSingleTeacherById(id);
         getListDisctrict();
+        await getUserInfor(user.userId);
+        getListSkills();
     }
 
     onChangeCity1 = (e) => {
@@ -23,8 +33,17 @@ class Contract extends React.PureComponent {
     // eslint-disable-next-line consistent-return
     render() {
         const tokenn = localStorage.token;
-        const { listCity, districtNames, detailTeacher, listDistrict } = this.props;
+        const {
+            listCity,
+            districtNames,
+            detailTeacher,
+            listDistrict,
+            userProfiles,
+            listSkills
+            // userInfor
+        } = this.props;
 
+        // console.log('listSkills', listSkills);
         if (tokenn) {
             return (
                 <div className="div-container">
@@ -43,11 +62,11 @@ class Contract extends React.PureComponent {
                                         </div>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Tôi tên là:</Form.Label>
-                                            <Form.Control type="text" placeholder="Họ và tên" />
+                                            <Form.Control type="text" value={userProfiles.name} />
                                         </Form.Group>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Email:</Form.Label>
-                                            <Form.Control type="text" placeholder="Họ và tên" />
+                                            <Form.Control type="text" value={userProfiles.gmail} />
                                         </Form.Group>
                                         <div className="col-md-12 col-sm-12">
                                             <Form.Label>Địa chỉ:</Form.Label>
@@ -130,46 +149,44 @@ class Contract extends React.PureComponent {
                                     </div>
                                     <div className="col-sm-12 col-md-12">
                                         <p>- Bên A mong muốn được học về kỹ năng:</p>
-                                        <Form.Check inline type="checkbox" label="Check me out" />
-                                        <Form.Check inline type="checkbox" label="Check me out" />
-                                        <Form.Check inline type="checkbox" label="Check me out" />
-                                        <Form.Check inline type="checkbox" label="Check me out" />
-                                        <Form.Check inline type="checkbox" label="Check me out" />
+                                        {listSkills ? listSkills.map((item) => (
+                                            <Form.Check className="ml-5" inline type="checkbox" label={item.name} value={item.skillId} />
+                                        )) : null}
                                     </div>
                                 </div>
                                 <div className="pl-5 pr-5">
                                     <div className="col-sm-12 col-md-12 mt-4">
                                         <p>- Ngày học:</p>
-                                        <Form.Check inline type="checkbox" label="Thương lượng với bên B" />
-                                        <Form.Check className="ml-5" inline type="checkbox" label="Chọn thời gian học" />
+                                        {/* <Form.Check inline type="checkbox" label="Thương lượng với bên B" />
+                                        <Form.Check className="ml-5" inline type="checkbox" label="Chọn thời gian học" /> */}
                                     </div>
 
-                                    <div className="col-md-5 col-sm-5 mt-4">
-                                        <Form.Control type="date"></Form.Control>
+                                    <div className="col-md-12 col-sm-12">
+                                        <div className="col-md-5 col-sm-5">
+                                            <Form.Control type="date"></Form.Control>
+                                        </div>
+                                        <span className="col-md-2 col-sm-2 text-center"> Đến </span>
+                                        <div className="col-md-5 col-sm-5">
+                                            <Form.Control type="date"></Form.Control>
+                                        </div>
                                     </div>
-                                    <span className="col-md-2 col-sm-2 text-center mt-4"> Đến </span>
-                                    <div className="col-md-5 col-sm-5 mt-4">
-                                        <Form.Control type="date"></Form.Control>
-                                    </div>
-                                    <div className="col-sm-12 col-md-12 mt-4">
-                                        <p>- Các ngày:</p>
-                                        <Form.Check inline type="checkbox" label="Thứ 2" />
-                                        <Form.Check inline type="checkbox" label="Thứ 3" />
-                                        <Form.Check inline type="checkbox" label="Thứ 4" />
-                                        <Form.Check inline type="checkbox" label="Thứ 5" />
-                                        <Form.Check inline type="checkbox" label="Thứ 6" />
-                                        <Form.Check inline type="checkbox" label="Thứ 7" />
-                                        <Form.Check inline type="checkbox" label="Chủ nhật" />
+                                    <div>
+                                        <div className="col-md-3 col-sm-3 mt-4">
+                                            - Số ngày học/tuần:
+                                        </div>
+                                        <div className="col-md-2 col-sm-2 mt-4">
+                                            <Form.Control type="number" max="7" min="1"></Form.Control>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="pl-5 pr-5">
                                     <div className="col-sm-12 col-md-12 mt-4">
                                         <p>- Thời gian học/ngày:</p>
-                                        <div className="col-md-5 col-sm-5 mt-4">
+                                        <div className="col-md-5 col-sm-5">
                                             <Form.Control type="time"></Form.Control>
                                         </div>
-                                        <span className="col-md-2 col-sm-2 text-center mt-4"> Đến </span>
-                                        <div className="col-md-5 col-sm-5 mt-4">
+                                        <span className="col-md-2 col-sm-2 text-center"> Đến </span>
+                                        <div className="col-md-5 col-sm-5">
                                             <Form.Control type="time"></Form.Control>
                                         </div>
                                     </div>
@@ -206,12 +223,21 @@ class Contract extends React.PureComponent {
                                     <div className="col-sm-12 col-md-12 mt-4 mb-5">
                                         <p style={{ color: 'red' }}><i>*Lưu ý:</i></p>
                                         <p>
-                                            - Bên B phải có trách nhiệm dạy học đầy đủ
-                                             và đúng theo yêu cầu của 2 bên như đã thỏa thuận.
+                                            - Thời gian học tối đa là <b>2 tiếng/ngày</b>.
+                                             Nếu quá thời gian, bên A sẽ phải có trách nhiệm thanh toán thêm cho bên B.
+                                        </p>
+                                        <p>
+                                            - Bên B sẽ phải có trách nhiệm dạy học đầy đủ
+                                             và làm đúng theo yêu cầu của 2 bên như đã thỏa thuận.
                                         </p>
                                         <p>
                                             - Trong trường hợp bên B không hoàn thành đúng trách nhiệm,
-                                             bên A có quyền khiếu nại lên hệ thống.
+                                             bên A có quyền <b>khiếu nại</b> lên hệ thống.
+                                        </p>
+                                        <p>
+                                            - Bên A sẽ không được nhận lại chi phí
+                                            đã thanh toán cho bên B
+                                             nếu hủy bỏ hợp đồng.
                                         </p>
                                         <p>
                                             - Bên A sẽ không được nhận lại chi phí

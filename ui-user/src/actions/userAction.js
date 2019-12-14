@@ -265,7 +265,7 @@ export const getInforTeacher = (infor) => ({
 });
 
 export const getUserInfor = (id) => (dispatch) => {
-  console.log('id', id);
+  // console.log('id', id);
   return fetch(API.GET_USER_INFO_BY_ID + id, {
     method: 'GET',
     headers: {
@@ -276,7 +276,7 @@ export const getUserInfor = (id) => (dispatch) => {
     .then((resr) => {
       dispatch(userLogin(resr));
       dispatch(userProfile(resr));
-      dispatch(getInforTeacher(resr));
+      // dispatch(getInforTeacher(resr));
     })
     .catch((err) => console.log('Error getUserInfor occured', err));
 };
@@ -324,9 +324,9 @@ export const getSingleTeacherById = (id) => (dispatch) => fetch(
 // 		},
 //   }
 //   ).then((respond) => respond.json())
-// 		.then(async (inforTeacher) => {
-// 			console.log('getInforUserById', inforTeacher);
-// 			await dispatch(getInforTeacher(inforTeacher));
+//   .then(async (userInfor) => {
+//       console.log('getInforUserById', userInfor);
+//       await dispatch({ type: 'GET_USER_INFO_BY_ID', userInfor });
 // 		}).catch((err) => console.log('Error getInforUserById occured', err));
 
 export const listTeacherTop = () => (dispatch) => fetch(API.GET_TEACHERS_TOP, {

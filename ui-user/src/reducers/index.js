@@ -34,15 +34,15 @@ export const userProfiles = (state = {}, action) => {
   }
 };
 
-// export const stringTag = (state = '', action) => {
-// 	switch (action.type) {
-// 		case 'CHOSEN_TAG_LIST': {
-// 			return action.stringTags;
-// 		}
-// 		default:
-// 			return state;
-// 	}
-// };
+export const userInfor = (state = {}, action) => {
+	switch (action.type) {
+    case 'GET_USER_INFO_BY_ID': {
+      return action.userInfor;
+		}
+		default:
+			return state;
+	}
+};
 
 export const nameAvatar = (state = {}, action) => {
   switch (action.type) {
