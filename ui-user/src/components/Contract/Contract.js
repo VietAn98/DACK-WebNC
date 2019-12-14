@@ -7,11 +7,11 @@ import './Contract.css';
 class Contract extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
     componentWillMount = () => {
-        const { getListCity, getUserInfor, getListDisctrict } = this.props;
+        const { getListCity, getSingleTeacherById, getListDisctrict } = this.props;
         const path = window.location.pathname.split('-');
         const id = path[path.length - 1];
         getListCity();
-        getUserInfor(id);
+        getSingleTeacherById(id);
         getListDisctrict();
     }
 
@@ -23,7 +23,7 @@ class Contract extends React.PureComponent {
     // eslint-disable-next-line consistent-return
     render() {
         const tokenn = localStorage.token;
-        const { listCity, districtNames, userProfiles, listDistrict } = this.props;
+        const { listCity, districtNames, detailTeacher, listDistrict } = this.props;
 
         if (tokenn) {
             return (
@@ -88,11 +88,11 @@ class Contract extends React.PureComponent {
                                         </div>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Tên người dạy:</Form.Label>
-                                            <Form.Control type="text" value={userProfiles.name} disabled />
+                                            <Form.Control type="text" value={detailTeacher.name} disabled />
                                         </Form.Group>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Email:</Form.Label>
-                                            <Form.Control type="text" value={userProfiles.gmail} disabled />
+                                            <Form.Control type="text" value={detailTeacher.gmail} disabled />
                                         </Form.Group>
                                         <div className="col-md-12 col-sm-12">
                                             <Form.Label>Địa chỉ:</Form.Label>
@@ -112,7 +112,7 @@ class Contract extends React.PureComponent {
                                         <div className="col-md-5 col-sm-5">
                                             <Form.Control as="select" disabled>
                                                 {listDistrict ? listDistrict.map((item) => {
-                                                    if (item.districtId === userProfiles.districtId) {
+                                                    if (item.districtId === detailTeacher.districtId) {
                                                         return (
                                                             <option value={item.districtId}>{item.name}</option>
                                                         );

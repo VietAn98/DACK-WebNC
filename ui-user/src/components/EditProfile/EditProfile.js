@@ -68,11 +68,15 @@ class EditProfile extends React.PureComponent {
             ...currentUser,
             [e.target.id]: e.target.value
         });
-        // await checkFieldsValueFormUpdateInfor(
-        //     document.getElementById('name').value,
-        //     document.getElementById('pAddress').value,
-        //     document.getElementById('pPhoneNumber').value
-        // );
+    };
+
+    onHandleChange2 = async (e) => {
+        const { userLogin, currentUser } = this.props;
+
+        await userLogin({
+            ...currentUser,
+            [e.target.id]: e.target.value
+        });
     };
 
     onSubmitInforTeaching = async (e) => {
@@ -347,7 +351,7 @@ class EditProfile extends React.PureComponent {
                                                 placeholder="VND"
                                                 required
                                                 // eslint-disable-next-line radix
-                                                value={numeral(`${currentUser.price}`).format('(0,0)')}
+                                                value={currentUser.price}
                                                 onChange={this.onHandleChange}
                                             />
                                             <div className="invalid-feedback text-white">
@@ -365,8 +369,8 @@ class EditProfile extends React.PureComponent {
                                                     placeholder="VND"
                                                     required
                                                     // eslint-disable-next-line radix
-                                                    value={numeral(`${currentUser.price}`).format('(0 0)')}
-                                                    onChange={this.onHandleChange}
+                                                    value={currentUser.price}
+                                                    onChange={this.onHandleChange2}
                                                 />
                                                 <div className="invalid-feedback text-white">
                                                     Please choose.

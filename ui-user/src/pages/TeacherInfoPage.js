@@ -33,10 +33,16 @@ export class TeacherInfoPage extends React.PureComponent {
 
   onClickHire = async (id) => {
     const tokenn = localStorage.token;
+    // console.log('tokennn', tokenn);
     if (tokenn) {
       history.push(`/contract/teacher-${id}`);
     } else {
-      history.push('/signin');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Bạn chưa đăng nhập!',
+        footer: '<a href>Tiến hành Đăng nhập</a>'
+      });
     }
   };
 
@@ -45,6 +51,7 @@ export class TeacherInfoPage extends React.PureComponent {
       detailTeacher, listNameOfSkill, listTeachers, cityName, listDistrict, userComment
     } = this.props;
     const { skills } = listNameOfSkill;
+    console.log('listNameOfSkilllistNameOfSkill', listNameOfSkill);
     return (
       <section style={{ marginTop: '6em', marginBottom: '4em' }}>
         {detailTeacher ? (
@@ -119,7 +126,7 @@ export class TeacherInfoPage extends React.PureComponent {
                 <div className="mt-5">
                   <h3 style={{ fontWeight: 'bolder' }} className="mt-4">
                     Kỹ năng
-                </h3>
+                  </h3>
                   <div className="listStyle">
                     <ul style={{ listStyle: 'none' }}>
                       {skills

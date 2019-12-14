@@ -3,21 +3,21 @@ import Contract from '../components/Contract/Contract';
 import {
     getListCity,
     getDistrictByIdCity,
-    getUserInfor,
+    getSingleTeacherById,
     getListDisctrict
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
     listCity: state.listCity,
     districtNames: state.districtNames,
-    userProfiles: state.userProfiles,
+    detailTeacher: state.detailTeacher,
     listDistrict: state.listDistrict
 });
 
 const mapDispatchToProps = (dispatch) => ({
     getListCity: () => dispatch(getListCity()),
     getDistrictByIdCity: (id) => dispatch(getDistrictByIdCity(id)),
-    getUserInfor: (id) => dispatch(getUserInfor(id)),
+    getSingleTeacherById: (id) => dispatch(getSingleTeacherById(id)),
     getListDisctrict: () => dispatch(getListDisctrict())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Contract);

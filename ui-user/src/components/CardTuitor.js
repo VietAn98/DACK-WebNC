@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import numeral from 'numeral';
+import Swal from 'sweetalert2';
 import history from '../history';
 import './CardTuitor.css';
 import avatar from '../public/images/avatar.jpg';
@@ -14,10 +15,22 @@ class Card extends React.PureComponent {
 
   onnclicks = (id) => {
     history.push(`/teacher-info/${id}`);
+    window.location.reload();
   };
 
   onClickHire = (id) => {
-    history.push(`/contract/teacher-${id}`);
+    const tokenn = localStorage.token;
+    // console.log('tokennn', tokenn);
+    if (tokenn) {
+      history.push(`/contract/teacher-${id}`);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Bạn chưa đăng nhập!',
+        footer: '<a href>Tiến hành Đăng nhập</a>'
+      });
+    }
   };
 
   render() {
