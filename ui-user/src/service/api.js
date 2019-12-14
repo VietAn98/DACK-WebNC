@@ -14,7 +14,7 @@ const APIService = {
   GET_CITY_BY_IDDISTRICT: `${URL}/api/get-city-by-district/`,
   GET_LIST_DISTRICT: `${URL}/api/get-list-district`,
   GET_LIST_CITY: `${URL}/api/get-list-city`,
-  GET_SKILLS: `${URL}/api/get-List-Skill-ByUser/`,
+  GET_SKILLS: `${URL}/api/get-List-Skill-ByUser/`, // return id
   GET_NAME_SKILLS: `${URL}/api/get-name-Skill-ByUser/`,
   GET_LIST_SKILLS: `${URL}/api/get-list-skills`,
   GET_LIST_TEACHERS: `${URL}/api/get-list-teaching`,

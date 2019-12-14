@@ -1,7 +1,7 @@
-import React from "react";
-import Banner from "../components/Banner/Banner";
-import FeatureTuitor from "../components/FeatureTuitor/FeatureTuitor";
-import AboutUs from "../components/AboutUs/AboutUs";
+import React from 'react';
+import Banner from '../components/Banner/Banner';
+import FeatureTuitor from '../components/FeatureTuitor/FeatureTuitor';
+import AboutUs from '../components/AboutUs/AboutUs';
 
 class HomePage extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated
@@ -14,10 +14,10 @@ class HomePage extends React.PureComponent {
 	const { listTeachers } = this.props;
     return (
       <div>
-        <Banner style={{ height: "100%" }} />
+        <Banner style={{ height: '100%' }} />
         {listTeachers ? (
           <FeatureTuitor
-            style={{ marginTop: "2rem" }}
+            style={{ marginTop: '2rem' }}
             listTeachers={listTeachers}
           />
         ) : null}

@@ -15,13 +15,15 @@ import {
   filterByThreeStar,
   filterByFourStar,
   filterByFiveStar,
-  getTeacherByDistrict
+  getTeacherByDistrict,
+  getListSkills
 } from "../actions/userAction";
 
 const mapStateToProps = state => ({
   listTeachers: state.listTeachers,
   listCity: state.listCity,
-  districtNames: state.districtNames
+  districtNames: state.districtNames,
+  listSkills: state.listSkills
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,6 +42,7 @@ const mapDispatchToProps = dispatch => ({
   filterByFourStar: () => dispatch(filterByFourStar()),
   filterByFiveStar: () => dispatch(filterByFiveStar()),
   getTeacherByDistrict: (id) => dispatch(getTeacherByDistrict(id)),
+  getListSkills: () => dispatch(getListSkills())
 
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherList);

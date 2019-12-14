@@ -11,6 +11,7 @@ import Settings from './pages/Settings';
 import TeacherInfoPage from './containers/TeacherInforContainer';
 import TeacherList from './containers/TeacherListContainer';
 import NewPassword from './containers/NewPasswordContainer';
+import Contract from './containers/ContractContainer';
 
 export class App extends React.PureComponent {
 	render() {
@@ -19,6 +20,7 @@ export class App extends React.PureComponent {
 			<main>
 				<Header />
 				<Switch>
+					<Route path="/contract" exact component={Contract} />
 					<Route path="/teacherslist" exact component={TeacherList} />
 					<Route path="/settings" exact component={Settings} />
 					<Route path="/signin" exact component={SignInPage} />

@@ -26,7 +26,7 @@ export const isSigIn = (state = initStatelogin(), action) => {
 
 export const userProfiles = (state = {}, action) => {
   switch (action.type) {
-    case "USER_PROFILE": {
+    case 'USER_PROFILE': {
       return action.payload;
     }
     default:
@@ -46,7 +46,7 @@ export const userProfiles = (state = {}, action) => {
 
 export const nameAvatar = (state = {}, action) => {
   switch (action.type) {
-    case "AVATAR_NAME": {
+    case 'AVATAR_NAME': {
       return action.avtName;
     }
     default:
@@ -56,7 +56,7 @@ export const nameAvatar = (state = {}, action) => {
 
 export const listDistrict = (state = [], action) => {
   switch (action.type) {
-    case "DISTRICT_LIST": {
+    case 'DISTRICT_LIST': {
       return action.districtList;
     }
     default:
@@ -66,7 +66,7 @@ export const listDistrict = (state = [], action) => {
 
 export const listCity = (state = [], action) => {
   switch (action.type) {
-    case "CITY_LIST": {
+    case 'CITY_LIST': {
       return action.cityList;
     }
     default:
@@ -76,7 +76,7 @@ export const listCity = (state = [], action) => {
 
 export const cityName = (state = {}, action) => {
   switch (action.type) {
-    case "GET_CITY_BY_DISTRICT": {
+    case 'GET_CITY_BY_DISTRICT': {
       return action.cityName;
     }
     default:
@@ -86,7 +86,7 @@ export const cityName = (state = {}, action) => {
 
 export const districtNames = (state = [], action) => {
   switch (action.type) {
-    case "GET_DISTRICT_BY_CITY": {
+    case 'GET_DISTRICT_BY_CITY': {
       return action.districtNames;
     }
     default:
@@ -96,7 +96,7 @@ export const districtNames = (state = [], action) => {
 
 export const teacherSkills = (state = [], action) => {
   switch (action.type) {
-    case "GET_SKILLS": {
+    case 'GET_SKILLS': {
       return action.teacherSkills;
     }
     default:
@@ -128,7 +128,7 @@ export const teacherSkills = (state = [], action) => {
 
 export const currentUser = (state = {}, action) => {
   switch (action.type) {
-    case "USER_LOGIN": {
+    case 'USER_LOGIN': {
       return action.payload;
     }
     default:
@@ -138,7 +138,7 @@ export const currentUser = (state = {}, action) => {
 
 export const listSkills = (state = [], action) => {
   switch (action.type) {
-    case "GET_LIST_SKILLS": {
+    case 'GET_LIST_SKILLS': {
       return action.listSkills;
     }
     default:
@@ -148,49 +148,49 @@ export const listSkills = (state = [], action) => {
 
 export const listTeachers = (state = [], action) => {
   switch (action.type) {
-    case "GET_LIST_TEACHERS": {
+    case 'GET_LIST_TEACHERS': {
       return action.listTeachers;
     }
-    case "GET_TEACHERS_TOP": {
+    case 'GET_TEACHERS_TOP': {
       return action.TopTeacher;
     }
-    case "GET_TEACHERS_TOP_SIX": {
+    case 'GET_TEACHERS_TOP_SIX': {
       return action.TopTeacher;
     }
-    case "GET_TEACHERS_PRICE_INCREASE": {
+    case 'GET_TEACHERS_PRICE_INCREASE': {
       return action.teacher;
     }
-    case "GET_TEACHERS_PRICE_DECREASE": {
+    case 'GET_TEACHERS_PRICE_DECREASE': {
       return action.teacher;
     }
-    case "GET_TEACHERS_REATESUCCESS_DECREASE": {
+    case 'GET_TEACHERS_REATESUCCESS_DECREASE': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_MINPRICE": {
+    case 'GET_TEACHERS_BY_MINPRICE': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_MIDDLEPRICE": {
+    case 'GET_TEACHERS_BY_MIDDLEPRICE': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_MAXPRICE": {
+    case 'GET_TEACHERS_BY_MAXPRICE': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_ONE_STAR": {
+    case 'GET_TEACHERS_BY_ONE_STAR': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_TWO_STAR": {
+    case 'GET_TEACHERS_BY_TWO_STAR': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_THREE_STAR": {
+    case 'GET_TEACHERS_BY_THREE_STAR': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_FOUR_STAR": {
+    case 'GET_TEACHERS_BY_FOUR_STAR': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_FIVE_STAR": {
+    case 'GET_TEACHERS_BY_FIVE_STAR': {
       return action.teacher;
     }
-    case "GET_TEACHERS_BY_DISTRICT": {
+    case 'GET_TEACHERS_BY_DISTRICT': {
       return action.teacher;
     }
     default:
@@ -198,20 +198,20 @@ export const listTeachers = (state = [], action) => {
   }
 };
 
-export const listNameSkill = (state = [], action) => {
-  switch (action.type) {
-    case "GET_NAME_SKILLS": {
-      return action.nameSkills;
-    }
-    default:
-      return state;
-  }
+export const listNameOfSkill = (state = [], action) => {
+	switch (action.type) {
+		case 'GET_NAME_SKILLS': {
+			return action.nameSkills;
+		}
+		default:
+			return state;
+	}
 };
 
 export const detailTeacher = (state = {}, action) => {
   switch (action.type) {
-    case "GET_INFOR_TEACHER": {
-      console.log("kkkkkkkkkkkkkkkk", action.infor);
+    case 'GET_INFOR_TEACHER': {
+      console.log('kkkkkkkkkkkkkkkk', action.infor);
       return action.infor;
     }
     default:

@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import './EditProfile.css';
 
 const user = JSON.parse(localStorage.getItem('user'));
+console.log('user EditProfile', user);
 const gender = [
     {
         value: 'Nam', text: 'Nam'
@@ -94,20 +95,8 @@ class EditProfile extends React.PureComponent {
         }
 
         const name = document.getElementById('name').value;
-        const intro = document.getElementById('introduce').value;
-        const price = document.getElementById('price').value;
         const genderSelected = document.getElementById('selectGender').value;
         const idDistrict = document.getElementById('selectDistrict').value;
-
-        const skills = document.getElementsByClassName('checkedbox');
-        let stringSkill = '';
-        for (let i = 0; i < skills.length; i += 1) {
-            if (skills[i].checked === true) {
-                // eslint-disable-next-line radix
-                const a = `${parseInt(skills[i].id)},`;
-                stringSkill += a;
-            }
-        }
 
         if (user.categoryUser === 0) {
             Promise.resolve(updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar))
@@ -122,17 +111,20 @@ class EditProfile extends React.PureComponent {
                         }
                     });
                 });
-
-            // await userLogin({
-            //     ...currentUser,
-            //     name,
-            //     genderSelected,
-            //     idDistrict,
-            //     avatar
-            // });
         }
 
         if (user.categoryUser === 1) {
+            const skills = document.getElementsByClassName('checkedbox');
+            let stringSkill = '';
+            for (let i = 0; i < skills.length; i += 1) {
+                if (skills[i].checked === true) {
+                    // eslint-disable-next-line radix
+                    const a = `${parseInt(skills[i].id)},`;
+                    stringSkill += a;
+                }
+            }
+            const intro = document.getElementById('introduce').value;
+            const price = document.getElementById('price').value;
             Promise.resolve(updateTeacherInfor(gmail,
                 name,
                 genderSelected,

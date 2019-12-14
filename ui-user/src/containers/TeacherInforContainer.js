@@ -4,21 +4,24 @@ import {
   getInforUserById,
   listNameSkill,
   listTeacherTop,
-  getCityByIdDistrict
+  getCityByIdDistrict,
+  getListDisctrict
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
   detailTeacher: state.detailTeacher,
-  nameSkill: state.listNameSkill,
+  listNameOfSkill: state.listNameOfSkill,
   listTeachers: state.listTeachers,
-  cityName: state.cityName
+  cityName: state.cityName,
+  listDistrict: state.listDistrict
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getInforUserById: (id) => dispatch(getInforUserById(id)),
   listNameSkill: (id) => dispatch(listNameSkill(id)),
   listTeacherTop: () => dispatch(listTeacherTop()),
-  getCityByIdDistrict: (id) => dispatch(getCityByIdDistrict(id))
+  getCityByIdDistrict: (id) => dispatch(getCityByIdDistrict(id)),
+  getListDisctrict: () => dispatch(getListDisctrict())
   // loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TeacherInfor);

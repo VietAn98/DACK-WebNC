@@ -7,7 +7,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getListTeacher: () => dispatch(getListTeacher()),
-    listSixTeacherTop: () => dispatch(listSixTeacherTop())
+    listSixTeacherTop: () => dispatch(listSixTeacherTop()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

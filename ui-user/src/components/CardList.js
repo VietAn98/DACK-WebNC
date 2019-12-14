@@ -1,5 +1,5 @@
-import React from "react";
-import CardTuitor from "./CardTuitor";
+import React from 'react';
+import CardTuitor from '../containers/CardTuitorContainer';
 
 class CardList extends React.PureComponent {
   render() {
@@ -8,13 +8,13 @@ class CardList extends React.PureComponent {
       <div>
         <div className="row">
           {listTeachers
-            ? listTeachers.map(listTeachers => {
-                return (
-                  <div className="col-md-4 col-sm-12">
-                    <CardTuitor listTeachers={listTeachers} />
-                  </div>
-                );
-              })
+            ? listTeachers.map((item) => (
+              <div className="col-md-4 col-sm-4" key={item.userId}>
+                <CardTuitor
+                  listTeacherss={item}
+                />
+              </div>
+            ))
             : null}
         </div>
       </div>
