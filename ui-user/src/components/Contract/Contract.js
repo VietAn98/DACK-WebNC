@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-// import history from '../../history';
+import numeral from 'numeral';
 import PageNotFound from '../../pages/PageNotFound';
 import './Contract.css';
 
@@ -28,6 +28,10 @@ class Contract extends React.PureComponent {
     onChangeCity1 = (e) => {
         const { getDistrictByIdCity } = this.props;
         getDistrictByIdCity(e.target.value);
+    }
+
+    onChangeDateFrom = (e) => {
+        console.log('onChangeDateFrom', e.target.value);
     }
 
     // eslint-disable-next-line consistent-return
@@ -157,17 +161,15 @@ class Contract extends React.PureComponent {
                                 <div className="pl-5 pr-5">
                                     <div className="col-sm-12 col-md-12 mt-4">
                                         <p>- Ngày học:</p>
-                                        {/* <Form.Check inline type="checkbox" label="Thương lượng với bên B" />
-                                        <Form.Check className="ml-5" inline type="checkbox" label="Chọn thời gian học" /> */}
                                     </div>
 
                                     <div className="col-md-12 col-sm-12">
                                         <div className="col-md-5 col-sm-5">
-                                            <Form.Control type="date"></Form.Control>
+                                            <Form.Control type="date" id="dateFrom" onChange={this.onChangeDateFrom}></Form.Control>
                                         </div>
                                         <span className="col-md-2 col-sm-2 text-center"> Đến </span>
                                         <div className="col-md-5 col-sm-5">
-                                            <Form.Control type="date"></Form.Control>
+                                            <Form.Control type="date" id="dateTo"></Form.Control>
                                         </div>
                                     </div>
                                     <div>
@@ -181,41 +183,39 @@ class Contract extends React.PureComponent {
                                 </div>
                                 <div className="pl-5 pr-5">
                                     <div className="col-sm-12 col-md-12 mt-4">
-                                        <p>- Thời gian học/ngày:</p>
-                                        <div className="col-md-5 col-sm-5">
+                                        <p>- Thời gian học/ngày: <b>2 giờ/ngày</b></p>
+                                        {/* <div className="col-md-5 col-sm-5">
                                             <Form.Control type="time"></Form.Control>
                                         </div>
                                         <span className="col-md-2 col-sm-2 text-center"> Đến </span>
                                         <div className="col-md-5 col-sm-5">
                                             <Form.Control type="time"></Form.Control>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <div className="pl-5 pr-5">
-                                    <div className="col-sm-12 col-md-12 mt-4 flex-wrap">
-                                        <div className="col-sm-5 col-md-5">
-                                            - Tổng chi phí thanh toán cho bên B:
-                                        </div>
-                                        <div className="col-sm-2 col-md-2">
-                                            <b className="float-right">Số tiền/giờ</b>
-                                        </div>
-                                        <div className="col-sm-2 col-md-2 float-right">
-                                            <b className="float-right">Số ngày học</b>
-                                        </div>
-                                        <div className="col-sm-3 col-md-3 float-right">
-                                            <b className="float-right">Số giờ học/ngày</b>
-                                        </div>
+                                    <div className="col-sm-5 col-md-5 mt-3">
+                                        - Tổng chi phí thanh toán cho bên B:
+                                    </div>
+                                    <div className="col-sm-2 col-md-2 mt-3">
+                                        <b className="float-right">Số tiền/giờ</b>
+                                    </div>
+                                    <div className="col-sm-2 col-md-2 mt-3 float-right">
+                                        <b className="float-right">Số ngày học</b>
+                                    </div>
+                                    <div className="col-sm-3 col-md-3 mt-3 float-right">
+                                        <b className="float-right">Số giờ học/ngày</b>
                                     </div>
                                     <div className="col-sm-12 col-md-12 mt-4">
                                         <div className="col-sm-5 col-md-5" />
                                         <div className="col-sm-2 col-md-2">
-                                            <b className="float-right color-red">Số tiền/giờ</b>
+                                            <b className="float-right color-red">{detailTeacher ? `${numeral(`${detailTeacher.price}`).format('(0,0)')} VND` : null}</b>
                                         </div>
-                                        <div className="col-sm-2 col-md-2 float-right">
-                                            <b className="float-right color-red">Số ngày học</b>
+                                        <div className="col-sm-2 col-md-2">
+                                            <b className="float-right color-red"></b>
                                         </div>
-                                        <div className="col-sm-3 col-md-3 float-right">
-                                            <b className="float-right color-red">Số giờ học/ngày</b>
+                                        <div className="col-sm-3 col-md-3">
+                                            <b className="text-center color-red">2</b>
                                         </div>
                                     </div>
                                 </div>
@@ -223,16 +223,27 @@ class Contract extends React.PureComponent {
                                     <div className="col-sm-12 col-md-12 mt-4 mb-5">
                                         <p style={{ color: 'red' }}><i>*Lưu ý:</i></p>
                                         <p>
-                                            - Thời gian học tối đa là <b>2 tiếng/ngày</b>.
-                                             Nếu quá thời gian, bên A sẽ phải có trách nhiệm thanh toán thêm cho bên B.
+                                            - Thời gian học tối đa là
+{' '}
+                                            <b>2 tiếng/ngày</b>
+                                            .
+            Nếu quá thời gian,
+{' '}
+                                            bên A sẽ phải có trách nhiệm thanh toán thêm cho bên B.
                                         </p>
                                         <p>
                                             - Bên B sẽ phải có trách nhiệm dạy học đầy đủ
                                              và làm đúng theo yêu cầu của 2 bên như đã thỏa thuận.
                                         </p>
                                         <p>
-                                            - Trong trường hợp bên B không hoàn thành đúng trách nhiệm,
-                                             bên A có quyền <b>khiếu nại</b> lên hệ thống.
+                                            - Trong trường hợp bên B
+                                            {' '}
+                                            không hoàn thành đúng trách nhiệm,
+                                       bên A có quyền
+{' '}
+                                            <b>khiếu nại</b>
+                                            {' '}
+                                            lên hệ thống.
                                         </p>
                                         <p>
                                             - Bên A sẽ không được nhận lại chi phí
