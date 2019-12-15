@@ -1,11 +1,11 @@
 import React from 'react';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { Container, Form, Button } from 'react-bootstrap';
 import numeral from 'numeral';
+import moment from 'moment';
 import PageNotFound from '../../pages/PageNotFound';
 import './Contract.css';
-
-const moment = require('moment');
+// const moment = require('moment');
 
 class Contract extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated

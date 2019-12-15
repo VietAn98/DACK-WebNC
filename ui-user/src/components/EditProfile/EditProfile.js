@@ -1,12 +1,12 @@
 import React from 'react';
 // import jwtDecode from 'jwt-decode';
 import { Form, Button } from 'react-bootstrap';
-import numeral from 'numeral';
+// import numeral from 'numeral';
 import Swal from 'sweetalert2';
 import './EditProfile.css';
 
 const user = JSON.parse(localStorage.getItem('user'));
-console.log('user EditProfile', user);
+// console.log('user EditProfile', user);
 const gender = [
     {
         value: 'Nam', text: 'Nam'
