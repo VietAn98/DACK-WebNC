@@ -38,6 +38,9 @@ const APIService = {
   FORGOT_PASSWORD: `${URL}/api/forget-password`,
   FORGOT_FORGOT_PASSWORD: `${URL}/api/update-new-password`,
   GET_USER_COMMENT: `${URL}/api/get-comment-by-user/`,
+
+  // contract
+  CREATE_CONTRACT: `${URL}/api/create-contract`,
 };
 
 export default APIService;

@@ -219,7 +219,7 @@ export const endLearnDay = (state = '', action) => {
 		default:
 			return state;
 	}
-}
+};
 
 export const detailTeacher = (state = {}, action) => {
   switch (action.type) {
