@@ -11,6 +11,12 @@ export const login = () => ({
   type: 'IS_LOGIN'
 });
 
+export const getEndDay = (day) => ({
+  type: 'END_DAY',
+  day
+});
+
+
 export const registerRequest = (
   name,
   gmail,

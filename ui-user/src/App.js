@@ -12,6 +12,7 @@ import TeacherInfoPage from './containers/TeacherInforContainer';
 import TeacherList from './containers/TeacherListContainer';
 import NewPassword from './containers/NewPasswordContainer';
 import Contract from './containers/ContractContainer';
+// import Test from './components/test';
 
 export class App extends React.PureComponent {
 	render() {
@@ -28,6 +29,7 @@ export class App extends React.PureComponent {
 					<Route path="/teacher-info/:id" exact component={TeacherInfoPage} />
 					<Route path="/update-new-password/" exact component={NewPassword} />
 					<Route path="/" exact component={HomePage} />
+					{/* <Route path="/test" exact component={Test} /> */}
 					<Route component={PageNotFound} />
 				</Switch>
 				<Footer />

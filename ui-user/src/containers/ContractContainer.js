@@ -7,7 +7,8 @@ import {
     getListDisctrict,
     // getInforUserById,
     getUserInfor,
-    getListSkills
+    getListSkills,
+    getEndDay
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -17,7 +18,8 @@ const mapStateToProps = (state) => ({
     listDistrict: state.listDistrict,
     // userInfor: state.userInfor,
     userProfiles: state.userProfiles,
-    listSkills: state.listSkills
+    listSkills: state.listSkills,
+    endLearnDay: state.endLearnDay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -27,6 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
     getListDisctrict: () => dispatch(getListDisctrict()),
     // getInforUserById: (id) => dispatch(getInforUserById(id)),
     getUserInfor: (id) => dispatch(getUserInfor(id)),
-    getListSkills: () => dispatch(getListSkills())
+    getListSkills: () => dispatch(getListSkills()),
+    getEndDay: (day) => dispatch(getEndDay(day)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Contract);

@@ -211,6 +211,16 @@ export const listNameOfSkill = (state = [], action) => {
 	}
 };
 
+export const endLearnDay = (state = '', action) => {
+  switch (action.type) {
+		case 'END_DAY': {
+			return action.day;
+		}
+		default:
+			return state;
+	}
+}
+
 export const detailTeacher = (state = {}, action) => {
   switch (action.type) {
     case 'GET_INFOR_TEACHER': {
