@@ -43,6 +43,7 @@ module.exports = {
       price: req.body.price,
       startDay: req.body.startDay,
       endDay: req.body.endDay,
+      dateCreate: req.body.dateCreate,
       numberDay: req.body.numberDay,
       numberHour: req.body.numberHour,
       state: 1
