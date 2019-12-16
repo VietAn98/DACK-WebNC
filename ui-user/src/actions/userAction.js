@@ -209,12 +209,14 @@ export const getListCity = () => (dispatch) => fetch(API.GET_LIST_CITY, {
     })
     .catch((err) => console.log('Error getListCity occured', err));
 
-export const getCityByIdDistrict = (idDistrict) => (dispatch) => fetch(API.GET_CITY_BY_IDDISTRICT + idDistrict, {
+export const getCityByIdDistrict = (idDistrict) => (dispatch) => fetch(
+  API.GET_CITY_BY_IDDISTRICT + idDistrict, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-  })
+  }
+  )
     .then((respond) => respond.json())
     .then((res) => {
       dispatch({ type: 'GET_CITY_BY_DISTRICT', cityName: res });

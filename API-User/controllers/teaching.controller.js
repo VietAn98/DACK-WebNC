@@ -38,19 +38,7 @@ module.exports = {
             skillId: element
           };
           dbSkill_teacher.updateSkillTeacher(skill_teacher);
-          // if (element) {
-          //   dbSkill_teacher
-          //     .getSkillTeacher(element, user[0].userId)
-          //     .then(row => {
-          //       if (row.length === 0) {
-          //         let skill_teacher = {
-          //           userId: user[0].userId,
-          //           skillId: element
-          //         };
-          //         dbSkill_teacher.updateSkillTeacher(skill_teacher);
-          //       }
-          //     });
-          // }
+         
         });
       });
 
