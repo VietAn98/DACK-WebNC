@@ -18,9 +18,9 @@ class Contract extends React.PureComponent {
       getListSkills,
       listNameSkill
     } = this.props;
-    const path = window.location.pathname.split("-");
+    const path = window.location.pathname.split('-');
     const id = path[path.length - 1];
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     getListCity();
     getSingleTeacherById(id);
@@ -30,7 +30,7 @@ class Contract extends React.PureComponent {
     listNameSkill(id);
   };
 
-  onChangeCity1 = e => {
+  onChangeCity1 = (e) => {
     const { getDistrictByIdCity } = this.props;
     getDistrictByIdCity(e.target.value);
   };
@@ -42,76 +42,73 @@ class Contract extends React.PureComponent {
 
   onChangeDateFrom = () => {
     const { detailTeacher, getEndDay } = this.props;
-    const soTuan = document.getElementById("soTuan").value;
-    const soNgay = document.getElementById("number").value;
-    const soGio = document.getElementById("numberHour").value;
-    const startDay = new Date(document.getElementById("dateFrom").value);
+    const soTuan = document.getElementById('soTuan').value;
+    const soNgay = document.getElementById('number').value;
+    const soGio = document.getElementById('numberHour').value;
+    const startDay = new Date(document.getElementById('dateFrom').value);
 
-    if (soTuan !== "") {
+    if (soTuan !== '') {
       const EndDay = this.addDays(startDay, soTuan * 7);
-      getEndDay(moment(EndDay).format("DD-MM-YYYY"));
+      getEndDay(moment(EndDay).format('DD-MM-YYYY'));
     }
 
-    if (soTuan !== "" && soNgay !== "" && soGio !== "") {
-      const price =
-        document.getElementById("number").value *
-        soTuan *
-        (detailTeacher.price * soGio);
-      document.getElementById("price").value = price;
+    if (soTuan !== '' && soNgay !== '' && soGio !== '') {
+      const price = document.getElementById('number').value * soTuan * (detailTeacher.price * soGio);
+      document.getElementById('price').value = price;
     }
   };
 
   onChangeSoTuan = () => {
     const { detailTeacher, getEndDay } = this.props;
-    const dateFrom = document.getElementById("dateFrom").value;
-    const soTuan = document.getElementById("soTuan").value;
-    const soNgay = document.getElementById("number").value;
-    const soGio = document.getElementById("numberHour").value;
-    const startDay = new Date(document.getElementById("dateFrom").value);
-    if (dateFrom !== "") {
+    const dateFrom = document.getElementById('dateFrom').value;
+    const soTuan = document.getElementById('soTuan').value;
+    const soNgay = document.getElementById('number').value;
+    const soGio = document.getElementById('numberHour').value;
+    const startDay = new Date(document.getElementById('dateFrom').value);
+    if (dateFrom !== '') {
       const EndDay = this.addDays(startDay, soTuan * 7);
-      getEndDay(moment(EndDay).format("DD-MM-YYYY"));
+      getEndDay(moment(EndDay).format('DD-MM-YYYY'));
     }
 
-    if (dateFrom !== "" && soNgay !== "" && soGio !== "") {
+    if (dateFrom !== '' && soNgay !== '' && soGio !== '') {
       const price = soNgay * soTuan * (detailTeacher.price * soGio);
-      document.getElementById("price").value = price;
+      document.getElementById('price').value = price;
     }
   };
 
   onChangeSoNgay = () => {
     const { detailTeacher, getEndDay } = this.props;
-    const dateFrom = document.getElementById("dateFrom").value;
-    const soTuan = document.getElementById("soTuan").value;
-    const soNgay = document.getElementById("number").value;
-    const soGio = document.getElementById("numberHour").value;
-    if (dateFrom !== "" && soTuan !== "" && soGio !== "") {
-      const startDay = new Date(document.getElementById("dateFrom").value);
+    const dateFrom = document.getElementById('dateFrom').value;
+    const soTuan = document.getElementById('soTuan').value;
+    const soNgay = document.getElementById('number').value;
+    const soGio = document.getElementById('numberHour').value;
+    if (dateFrom !== '' && soTuan !== '' && soGio !== '') {
+      const startDay = new Date(document.getElementById('dateFrom').value);
       const EndDay = this.addDays(startDay, soTuan * 7);
       const price = soNgay * soTuan * (detailTeacher.price * soGio);
-      getEndDay(moment(EndDay).format("DD-MM-YYYY"));
-      document.getElementById("price").value = price;
+      getEndDay(moment(EndDay).format('DD-MM-YYYY'));
+      document.getElementById('price').value = price;
     }
   };
 
   onChangeTime = () => {
     const { detailTeacher, getEndDay } = this.props;
-    const dateFrom = document.getElementById("dateFrom").value;
-    const soTuan = document.getElementById("soTuan").value;
-    const soNgay = document.getElementById("number").value;
-    const soGio = document.getElementById("numberHour").value;
-    if (dateFrom !== "" && soTuan !== "" && soNgay !== "") {
-      const startDay = new Date(document.getElementById("dateFrom").value);
+    const dateFrom = document.getElementById('dateFrom').value;
+    const soTuan = document.getElementById('soTuan').value;
+    const soNgay = document.getElementById('number').value;
+    const soGio = document.getElementById('numberHour').value;
+    if (dateFrom !== '' && soTuan !== '' && soNgay !== '') {
+      const startDay = new Date(document.getElementById('dateFrom').value);
       const EndDay = this.addDays(startDay, soTuan * 7);
       const price = soNgay * soTuan * (detailTeacher.price * soGio);
-      getEndDay(moment(EndDay).format("DD-MM-YYYY"));
-      document.getElementById("price").value = price;
+      getEndDay(moment(EndDay).format('DD-MM-YYYY'));
+      document.getElementById('price').value = price;
     }
   };
 
-  onSubmitCreateContract = e => {
+  onSubmitCreateContract = (e) => {
     e.preventDefault();
-    const checkcheck = document.getElementsByClassName("checkcheck");
+    const checkcheck = document.getElementsByClassName('checkcheck');
     let isValid = false;
     for (let i = 0; i < checkcheck.length; i += 1) {
       if (checkcheck[i].children[0].checked === true) {
@@ -119,31 +116,31 @@ class Contract extends React.PureComponent {
       }
     }
     if (isValid) {
-      const dateFrom = document.getElementById("dateFrom").value;
-      const soTuan = document.getElementById("soTuan").value;
-      const soNgay = document.getElementById("number").value;
-      const soGio = document.getElementById("numberHour").value;
-      const price = document.getElementById("price").value;
+      const dateFrom = document.getElementById('dateFrom').value;
+      const soTuan = document.getElementById('soTuan').value;
+      const soNgay = document.getElementById('number').value;
+      const soGio = document.getElementById('numberHour').value;
+      const price = document.getElementById('price').value;
 
       if (
-        dateFrom === "" ||
-        soTuan === "" ||
-        soNgay === "" ||
-        soGio === "" ||
-        price === "0"
+        dateFrom === ''
+        || soTuan === ''
+        || soNgay === ''
+        || soGio === ''
+        || price === '0'
       ) {
         Swal.fire(
-          "Cần nhập đầy đủ thông tin  để xem giá tiền trước khi thánh toán"
+          'Cần nhập đầy đủ thông tin  để xem giá tiền trước khi thánh toán'
         );
       } else {
         Swal.fire('Đang gửi yêu cầu!');
         Swal.showLoading();
         const { createContract, endLearnDay } = this.props;
-        const path = window.location.pathname.split("-");
+        const path = window.location.pathname.split('-');
         const idTeacher = path[path.length - 1];
-        const user = JSON.parse(localStorage.getItem("user"));
-        const { startDay } = moment(dateFrom).format("DD-MM-YYYY");
-        let skills = "";
+        const user = JSON.parse(localStorage.getItem('user'));
+        const { startDay } = moment(dateFrom).format('DD-MM-YYYY');
+        let skills = '';
         for (let i = 0; i < checkcheck.length; i += 1) {
           if (checkcheck[i].children[0].checked === true) {
             skills += `${checkcheck[i].children[0].value},`;
@@ -161,7 +158,7 @@ class Contract extends React.PureComponent {
         );
       }
     } else {
-      Swal.fire("Vui lòng chọn kĩ năng muốn học");
+      Swal.fire('Vui lòng chọn kĩ năng muốn học');
     }
   };
 
@@ -180,7 +177,7 @@ class Contract extends React.PureComponent {
       // userInfor
     } = this.props;
     const { skills } = listNameOfSkill;
-    console.log("listSkills", listNameOfSkill);
+    console.log('listSkills', listNameOfSkill);
     if (tokenn) {
       return (
         <div className="div-container">
@@ -295,18 +292,18 @@ class Contract extends React.PureComponent {
                     <div className="col-md-5 col-sm-5">
                       <Form.Control as="select" disabled>
                         {listDistrict
-                          ? listDistrict.map(item => {
-                              if (
-                                item.districtId === detailTeacher.districtId
-                              ) {
-                                return (
-                                  <option value={item.districtId}>
-                                    {item.name}
-                                  </option>
-                                );
-                              }
-                              return null;
-                            })
+                          ? listDistrict.map((item) => {
+                            if (
+                              item.districtId === detailTeacher.districtId
+                            ) {
+                              return (
+                                <option value={item.districtId}>
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return null;
+                          })
                           : null}
                         <option>Quận</option>
                       </Form.Control>
@@ -324,15 +321,15 @@ class Contract extends React.PureComponent {
                   <div className="col-sm-12 col-md-12">
                     <p>- Bên A mong muốn được học về kỹ năng:</p>
                     {skills
-                      ? skills.map(item => (
-                          <Form.Check
-                            className="ml-5 checkcheck"
-                            inline
-                            type="checkbox"
-                            label={item.name}
-                            value={item.skillId}
-                          />
-                        ))
+                      ? skills.map((item) => (
+                        <Form.Check
+                          className="ml-5 checkcheck"
+                          inline
+                          type="checkbox"
+                          label={item.name}
+                          value={item.skillId}
+                        />
+                      ))
                       : null}
                   </div>
                 </div>
@@ -347,11 +344,13 @@ class Contract extends React.PureComponent {
                         type="date"
                         id="dateFrom"
                         onChange={this.onChangeDateFrom}
-                      ></Form.Control>
+                      >
+                      </Form.Control>
                     </div>
                     <span className="col-md-2 col-sm-2 text-center">
-                      {" "}
-                      Số tuần{" "}
+                      {' '}
+                      Số tuần
+{' '}
                     </span>
                     <div className="col-md-5 col-sm-5">
                       <Form.Control
@@ -359,7 +358,8 @@ class Contract extends React.PureComponent {
                         id="soTuan"
                         min="1"
                         onChange={this.onChangeSoTuan}
-                      ></Form.Control>
+                      >
+                      </Form.Control>
                     </div>
                   </div>
                   <div>
@@ -373,14 +373,17 @@ class Contract extends React.PureComponent {
                         min="1"
                         id="number"
                         onChange={this.onChangeSoNgay}
-                      ></Form.Control>
+                      >
+                      </Form.Control>
                     </div>
                   </div>
                 </div>
                 <div className="pl-5 pr-5">
                   <div className="col-sm-12 col-md-12 mt-4">
                     <p>
-                      - Thời gian học/ngày: <b>2 giờ/ngày</b>
+                      - Thời gian học/ngày:
+{' '}
+                      <b>2 giờ/ngày</b>
                     </p>
                     <Form.Control
                       type="number"
@@ -388,7 +391,8 @@ class Contract extends React.PureComponent {
                       min="1"
                       id="numberHour"
                       onChange={this.onChangeTime}
-                    ></Form.Control>
+                    >
+                    </Form.Control>
                     {/* <div className="col-md-5 col-sm-5">
                                             <Form.Control type="time"></Form.Control>
                                         </div>
@@ -417,8 +421,8 @@ class Contract extends React.PureComponent {
                       <b className="float-right color-red">
                         {detailTeacher
                           ? `${numeral(`${detailTeacher.price}`).format(
-                              "(0,0)"
-                            )} VND`
+                            '(0,0)'
+                          )} VND`
                           : null}
                       </b>
                     </div>
@@ -434,13 +438,16 @@ class Contract extends React.PureComponent {
                 </div>
                 <div className="pl-5 pr-5">
                   <div className="col-sm-12 col-md-12 mt-4 mb-5">
-                    <p style={{ color: "red" }}>
+                    <p style={{ color: 'red' }}>
                       <i>*Lưu ý:</i>
                     </p>
                     <p>
-                      - Thời gian học tối đa là <b>2 tiếng/ngày</b>. Nếu quá
-                      thời gian, bên A sẽ phải có trách nhiệm thanh toán thêm
-                      cho bên B.
+                      - Thời gian học tối đa là
+{' '}
+                      <b>2 tiếng/ngày</b>
+                      . Nếu quá
+                                            thời gian, bên A sẽ phải có trách nhiệm thanh toán thêm
+                                            cho bên B.
                     </p>
                     <p>
                       - Bên B sẽ phải có trách nhiệm dạy học đầy đủ và làm đúng
@@ -448,7 +455,11 @@ class Contract extends React.PureComponent {
                     </p>
                     <p>
                       - Trong trường hợp bên B không hoàn thành đúng trách
-                      nhiệm, bên A có quyền <b>khiếu nại</b> lên hệ thống.
+                      nhiệm, bên A có quyền
+{' '}
+                      <b>khiếu nại</b>
+                      {' '}
+                      lên hệ thống.
                     </p>
                     <p>
                       - Bên A sẽ không được nhận lại chi phí đã thanh toán cho
@@ -465,7 +476,7 @@ class Contract extends React.PureComponent {
                   <h4>Tổng chi phí thanh toán:</h4>
                   <input
                     readOnly
-                    type={{ backgroundColor: "red" }}
+                    type={{ backgroundColor: 'red' }}
                     id="price"
                     placeholder="Giá sẽ hiện lên khi nhập đầy đủ thông tin"
                   />

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import HistoryRequest from '../components/HistoryRequest/HistoryRequest';
+import History from '../components/History/History';
 // import { loginRequest } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -9,4 +9,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     // loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(HistoryRequest);
+export default connect(mapStateToProps, mapDispatchToProps)(History);

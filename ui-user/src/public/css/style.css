@@ -1871,3 +1871,7 @@ textarea:-ms-input-placeholder {
   -o-background-size: cover;
   -ms-background-size: cover; */
 }
+
+.cursor-pointer{
+	cursor: pointer;
+}

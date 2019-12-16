@@ -5,7 +5,7 @@ import {
 import jwtDecode from 'jwt-decode';
 import EditProfile from '../containers/EditProfileContainer';
 import ChangePassword from '../containers/ChangePasswordContainer';
-import HistoryRequest from '../containers/HistoryRequestContainer';
+import History from '../containers/HistoryContainer';
 import PageNotFound from './PageNotFound';
 import '../public/css/style.css';
 
@@ -40,14 +40,14 @@ class Settings extends React.PureComponent {
                                         <i className="fas fa-history" />
                                         {' '}
                                         {' '}
-                                        Lịch sử, trạng thái yêu cầu dạy học
+                                        Lịch sử các yêu cầu dạy học
                                     </ListGroup.Item>
                                 ) : (
                                         <ListGroup.Item action href="#contracthistory">
                                             <i className="fas fa-history" />
                                             {' '}
                                             {' '}
-                                            Lịch sử, trạng thái hợp đồng học
+                                            Lịch sử hợp đồng học
                                         </ListGroup.Item>
                                     )}
                             </ListGroup>
@@ -61,10 +61,12 @@ class Settings extends React.PureComponent {
                                     <ChangePassword />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#requesthistory">
-                                    <HistoryRequest />
+                                    {decoded.categoryUser === 1
+                                        ? <History /> : <PageNotFound />}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#contracthistory">
-                                    <PageNotFound />
+                                    {decoded.categoryUser === 0
+                                        ? <History /> : <PageNotFound />}
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

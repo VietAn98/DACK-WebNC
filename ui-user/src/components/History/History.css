@@ -1,0 +1,15 @@
+i.fas.fa-check {
+    color: green;
+    font-size: 22px;
+}
+
+i.fas.fa-sms{
+    color: rgb(0, 75, 189);
+    font-size: 22px;
+}
+
+i.fas.fa-times,
+i.fas.fa-exclamation-circle{
+    color: rgb(255, 0, 0);
+    font-size: 22px;
+}
