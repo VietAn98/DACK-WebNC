@@ -5,6 +5,7 @@ import {
 import jwtDecode from 'jwt-decode';
 import EditProfile from '../containers/EditProfileContainer';
 import ChangePassword from '../containers/ChangePasswordContainer';
+import HistoryRequest from '../containers/HistoryRequestContainer';
 import PageNotFound from './PageNotFound';
 import '../public/css/style.css';
 
@@ -60,7 +61,7 @@ class Settings extends React.PureComponent {
                                     <ChangePassword />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#requesthistory">
-                                    <PageNotFound />
+                                    <HistoryRequest />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#contracthistory">
                                     <PageNotFound />
