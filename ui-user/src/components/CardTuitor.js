@@ -41,7 +41,7 @@ class Card extends React.PureComponent {
       <div style={style}>
         {listTeachers ? (
           <div className="cardTuitor">
-            <img src={avatar} alt="avatar" />
+            <img src={listTeachers.avatar ? listTeachers.avatar : avatar} alt="avatar" />
             <div className="cardCaption">
               <div className="cardInfo">
                 <h6>{listTeachers.name}</h6>

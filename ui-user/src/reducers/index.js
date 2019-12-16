@@ -84,6 +84,16 @@ export const cityName = (state = {}, action) => {
   }
 };
 
+export const cityNameForTeacher = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_CITY_BY_DISTRICT_FOR_TEACHER': {
+      return action.cityNameForTeacher;
+    }
+    default:
+      return state;
+  }
+};
+
 export const districtNames = (state = [], action) => {
   switch (action.type) {
     case 'GET_DISTRICT_BY_CITY': {
@@ -221,6 +231,16 @@ export const endLearnDay = (state = '', action) => {
 	}
 };
 
+export const totalHour = (state = '', action) => {
+  switch (action.type) {
+    case 'TOTAL_HOUR': {
+      return action.hour;
+    }
+    default:
+      return state;
+  }
+};
+
 export const detailTeacher = (state = {}, action) => {
   switch (action.type) {
     case 'GET_INFOR_TEACHER': {
@@ -236,6 +256,16 @@ export const userComment = (state = [], action) => {
   switch (action.type) {
     case 'GET_USER_COMMENT': {
       return action.userComment;
+    }
+    default:
+      return state;
+  }
+};
+
+export const allContracts = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_ALL_CONTRACTS': {
+      return action.allContracts;
     }
     default:
       return state;

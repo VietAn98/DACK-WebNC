@@ -10,7 +10,10 @@ import {
   getListSkills,
   getEndDay,
   listNameSkill,
-  createContract
+  createContract,
+  getCityByIdDistrict,
+  getCityByIdDistrictForTeacher,
+  getTotalHour
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -20,9 +23,11 @@ const mapStateToProps = (state) => ({
   listDistrict: state.listDistrict,
   // userInfor: state.userInfor,
   userProfiles: state.userProfiles,
-  listSkills: state.listSkills,
   endLearnDay: state.endLearnDay,
-  listNameOfSkill: state.listNameOfSkill
+  listNameOfSkill: state.listNameOfSkill,
+  cityName: state.cityName,
+  cityNameForTeacher: state.cityNameForTeacher,
+  totalHour: state.totalHour
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,7 +37,6 @@ const mapDispatchToProps = (dispatch) => ({
   getListDisctrict: () => dispatch(getListDisctrict()),
   // getInforUserById: (id) => dispatch(getInforUserById(id)),
   getUserInfor: (id) => dispatch(getUserInfor(id)),
-  getListSkills: () => dispatch(getListSkills()),
   getEndDay: (day) => dispatch(getEndDay(day)),
   listNameSkill: (id) => dispatch(listNameSkill(id)),
   createContract: (
@@ -41,20 +45,25 @@ const mapDispatchToProps = (dispatch) => ({
     price,
     startDay,
     endDay,
+    dateCreate,
     skill,
     numberDay,
     numberHour
   ) => dispatch(
-      createContract(
-        teacherId,
-        studentId,
-        price,
-        startDay,
-        endDay,
-        skill,
-        numberDay,
-        numberHour
-      )
+    createContract(
+      teacherId,
+      studentId,
+      price,
+      startDay,
+      endDay,
+      dateCreate,
+      skill,
+      numberDay,
+      numberHour
     )
+  ),
+  getCityByIdDistrict: (idDis) => dispatch(getCityByIdDistrict(idDis)),
+  getCityByIdDistrictForTeacher: (idDis) => dispatch(getCityByIdDistrictForTeacher(idDis)),
+  getTotalHour: (hour) => dispatch(getTotalHour(hour))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Contract);

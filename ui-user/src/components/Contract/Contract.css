@@ -33,3 +33,11 @@
 .color-red {
     color: red;
 }
+
+.dateStart::-webkit-clear-button {
+    display: none;
+}
+
+h3 {
+  margin-top: 10px !important;
+}

@@ -6,7 +6,7 @@ const APIService = {
   UPDATE_INFOR_TEACHER: `${URL}/api/update-infor-teacher`,
   UPDATE_INFOR_STUDENT: `${URL}/api/update-infor-student`,
   GET_INFO: `${URL}/api/profile`,
-  GET_USER_INFO_BY_ID: `${URL}/api/get-detail-teacher/`, //lấy thông tin teacher + student
+  GET_USER_INFO_BY_ID: `${URL}/api/get-detail-teacher/`, // lấy thông tin teacher + student
   GET_TEACHER_INFO_BY_ID: `${URL}/api/get-detail-single-teacher/`,
   //   CHANGE_INFO: `${URL}/api/updateInfor`,
   UPLOAD_AVATAR: `${URL}/api/image`,
@@ -15,6 +15,8 @@ const APIService = {
   GET_CITY_BY_IDDISTRICT: `${URL}/api/get-city-by-district/`,
   GET_LIST_DISTRICT: `${URL}/api/get-list-district`,
   GET_LIST_CITY: `${URL}/api/get-list-city`,
+
+  // teacher
   GET_SKILLS: `${URL}/api/get-List-Skill-ByUser/`, // return id
   GET_NAME_SKILLS: `${URL}/api/get-name-Skill-ByUser/`,
   GET_LIST_SKILLS: `${URL}/api/get-list-skills`,
@@ -41,6 +43,7 @@ const APIService = {
 
   // contract
   CREATE_CONTRACT: `${URL}/api/create-contract`,
+  GET_ALL_CONTRACTS: `${URL}/api/getAllContract`,
 };
 
 export default APIService;

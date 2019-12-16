@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -23,6 +24,12 @@ if (tokenn) {
 }
 
 class History extends React.PureComponent {
+    // eslint-disable-next-line react/no-deprecated
+    componentWillMount = () => {
+        const { getAllContracts } = this.props;
+        getAllContracts();
+    }
+
     onClickRefuse = () => {
         Swal.fire({
             title: 'Bạn chắc chắn chứ?',
@@ -63,7 +70,21 @@ class History extends React.PureComponent {
         });
     }
 
+    // createTable = (temp) => {
+    //     const table = [];
+
+    //     for (let i = 1; i < temp.length + 1; i += 1) {
+    //         const children = [];
+    //         children.push(<td>{i}</td>);
+    //         table.push(<tr>{children}</tr>);
+    //     }
+    //     return table;
+    // }
+
     render() {
+        const { allContracts } = this.props;
+        let i = 0;
+
         return (
             <div
                 style={{
@@ -115,30 +136,36 @@ class History extends React.PureComponent {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="cursor-pointer">
-                                <td>1</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>
-                                    {decoded.categoryUser === 1
-                                        ? (
-                                            <div>
-                                                <i className="fas fa-check mr-3" title="Chấp nhận yêu cầu" />
-                                                <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
-                                                <i className="fas fa-times" title="Từ chối yêu cầu" onClick={this.onClickRefuse} />
-                                            </div>
-                                        )
-                                        : (
-                                            <div>
-                                                <i className="fas fa-check mr-3" title="Đã hoàn thành khóa học" onClick={this.onClickAgree} />
-                                                <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
-                                                <i className="fas fa-exclamation-circle" title="Khiếu nại" />
-                                            </div>
-                                        )}
-                                </td>
-                            </tr>
+                            {allContracts ? allContracts.map((item) => (
+                                <tr className="cursor-pointer">
+                                    <td>{i += 1}</td>
+                                    <td>
+                                        Yêu cầu thứ
+{' '}
+                                        {i += 1}
+                                    </td>
+                                    <td>Table cell</td>
+                            {/* <td>{item.}</td> */}
+                                    <td>Table cell</td>
+                                    <td>
+                                        {decoded.categoryUser === 1
+                                            ? (
+                                                <div>
+                                                    <i className="fas fa-check mr-3" title="Chấp nhận yêu cầu" />
+                                                    <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
+                                                    <i className="fas fa-times" title="Từ chối yêu cầu" onClick={this.onClickRefuse} />
+                                                </div>
+                                            )
+                                            : (
+                                                <div>
+                                                    <i className="fas fa-check mr-3" title="Đã hoàn thành khóa học" onClick={this.onClickAgree} />
+                                                    <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
+                                                    <i className="fas fa-exclamation-circle" title="Khiếu nại" />
+                                                </div>
+                                            )}
+                                    </td>
+                                </tr>
+                            )) : null}
                         </tbody>
                     </Table>
                 </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import CardTuitor from './CardTuitor';
 
 class CardList extends React.PureComponent {
@@ -8,7 +8,7 @@ class CardList extends React.PureComponent {
       <div>
         <div className="row">
           {listTeachers
-            ? listTeachers.map(item => (
+            ? listTeachers.map((item) => (
                 <div className="col-md-4 col-sm-4" key={item.userId}>
                   <CardTuitor listTeachers={item} />
                 </div>

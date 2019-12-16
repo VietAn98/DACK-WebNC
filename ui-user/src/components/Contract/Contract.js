@@ -7,6 +7,9 @@ import PageNotFound from '../../pages/PageNotFound';
 import './Contract.css';
 // const moment = require('moment');
 
+const today = new Date();
+const Today = moment(today).format('DD-MM-YYYY');
+
 class Contract extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated
   componentWillMount = async () => {
@@ -15,8 +18,9 @@ class Contract extends React.PureComponent {
       getSingleTeacherById,
       getListDisctrict,
       getUserInfor,
-      getListSkills,
-      listNameSkill
+      listNameSkill,
+      getCityByIdDistrict,
+      getCityByIdDistrictForTeacher
     } = this.props;
     const path = window.location.pathname.split('-');
     const id = path[path.length - 1];
@@ -26,8 +30,11 @@ class Contract extends React.PureComponent {
     getSingleTeacherById(id);
     getListDisctrict();
     await getUserInfor(user.userId);
-    getListSkills();
     listNameSkill(id);
+
+    const { userProfiles, detailTeacher } = this.props;
+    getCityByIdDistrict(userProfiles.districtId);
+    getCityByIdDistrictForTeacher(detailTeacher.districtId);
   };
 
   onChangeCity1 = (e) => {
@@ -41,7 +48,7 @@ class Contract extends React.PureComponent {
   };
 
   onChangeDateFrom = () => {
-    const { detailTeacher, getEndDay } = this.props;
+    const { detailTeacher, getEndDay, getTotalHour } = this.props;
     const soTuan = document.getElementById('soTuan').value;
     const soNgay = document.getElementById('number').value;
     const soGio = document.getElementById('numberHour').value;
@@ -49,17 +56,19 @@ class Contract extends React.PureComponent {
 
     if (soTuan !== '') {
       const EndDay = this.addDays(startDay, soTuan * 7);
+      const totalHour = soNgay * soTuan * soGio;
       getEndDay(moment(EndDay).format('DD-MM-YYYY'));
+      getTotalHour(totalHour);
     }
 
     if (soTuan !== '' && soNgay !== '' && soGio !== '') {
       const price = document.getElementById('number').value * soTuan * (detailTeacher.price * soGio);
-      document.getElementById('price').value = price;
+      document.getElementById('price').innerHTML = numeral(price).format('(0,0)');
     }
   };
 
   onChangeSoTuan = () => {
-    const { detailTeacher, getEndDay } = this.props;
+    const { detailTeacher, getEndDay, getTotalHour } = this.props;
     const dateFrom = document.getElementById('dateFrom').value;
     const soTuan = document.getElementById('soTuan').value;
     const soNgay = document.getElementById('number').value;
@@ -67,17 +76,19 @@ class Contract extends React.PureComponent {
     const startDay = new Date(document.getElementById('dateFrom').value);
     if (dateFrom !== '') {
       const EndDay = this.addDays(startDay, soTuan * 7);
+      const totalHour = soNgay * soTuan * soGio;
       getEndDay(moment(EndDay).format('DD-MM-YYYY'));
+      getTotalHour(totalHour);
     }
 
     if (dateFrom !== '' && soNgay !== '' && soGio !== '') {
       const price = soNgay * soTuan * (detailTeacher.price * soGio);
-      document.getElementById('price').value = price;
+      document.getElementById('price').innerHTML = numeral(price).format('(0,0)');
     }
   };
 
   onChangeSoNgay = () => {
-    const { detailTeacher, getEndDay } = this.props;
+    const { detailTeacher, getEndDay, getTotalHour } = this.props;
     const dateFrom = document.getElementById('dateFrom').value;
     const soTuan = document.getElementById('soTuan').value;
     const soNgay = document.getElementById('number').value;
@@ -86,13 +97,15 @@ class Contract extends React.PureComponent {
       const startDay = new Date(document.getElementById('dateFrom').value);
       const EndDay = this.addDays(startDay, soTuan * 7);
       const price = soNgay * soTuan * (detailTeacher.price * soGio);
+      const totalHour = soNgay * soTuan * soGio;
       getEndDay(moment(EndDay).format('DD-MM-YYYY'));
-      document.getElementById('price').value = price;
+      getTotalHour(totalHour);
+      document.getElementById('price').innerHTML = numeral(price).format('(0,0)');
     }
   };
 
   onChangeTime = () => {
-    const { detailTeacher, getEndDay } = this.props;
+    const { detailTeacher, getEndDay, getTotalHour } = this.props;
     const dateFrom = document.getElementById('dateFrom').value;
     const soTuan = document.getElementById('soTuan').value;
     const soNgay = document.getElementById('number').value;
@@ -101,14 +114,17 @@ class Contract extends React.PureComponent {
       const startDay = new Date(document.getElementById('dateFrom').value);
       const EndDay = this.addDays(startDay, soTuan * 7);
       const price = soNgay * soTuan * (detailTeacher.price * soGio);
+      const totalHour = soNgay * soTuan * soGio;
       getEndDay(moment(EndDay).format('DD-MM-YYYY'));
-      document.getElementById('price').value = price;
+      getTotalHour(totalHour);
+      document.getElementById('price').innerHTML = numeral(price).format('(0,0)');
     }
   };
 
   onSubmitCreateContract = (e) => {
     e.preventDefault();
     const checkcheck = document.getElementsByClassName('checkcheck');
+    const dateCreate = Today;
     let isValid = false;
     for (let i = 0; i < checkcheck.length; i += 1) {
       if (checkcheck[i].children[0].checked === true) {
@@ -139,7 +155,7 @@ class Contract extends React.PureComponent {
         const path = window.location.pathname.split('-');
         const idTeacher = path[path.length - 1];
         const user = JSON.parse(localStorage.getItem('user'));
-        const { startDay } = moment(dateFrom).format('DD-MM-YYYY');
+        const startDay = moment(dateFrom).format('DD-MM-YYYY');
         let skills = '';
         for (let i = 0; i < checkcheck.length; i += 1) {
           if (checkcheck[i].children[0].checked === true) {
@@ -147,11 +163,13 @@ class Contract extends React.PureComponent {
           }
         }
         createContract(
-          idTeacher,
+          // eslint-disable-next-line radix
+          parseInt(idTeacher),
           user.userId,
           price,
-          dateFrom,
+          startDay,
           endLearnDay,
+          dateCreate,
           skills,
           soNgay,
           soGio
@@ -171,13 +189,14 @@ class Contract extends React.PureComponent {
       detailTeacher,
       listDistrict,
       userProfiles,
-      listSkills,
       endLearnDay,
-      listNameOfSkill
-      // userInfor
+      listNameOfSkill,
+      cityName,
+      cityNameForTeacher,
+      totalHour
     } = this.props;
     const { skills } = listNameOfSkill;
-    console.log('listSkills', listNameOfSkill);
+    // console.log('totalHour', totalHour);
     if (tokenn) {
       return (
         <div className="div-container">
@@ -186,8 +205,14 @@ class Contract extends React.PureComponent {
               <b>HỢP ĐỒNG THUÊ GIÁO VIÊN</b>
             </h1>
             <p className="text-center">
-              <i>(ID: 123)</i>
+              <i>
+                Ngày tạo:
+                {Today}
+              </i>
             </p>
+            {/* <p className="text-center">
+              <i>(ID: 123)</i>
+            </p> */}
             <div className="my-container">
               <Form
                 onSubmit={this.onSubmitCreateContract}
@@ -208,48 +233,87 @@ class Contract extends React.PureComponent {
                     </div>
                     <Form.Group className="col-md-12 col-sm-12">
                       <Form.Label>Tôi tên là:</Form.Label>
-                      <Form.Control type="text" value={userProfiles.name} />
+                      <Form.Control disabled type="text" value={userProfiles.name} />
                     </Form.Group>
                     <Form.Group className="col-md-12 col-sm-12">
                       <Form.Label>Email:</Form.Label>
-                      <Form.Control type="text" value={userProfiles.gmail} />
+                      <Form.Control disabled type="text" value={userProfiles.gmail} />
                     </Form.Group>
                     <div className="col-md-12 col-sm-12">
                       <Form.Label>Địa chỉ:</Form.Label>
                     </div>
-                    <Form.Control type="text" value={userProfiles.gmail} />
-                    {/* <div className="col-md-7 col-sm-7">
+                    <div className="col-md-12 col-sm-12 mb-3">
                       <Form.Control
+                        type="text"
+                        value="{detailTeacher.address}"
+                        disabled
+                      />
+                    </div>
+                    <div className="col-md-7 col-sm-7">
+                      <Form.Control
+                        disabled
                         as="select"
                         id="city1"
                         onChange={this.onChangeCity1}
                         required
+                        style={{ height: '100%' }}
                       >
                         {listCity
-                          ? listCity.map(item => (
-                              <option value={item.cityId}>{item.name}</option>
-                            ))
+                          ? listCity.map((item) => {
+                            if (item.cityId === cityName.cityId) {
+                              return (
+                                <option
+                                  selected
+                                  value={item.cityId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return (
+                              <option value={item.cityId} className="black-title">
+                                {item.name}
+                              </option>
+                            );
+                          })
                           : null}
                       </Form.Control>
                     </div>
                     <div className="col-md-5 col-sm-5">
-                      <Form.Control as="select" id="district">
-                        {districtNames.length !== 0 ? (
-                          districtNames.map(item => (
-                            <option
-                              value={item.districtId}
-                              className="black-title"
-                            >
+                      <Form.Control disabled as="select" id="district" style={{ height: '100%' }}>
+                        {districtNames.length !== 0
+                          ? districtNames.map((item) => (
+                            <option value={item.districtId} className="black-title">
                               {item.name}
                             </option>
                           ))
-                        ) : (
-                          // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                          <option value="0" className="black-title" />
-                        )}
+                          : listDistrict.map((item) => {
+                            if (item.cityId === cityName.cityId) {
+                              if (item.districtId === userProfiles.districtId) {
+                                return (
+                                  <option
+                                    selected
+                                    value={item.districtId}
+                                    className="black-title"
+                                  >
+                                    {item.name}
+                                  </option>
+                                );
+                              }
+                              return (
+                                <option
+                                  value={item.districtId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return null;
+                          })}
                       </Form.Control>
                     </div>
-                   */}
                   </div>
                   <div className="col-md-6 col-sm-6">
                     <div className="col-md-12 col-sm-12">
@@ -281,31 +345,63 @@ class Contract extends React.PureComponent {
                     <div className="col-md-12 col-sm-12">
                       <Form.Label>Địa chỉ:</Form.Label>
                     </div>
-                    <div className="col-md-7 col-sm-7">
-                      <Form.Control as="select" id="city2" disabled>
-                        {/* <option value="0">Thành phố</option>
-                                                {listCity ? (listCity.map((item) => (
-                                                    <option value={item.cityId}>{item.name}</option>
-                                                ))) : null} */}
-                      </Form.Control>
+                    <div className="col-md-12 col-sm-12 mb-3">
+                      <Form.Control
+                        type="text"
+                        value="{detailTeacher.address}"
+                        disabled
+                      />
                     </div>
-                    <div className="col-md-5 col-sm-5">
-                      <Form.Control as="select" disabled>
-                        {listDistrict
-                          ? listDistrict.map((item) => {
-                            if (
-                              item.districtId === detailTeacher.districtId
-                            ) {
+                    <div className="col-md-7 col-sm-7">
+                      <Form.Control as="select" id="city2" disabled style={{ height: '100%' }}>
+                        {listCity
+                          ? listCity.map((item) => {
+                            if (item.cityId === cityNameForTeacher.cityId) {
                               return (
-                                <option value={item.districtId}>
+                                <option
+                                  selected
+                                  value={item.cityId}
+                                  className="black-title"
+                                >
                                   {item.name}
                                 </option>
                               );
                             }
-                            return null;
+                            return (
+                              <option value={item.cityId} className="black-title">
+                                {item.name}
+                              </option>
+                            );
                           })
                           : null}
-                        <option>Quận</option>
+                      </Form.Control>
+                    </div>
+                    <div className="col-md-5 col-sm-5">
+                      <Form.Control as="select" disabled style={{ height: '100%' }}>
+                        {listDistrict.map((item) => {
+                          if (item.cityId === cityName.cityId) {
+                            if (item.districtId === userProfiles.districtId) {
+                              return (
+                                <option
+                                  selected
+                                  value={item.districtId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return (
+                              <option
+                                value={item.districtId}
+                                className="black-title"
+                              >
+                                {item.name}
+                              </option>
+                            );
+                          }
+                          return null;
+                        })}
                       </Form.Control>
                     </div>
                   </div>
@@ -334,120 +430,103 @@ class Contract extends React.PureComponent {
                   </div>
                 </div>
                 <div className="pl-5 pr-5">
-                  <div className="col-sm-12 col-md-12 mt-4">
-                    <p>- Ngày học:</p>
+                  <div className="col-sm-3 col-md-3 mt-4">
+                    <p>- Ngày bắt đầu:</p>
+                    <Form.Control
+                      className="dateStart"
+                      type="date"
+                      id="dateFrom"
+                      onChange={this.onChangeDateFrom}
+                    >
+                    </Form.Control>
                   </div>
 
-                  <div className="col-md-12 col-sm-12">
-                    <div className="col-md-5 col-sm-5">
-                      <Form.Control
-                        type="date"
-                        id="dateFrom"
-                        onChange={this.onChangeDateFrom}
-                      >
-                      </Form.Control>
-                    </div>
-                    <span className="col-md-2 col-sm-2 text-center">
-                      {' '}
-                      Số tuần
-{' '}
-                    </span>
-                    <div className="col-md-5 col-sm-5">
-                      <Form.Control
-                        type="text"
-                        id="soTuan"
-                        min="1"
-                        onChange={this.onChangeSoTuan}
-                      >
-                      </Form.Control>
-                    </div>
+                  <div className="col-sm-3 col-md-3 mt-4">
+                    <p>- Số tuần:</p>
+                    <Form.Control
+                      type="number"
+                      id="soTuan"
+                      min="1"
+                      onChange={this.onChangeSoTuan}
+                    >
+                    </Form.Control>
                   </div>
-                  <div>
-                    <div className="col-md-3 col-sm-3 mt-4">
-                      - Số ngày học/tuần:
-                    </div>
-                    <div className="col-md-2 col-sm-2 mt-4">
-                      <Form.Control
-                        type="number"
-                        max="7"
-                        min="1"
-                        id="number"
-                        onChange={this.onChangeSoNgay}
-                      >
-                      </Form.Control>
-                    </div>
-                  </div>
-                </div>
-                <div className="pl-5 pr-5">
-                  <div className="col-sm-12 col-md-12 mt-4">
-                    <p>
-                      - Thời gian học/ngày:
-{' '}
-                      <b>2 giờ/ngày</b>
-                    </p>
+
+                  <div className="col-md-3 col-sm-3 mt-4">
+                    <p>- Số ngày học/tuần:</p>
                     <Form.Control
                       type="number"
                       max="7"
+                      min="1"
+                      id="number"
+                      onChange={this.onChangeSoNgay}
+                    >
+                    </Form.Control>
+                  </div>
+
+                  <div className="col-md-3 col-sm-3 mt-4">
+                    <p>- Thời gian học/ngày:</p>
+                    <Form.Control
+                      type="number"
+                      max="24"
                       min="1"
                       id="numberHour"
                       onChange={this.onChangeTime}
                     >
                     </Form.Control>
-                    {/* <div className="col-md-5 col-sm-5">
-                                            <Form.Control type="time"></Form.Control>
-                                        </div>
-                                        <span className="col-md-2 col-sm-2 text-center"> Đến </span>
-                                        <div className="col-md-5 col-sm-5">
-                                            <Form.Control type="time"></Form.Control>
-                                        </div> */}
                   </div>
                 </div>
+
                 <div className="pl-5 pr-5">
-                  <div className="col-sm-5 col-md-5 mt-3">
+                  <div className="col-sm-4 col-md-4 mt-5">
                     - Tổng chi phí thanh toán cho bên B:
                   </div>
-                  <div className="col-sm-2 col-md-2 mt-3">
-                    <b className="float-right">Số tiền/giờ</b>
+                  <div className="col-sm-2 col-md-2 mt-5 text-center">
+                    <b>Số tiền/giờ (VND)</b>
                   </div>
-                  <div className="col-sm-2 col-md-2 mt-3 float-right">
-                    <b className="float-right">Ngày kết thúc</b>
+                  <div className="col-sm-2 col-md-2 mt-5 text-center">
+                    <b>Ngày kết thúc</b>
                   </div>
-                  <div className="col-sm-3 col-md-3 mt-3 float-right">
-                    <b className="float-right">Số giờ học/ngày</b>
+                  <div className="col-sm-2 col-md-2 mt-5 text-center">
+                    <b>Tổng giờ học</b>
                   </div>
-                  <div className="col-sm-12 col-md-12 mt-4">
-                    <div className="col-sm-5 col-md-5" />
-                    <div className="col-sm-2 col-md-2">
-                      <b className="float-right color-red">
-                        {detailTeacher
-                          ? `${numeral(`${detailTeacher.price}`).format(
-                            '(0,0)'
-                          )} VND`
-                          : null}
-                      </b>
-                    </div>
-                    <div className="col-sm-2 col-md-2">
-                      <b className="float-right color-red">
-                        {endLearnDay || null}
-                      </b>
-                    </div>
-                    <div className="col-sm-3 col-md-3">
-                      <b className="text-center color-red">2</b>
-                    </div>
+                  <div className="col-sm-2 col-md- mt-5 text-center">
+                    <b>Tổng tiền (VND)</b>
+                  </div>
+                  <div className="col-sm-4 col-md-4" />
+                  <div className="col-sm-2 col-md-2 text-center mt-3">
+                    <b className="color-red">
+                      {detailTeacher
+                        ? `${numeral(`${detailTeacher.price}`).format(
+                          '(0,0)'
+                        )}`
+                        : null}
+                    </b>
+                  </div>
+                  <div className="col-sm-2 col-md-2 text-center mt-3">
+                    <b className="color-red">
+                      {endLearnDay || null}
+                    </b>
+                  </div>
+                  <div className="col-sm-2 col-md-2 text-center mt-3">
+                    <b className="color-red">{totalHour || null}</b>
+                  </div>
+                  <div className="col-sm-2 col-md-2 text-center">
+                    <h3 className="color-red"><b id="price"></b>
+                    </h3>
+                    {/* <input
+                      readOnly
+                      type={{ backgroundColor: 'red' }}
+                      id="price"
+                      placeholder="Giá sẽ hiện lên khi nhập đầy đủ thông tin"
+                    /> */}
                   </div>
                 </div>
+
                 <div className="pl-5 pr-5">
                   <div className="col-sm-12 col-md-12 mt-4 mb-5">
                     <p style={{ color: 'red' }}>
                       <i>*Lưu ý:</i>
-                    </p>
-                    <p>
-                      - Thời gian học tối đa là
-{' '}
-                      <b>2 tiếng/ngày</b>
-                      . Nếu quá
-                                            thời gian, bên A sẽ phải có trách nhiệm thanh toán thêm
-                                            cho bên B.
                     </p>
                     <p>
                       - Bên B sẽ phải có trách nhiệm dạy học đầy đủ và làm đúng
@@ -459,27 +538,13 @@ class Contract extends React.PureComponent {
 {' '}
                       <b>khiếu nại</b>
                       {' '}
-                      lên hệ thống.
+                      lên hệ thống để yêu cầu hoàn tiền.
                     </p>
                     <p>
                       - Bên A sẽ không được nhận lại chi phí đã thanh toán cho
-                      bên B nếu hủy bỏ hợp đồng.
-                    </p>
-                    <p>
-                      - Bên A sẽ không được nhận lại chi phí đã thanh toán cho
-                      bên B nếu hủy bỏ hợp đồng.
+                      bên B nếu hủy bỏ ngang hợp đồng.
                     </p>
                   </div>
-                </div>
-
-                <div className="col-sm-5 col-md-5 mt-3 text-center total-price">
-                  <h4>Tổng chi phí thanh toán:</h4>
-                  <input
-                    readOnly
-                    type={{ backgroundColor: 'red' }}
-                    id="price"
-                    placeholder="Giá sẽ hiện lên khi nhập đầy đủ thông tin"
-                  />
                 </div>
 
                 <div className="col-sm-12 col-md-12 mt-5 text-center">

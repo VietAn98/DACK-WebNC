@@ -51,11 +51,11 @@ export class TeacherInfoPage extends React.PureComponent {
       detailTeacher, listNameOfSkill, listTeachers, cityName, listDistrict, userComment
     } = this.props;
     const { skills } = listNameOfSkill;
-    console.log('listNameOfSkilllistNameOfSkill', listNameOfSkill);
+    // console.log('listNameOfSkilllistNameOfSkill', listNameOfSkill);
     return (
       <section style={{ marginTop: '6em', marginBottom: '4em' }}>
         {detailTeacher ? (
-          <Container className="p-5" style={{ boxShadow: '0px 1px 5px 2px grey' }}>
+          <Container className="p-5" style={{ boxShadow: '0px 1px 5px 0.7px grey', borderRadius: '10px' }}>
             <div className="row">
               <div className="col-md-3 col-xl-3 col-lg-3 my-3">
                 <img
@@ -65,18 +65,17 @@ export class TeacherInfoPage extends React.PureComponent {
                     maxWidth: '100%',
                     padding: '5px',
                     border: '1px solid #e4e4e4',
-                    borderRadius: '10%'
+                    borderRadius: '10%',
+                    margin: 'auto'
                   }}
                 />
                 <h4
                   style={{
-                    margin: '0',
                     color: '#ee4540',
-                    fontSize: '1.5em',
+                    fontSize: '1.6em',
                     textTransform: 'capitalize',
-                    lineHeight: '1.8em',
+                    lineHeight: '2em',
                     fontWeight: '600',
-                    letterSpacing: '1px',
                     textAlign: 'center'
                   }}
                 >
@@ -86,7 +85,7 @@ export class TeacherInfoPage extends React.PureComponent {
                   <span
                     style={{
                       fontWeight: 'bolder',
-                      fontSize: 'larger',
+                      fontSize: 'medium',
                       marginRight: '5px'
                     }}
                   >
@@ -98,7 +97,7 @@ export class TeacherInfoPage extends React.PureComponent {
                   <span
                     style={{
                       fontWeight: 'bolder',
-                      fontSize: 'larger',
+                      fontSize: 'medium',
                       marginRight: '5px'
                     }}
                   >

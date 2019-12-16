@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import History from '../components/History/History';
-// import { loginRequest } from '../actions/userAction';
+import { getAllContracts } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
-    // userProfile: state.userProfile
+    allContracts: state.allContracts
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // loginRequest: (gmail, password) => dispatch(loginRequest(gmail, password)),
+    getAllContracts: () => dispatch(getAllContracts()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(History);

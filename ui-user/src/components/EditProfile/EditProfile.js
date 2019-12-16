@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 // import jwtDecode from 'jwt-decode';
-import { Form, Button } from "react-bootstrap";
+import { Form, Button } from 'react-bootstrap';
 // import numeral from 'numeral';
-import Swal from "sweetalert2";
-import "./EditProfile.css";
+import Swal from 'sweetalert2';
+import './EditProfile.css';
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem('user'));
 // console.log('user EditProfile', user);
 const gender = [
   {
-    value: "Nam",
-    text: "Nam"
+    value: 'Nam',
+    text: 'Nam'
   },
   {
-    value: "Nữ",
-    text: "Nữ"
+    value: 'Nữ',
+    text: 'Nữ'
   }
 ];
 
@@ -40,16 +40,16 @@ class EditProfile extends React.PureComponent {
     // console.log('user/ProfilesuserProfilesuserProfiles', userProfiles);
   };
 
-  onGetAvatar = e => {
+  onGetAvatar = (e) => {
     const { avatarName, uploadAvatar } = this.props;
     avatarName(e.target.files[0]);
 
     const fd = new FormData();
-    fd.append("avatar", e.target.files[0], e.target.files[0].name);
+    fd.append('avatar', e.target.files[0], e.target.files[0].name);
     uploadAvatar(fd);
   };
 
-  onChangeCity = e => {
+  onChangeCity = (e) => {
     const { getDistrictByIdCity } = this.props;
     getDistrictByIdCity(e.target.value);
   };
@@ -58,11 +58,11 @@ class EditProfile extends React.PureComponent {
     const { userLogin, currentUser } = this.props;
     userLogin({
       ...currentUser,
-      avatar: ""
+      avatar: ''
     });
   };
 
-  onHandleChange = async e => {
+  onHandleChange = async (e) => {
     const { userLogin, currentUser } = this.props;
 
     await userLogin({
@@ -71,7 +71,7 @@ class EditProfile extends React.PureComponent {
     });
   };
 
-  onHandleChange2 = async e => {
+  onHandleChange2 = async (e) => {
     const { userLogin, currentUser } = this.props;
 
     await userLogin({
@@ -80,7 +80,7 @@ class EditProfile extends React.PureComponent {
     });
   };
 
-  onSubmitInforTeaching = async e => {
+  onSubmitInforTeaching = async (e) => {
     e.preventDefault();
 
     const {
@@ -92,26 +92,26 @@ class EditProfile extends React.PureComponent {
 
     const { gmail } = user;
 
-    let avatar = "";
-    if (currentUser.avatar === "" || currentUser.avatar === null) {
+    let avatar = '';
+    if (currentUser.avatar === '' || currentUser.avatar === null) {
       avatar = `http://localhost:3001/images/${nameAvatar.name}`;
     } else {
       avatar = currentUser.avatar;
     }
 
-    const name = document.getElementById("name").value;
-    const genderSelected = document.getElementById("selectGender").value;
-    const idDistrict = document.getElementById("selectDistrict").value;
+    const name = document.getElementById('name').value;
+    const genderSelected = document.getElementById('selectGender').value;
+    const idDistrict = document.getElementById('selectDistrict').value;
 
     if (user.categoryUser === 0) {
       Promise.resolve(
         updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar)
       ).then(() => {
         Swal.fire({
-          icon: "success",
-          title: "Cập Nhật Thành Công",
-          confirmButtonText: "OK"
-        }).then(result => {
+          icon: 'success',
+          title: 'Cập Nhật Thành Công',
+          confirmButtonText: 'OK'
+        }).then((result) => {
           if (result.value) {
             window.location.reload();
           }
@@ -120,8 +120,8 @@ class EditProfile extends React.PureComponent {
     }
 
     if (user.categoryUser === 1) {
-      const skills = document.getElementsByClassName("checkedbox");
-      let stringSkill = "";
+      const skills = document.getElementsByClassName('checkedbox');
+      let stringSkill = '';
       for (let i = 0; i < skills.length; i += 1) {
         if (skills[i].checked === true) {
           // eslint-disable-next-line radix
@@ -129,8 +129,8 @@ class EditProfile extends React.PureComponent {
           stringSkill += a;
         }
       }
-      const intro = document.getElementById("introduce").value;
-      const price = document.getElementById("price").value;
+      const intro = document.getElementById('introduce').value;
+      const price = document.getElementById('price').value;
       Promise.resolve(
         updateTeacherInfor(
           gmail,
@@ -144,10 +144,10 @@ class EditProfile extends React.PureComponent {
         )
       ).then(() => {
         Swal.fire({
-          icon: "success",
-          title: "Cập Nhật Thành Công",
-          confirmButtonText: "OK"
-        }).then(result => {
+          icon: 'success',
+          title: 'Cập Nhật Thành Công',
+          confirmButtonText: 'OK'
+        }).then((result) => {
           if (result.value) {
             window.location.reload();
           }
@@ -168,9 +168,9 @@ class EditProfile extends React.PureComponent {
     } = this.props;
 
     const arraty = [];
-    listSkills.forEach(item => {
+    listSkills.forEach((item) => {
       let arr = {};
-      teacherSkills.forEach(val => {
+      teacherSkills.forEach((val) => {
         if (item.skillId === val.skillId) {
           arr = Object.assign(item, { checked: true });
           arraty.push(arr);
@@ -182,22 +182,22 @@ class EditProfile extends React.PureComponent {
     // console.log('arraty', arraty);
 
     const newArr = [];
-    arraty.forEach(element => {
+    arraty.forEach((element) => {
       if (!newArr.includes(element)) {
         newArr.push(element);
       }
     });
-    console.log("cityName: ", cityName);
+    console.log('cityName: ', cityName);
 
     // const checkedbox = document.getElementsByClassName('checkedbox');
     // console.log('checkedbox', checkedbox);
     return (
       <div
         style={{
-          backgroundColor: "rgba(0,0,0,0.5)",
-          borderRadius: "20px",
-          marginRight: "3rem",
-          paddingBottom: "3rem"
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          borderRadius: '20px',
+          marginRight: '3rem',
+          paddingBottom: '3rem'
         }}
       >
         <h3 className="w3layouts-heading text-white">
@@ -234,29 +234,29 @@ class EditProfile extends React.PureComponent {
                   required
                 >
                   {gender
-                    ? gender.map(item => {
-                        if (item.value === currentUser.gender) {
-                          return (
-                            <option
-                              selected
-                              className="black-title"
-                              value={item.value}
-                            >
-                              {item.text}
-                            </option>
-                          );
-                        }
+                    ? gender.map((item) => {
+                      if (item.value === currentUser.gender) {
                         return (
-                          <option className="black-title" value={item.value}>
+                          <option
+                            selected
+                            className="black-title"
+                            value={item.value}
+                          >
                             {item.text}
                           </option>
                         );
-                      })
+                      }
+                      return (
+                        <option className="black-title" value={item.value}>
+                          {item.text}
+                        </option>
+                      );
+                    })
                     : null}
                 </Form.Control>
               </div>
               <div className="col-md-4 col-sm-4 mt-4 contact_right_grid float-right">
-                {currentUser.avatar === null || currentUser.avatar === "" ? (
+                {currentUser.avatar === null || currentUser.avatar === '' ? (
                   <div>
                     <h5 className="float-left text-white">
                       <b>Chọn ảnh đại diện:</b>
@@ -269,119 +269,212 @@ class EditProfile extends React.PureComponent {
                     />
                   </div>
                 ) : (
-                  <div>
-                    <div className="avatarHolder">
-                      <img
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          padding: "1%"
-                        }}
-                        alt="avatar"
-                        src={currentUser.avatar}
-                        required
-                      />
+                    <div>
+                      <div className="avatarHolder">
+                        <img
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            padding: '1%'
+                          }}
+                          alt="avatar"
+                          src={currentUser.avatar}
+                          required
+                        />
+                      </div>
+                      <Button
+                        style={{ marginLeft: '40%', marginTop: '1%' }}
+                        onClick={this.onChangeImage}
+                      >
+                        Thay đổi
+                      </Button>
                     </div>
-                    <Button
-                      style={{ marginLeft: "40%", marginTop: "1%" }}
-                      onClick={this.onChangeImage}
-                    >
-                      Thay đổi
-                    </Button>
-                  </div>
-                )}
+                  )}
                 {/* <input type="file" onChange={this.onChangeAvatar} /> */}
               </div>
 
-              {/* <div className="col-md-7 col-sm-7 contact_left_grid mt-4 pt-1">
-                                <h5 className="float-left text-white">
-                                    <b>Địa chỉ:</b>
-                                </h5>
-                                <input
-                                    type="text"
-                                    id="address"
-                                    value={user.}
-                                />
-                            </div> */}
-              <div className="col-md-4 col-sm-4 mt-4">
-                <h5 className="float-left text-white">
-                  <b>Tỉnh/Thành phố:</b>
-                </h5>
-                <Form.Control
-                  as="select"
-                  className="select-form"
-                  id="selectCity"
-                  onChange={this.onChangeCity}
-                  required
-                >
-                  {listCity
-                    ? listCity.map(item => {
-                        if (item.cityId === cityName.cityId) {
-                          return (
-                            <option
-                              selected
-                              value={item.cityId}
-                              className="black-title"
-                            >
-                              {item.name}
-                            </option>
-                          );
-                        }
-                        return (
-                          <option value={item.cityId} className="black-title">
-                            {item.name}
-                          </option>
-                        );
-                      })
-                    : null}
-                </Form.Control>
-              </div>
-              <div className="col-md-3 col-sm-3 mt-4">
-                <h5 className="float-left text-white">
-                  <b>Quận:</b>
-                </h5>
-                <Form.Control
-                  as="select"
-                  className="select-form"
-                  id="selectDistrict"
-                  required
-                >
-                  {districtNames.length !== 0
-                    ? districtNames.map(item => (
-                        <option value={item.districtId} className="black-title">
-                          {item.name}
-                        </option>
-                      ))
-                    : listDistrict.map(item => {
-                        if (item.cityId === cityName.cityId) {
-                          if (item.districtId === currentUser.districtId) {
+              {currentUser.avatar === null || currentUser.avatar === ''
+                ? (
+                  <div>
+                    <div className="col-md-6 col-sm-6 contact_left_grid mt-4 pt-1">
+                      <h5 className="float-left text-white">
+                        <b>Địa chỉ:</b>
+                      </h5>
+                      <input
+                        type="text"
+                        id="address"
+                      // value={user.}
+                      />
+                    </div>
+                    <div className="col-md-3 col-sm-3 mt-4">
+                      <h5 className="float-left text-white">
+                        <b>Tỉnh/Thành phố:</b>
+                      </h5>
+                      <Form.Control
+                        as="select"
+                        className="select-form"
+                        id="selectCity"
+                        onChange={this.onChangeCity}
+                        required
+                      >
+                        {listCity
+                          ? listCity.map((item) => {
+                            if (item.cityId === cityName.cityId) {
+                              return (
+                                <option
+                                  selected
+                                  value={item.cityId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
                             return (
-                              <option
-                                selected
-                                value={item.districtId}
-                                className="black-title"
-                              >
+                              <option value={item.cityId} className="black-title">
                                 {item.name}
                               </option>
                             );
-                          }
-                          return (
-                            <option
-                              value={item.districtId}
-                              className="black-title"
-                            >
+                          })
+                          : null}
+                      </Form.Control>
+                    </div>
+                    <div className="col-md-3 col-sm-3 mt-4">
+                      <h5 className="float-left text-white">
+                        <b>Quận:</b>
+                      </h5>
+                      <Form.Control
+                        as="select"
+                        className="select-form"
+                        id="selectDistrict"
+                        required
+                      >
+                        {districtNames.length !== 0
+                          ? districtNames.map((item) => (
+                            <option value={item.districtId} className="black-title">
                               {item.name}
                             </option>
-                          );
-                        }
-                        return null;
-                      })}
-                </Form.Control>
-              </div>
+                          ))
+                          : listDistrict.map((item) => {
+                            if (item.cityId === cityName.cityId) {
+                              if (item.districtId === currentUser.districtId) {
+                                return (
+                                  <option
+                                    selected
+                                    value={item.districtId}
+                                    className="black-title"
+                                  >
+                                    {item.name}
+                                  </option>
+                                );
+                              }
+                              return (
+                                <option
+                                  value={item.districtId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return null;
+                          })}
+                      </Form.Control>
+                    </div>
+                  </div>
+) : (
+                  <div>
+                    <div className="col-md-7 col-sm-7 contact_left_grid mt-4 pt-1">
+                      <h5 className="float-left text-white">
+                        <b>Địa chỉ:</b>
+                      </h5>
+                      <input
+                        type="text"
+                        id="address"
+                      // value={user.}
+                      />
+                    </div>
+                    <div className="col-md-4 col-sm-4 mt-4">
+                      <h5 className="float-left text-white">
+                        <b>Tỉnh/Thành phố:</b>
+                      </h5>
+                      <Form.Control
+                        as="select"
+                        className="select-form"
+                        id="selectCity"
+                        onChange={this.onChangeCity}
+                        required
+                      >
+                        {listCity
+                          ? listCity.map((item) => {
+                            if (item.cityId === cityName.cityId) {
+                              return (
+                                <option
+                                  selected
+                                  value={item.cityId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return (
+                              <option value={item.cityId} className="black-title">
+                                {item.name}
+                              </option>
+                            );
+                          })
+                          : null}
+                      </Form.Control>
+                    </div>
+                    <div className="col-md-3 col-sm-3 mt-4">
+                      <h5 className="float-left text-white">
+                        <b>Quận:</b>
+                      </h5>
+                      <Form.Control
+                        as="select"
+                        className="select-form"
+                        id="selectDistrict"
+                        required
+                      >
+                        {districtNames.length !== 0
+                          ? districtNames.map((item) => (
+                            <option value={item.districtId} className="black-title">
+                              {item.name}
+                            </option>
+                          ))
+                          : listDistrict.map((item) => {
+                            if (item.cityId === cityName.cityId) {
+                              if (item.districtId === currentUser.districtId) {
+                                return (
+                                  <option
+                                    selected
+                                    value={item.districtId}
+                                    className="black-title"
+                                  >
+                                    {item.name}
+                                  </option>
+                                );
+                              }
+                              return (
+                                <option
+                                  value={item.districtId}
+                                  className="black-title"
+                                >
+                                  {item.name}
+                                </option>
+                              );
+                            }
+                            return null;
+                          })}
+                      </Form.Control>
+                    </div>
+                  </div>
+                )}
 
               {user.categoryUser === 1 ? (
                 <div>
-                  {currentUser.avatar === "" || currentUser.avatar === null ? (
+                  {currentUser.avatar === '' || currentUser.avatar === null ? (
                     <div className="col-md-5 col-sm-5 contact_left_grid">
                       <h5 className="float-left pt-3 text-white">
                         <b>Giá tiền thuê/giờ (VND/h):</b>
@@ -400,24 +493,24 @@ class EditProfile extends React.PureComponent {
                       </div>
                     </div>
                   ) : (
-                    <div className="col-md-7 col-sm-7 contact_left_grid">
-                      <h5 className="float-left pt-3 text-white">
-                        <b>Giá tiền thuê/giờ (VND/h):</b>
-                      </h5>
-                      <input
-                        type="number"
-                        id="price"
-                        placeholder="VND"
-                        required
-                        // eslint-disable-next-line radix
-                        value={currentUser.price}
-                        onChange={this.onHandleChange2}
-                      />
-                      <div className="invalid-feedback text-white">
-                        Please choose.
+                      <div className="col-md-7 col-sm-7 contact_left_grid">
+                        <h5 className="float-left pt-3 text-white">
+                          <b>Giá tiền thuê/giờ (VND/h):</b>
+                        </h5>
+                        <input
+                          type="number"
+                          id="price"
+                          placeholder="VND"
+                          required
+                          // eslint-disable-next-line radix
+                          value={currentUser.price}
+                          onChange={this.onHandleChange2}
+                        />
+                        <div className="invalid-feedback text-white">
+                          Please choose.
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   <div className="col-md-12 col-sm-12">
                     <h5 className="float-left pt-4 text-white">
@@ -425,19 +518,17 @@ class EditProfile extends React.PureComponent {
                     </h5>
                     <div className="mt-5 pt-4 font-size-13">
                       {newArr
-                        ? newArr.map(item => {
-                            return (
-                              <div className="col-md-2 col-sm-2">
-                                <input
-                                  className="checkedbox"
-                                  defaultChecked={item.checked ? true : false}
-                                  type="checkbox"
-                                  id={item.skillId}
-                                />
-                                <p> {item.name}</p>
-                              </div>
-                            );
-                          })
+                        ? newArr.map((item) => (
+                          <div className="col-md-2 col-sm-2">
+                            <input
+                              className="checkedbox"
+                              defaultChecked={!!item.checked}
+                              type="checkbox"
+                              id={item.skillId}
+                            />
+                            <p>{item.name}</p>
+                          </div>
+                        ))
                         : null}
                     </div>
                     <div className="clearfix" />
