@@ -68,6 +68,9 @@ export const teachers = (state = [], action) => {
     case 'GET_LIST_TEACHER': {
       return action.teacher;
     }
+    case 'GET_LIST_LIMIT_TEACHER': {
+      return action.teacher;
+    }
     default:
       return state;
   }
