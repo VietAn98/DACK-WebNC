@@ -90,7 +90,7 @@ export const getListTeacher = () => dispatch =>
     });
 
 export const getListLimitTeacher = (page) => dispatch =>
-  fetch(`${API.GET_LIMIT_TEACHER }?page=${page}`, {
+  fetch(`${API.GET_LIMIT_TEACHER}?page=${page}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
@@ -99,6 +99,21 @@ export const getListLimitTeacher = (page) => dispatch =>
     .then(response => response.json())
     .then(teacher => {
       dispatch({ type: "GET_LIST_LIMIT_TEACHER", teacher });
+    })
+    .catch(error => {
+      throw error;
+    });
+
+export const getListLimitStudent = (page) => dispatch =>
+  fetch(`${API.GET_LIMIT_STUDENT}?page=${page}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+    }
+  })
+    .then(response => response.json())
+    .then(students => {
+      dispatch({ type: "GET_LIMIT_STUDENT", students });
     })
     .catch(error => {
       throw error;

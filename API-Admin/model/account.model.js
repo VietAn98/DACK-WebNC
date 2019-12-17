@@ -17,6 +17,14 @@ module.exports = {
     return db.load(`select * from account where categoryUser = 1 LIMIT ${limit} OFFSET ${offset}`);
   },
 
+  getCountStudent: () => {
+    return db.load("select COUNT(*) as sumT from account where categoryUser = 0");
+  },
+
+  getListAccStudentLimit: (limit,offset) => {
+    return db.load(`select * from account where categoryUser = 0 LIMIT ${limit} OFFSET ${offset}`);
+  },
+
   getAccById: (id) => {
     return db.load(`select * from account where userId = ${id}`);
   },

@@ -9,6 +9,14 @@ module.exports = {
     return db.load(`select * from skill where skillId = "${id}" `);
   },
 
+  getCountSkill: () => {
+    return db.load("select COUNT(*) as sumT from skill");
+  },
+
+  getListSkillLimit: (limit,offset) => {
+    return db.load(`select * from skill LIMIT ${limit} OFFSET ${offset}`);
+  },
+
   addSkill: entity => {
     return db.add("skill", entity);
   },

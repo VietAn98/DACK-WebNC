@@ -4,7 +4,8 @@ import {
   getListSkill,
   deleteSingleSkill,
   updateSkill,
-  addSkill
+  addSkill,
+  getLimitSkills
 } from '../actions/skillAction';
 
 const mapStateToProps = (state) => ({
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getListSkill: () => dispatch(getListSkill()),
+  getLimitSkills: (page) =>  dispatch(getLimitSkills(page)),
   deleteSingleSkill: (skillId) => dispatch(deleteSingleSkill(skillId)),
   updateSkill: (skillId, name) => dispatch(updateSkill(skillId, name)),
   addSkill: (name) => dispatch(addSkill(name))

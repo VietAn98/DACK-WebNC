@@ -27,6 +27,9 @@ export const students = (state = [], action) => {
     case 'GET_LIST_STUDENTS': {
       return action.students;
     }
+    case 'GET_LIMIT_STUDENT': {
+      return action.students;
+    }
     default:
       return state;
   }

@@ -12,9 +12,11 @@ const APIService = {
   // teacher
   GET_TEACHERS: `${URL}/api-admin/get-list-account-teacher`,
   GET_LIMIT_TEACHER: `${URL}/api-admin/get-list-limit-account-teacher`,
+  GET_LIMIT_STUDENT: `${URL}/api-admin/get-list-account-student`,
 
   // skill
   GET_SKILLS: `${URL}/api-admin/get-list-skill`,
+  GET_SKILLS_LIMIT: `${URL}/api-admin/get-list-limit-skill`,
   DELE_SKILL: `${URL}/api-admin/delete-skill`,
   UPDATE_SKILL: `${URL}/api-admin/update-skill`,
   ADD_SKILL: `${URL}/api-admin/add-skill`,

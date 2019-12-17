@@ -68,13 +68,13 @@ class student extends React.PureComponent {
         </Table>
         <div style={{ textAlign: "center" }}>
           <Pagination>
-            <Pagination.First />
+            <Pagination.First onClick={() => this.changePage(index-1)}/>
             {arrPage.map(number => (
               <Pagination.Item active = {number===index || false} onClick={() => this.changePage(number)}>
                 {number}
               </Pagination.Item>
             ))}
-            <Pagination.Last />
+            <Pagination.Last onClick={() => this.changePage(index+1)} />
           </Pagination>
         </div>
       </div>
