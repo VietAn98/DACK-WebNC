@@ -74,7 +74,7 @@ class student extends React.PureComponent {
                 {number}
               </Pagination.Item>
             ))}
-            <Pagination.Last onClick={() => this.changePage(index+1)} />
+            <Pagination.Last disabled={numberPages === 1 || numberPages === index || false} onClick={() => this.changePage(index+1)} />
           </Pagination>
         </div>
       </div>

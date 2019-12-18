@@ -11,6 +11,8 @@ import Teacher from './containers/ManageTeacherContainer';
 import DetailsUser from './containers/DetailUserContainer';
 import ListSkill from './containers/ManageSkillContainer';
 import PageNotFound from './components/PageNotFound';
+import listContract from './containers/ContractContainer';
+import DetailContract from './containers/detailContractContainer';
 
 import './App.css';
 
@@ -36,6 +38,10 @@ export class App extends React.PureComponent {
                     <Route path="/manage-teacher" exact component={Teacher} />
                     <Route path="/manage-admin" exact component={CreateAccountContainer} />
                     <Route path="/manage-skills" exact component={ListSkill} />
+                    <Route path="/manage-contract" exact component={listContract} />
+                    <Route path="/manage-detail-contract/:id">
+                      <DetailContract />
+                    </Route> 
                     <Route path="/" exact component={HomePage} />
                     <Route component={PageNotFound} />
                   </Switch>

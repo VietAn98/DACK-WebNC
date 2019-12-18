@@ -21,6 +21,13 @@ const APIService = {
   UPDATE_SKILL: `${URL}/api-admin/update-skill`,
   ADD_SKILL: `${URL}/api-admin/add-skill`,
 
+  // contract
+  GET_LIMIT_CONTRACT: `${URL}/api-admin/get-list-limit-contract`,
+  GET_LIST_STATE_CONTRACT: `${URL}/api-admin/get-list-state-contract`,
+  GET_LIST_CONTRACT_BY_STATE: `${URL}/api-admin/get-list-contract-by-state/`,
+  GET_DETAIL_CONTRACT: `${URL}/api-admin/get-detail-contract/`,
+  UPDATE_CONTRACT: `${URL}/api-admin/update-contract`
+
 //   GET_INFO: `${URL}/api/current-user-profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,
 //   // CHANGE_AVATAR: `${URL}/user/uploadavatar`,

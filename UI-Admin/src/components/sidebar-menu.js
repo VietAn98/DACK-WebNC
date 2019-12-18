@@ -35,7 +35,7 @@ class SideBarMenu extends React.PureComponent {
                   </li>
                 </ul>
               </li>
-              <li id="menu-comunicacao">
+              {/* <li id="menu-comunicacao">
                 <a href="#">
                   <i className="fa fa-book nav_icon" />
                   <span>Quản lý Hợp đồng học</span>
@@ -55,6 +55,13 @@ class SideBarMenu extends React.PureComponent {
                     <a href="icons.html">Icons</a>
                   </li>
                 </ul>
+              </li>
+               */}
+              <li>
+                <a href="/manage-contract">
+                <i className="fa fa-book nav_icon" />
+                  <span>Quản lý hợp đồng</span>
+                </a>
               </li>
               <li>
                 <a href="/manage-skills">
