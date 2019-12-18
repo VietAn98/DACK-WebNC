@@ -63,6 +63,7 @@ module.exports = {
         districtId: req.body.districtId,
         categoryUser: req.body.categoryUser,
         state: 0,
+        address: req.body.address,
         gender: req.body.gender,
         keyPass: keyPass,
         adLock: 1

@@ -28,6 +28,7 @@ module.exports = {
         avatar: req.body.avatar,
         price: req.body.price,
         name: req.body.name,
+        address: req.body.address,
         gender: req.body.gender,
         districtId: req.body.districtId
       };
