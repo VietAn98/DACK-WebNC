@@ -50,7 +50,7 @@ module.exports = {
   },
 
   getAccById: id => {
-    return db.load(`select * from account where userId = '${id}' `);
+    return db.load(`SELECT tm.*, ct.name as nameCity FROM (select ac.*, dt.name as nameDistrict, dt.cityId from account as ac JOIN district as dt on ac.districtId = dt.districtId where userId = ${id}) as tm JOIN city as ct ON tm.cityId = ct.cityId `);
   },
 
   getAddressByUser: idDistrict => {
