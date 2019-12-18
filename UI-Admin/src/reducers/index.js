@@ -27,6 +27,9 @@ export const students = (state = [], action) => {
     case 'GET_LIST_STUDENTS': {
       return action.students;
     }
+    case 'GET_LIMIT_STUDENT': {
+      return action.students;
+    }
     default:
       return state;
   }
@@ -66,6 +69,9 @@ export const getDistrict = (state = {}, action) => {
 export const teachers = (state = [], action) => {
   switch (action.type) {
     case 'GET_LIST_TEACHER': {
+      return action.teacher;
+    }
+    case 'GET_LIST_LIMIT_TEACHER': {
       return action.teacher;
     }
     default:

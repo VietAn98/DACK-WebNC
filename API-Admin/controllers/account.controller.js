@@ -11,6 +11,37 @@ module.exports = {
       .catch(err => res.status(400).json({ message: "thất bại", err: err }));
   },
 
+  getListLimitAccountTeacher: (req, res) => {
+    var page = req.query.page || 1;
+    var limit = 6;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountTeacher(),
+      db.getListAccTeacherLimit(limit,offset)
+    ]).then(([sumTeacher, limitTeacher]) => {
+      var numberPages = parseInt(sumTeacher[0].sumT / limit);
+      if (sumTeacher[0].sumT % limit > 0) numberPages+=1;
+      res.status(200).json({numberPages ,limitTeacher, offset,page})
+
+    })
+  },
+  getListAccountStudent: (req, res) => {
+    var page = req.query.page || 1;
+    var limit = 6;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountStudent(),
+      db.getListAccStudentLimit(limit,offset)
+    ]).then(([sumStudent, limitStudent]) => {
+      var numberPages = parseInt(sumStudent[0].sumT / limit);
+      if (sumStudent[0].sumT % limit > 0) numberPages+=1;
+      res.status(200).json({numberPages ,limitStudent, offset,page})
+
+    })
+  },
+
   getDetailAccount: (req, res) => {
     const id = req.params.id;
     return db
@@ -20,14 +51,7 @@ module.exports = {
       })
       .catch(err => res.status(400).json({ message: "thất bại", err: err }));
   },
-  getListAccountStudent: (req, res) => {
-    return db
-      .getListAccstudent()
-      .then(list => {
-        res.status(200).json(list);
-      })
-      .catch(err => res.status(400).json({ message: "thất bại", err: err }));
-  },
+ 
 
   getAddressByUser: (req, res) => {
     const id = req.params.idDistrict;

@@ -47,6 +47,22 @@ module.exports = {
       .catch(err => res.status(400).json(err));
   },
 
+  getListLimitSkill: (req, res) => {
+    var page = req.query.page || 1;
+    var limit = 6;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountSkill(),
+      db.getListSkillLimit(limit,offset)
+    ]).then(([sumsSkill, limitSkill]) => {
+      var numberPages = parseInt(sumsSkill[0].sumT / limit);
+      if (sumsSkill[0].sumT % limit > 0) numberPages+=1;
+      res.status(200).json({numberPages ,limitSkill, offset,page});
+      
+    })
+  },
+
   getSkillById: (req, res) => {
     const id = req.params.id;
     return db
