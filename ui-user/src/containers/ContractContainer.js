@@ -1,33 +1,44 @@
+/* eslint-disable global-require */
 import { connect } from 'react-redux';
-import Contract from '../components/Contract/Contract';
 import {
   getListCity,
   getDistrictByIdCity,
   getSingleTeacherById,
   getListDisctrict,
-  // getInforUserById,
+  getInforUserById,
   getUserInfor,
-  getListSkills,
+  // getListSkills,
   getEndDay,
   listNameSkill,
   createContract,
   getCityByIdDistrict,
   getCityByIdDistrictForTeacher,
-  getTotalHour
+  getTotalHour,
+
+  getDetailContractByIdContract,
+  updateStateContract
 } from '../actions/userAction';
+
+const Components = {
+  Contract: require('../components/Contract/Contract').default,
+  ReadOnlyContract: require('../components/Contract/ReadOnlyContract').default
+};
 
 const mapStateToProps = (state) => ({
   listCity: state.listCity,
   districtNames: state.districtNames,
   detailTeacher: state.detailTeacher,
   listDistrict: state.listDistrict,
-  // userInfor: state.userInfor,
+  userInfor: state.userInfor,
   userProfiles: state.userProfiles,
   endLearnDay: state.endLearnDay,
   listNameOfSkill: state.listNameOfSkill,
   cityName: state.cityName,
   cityNameForTeacher: state.cityNameForTeacher,
-  totalHour: state.totalHour
+  totalHour: state.totalHour,
+
+  // ReadOnlyContract
+  contractByIdContract: state.contractByIdContract
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -35,7 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
   getDistrictByIdCity: (id) => dispatch(getDistrictByIdCity(id)),
   getSingleTeacherById: (id) => dispatch(getSingleTeacherById(id)),
   getListDisctrict: () => dispatch(getListDisctrict()),
-  // getInforUserById: (id) => dispatch(getInforUserById(id)),
+  getInforUserById: (id) => dispatch(getInforUserById(id)),
   getUserInfor: (id) => dispatch(getUserInfor(id)),
   getEndDay: (day) => dispatch(getEndDay(day)),
   listNameSkill: (id) => dispatch(listNameSkill(id)),
@@ -64,6 +75,13 @@ const mapDispatchToProps = (dispatch) => ({
   ),
   getCityByIdDistrict: (idDis) => dispatch(getCityByIdDistrict(idDis)),
   getCityByIdDistrictForTeacher: (idDis) => dispatch(getCityByIdDistrictForTeacher(idDis)),
-  getTotalHour: (hour) => dispatch(getTotalHour(hour))
+  getTotalHour: (hour) => dispatch(getTotalHour(hour)),
+
+  // ReadOnlyContract
+  getDetailContractByIdContract: (idContract) => dispatch(getDetailContractByIdContract(idContract)),
+  updateStateContract: (idContract, state) => dispatch(updateStateContract(idContract, state))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Contract);
+export default (componentName) => connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Components[componentName]);

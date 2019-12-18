@@ -2,55 +2,58 @@ var db = require("../utils/connectDB");
 
 module.exports = {
   getContractByUser: idUser => {
-    return db.load(`select * from contract where studentId = "${idUser}"`);
+    return db.load(`SELECT * FROM 
+    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
+      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+      as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
+      as bb WHERE bb.studentId="${idUser}"`);
+  },
+
+  getContractByTeacher: idUser => {
+    return db.load(`SELECT * FROM 
+    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
+      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+      as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
+      as bb WHERE bb.teacherId="${idUser}"`);
   },
 
   getAllContract: () => {
-    return db.load(`select * from contract`);
+    return db.load(`SELECT new2.*, st.name as Status from 
+    (select new.*, acc2.name as TeacherName from 
+      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) as new 
+      JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state`);
   },
 
   createContract: (contract) => {
     return db.add("contract", contract);
   },
 
-  getListContractAwait: () => {
-    return db.load("SELECT * FROM contract WHERE state = 1")
+  filterListContractStudent: (idUser, idState) => {
+    return db.load(`SELECT * FROM 
+    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
+      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+      as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
+      as bb WHERE bb.studentId="${idUser}" AND bb.state="${idState}"`)
   },
 
-  getListContractVerified: () => {
-    return db.load("SELECT * FROM contract WHERE state = 2")
-  },
-
-  getListContractComplete: () => {
-    return db.load("SELECT * FROM contract WHERE state = 3")
-  },
-
-  getListContractDeny: () => {
-    return db.load("SELECT * FROM contract WHERE state = 4")
-  },
-
-  getListContractAwaitPay: () => {
-    return db.load("SELECT * FROM contract WHERE state = 5")
-  },
-
-  getListContractReported: () => {
-    return db.load("SELECT * FROM contract WHERE state = 6")
-  },
-
-  getListContractCancel: () => {
-    return db.load("SELECT * FROM contract WHERE state = 7")
+  filterListContractTeacher: (idUser, idState) => {
+    return db.load(`SELECT * FROM 
+    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
+      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+      as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
+      as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}"`)
   },
 
   detailContract: (id) => {
     return db.load(`SELECT * FROM contract WHERE idContract = ${id}`)
   },
 
-  getSkillByContract : (id) => {
+  getSkillByContract: (id) => {
     return db.load(`SELECT * FROM skill_contract as sc JOIN skill as sk on sc.idSkill = sk.skillId where sc.idContract = ${id}`)
   },
 
-  updateStateContract : (contract) => {
+  updateStateContract: (contract) => {
     return db.update("contract", "idContract", contract);
   }
- 
+
 };

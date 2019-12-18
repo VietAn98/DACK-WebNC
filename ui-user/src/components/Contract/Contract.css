@@ -31,13 +31,23 @@
 }
 
 .color-red {
-    color: red;
+  color: red;
 }
 
 .dateStart::-webkit-clear-button {
-    display: none;
+  display: none;
 }
 
 h3 {
   margin-top: 10px !important;
+}
+
+.mystamp {
+  width: 18%;
+  height: 18%;
+  margin-top: 2em;
+  transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
 }

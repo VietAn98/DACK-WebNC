@@ -2,16 +2,12 @@ const contractController = require('../controllers').contractController
 
 module.exports = app => {
     app.get('/api/get-contract-by-user/:id', contractController.getContractByUser);
+    app.get('/api/get-contract-by-teacher/:id', contractController.getContractByTeacher);
     app.post('/api/create-contract',contractController.createContract );
     
     //get  list contract
-    app.get('/api/get-list-contract-await', contractController.getListContractAwait);
-    app.get('/api/get-list-contract-verified', contractController.getListContractVerified);
-    app.get('/api/get-list-contract-complete',contractController.getListContractComplete)
-    app.get('/api/get-list-contract-deny',contractController.getListContractDeny);
-    app.get('/api/get-list-contract-wait-pay',contractController.getListContractAwaitPay);
-    app.get('/api/get-list-contract-reported', contractController.getListContractReported);
-    app.get('/api/get-list-contract-cancel', contractController.getListContractCancel);
+    app.get('/api/filter-list-contract-student/:idUser', contractController.filterListContractStudent);
+    app.get('/api/filter-list-contract-teacher/:idUser', contractController.filterListContractTeacher);
     
     //detail contract
     app.get('/api/get-detail-contract/:id', contractController.detailContract);

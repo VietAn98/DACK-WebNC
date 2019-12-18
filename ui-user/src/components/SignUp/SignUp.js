@@ -154,6 +154,14 @@ class Register extends React.PureComponent {
                       required
                     />
                   </div>
+                  <div className="col-md-12 col-sm-12 mt-4">
+                    <input
+                      type="text"
+                      id="address"
+                      placeholder="Địa chỉ"
+                      required
+                    />
+                  </div>
                   <div className="col-md-6 col-sm-6 contact_left_grid pt-3">
                     <h5 className="float-left text-white">
                       <b>Tỉnh/Thành phố:</b>

@@ -21,7 +21,7 @@ class AfterLogin extends React.PureComponent {
 			decoded = jwtDecode(tokenn);
 		}
 		const { signOut, userProfiles } = this.props;
-		console.log('userProfiles', userProfiles);
+		// console.log('userProfiles', userProfiles);
 		return (
 			<div>
 				<div className="after-login">

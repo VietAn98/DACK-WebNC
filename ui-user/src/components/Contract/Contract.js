@@ -512,7 +512,8 @@ class Contract extends React.PureComponent {
                     <b className="color-red">{totalHour || null}</b>
                   </div>
                   <div className="col-sm-2 col-md-2 text-center">
-                    <h3 className="color-red"><b id="price"></b>
+                    <h3 className="color-red">
+                      <b id="price" />
                     </h3>
                     {/* <input
                       readOnly

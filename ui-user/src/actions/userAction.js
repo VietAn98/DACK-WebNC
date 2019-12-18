@@ -294,6 +294,7 @@ export const getUserInfor = (id) => (dispatch) => fetch(API.GET_USER_INFO_BY_ID 
 })
   .then((respond) => respond.json())
   .then((resr) => {
+    console.log('getUserInfor', resr);
     dispatch(userLogin(resr));
     dispatch(userProfile(resr));
     // dispatch(getInforTeacher(resr));
@@ -332,22 +333,23 @@ export const getSingleTeacherById = (id) => (dispatch) => fetch(API.GET_TEACHER_
 })
   .then((respond) => respond.json())
   .then(async (inforTeacher) => {
+    console.log('getSingleTeacherById', inforTeacher);
     await dispatch(getInforTeacher(inforTeacher));
   })
   .catch((err) => console.log('Error getSingleTeacherById occured', err));
 
-// export const getInforUserById = (id) => (dispatch) => fetch(
-//   API.GET_USER_INFO_BY_ID + id, {
-// 		method: 'GET',
-// 		headers: {
-// 			'Content-Type': 'application/x-www-form-urlencoded'
-// 		},
-//   }
-//   ).then((respond) => respond.json())
-//   .then(async (userInfor) => {
-//       console.log('getInforUserById', userInfor);
-//       await dispatch({ type: 'GET_USER_INFO_BY_ID', userInfor });
-// 		}).catch((err) => console.log('Error getInforUserById occured', err));
+export const getInforUserById = (id) => (dispatch) => fetch(
+  API.GET_USER_INFO_BY_ID + id, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+}
+).then((respond) => respond.json())
+  .then(async (userInfor) => {
+    console.log('getInforUserById', userInfor);
+    await dispatch({ type: 'GET_USER_INFO_BY_ID', userInfor });
+  }).catch((err) => console.log('Error getInforUserById occured', err));
 
 export const listTeacherTop = () => (dispatch) => fetch(API.GET_TEACHERS_TOP, {
   method: 'GET',
@@ -670,15 +672,131 @@ export const createContract = (
   // .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
   .catch((err) => console.log('Error registerRequest occured', err));
 
-export const getAllContracts = () => (dispatch) => fetch(API.GET_ALL_CONTRACTS, {
+// export const getAllContracts = () => (dispatch) => fetch(API.GET_ALL_CONTRACTS, {
+//   method: 'GET',
+//   headers: {
+//     'Content-Type': 'application/x-www-form-urlencoded'
+//   }
+// })
+//   .then((respond) => respond.json())
+//   .then((res) => {
+//     console.log('getAllContracts', res);
+//     dispatch({ type: 'GET_ALL_CONTRACTS', allContracts: res });
+//   })
+//   .catch((err) => console.log('Error getAllContracts occured', err));
+
+export const getContractByUserId = (idUser) => (dispatch) => fetch(
+  API.GET_CONTRACT_BY_USER_ID + idUser, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
-})
+}
+)
   .then((respond) => respond.json())
   .then((res) => {
-    console.log('getAllContracts', res);
-    dispatch({ type: 'GET_ALL_CONTRACTS', allContracts: res });
+    // console.log('getContractByUserId', res);
+    dispatch({ type: 'GET_CONTRACT_BY_USER_ID', contractByIdUser: res });
   })
-  .catch((err) => console.log('Error getAllContracts occured', err));
+  .catch((err) => console.log('Error getContractByUserId occured', err));
+
+export const getContractByTeacherId = (idUser) => (dispatch) => fetch(
+  API.GET_CONTRACT_BY_TEACHER_ID + idUser, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
+)
+  .then((respond) => respond.json())
+  .then((res) => {
+    console.log('getContractByTeacherId', res);
+    dispatch({ type: 'GET_CONTRACT_BY_TEACHER_ID', contractByIdTeacher: res });
+  })
+  .catch((err) => console.log('Error getContractByTeacherId occured', err));
+
+export const getDetailContractByIdContract = (idContract) => (dispatch) => fetch(
+  API.GET_DETAIL_CONTRACT_BY_ID + idContract, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
+)
+  .then((respond) => respond.json())
+  .then((res) => {
+    console.log('getDetailContractByIdContract', res);
+    dispatch({ type: 'GET_DETAIL_CONTRACT_BY_ID', contractByIdContract: res });
+  })
+  .catch((err) => console.log('Error getDetailContractByIdContract occured', err));
+
+export const updateStateContract = (
+  idContract,
+  state
+) => (dispatch) => fetch(API.UPDATE_STATE_CONTRACT + idContract, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    idContract,
+    state
+  })
+})
+  .then(async (respond) => {
+    if (respond.status === 200) {
+      await Swal.fire({
+        icon: 'success',
+        title: 'Thành Công',
+      });
+      history.push('/Settings');
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Thất bại',
+        text: 'Xin hãy thử lại'
+        // footer: '<a href>Đến Trang Chủ</a>',
+      });
+    }
+  })
+  // .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
+  .catch((err) => console.log('Error updateStateContract occured', err));
+
+export const filterContractsOfStudent = (idUser, idState) => (dispatch) => fetch(
+  `${API.FILTER_LIST_CONTRACT_STUDENT + idUser}?idState=${idState}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
+)
+  .then((respond) => respond.json())
+  .then((contractsOfStudent) => {
+    console.log('filterContractsOfStudent', contractsOfStudent);
+    if (contractsOfStudent.message) {
+      dispatch({ type: 'FILTER_LIST_CONTRACT_STUDENT', contractsOfStudent: [] });
+    } else {
+      dispatch({ type: 'FILTER_LIST_CONTRACT_STUDENT', contractsOfStudent });
+    }
+  })
+  .catch((err) => console.log('Error filterContractsOfStudent occured', err));
+
+export const filterContractsOfTeacher = (idUser, idState) => (dispatch) => fetch(
+  `${API.FILTER_LIST_CONTRACT_TEACHER + idUser}?idState=${idState}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
+)
+  .then((respond) => respond.json())
+  .then((contractsOfTeacher) => {
+    console.log('filterContractsOfTeacher', contractsOfTeacher);
+    if (contractsOfTeacher.message) {
+      dispatch({ type: 'FILTER_LIST_CONTRACT_TEACHER', contractsOfTeacher: [] });
+    } else {
+      dispatch({ type: 'FILTER_LIST_CONTRACT_TEACHER', contractsOfTeacher });
+    }
+  })
+  .catch((err) => console.log('Error filterContractsOfTeacher occured', err));

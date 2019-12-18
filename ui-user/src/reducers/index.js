@@ -35,13 +35,13 @@ export const userProfiles = (state = {}, action) => {
 };
 
 export const userInfor = (state = {}, action) => {
-	switch (action.type) {
+  switch (action.type) {
     case 'GET_USER_INFO_BY_ID': {
       return action.userInfor;
-		}
-		default:
-			return state;
-	}
+    }
+    default:
+      return state;
+  }
 };
 
 export const nameAvatar = (state = {}, action) => {
@@ -212,23 +212,23 @@ export const listTeachers = (state = [], action) => {
 };
 
 export const listNameOfSkill = (state = [], action) => {
-	switch (action.type) {
-		case 'GET_NAME_SKILLS': {
-			return action.nameSkills;
-		}
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case 'GET_NAME_SKILLS': {
+      return action.nameSkills;
+    }
+    default:
+      return state;
+  }
 };
 
 export const endLearnDay = (state = '', action) => {
   switch (action.type) {
-		case 'END_DAY': {
-			return action.day;
-		}
-		default:
-			return state;
-	}
+    case 'END_DAY': {
+      return action.day;
+    }
+    default:
+      return state;
+  }
 };
 
 export const totalHour = (state = '', action) => {
@@ -262,10 +262,49 @@ export const userComment = (state = [], action) => {
   }
 };
 
-export const allContracts = (state = [], action) => {
+// export const allContracts = (state = [], action) => {
+//   switch (action.type) {
+//     case 'GET_ALL_CONTRACTS': {
+//       return action.allContracts;
+//     }
+//     default:
+//       return state;
+//   }
+// };
+
+export const contractByIdUser = (state = [], action) => {
   switch (action.type) {
-    case 'GET_ALL_CONTRACTS': {
-      return action.allContracts;
+    case 'GET_CONTRACT_BY_USER_ID': {
+      return action.contractByIdUser;
+    }
+    case 'GET_CONTRACT_BY_TEACHER_ID': {
+      return action.contractByIdTeacher;
+    }
+    case 'FILTER_LIST_CONTRACT_STUDENT': {
+      return action.contractsOfStudent;
+    }
+    case 'FILTER_LIST_CONTRACT_TEACHER': {
+      return action.contractsOfTeacher;
+    }
+    default:
+      return state;
+  }
+};
+
+// export const contractByIdTeacher = (state = [], action) => {
+//   switch (action.type) {
+//     case 'GET_CONTRACT_BY_TEACHER_ID': {
+//       return action.contractByIdTeacher;
+//     }
+//     default:
+//       return state;
+//   }
+// };
+
+export const contractByIdContract = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_DETAIL_CONTRACT_BY_ID': {
+      return action.contractByIdContract;
     }
     default:
       return state;

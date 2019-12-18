@@ -18,6 +18,23 @@ module.exports = {
       );
   },
 
+  getContractByTeacher: async (req, res) => {
+    let id = req.params.id;
+    return await db
+      .getContractByTeacher(id)
+      .then(contract => {
+        if (contract.length > 0) {
+          res.status(200).json(contract);
+        } else {
+          res.status(400).json({ message: "Hợp đồng không tồn tại" });
+        }
+      })
+      .catch(err =>
+        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
+      );
+  },
+
+
   getAllContract: (req, res) => {
     return db
     .getAllContract()
@@ -66,9 +83,11 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  getListContractAwait: async (req, res) => {
+  filterListContractStudent: async (req, res) => {
+    const idUser = req.params.idUser;
+    const idState = req.query.idState;
     return await db
-      .getListContractAwait()
+      .filterListContractStudent(idUser, idState)
       .then(contract => {
         if (contract.length > 0) {
           res.status(200).json(contract);
@@ -81,85 +100,11 @@ module.exports = {
       );
   },
 
-  getListContractVerified: async (req, res) => {
+  filterListContractTeacher: async (req, res) => {
+    const idUser = req.params.idUser;
+    const idState = req.query.idState;
     return await db
-      .getListContractVerified()
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
-  },
-
-  //
-  getListContractComplete: async (req, res) => {
-    return await db
-      .getListContractComplete()
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
-  },
-
-  getListContractDeny: async (req, res) => {
-    return await db
-      .getListContractDeny()
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
-  },
-
-  getListContractAwaitPay: async (req, res) => {
-    return await db
-      .getListContractAwaitPay()
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
-  },
-
-  getListContractReported: async (req, res) => {
-    return await db
-      .getListContractReported()
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
-  },
-
-  getListContractCancel: async (req, res) => {
-    return await db
-      .getListContractCancel()
+      .filterListContractTeacher(idUser,idState)
       .then(contract => {
         if (contract.length > 0) {
           res.status(200).json(contract);

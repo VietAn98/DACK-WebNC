@@ -44,6 +44,13 @@ const APIService = {
   // contract
   CREATE_CONTRACT: `${URL}/api/create-contract`,
   GET_ALL_CONTRACTS: `${URL}/api/getAllContract`,
+  GET_CONTRACT_BY_USER_ID: `${URL}/api/get-contract-by-user/`,
+  GET_CONTRACT_BY_TEACHER_ID: `${URL}/api/get-contract-by-teacher/`,
+  GET_DETAIL_CONTRACT_BY_ID: `${URL}/api/get-detail-contract/`,
+  UPDATE_STATE_CONTRACT: `${URL}/api/update-state-contract/`,
+
+  FILTER_LIST_CONTRACT_STUDENT: `${URL}/api/filter-list-contract-student/`,
+  FILTER_LIST_CONTRACT_TEACHER: `${URL}/api/filter-list-contract-teacher/`
 };
 
 export default APIService;

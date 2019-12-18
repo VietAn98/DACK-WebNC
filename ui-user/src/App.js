@@ -21,8 +21,8 @@ export class App extends React.PureComponent {
 			<main>
 				<Header />
 				<Switch>
-					<Route path="/contract-:id" exact component={Contract} />
-					<Route path="/contract/teacher-:id" exact component={Contract} />
+					<Route path="/contract-:id" exact component={Contract('ReadOnlyContract')} />
+					<Route path="/contract/teacher-:id" exact component={Contract('Contract')} />
 					<Route path="/teacherslist" exact component={TeacherList} />
 					<Route path="/settings" exact component={Settings} />
 					<Route path="/signin" exact component={SignInPage} />
