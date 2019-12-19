@@ -4,6 +4,7 @@ const districtController = require('./district.controller');
 const teachingController = require('./teaching.controller');
 const studentController = require('./student.controller');
 const contractController = require ('./contract.Controller');
+const commentController = require('./comment.controller');
 
 module.exports = {
   registerController,
@@ -11,5 +12,6 @@ module.exports = {
   districtController,
   teachingController,
   studentController,
-  contractController
+  contractController,
+  commentController
 };

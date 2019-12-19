@@ -53,6 +53,7 @@ require('./routes/district.router')(app);
 require('./routes/teaching/teaching.router')(app);
 require('./routes/student.router')(app);
 require('./routes/contract.router')(app);
+require('./routes/comment.router')(app);
 
 
 app.listen(3001, () => {
