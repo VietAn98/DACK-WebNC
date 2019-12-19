@@ -278,14 +278,14 @@ class Header extends React.PureComponent {
                       <ul className="dropdown-menu drp-mnu">
                         <li>
                           {' '}
-                          <a href="#">
+                          <a href="/change-password">
                             <i className="fa fa-cog" />
                             {' '}
-                            Settings
+                            Thay đổi mật khẩu
                             </a>
                           {' '}
                         </li>
-                        <li>
+                        {/* <li>
                           {' '}
                           <a href="#">
                             <i className="fa fa-user" />
@@ -294,6 +294,7 @@ class Header extends React.PureComponent {
                             </a>
                           {' '}
                         </li>
+                         */}
                         <li>
                           {' '}
                           <a href="#" onClick={this.logOut}>

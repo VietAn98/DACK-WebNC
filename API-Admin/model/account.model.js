@@ -5,6 +5,10 @@ module.exports = {
     return db.load("select * from account where categoryUser = 0 or categoryUser = 1");
   },
 
+  getAccAdmin: (id) => {
+    return db.load(`select * from account where userId=${id}`);
+  },
+
   getListAccTeacher: () => {
     return db.load("select * from account where categoryUser = 1");
   },

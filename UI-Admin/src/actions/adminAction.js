@@ -62,6 +62,30 @@ export const adminCreateAccount = (name, gmail, password) => (dispatch) => (
       .catch((err) => Swal.fire('Thông báo', 'Không thành công', 'error'))
   );
 
+  export const changePassword = (id, newPassw, oldPassw) => (dispatch) => fetch(
+    API.CHANGE_PASSWORD, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id,
+      newPassw,
+      oldPassw
+    })
+  }
+  )
+    .then((respond) => {
+      if (respond.status === 200) {
+        Swal.fire('Cập nhật thành công');
+        history.push('/');
+      } else {
+        Swal.fire('Cập nhật thất bại, vui lòng kiểm tra lại');
+      }
+    })
+    .catch((err) => console.log('Error change password occured', err));
+
 // export const registerRequest = (
 // 	name,
 // 	gmail,

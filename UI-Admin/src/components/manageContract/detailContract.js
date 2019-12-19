@@ -36,13 +36,13 @@ class detailContract extends React.PureComponent {
     const { updateContract } = this.props;
     updateContract(id, idState);
   };
-    
+
   render() {
     const { detailContracts, statesContract } = this.props;
     const { contract, teacher, student, skills } = detailContracts;
     const arrState = [];
     statesContract.forEach(element => {
-      if (element.id === 3 || element.id === 4 || element.id === 6) {
+      if (element.id === 2 || element.id === 7 || element.id === 6) {
         arrState.push(element);
       }
     });
