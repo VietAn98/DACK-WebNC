@@ -542,8 +542,16 @@ class Contract extends React.PureComponent {
                       lên hệ thống để yêu cầu hoàn tiền.
                     </p>
                     <p>
-                      - Bên A sẽ không được nhận lại chi phí đã thanh toán cho
-                      bên B nếu hủy bỏ ngang hợp đồng.
+                      - Sau khi kết thúc khóa học, trong thời hạn
+{' '}
+                      <b>3 ngày</b>
+                      ,
+                      nếu bên A không xác nhận
+{' '}
+                      <b>Đã hoàn thành</b>
+                      {' '}
+                      khóa học (tính từ ngày kết thúc khóa học),
+                    thì hệ thống sẽ tự động cập nhật và thanh toán cho bên B.
                     </p>
                   </div>
                 </div>

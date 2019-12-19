@@ -4,7 +4,8 @@ import {
     getContractByUserId,
     getContractByTeacherId,
     filterContractsOfTeacher,
-    filterContractsOfStudent
+    filterContractsOfStudent,
+    updateStateContract
 } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
     ),
     filterContractsOfStudent: (idUser, idState) => dispatch(
         filterContractsOfStudent(idUser, idState)
-    )
+    ),
+    updateStateContract: (idContract, state) => dispatch(updateStateContract(idContract, state))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(History);

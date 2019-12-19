@@ -745,20 +745,21 @@ export const updateStateContract = (
   })
 })
   .then(async (respond) => {
-    if (respond.status === 200) {
-      await Swal.fire({
-        icon: 'success',
-        title: 'Thành Công',
-      });
-      history.push('/Settings');
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Thất bại',
-        text: 'Xin hãy thử lại'
-        // footer: '<a href>Đến Trang Chủ</a>',
-      });
-    }
+    console.log('Respond from updateStateContract:', respond);
+    // if (respond.status === 200) {
+    //   await Swal.fire({
+    //     icon: 'success',
+    //     title: 'Thành Công',
+    //   });
+    //   history.push('/Settings');
+    // } else {
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: 'Thất bại',
+    //     text: 'Xin hãy thử lại'
+    //     // footer: '<a href>Đến Trang Chủ</a>',
+    //   });
+    // }
   })
   // .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
   .catch((err) => console.log('Error updateStateContract occured', err));
@@ -800,3 +801,94 @@ export const filterContractsOfTeacher = (idUser, idState) => (dispatch) => fetch
     }
   })
   .catch((err) => console.log('Error filterContractsOfTeacher occured', err));
+
+export const sendComplaint = (
+  contractId,
+  reason
+) => (dispatch) => fetch(API.SEND_COMPLAINT, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    contractId,
+    reason
+  })
+})
+  .then(async (respond) => {
+    if (respond.status === 200) {
+      await Swal.fire({
+        icon: 'success',
+        title: 'Thành Công',
+      });
+      // history.push('/Settings');
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Thất bại',
+        text: 'Xin hãy thử lại'
+        // footer: '<a href>Đến Trang Chủ</a>',
+      });
+    }
+  })
+  .catch((err) => console.log('Error sendComplaint occured', err));
+
+export const sendComment = (
+  idUser,
+  content,
+  starNumber,
+  idTeacher,
+  idContract
+) => (dispatch) => fetch(API.SEND_COMMENT, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    idUser,
+    content,
+    starNumber,
+    idTeacher,
+    idContract
+  })
+})
+  .then(async (respond) => {
+    if (respond.status === 200) {
+      await Swal.fire({
+        icon: 'success',
+        title: 'Thành Công',
+      });
+      // history.push('/Settings');
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Thất bại',
+        text: 'Xin hãy thử lại'
+        // footer: '<a href>Đến Trang Chủ</a>',
+      });
+    }
+  })
+  // .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
+  .catch((err) => console.log('Error sendComment occured', err));
+
+export const getComplaintByIdContract = (idContract) => (dispatch) => fetch(
+  API.GET_COMLAINT_BY_IDCONTRACT + idContract, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+})
+  .then((respond) => respond.json())
+  .then((complaintByIdContract) => {
+    console.log('getComplaintByIdContract action', complaintByIdContract);
+    dispatch({ type: 'GET_COMLAINT_BY_IDCONTRACT', complaintByIdContract });
+  })
+  .catch((err) => console.log('Error getComplaintByIdContract occured', err));
+
+
+export const rateStar = (star) => ({
+  type: 'RATE_STAR',
+  star
+});

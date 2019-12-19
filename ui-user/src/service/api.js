@@ -50,7 +50,11 @@ const APIService = {
   UPDATE_STATE_CONTRACT: `${URL}/api/update-state-contract/`,
 
   FILTER_LIST_CONTRACT_STUDENT: `${URL}/api/filter-list-contract-student/`,
-  FILTER_LIST_CONTRACT_TEACHER: `${URL}/api/filter-list-contract-teacher/`
+  FILTER_LIST_CONTRACT_TEACHER: `${URL}/api/filter-list-contract-teacher/`,
+
+  SEND_COMPLAINT: `${URL}/api/create-complaint`,
+  SEND_COMMENT: `${URL}/api/create-comment`,
+  GET_COMLAINT_BY_IDCONTRACT: `${URL}/api/get-complaint-by-contract/`,
 };
 
 export default APIService;

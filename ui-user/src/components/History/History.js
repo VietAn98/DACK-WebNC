@@ -4,20 +4,19 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import Swal from 'sweetalert2';
-import { Table, Form } from 'react-bootstrap';
+// import Swal from 'sweetalert2';
+import { Table, Form, Button } from 'react-bootstrap';
+import moment from 'moment';
 import jwtDecode from 'jwt-decode';
 import './History.css';
 import history from '../../history';
 
 const status = [
-    { value: 1, text: 'Đang chờ' },
-    { value: 2, text: 'Đã xác nhận' },
+    { value: 1, text: 'Đang chờ xác nhận' },
+    { value: 2, text: 'Đã xác nhận dạy' },
     { value: 3, text: 'Đã hoàn thành' },
     { value: 4, text: 'Đã từ chối' },
-    { value: 5, text: 'Chờ thanh toán' },
-    { value: 6, text: 'Khiếu nại' },
-    { value: 7, text: 'Đã hủy' },
+    { value: 5, text: 'Đang khiếu nại' },
 ];
 
 const tokenn = localStorage.token;
@@ -26,14 +25,37 @@ if (tokenn) {
     decoded = jwtDecode(tokenn);
 }
 
+const today = new Date();
+const Today = moment(today).format('DD-MM-YYYY');
+
 class History extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
-    componentWillMount = () => {
+    componentWillMount = async () => {
         const { getContractByUserId, getContractByTeacherId } = this.props;
         if (decoded.categoryUser === 0) {
-            getContractByUserId(decoded.userId);
+            await getContractByUserId(decoded.userId);
         } else {
-            getContractByTeacherId(decoded.userId);
+            await getContractByTeacherId(decoded.userId);
+        }
+
+        const { contractByIdUser } = this.props;
+
+        if (contractByIdUser) {
+            contractByIdUser.map(async (row) => {
+                // console.log('dateend, datenow', dateend, datenow);
+                if (row.state === 2) {
+                    let parts = row.endDay.split('-');
+                    const dateend = Number(parts[2] + parts[1] + parts[0]);
+                    parts = Today.split('-');
+                    const datenow = Number(parts[2] + parts[1] + parts[0]);
+                    if (datenow - dateend > 3) {
+                        const { updateStateContract } = this.props;
+                        await updateStateContract(row.idContract, 3);
+                        console.log('dateend - datenow', dateend - datenow);
+                    }
+                }
+            });
+            // console.log('contractByIdUsercontractByIdUser', dateend - datenow);
         }
     }
 
@@ -169,7 +191,8 @@ class History extends React.PureComponent {
                                 <th className="text-center">#</th>
                                 <th className="text-center">Tên</th>
                                 <th className="text-center">{decoded.categoryUser === 1 ? 'Người gửi' : 'Người nhận'}</th>
-                                <th className="text-center">Thời gian gửi</th>
+                                <th className="text-center">Ngày gửi</th>
+                                <th className="text-center">Ngày kết thúc</th>
                                 <th className="text-center">Trạng thái</th>
                                 <th className="text-center">Thao tác</th>
                             </tr>
@@ -185,6 +208,13 @@ class History extends React.PureComponent {
                                         {decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}
                                     </td>
                                     <td className="text-center">{item.dateCreate}</td>
+                                    <td className="text-center">
+                                        {item.state === 2
+                                            || item.state === 3
+                                            || item.state === 5
+                                            ? `${item.endDay}` : null}
+                                        {/* <span className="sm-tag">End</span> */}
+                                    </td>
                                     <td className="text-center">{item.Status}</td>
                                     <td className="text-center">
                                         {decoded.categoryUser === 1
@@ -197,8 +227,16 @@ class History extends React.PureComponent {
                                             )
                                             : (
                                                 <div>
-                                                    {/* <i className="fas fa-check mr-3" title="Đã hoàn thành khóa học" onClick={this.onClickCompete.bind(this, item.idContract, item.state)} /> */}
-                                                    <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
+                                                    {/* {item.state === 2
+                                                        ? (
+                                                            <Button onClick={this.onClickSetStatus} variant="outline-light" className="justify-center">
+                                                                <i className="fas fa-check mr-3" title="Đã hoàn thành khóa học" />
+                                                            </Button>
+                                                        ) : null} */}
+
+                                                    <Button onClick={this.onClickInbox} variant="outline-light">
+                                                        <i className="fas fa-sms mr-3" title="Liên hệ" />
+                                                    </Button>
                                                     {/* <i className="fas fa-exclamation-circle" title="Khiếu nại" /> */}
                                                 </div>
                                             )}

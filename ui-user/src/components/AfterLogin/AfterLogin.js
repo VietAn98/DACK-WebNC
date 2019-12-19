@@ -28,33 +28,37 @@ class AfterLogin extends React.PureComponent {
 					<Dropdown>
 						<Dropdown.Toggle id="dropdown-basic">
 							<div className="d-flex flex-row justify-content-around ">
-								<div style={{ width: '30px', height: '30px' }}>
-									<img style={{ width: '100%', borderRadius: '50%' }} alt="avatar" src={avatar1} />
+								<div style={{ width: '40px', height: '30px' }}>
+									<img
+										style={{ width: '100%', borderRadius: '50%' }}
+										alt="avatar"
+										src={userProfiles.avatar ? `${userProfiles.avatar}` : `${avatar1}`}
+									/>
 								</div>
 								{tokenn ? (
-								<div
-									style={{
-										fontSize: '1.3rem',
-										marginLeft: '10px',
-										lineHeight: '30px',
-										verticalAlign: 'middle'
-									}}
-								>
+									<div
+										style={{
+											fontSize: '1.3rem',
+											marginLeft: '10px',
+											lineHeight: '30px',
+											verticalAlign: 'middle'
+										}}
+									>
 
 										{userProfiles.name}
-									{' '}
-									&#x25bc;
+										{' '}
+										&#x25bc;
 								</div>
 								) : (
-									<div className="d-flex flex-row justify-content-end">
-										<NavLink to="/signin" className="nav-link signIn">
-											Đăng nhập
+										<div className="d-flex flex-row justify-content-end">
+											<NavLink to="/signin" className="nav-link signIn">
+												Đăng nhập
 										</NavLink>
-										<NavLink to="/signup" className="nav-link signUp">
-											Đăng Ký
+											<NavLink to="/signup" className="nav-link signUp">
+												Đăng Ký
 										</NavLink>
-									</div>
-								)}
+										</div>
+									)}
 							</div>
 						</Dropdown.Toggle>
 

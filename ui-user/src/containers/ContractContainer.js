@@ -16,7 +16,11 @@ import {
   getTotalHour,
 
   getDetailContractByIdContract,
-  updateStateContract
+  updateStateContract,
+  sendComplaint,
+  sendComment,
+  getComplaintByIdContract,
+  rateStar
 } from '../actions/userAction';
 
 const Components = {
@@ -38,7 +42,9 @@ const mapStateToProps = (state) => ({
   totalHour: state.totalHour,
 
   // ReadOnlyContract
-  contractByIdContract: state.contractByIdContract
+  contractByIdContract: state.contractByIdContract,
+  complaintByIdContract: state.complaintByIdContract,
+  starNumber: state.starNumber
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -78,8 +84,23 @@ const mapDispatchToProps = (dispatch) => ({
   getTotalHour: (hour) => dispatch(getTotalHour(hour)),
 
   // ReadOnlyContract
-  getDetailContractByIdContract: (idContract) => dispatch(getDetailContractByIdContract(idContract)),
-  updateStateContract: (idContract, state) => dispatch(updateStateContract(idContract, state))
+  getDetailContractByIdContract: (idContract) => dispatch(
+    getDetailContractByIdContract(idContract)
+  ),
+  updateStateContract: (idContract, state) => dispatch(updateStateContract(idContract, state)),
+  sendComplaint: (contractId, reason) => dispatch(
+    sendComplaint(contractId,
+      reason)
+  ),
+  sendComment: (idUser, content, starNumber, idTeacher, idContract) => dispatch(
+    sendComment(idUser,
+      content,
+      starNumber,
+      idTeacher,
+      idContract)
+  ),
+  getComplaintByIdContract: (idContract) => dispatch(getComplaintByIdContract(idContract)),
+  rateStar: (star) => dispatch(rateStar(star))
 });
 export default (componentName) => connect(
   mapStateToProps,

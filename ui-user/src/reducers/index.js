@@ -310,3 +310,23 @@ export const contractByIdContract = (state = [], action) => {
       return state;
   }
 };
+
+export const complaintByIdContract = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_COMLAINT_BY_IDCONTRACT': {
+      return action.complaintByIdContract;
+    }
+    default:
+      return state;
+  }
+};
+
+export const starNumber = (state = 0, action) => {
+  switch (action.type) {
+    case 'RATE_STAR': {
+      return action.star;
+    }
+    default:
+      return state;
+  }
+};
