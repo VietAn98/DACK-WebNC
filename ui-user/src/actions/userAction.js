@@ -800,3 +800,18 @@ export const filterContractsOfTeacher = (idUser, idState) => (dispatch) => fetch
     }
   })
   .catch((err) => console.log('Error filterContractsOfTeacher occured', err));
+
+
+export const getMailByKeyPass = (keypass) => (dispatch) => fetch(API.GET_KEY_PASS + '?keyPass=' + keypass, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+})
+  .then((response) => response.json())
+  .then((result) => {
+    dispatch({ type: 'GET_KEY_PASS', result });
+  })
+  .catch((error) => {
+    throw error;
+  });

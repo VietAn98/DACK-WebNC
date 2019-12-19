@@ -59,6 +59,7 @@ module.exports = app => {
 
   app.post("/api/forget-password", loginController.forgetPassw);
   app.post("/api/update-new-password", loginController.updateNewPassw);
+  app.get("/api/get-keypass",loginController.getMailByKeyPass)
   app.post("/api/update-password-after-login",loginController.updatePasswAfterLogin),
   app.post("/api/image", upload.single("avatar"), loginController.addImage);
   app.post(

@@ -1,8 +1,9 @@
 import React from 'react';
 import Swal from "sweetalert2";
+import PageNotFound from '../pages/PageNotFound'
 
 import {
- Container, Form, Spinner, Button 
+  Container, Form, Spinner, Button
 } from 'react-bootstrap';
 import HomePage from '../containers/HomePageContainer';
 // import FacebookLogin from 'react-facebook-login';
@@ -33,22 +34,40 @@ class NewPassword extends React.PureComponent {
   //     this.validator = new Validator(rules);
   //   }s
 
+  constructor(props) {
+    super(props);
+    const path = window.location.search.split('=');
+    const keyPass = path[path.length - 1];
+    console.log(keyPass)
+    const { getMailByKeyPass } = this.props;
+    getMailByKeyPass(keyPass);
+
+  }
+
   onSubmitNewPassForm = (e) => {
     e.preventDefault();
     const { updatePassword } = this.props;
     updatePassword(document.getElementById('password').value);
     Swal.fire('Đang cập nhật password');
     Swal.showLoading();
-   // const a = req.query.email;
+    // const a = req.query.email;
   };
 
   render() {
+    const { keyPass } = this.props
+    let check = false;
+    if (keyPass.length === 0) {
+      check = true
+    }
     return (
       <div>
-        {localStorage.token ? (
+        {/* {localStorage.token ? (
           <HomePage />
         ) : (
-          <div className="contact-sectn" id="contact">
+          )} */}
+
+        {check ? <PageNotFound /> :
+          (<div className="contact-sectn" id="contact">
             <Container>
               <div
                 style={{
@@ -93,7 +112,8 @@ class NewPassword extends React.PureComponent {
               </div>
             </Container>
           </div>
-        )}
+          )
+        }
       </div>
     );
   }
