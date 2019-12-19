@@ -39,7 +39,7 @@ module.exports = {
         if (index != 0) {
           const contract = {
             idContract: req.body.contractId,
-            state: 6
+            state: 5
           };
 
           db_contract.updateStateContract(contract);

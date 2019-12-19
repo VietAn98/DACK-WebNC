@@ -48,7 +48,7 @@ module.exports = {
         });
         var mainOptions = {
           // thiết lập đối tượng, nội dung gửi mail
-          from: "AH!BreakingNews",
+          from: "ADMIN",
           to: gmail, //đến đâu
           subject: "Email lấy lại mật khẩu từ website gia sư online",
           html:
