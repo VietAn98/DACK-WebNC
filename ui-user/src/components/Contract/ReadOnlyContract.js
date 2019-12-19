@@ -60,7 +60,7 @@ class ReadOnlyContract extends React.PureComponent {
                     const dateend = Number(parts[2] + parts[1] + parts[0]);
                     parts = Today.split('-');
                     const datenow = Number(parts[2] + parts[1] + parts[0]);
-                    if (dateend - datenow <= 3 && dateend - datenow > 0) {
+                    if (datenow - dateend <= 3) {
                         isShow = true;
                     }
                 }
@@ -704,7 +704,7 @@ class ReadOnlyContract extends React.PureComponent {
                                 </div>
                                 <div className="col-md-3 col-sm-3">
                                     <h4><b>Đánh giá:</b></h4>
-                                    <div className="stars mt-2">
+                                    <div className="starsar mt-2">
                                         <Rater total={5} rating={0} onRate={this.OnRateStar} />
                                     </div>
                                 </div>

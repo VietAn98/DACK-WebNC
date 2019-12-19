@@ -9,7 +9,12 @@ import CardTuitor from '../components/CardTuitor';
 export class TeacherInfoPage extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { listNameSkill, listTeacherTop, getListDisctrict, getUserComment } = this.props;
+    const {
+      listNameSkill,
+      listTeacherTop,
+      getListDisctrict,
+      getUserComment
+    } = this.props;
     const path = window.location.pathname.split('/');
     const id = path[path.length - 1];
     // getInforUserById(id);
