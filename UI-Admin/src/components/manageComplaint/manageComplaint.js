@@ -28,7 +28,7 @@ class Complaint extends React.PureComponent {
 
 
   contractClick = id => {
-    // history.push(`/manage-detail-contract/${id}`);
+    history.push(`/manage-detail-contract/${id}`);
   };
 
   render() {
@@ -70,13 +70,13 @@ class Complaint extends React.PureComponent {
           <tbody>
             {listComplaint.hasOwnProperty("limitComplaint")
               ? // eslint-disable-next-line no-return-assign
-              limitComplaint.map(sk => (
-                <tr onClick={this.contractClick.bind(this, sk.id)}>
+              limitComplaint.map((sk) => (
+                <tr onClick={this.contractClick.bind(this, sk.contractId)}>
                   <td style={{ textAlign: "center" }}>{(stt += 1)}</td>
                   <td style={{ cursor: "pointer" }}>{sk.nameStudent}</td>
                   <td style={{ cursor: "pointer" }}>{sk.nameTeacher}</td>
                   <td style={{ cursor: "pointer" }}>{sk.reason}</td>
-                  <td style={{ cursor: "pointer" }}>{sk.isDone}</td>
+                  <td style={{textAlign:"center", color:"red"}}>{sk.isDone ? <i className="fa fa-check" /> : <i className="fa fa-times-circle" /> }</td>
                 </tr>
               ))
               : null}
