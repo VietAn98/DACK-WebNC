@@ -14,6 +14,7 @@ import PageNotFound from './components/PageNotFound';
 import listContract from './containers/ContractContainer';
 import DetailContract from './containers/detailContractContainer';
 import ChangePassword from './containers/changePasswContainer';
+import ForgotPassw from './containers/forgotPasswordContainer';
 
 
 import './App.css';
@@ -56,7 +57,16 @@ export class App extends React.PureComponent {
             <SideBarMenu />
           </div>
         ) : (
-            <AdminSignIn />
+            <Switch>
+              <Route path="/update-new-password" exact component={ForgotPassw} />
+              <Route path="/admin-sigin">
+                <AdminSignIn />
+              </Route>
+              <Route path="/">
+                <AdminSignIn />
+              </Route>
+            </Switch>
+
           )}
       </div>
     );

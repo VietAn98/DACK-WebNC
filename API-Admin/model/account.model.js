@@ -9,6 +9,10 @@ module.exports = {
     return db.load(`select * from account where userId=${id}`);
   },
 
+  getAccAdminByKeyPass: (keyPass) => {
+    return db.load(`select * from account where keyPass="${keyPass}"`);
+  },
+
   getListAccTeacher: () => {
     return db.load("select * from account where categoryUser = 1");
   },

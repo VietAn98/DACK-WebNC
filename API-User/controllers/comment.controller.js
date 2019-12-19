@@ -58,5 +58,35 @@ module.exports = {
       .catch(e => {
         res.status(400).json({ message: "Thất bại" });
       });
+  },
+
+  getComplaintByUser: (req, res) => {
+    // let id = req.params.id;
+    // return db
+    //   .getContractByUser(id)
+    //   .then(contract => {
+    //     if (contract.length > 0) {
+    //       res.status(200).json(contract);
+    //     } else {
+    //       res.status(400).json({ message: "Hợp đồng không tồn tại" });
+    //     }
+    //   })
+    //   .catch(err =>
+    //     res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
+    //   );
+  },
+  getComplaintByContract: (req, res) => {
+    const id = req.params.id;
+    return db.getComplaintByContract(id)
+      .then(complaint => {
+        if (complaint.length > 0) {
+          res.status(200).json(complaint);
+        } else {
+          res.status(400).json({ message: "Hợp đồng không tồn tại" });
+        }
+      })
+      .catch(err =>
+        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
+      );
   }
 };

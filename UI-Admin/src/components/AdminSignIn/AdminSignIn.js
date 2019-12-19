@@ -1,5 +1,7 @@
 import React from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
+import Swal from 'sweetalert2';
+
 // import { connect } from "react-redux";
 import "./AdminSignIn.css";
 
@@ -13,6 +15,19 @@ export class AdminSignIn extends React.PureComponent {
     const password = document.getElementById("password").value;
     adminLogin(gmail, password);
     // noLogin();
+  };
+  
+  forgot_Password = async () => {
+    const { value: email } = await Swal.fire({
+      title: 'Nhập chính xác mail để thay đổi mật khẩu của bạn',
+      input: 'email',
+      inputPlaceholder: 'Enter your email address'
+    });
+    if (email) {
+      // console.log(email);
+      const { forgotPassword } = this.props;
+      forgotPassword(email);
+    }
   };
 
   render() {
@@ -85,7 +100,7 @@ export class AdminSignIn extends React.PureComponent {
                     )}
                   </Form>
                   <div className="text-center mt-2">
-                    <a href="#" className="forget-pass">
+                    <a href="#" onClick={this.forgot_Password} className="forget-pass">
                       Quên mật khẩu?
                     </a>
                   </div>

@@ -13,5 +13,14 @@ module.exports = {
 
   createComplaint: entity => {
     return db.add("complaint", entity);
+  },
+
+  getComplaintByUser: (id) => {
+    return db.load('select * from complaint where ')
+  },
+
+  getComplaintByContract: (id) => {
+    return db.load(`select * from complaint where contractId = ${id} `)
+
   }
 };

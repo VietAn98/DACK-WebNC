@@ -78,3 +78,13 @@ export const teachers = (state = [], action) => {
       return state;
   }
 };
+
+export const keyPass = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_KEY_PASS': {
+      return action.result;
+    } 
+    default:
+      return state;
+  }
+}

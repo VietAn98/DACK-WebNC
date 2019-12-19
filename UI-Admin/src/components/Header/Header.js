@@ -300,7 +300,7 @@ class Header extends React.PureComponent {
                           <a href="#" onClick={this.logOut}>
                             <i className="fa fa-sign-out" />
                             {' '}
-                            Logout
+                            Đăng xuất
                             </a>
                           {' '}
                         </li>

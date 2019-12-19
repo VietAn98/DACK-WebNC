@@ -30,6 +30,9 @@ const APIService = {
 
   // password
   CHANGE_PASSWORD: `${URL}/api-admin/update-password`,
+  FORGOT_PASSWORD: `${URL}/api-admin/forget-password`,
+  FORGOT_FORGOT_PASSWORD: `${URL}/api-admin/update-new-password`,
+  GET_KEY_PASS: `${URL}/api-admin/get-keypass`,
 
 //   GET_INFO: `${URL}/api/current-user-profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,

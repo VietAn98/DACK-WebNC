@@ -10,4 +10,9 @@ module.exports = (app) => {
     app.get('/api-admin/get-district-byUser/:idDistrict', accoutController.getDistrictByUser);
     app.post('/api-admin/update-state-account', accoutController.updateStateAccount);
     app.post('/api-admin/update-password', admin.updatePassword)
+
+    //
+    app.post("/api-admin/forget-password", admin.forgetPassw);
+    app.post("/api-admin/update-new-password", admin.updateNewPassw);
+    app.get("/api-admin/get-keypass",admin.getMailByKeyPass)
 }
