@@ -8,5 +8,5 @@ module.exports = app => {
     // app.get('/api/get-complaint-by-id', commentController.getComplaintById)
     app.get('/api/get-complaint-by-contract/:id', commentController.getComplaintByContract)
 
-
+    
 }

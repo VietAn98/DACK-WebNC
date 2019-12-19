@@ -34,6 +34,16 @@ export const userProfiles = (state = {}, action) => {
   }
 };
 
+export const keyPass = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_KEY_PASS': {
+      return action.result;
+    } 
+    default:
+      return state;
+  }
+}
+
 export const userInfor = (state = {}, action) => {
   switch (action.type) {
     case 'GET_USER_INFO_BY_ID': {

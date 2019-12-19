@@ -11,6 +11,8 @@ const APIService = {
   //   CHANGE_INFO: `${URL}/api/updateInfor`,
   UPLOAD_AVATAR: `${URL}/api/image`,
   CHANGE_PASSWORD: `${URL}/api/update-password-after-login`,
+  GET_KEY_PASS: `${URL}/api/get-keypass`,
+
   GET_DISTRICT_BY_IDCITY: `${URL}/api/get-districts-by-city/`,
   GET_CITY_BY_IDDISTRICT: `${URL}/api/get-city-by-district/`,
   GET_LIST_DISTRICT: `${URL}/api/get-list-district`,

@@ -1,8 +1,10 @@
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const randomstring = require("randomstring");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 var { generateToken, sendToken } = require("../utils/token.utils");
+
 const db = require("../model/account.model");
 module.exports = {
   login: async (req, res) => {
@@ -114,7 +116,8 @@ module.exports = {
         if (keyPass === row[0].keyPass) {
           var entity = {
             userId: row[0].userId,
-            password: hashPassw
+            password: hashPassw,
+            keyPass : randomstring.generate(100),
           };
           db.updateAcc(entity)
             .then(id => {
@@ -131,6 +134,13 @@ module.exports = {
     } else {
       res.status(400).json({ message: "Đường truyền không chính xác" });
     }
+  },
+
+  getMailByKeyPass: (req,res) => {
+    // console.log(req.query.keyPass)
+    db.getAccAdminByKeyPass(req.query.keyPass).then(result => {
+      res.status(200).json(result);
+    })
   },
 
   // đăng kí thông tin người dạy

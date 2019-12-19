@@ -879,7 +879,8 @@ export const getComplaintByIdContract = (idContract) => (dispatch) => fetch(
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
-})
+}
+)
   .then((respond) => respond.json())
   .then((complaintByIdContract) => {
     console.log('getComplaintByIdContract action', complaintByIdContract);
@@ -892,3 +893,19 @@ export const rateStar = (star) => ({
   type: 'RATE_STAR',
   star
 });
+
+export const getMailByKeyPass = (keypass) => (dispatch) => fetch(
+  `${API.GET_KEY_PASS}?keyPass=${keypass}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+}
+)
+  .then((response) => response.json())
+  .then((result) => {
+    dispatch({ type: 'GET_KEY_PASS', result });
+  })
+  .catch((error) => {
+    throw error;
+  });

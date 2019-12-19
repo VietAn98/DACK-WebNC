@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Pagination, Button } from "react-bootstrap";
+import { Table, Pagination, Button, Spinner } from "react-bootstrap";
 import history from "../../history";
 
 class student extends React.PureComponent {
@@ -37,6 +37,16 @@ class student extends React.PureComponent {
         >
           <b>Danh sách giáo viên</b>
         </h1>
+        {teachers.hasOwnProperty("limitTeacher") ? null : (<div style={{ textAlign: "center" }}>
+          <Spinner animation="grow" variant="primary" />
+          <Spinner animation="grow" variant="secondary" />
+          <Spinner animation="grow" variant="success" />
+          <Spinner animation="grow" variant="danger" />
+          <Spinner animation="grow" variant="warning" />
+          <Spinner animation="grow" variant="info" />
+          <Spinner animation="grow" variant="dark" />
+        </div>)
+        }
         <Table striped bordered hover className="ml-1">
           <thead style={{ background: "#88888A" }}>
             <tr style={{ textAlign: "center" }}>
@@ -54,27 +64,27 @@ class student extends React.PureComponent {
           <tbody>
             {teachers.hasOwnProperty("limitTeacher")
               ? // eslint-disable-next-line no-return-assign
-                limitTeacher.map(tch => (
-                  <tr onClick={this.onnclicks.bind(this, tch.userId)}>
-                    <td style={{ textAlign: "center" }}>{(stt += 1)}</td>
-                    <td>{tch.name}</td>
-                    <td>{tch.gmail}</td>
-                    <td>{tch.gender}</td>
-                    <td>{tch.price}</td>
-                  </tr>
-                ))
+              limitTeacher.map(tch => (
+                <tr onClick={this.onnclicks.bind(this, tch.userId)}>
+                  <td style={{ textAlign: "center" }}>{(stt += 1)}</td>
+                  <td>{tch.name}</td>
+                  <td>{tch.gmail}</td>
+                  <td>{tch.gender}</td>
+                  <td>{tch.price}</td>
+                </tr>
+              ))
               : null}
           </tbody>
         </Table>
         <div style={{ textAlign: "center" }}>
           <Pagination>
-            <Pagination.First onClick={() => this.changePage(index-1)}/>
+            <Pagination.First onClick={() => this.changePage(index - 1)} />
             {arrPage.map(number => (
-              <Pagination.Item active = {number===index || false} onClick={() => this.changePage(number)}>
+              <Pagination.Item active={number === index || false} onClick={() => this.changePage(number)}>
                 {number}
               </Pagination.Item>
             ))}
-            <Pagination.Last disabled={numberPages === 1 || numberPages === index || false} onClick={() => this.changePage(index+1)} />
+            <Pagination.Last disabled={numberPages === 1 || numberPages === index || false} onClick={() => this.changePage(index + 1)} />
           </Pagination>
         </div>
       </div>

@@ -21,6 +21,11 @@ module.exports = {
     return db.load(`select * from account where gmail= '${email}' and adLock = '1'`);
   },
 
+  getAccAdminByKeyPass: (keyPass) => {
+    return db.load(`select * from account where keyPass="${keyPass}"`);
+  },
+
+
   getAccById: id => {
     return db.load(`select * from account where userId = '${id}' and  adLock=1 `);
   },
