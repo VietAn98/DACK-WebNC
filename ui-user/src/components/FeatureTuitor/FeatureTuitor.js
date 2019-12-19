@@ -28,7 +28,9 @@ class FeatureTuitor extends React.PureComponent {
 						</h4>
 					</div>
 					<div style={{ marginTop: '2rem' }}>
-						<CardList listTeachers={listTeachers} />
+						{listTeachers.length !== 0
+							? (<CardList listTeachers={listTeachers} />)
+							: (<div className="loader" style={{ margin: 'auto' }} />)}
 					</div>
 				</Container>
 			</section>
