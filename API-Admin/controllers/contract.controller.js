@@ -45,39 +45,36 @@ module.exports = {
   getDetailContract: (req, res) => {
     var id = req.params.id;
 
-    Promise.resolve(db.getDetailContract(id)).then(contract => {
-      Promise.all([
-        db_account.getAccById(contract[0].teacherId),
-        db_account.getAccById(contract[0].studentId),
-        db.getListSkillByTeacher(contract[0].teacherId),
-      ]).then(([teacher, student, skills]) => {
-        res.status(200).json({ contract, teacher, student, skills })
+    Promise.resolve(db.getDetailContract(id))
+      .then(contract => {
+        Promise.all([
+          db_account.getAccById(contract[0].teacherId),
+          db_account.getAccById(contract[0].studentId),
+          db.getListSkillByTeacher(contract[0].teacherId)
+        ]).then(([teacher, student, skills]) => {
+          res.status(200).json({ contract, teacher, student, skills });
+        });
       })
-    }).catch((e) => {
-
-    })
-
+      .catch(e => {});
   },
 
   updateContract: (req, res) => {
+    console.log(req.body.id)
     db_complaint.getComplaintByContract(req.body.id).then(compl => {
       const contract = {
         idContract: req.body.id,
         state: req.body.state
-      }
+      };
 
       const complaint = {
         id: compl[0].id,
         isDone: 1
-      }
-      Promise.all([
+      };
+      Promise.all(
         db.updateStateContract(contract),
-        db_complaint.updateComplaint(complaint),
-      ])
-      .then(([contr, comp]) => {
-        res.status(200).json({ mesage: "cập nhật thành công" });
-      })
-
-    })
+        db_complaint.updateComplaint(complaint)
+      );
+      res.status(200).json({ mesage: "cập nhật thành công" });
+    });
   }
 };
