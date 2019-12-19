@@ -34,7 +34,8 @@ class Register extends React.PureComponent {
     const districtId = document.getElementById('district').value;
     const gender = document.getElementById('selectGender').value;
     const categoryUser = document.getElementById('categoryUser').value;
-    registerRequest(name, gmail, password, districtId, gender, categoryUser);
+    const address = document.getElementById('address').value;
+    registerRequest(name, gmail, password, districtId, gender, categoryUser, address);
     Swal.fire('Đang kiểm tra tài khoản');
     Swal.showLoading();
   };

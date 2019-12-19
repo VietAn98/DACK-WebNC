@@ -245,7 +245,7 @@ class Contract extends React.PureComponent {
                     <div className="col-md-12 col-sm-12 mb-3">
                       <Form.Control
                         type="text"
-                        value="{detailTeacher.address}"
+                        value={userProfiles.address}
                         disabled
                       />
                     </div>
@@ -348,7 +348,7 @@ class Contract extends React.PureComponent {
                     <div className="col-md-12 col-sm-12 mb-3">
                       <Form.Control
                         type="text"
-                        value="{detailTeacher.address}"
+                        value={detailTeacher.address}
                         disabled
                       />
                     </div>

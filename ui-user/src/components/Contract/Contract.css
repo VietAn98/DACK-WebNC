@@ -68,6 +68,6 @@ Rater .stars{
   color: rgb(255, 187, 0) !important;
 }
 
-.form-control{
+.form-control#formcontract{
   background-color: rgba(248, 182, 178, 0.349) !important;
 }

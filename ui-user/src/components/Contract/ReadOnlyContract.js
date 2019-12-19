@@ -243,27 +243,28 @@ class ReadOnlyContract extends React.PureComponent {
                                         </div>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Họ tên:</Form.Label>
-                                            <Form.Control disabled type="text" value={userProfiles.name} />
+                                            <Form.Control id="formcontract" disabled type="text" value={userProfiles.name} />
                                         </Form.Group>
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Email:</Form.Label>
-                                            <Form.Control disabled type="text" value={userProfiles.gmail} />
+                                            <Form.Control id="formcontract" disabled type="text" value={userProfiles.gmail} />
                                         </Form.Group>
                                         <div className="col-md-12 col-sm-12">
                                             <Form.Label>Địa chỉ:</Form.Label>
                                         </div>
                                         <div className="col-md-12 col-sm-12 mb-3">
                                             <Form.Control
+                                                id="formcontract"
                                                 type="text"
-                                                value="{userInfor.address}"
+                                                value={userInfor.address}
                                                 disabled
                                             />
                                         </div>
                                         <div className="col-md-7 col-sm-7">
                                             <Form.Control
+                                                id="formcontract"
                                                 disabled
                                                 as="select"
-                                                id="city1"
                                                 onChange={this.onChangeCity1}
                                                 required
                                                 style={{ height: '100%' }}
@@ -291,7 +292,7 @@ class ReadOnlyContract extends React.PureComponent {
                                             </Form.Control>
                                         </div>
                                         <div className="col-md-5 col-sm-5">
-                                            <Form.Control disabled as="select" id="district" style={{ height: '100%' }}>
+                                            <Form.Control id="formcontract" disabled as="select" style={{ height: '100%' }}>
                                                 {districtNames.length !== 0
                                                     ? districtNames.map((item) => (
                                                         <option value={item.districtId} className="black-title">
@@ -342,6 +343,7 @@ class ReadOnlyContract extends React.PureComponent {
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Họ tên:</Form.Label>
                                             <Form.Control
+                                                id="formcontract"
                                                 type="text"
                                                 value={userInfor.name}
                                                 disabled
@@ -350,6 +352,7 @@ class ReadOnlyContract extends React.PureComponent {
                                         <Form.Group className="col-md-12 col-sm-12">
                                             <Form.Label>Email:</Form.Label>
                                             <Form.Control
+                                                id="formcontract"
                                                 type="text"
                                                 value={userInfor.gmail}
                                                 disabled
@@ -360,13 +363,14 @@ class ReadOnlyContract extends React.PureComponent {
                                         </div>
                                         <div className="col-md-12 col-sm-12 mb-3">
                                             <Form.Control
+                                                id="formcontract"
                                                 type="text"
-                                                value="{userInfor.address}"
+                                                value={userInfor.address}
                                                 disabled
                                             />
                                         </div>
                                         <div className="col-md-7 col-sm-7">
-                                            <Form.Control as="select" id="city2" disabled style={{ height: '100%' }}>
+                                            <Form.Control id="formcontract" as="select" disabled style={{ height: '100%' }}>
                                                 {listCity
                                                     ? listCity.map((item) => {
                                                         if (item.cityId
@@ -391,7 +395,7 @@ class ReadOnlyContract extends React.PureComponent {
                                             </Form.Control>
                                         </div>
                                         <div className="col-md-5 col-sm-5">
-                                            <Form.Control as="select" disabled style={{ height: '100%' }}>
+                                            <Form.Control id="formcontract" as="select" disabled style={{ height: '100%' }}>
                                                 {listDistrict.map((item) => {
                                                     if (item.cityId
                                                         === cityName.cityId) {
@@ -694,7 +698,7 @@ class ReadOnlyContract extends React.PureComponent {
                                             as="textarea"
                                             placeholder="(Không bắt buộc)"
                                             style={{ height: '93px' }}
-                                            id="textarea-comment"
+                                            id="formcontract"
                                         />
                                     </div>
                                 </div>

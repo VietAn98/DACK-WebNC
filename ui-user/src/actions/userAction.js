@@ -27,7 +27,8 @@ export const registerRequest = (
   password,
   districtId,
   gender,
-  categoryUser
+  categoryUser,
+  address
 ) => (dispatch) => fetch(API.REGISTER, {
   method: 'POST',
   headers: {
@@ -40,7 +41,8 @@ export const registerRequest = (
     password,
     districtId,
     gender,
-    categoryUser
+    categoryUser,
+    address
   })
 })
   .then((respond) => {
@@ -139,7 +141,8 @@ export const updateTeacherInfor = (
   introduce,
   skill,
   price,
-  avatar
+  avatar,
+  address
 ) => (dispatch) => fetch(API.UPDATE_INFOR_TEACHER, {
   method: 'POST',
   headers: {
@@ -154,7 +157,8 @@ export const updateTeacherInfor = (
     introduce,
     skill,
     price,
-    avatar
+    avatar,
+    address
   })
 })
   .then((respond) => console.log('Respond from updateTeacherInfor:', respond))
@@ -166,7 +170,8 @@ export const updateStudentInfor = (
   name,
   gender,
   districtId,
-  avatar
+  avatar,
+  address
 ) => (dispatch) => fetch(API.UPDATE_INFOR_STUDENT, {
   method: 'POST',
   headers: {
@@ -178,7 +183,8 @@ export const updateStudentInfor = (
     name,
     gender,
     districtId,
-    avatar
+    avatar,
+    address
   })
 })
   .then((respond) => console.log('Respond from updateStudentInfor:', respond))

@@ -17,7 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
 		districtId,
 		gender,
 		categoryUser,
-	) => dispatch(registerRequest(name, gmail, password, districtId, gender, categoryUser)),
+		address
+	) => dispatch(registerRequest(name, gmail, password, districtId, gender, categoryUser, address)),
 	getListCity: () => dispatch(getListCity()),
 	getDistrictByIdCity: (id) => dispatch(getDistrictByIdCity(id))
 });

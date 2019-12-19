@@ -103,11 +103,12 @@ export class TeacherInfoPage extends React.PureComponent {
                   >
                     Địa chỉ:
                   </span>
+                  {detailTeacher.address}
                   {listDistrict
                     ? listDistrict.map((item) => {
                       if (item.districtId === detailTeacher.districtId) {
                         return (
-                          `${item.name},`
+                          `, ${item.name},`
                         );
                       }
                     })
