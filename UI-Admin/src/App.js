@@ -15,6 +15,7 @@ import listContract from './containers/ContractContainer';
 import DetailContract from './containers/detailContractContainer';
 import ChangePassword from './containers/changePasswContainer';
 import ForgotPassw from './containers/forgotPasswordContainer';
+import ManageComplaint from './containers/ManageComplaintContainer';
 
 
 import './App.css';
@@ -43,6 +44,7 @@ export class App extends React.PureComponent {
                     <Route path="/manage-skills" exact component={ListSkill} />
                     <Route path="/manage-contract" exact component={listContract} />
                     <Route path="/change-password" exact component={ChangePassword} />
+                    <Route path="/manage-complaint" exact component = {ManageComplaint}/>
                     <Route path="/manage-detail-contract/:id">
                       <DetailContract />
                     </Route>

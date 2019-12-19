@@ -70,11 +70,10 @@ class SideBarMenu extends React.PureComponent {
                 </a>
               </li>
               <li id="menu-academico">
-                <a href="#">
+                <a href="/manage-complaint">
                   <i className="fa fa-file-text" />
                   <span>Quản lý Kiếu nại</span>
                   <span
-                    className="fa fa-angle-right"
                     style={{ float: 'right' }}
                    />
                 </a>

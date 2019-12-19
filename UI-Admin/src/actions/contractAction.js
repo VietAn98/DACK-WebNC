@@ -71,7 +71,7 @@ export const updateContract = (id, state) => (dispatch) => fetch(API.UPDATE_CONT
     .then((respond) => respond.json())
     .then((data) => {
       if (data) {
-        Swal.fire('Thông báo', 'Thành công', 'success');
+        Swal.fire('Thông báo', 'Cập nhật thành công trạng thái của hợp đồng', 'success');
         dispatch(getDetailContract(id));
       } else {
         Swal.fire('Thông báo', 'Không thành công', 'error');

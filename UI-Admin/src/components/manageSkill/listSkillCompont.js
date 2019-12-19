@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button, Pagination } from "react-bootstrap";
+import { Table, Button, Pagination, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
 import history from "../../history";
 
@@ -104,6 +104,16 @@ class ListSkill extends React.PureComponent {
         >
           <b>Danh sách các kỹ năng</b>
         </h1>
+        {listSkill.hasOwnProperty("limitSkill") ? null : (<div style={{ textAlign: "center" }}>
+          <Spinner animation="grow" variant="primary" />
+          <Spinner animation="grow" variant="secondary" />
+          <Spinner animation="grow" variant="success" />
+          <Spinner animation="grow" variant="danger" />
+          <Spinner animation="grow" variant="warning" />
+          <Spinner animation="grow" variant="info" />
+          <Spinner animation="grow" variant="dark" />
+        </div>)
+        }
         <Button type="button" onClick={this.AddSkill}>Thêm kỹ năng</Button>
         <Table striped bordered hover>
           <thead style={{ background: "#88888A" }}>

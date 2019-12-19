@@ -43,7 +43,6 @@ class detailsUser extends React.PureComponent {
 
   render() {
     const { detailUser, getAddress, getDistrict } = this.props;
-    console.log('000000000000000000000000', detailUser.introduce);
     return (
       <div className="inner-block">
         <Container className="my-container">

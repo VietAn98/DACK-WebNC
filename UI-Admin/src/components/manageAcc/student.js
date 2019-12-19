@@ -31,13 +31,23 @@ class student extends React.PureComponent {
     return (
       <div
         style={{ padding: "10px" }}
-        //   styles={{transform:`translateY(-50%)` }}
+      //   styles={{transform:`translateY(-50%)` }}
       >
         <h1
           style={{ textAlign: "center", marginBottom: "20px", padding: "20px" }}
         >
           <b>Danh sách học viên</b>
         </h1>
+        {students.hasOwnProperty("limitStudent") ? null : (<div style={{ textAlign: "center" }}>
+          <Spinner animation="grow" variant="primary" />
+          <Spinner animation="grow" variant="secondary" />
+          <Spinner animation="grow" variant="success" />
+          <Spinner animation="grow" variant="danger" />
+          <Spinner animation="grow" variant="warning" />
+          <Spinner animation="grow" variant="info" />
+          <Spinner animation="grow" variant="dark" />
+        </div>)
+        }
         <Table striped bordered hover>
           <thead style={{ background: "#88888A" }}>
             <tr style={{ textAlign: "center" }}>
@@ -50,19 +60,19 @@ class student extends React.PureComponent {
           <tbody>
             {students.hasOwnProperty("limitStudent")
               ? // eslint-disable-next-line no-return-assign
-                limitStudent.map(std => {
-                  return (
-                    <tr
-                      style={{ cursor: "pointer" }}
-                      onClick={this.onnclicks.bind(this, std.userId)}
-                    >
-                      <td style={{ textAlign: "center" }}>{(stt += 1)}</td>
-                      <td>{std.name}</td>
-                      <td>{std.gmail}</td>
-                      <td>{std.gender}</td>
-                    </tr>
-                  );
-                })
+              limitStudent.map(std => {
+                return (
+                  <tr
+                    style={{ cursor: "pointer" }}
+                    onClick={this.onnclicks.bind(this, std.userId)}
+                  >
+                    <td style={{ textAlign: "center" }}>{(stt += 1)}</td>
+                    <td>{std.name}</td>
+                    <td>{std.gmail}</td>
+                    <td>{std.gender}</td>
+                  </tr>
+                );
+              })
               : null}
           </tbody>
         </Table>

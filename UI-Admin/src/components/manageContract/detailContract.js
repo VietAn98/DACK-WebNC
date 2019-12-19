@@ -30,6 +30,8 @@ class detailContract extends React.PureComponent {
   };
 
   onChangeContract = obj => {
+    Swal.fire("Đang cập nhật");
+    Swal.showLoading();
     const idState = obj.target.value;
     const path = window.location.pathname.split("/");
     const id = path[path.length - 1];
@@ -42,7 +44,7 @@ class detailContract extends React.PureComponent {
     const { contract, teacher, student, skills } = detailContracts;
     const arrState = [];
     statesContract.forEach(element => {
-      if (element.id === 2 || element.id === 7 || element.id === 6) {
+      if (element.id === 5 || element.id === 4 || element.id === 3) {
         arrState.push(element);
       }
     });
@@ -51,7 +53,7 @@ class detailContract extends React.PureComponent {
       <div className="div-container">
         {detailContracts.hasOwnProperty("contract") ? (
           <Container className="contract-container">
-            {contract[0].state === 3 ? <img src={unpaid} alt="stamp" /> : null}
+            {contract[0].state === 2 ? <img src={unpaid} alt="stamp" /> : null}
             <h1 className="text-center">
               <b>HỢP ĐỒNG THUÊ GIÁO VIÊN</b>
             </h1>
@@ -308,12 +310,12 @@ class detailContract extends React.PureComponent {
                   </div>
                 </div>
 
-                {contract[0].state === 3 ? (
+                {contract[0].state === 2 ? (
                   <div className="col-sm-12 col-md-12 mb-5 text-center">
                     <Button onClick={this.payContract}>Thanh toán</Button>
                   </div>
                 ) : null}
-                {contract[0].state === 6 ? (
+                {contract[0].state === 5 ? (
                   <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>Thay đổi trang thái</Form.Label>
                     <Form.Control

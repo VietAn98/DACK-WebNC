@@ -34,6 +34,9 @@ const APIService = {
   FORGOT_FORGOT_PASSWORD: `${URL}/api-admin/update-new-password`,
   GET_KEY_PASS: `${URL}/api-admin/get-keypass`,
 
+  //  complaint
+  GET_LIMIT_COMPLAINT: `${URL}/api-admin/get-list-complaint`,
+
 //   GET_INFO: `${URL}/api/current-user-profile`,
 //   CHANGE_INFO: `${URL}/api/updateInfor`,
 //   // CHANGE_AVATAR: `${URL}/user/uploadavatar`,
