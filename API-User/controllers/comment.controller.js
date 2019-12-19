@@ -34,6 +34,7 @@ module.exports = {
       contractId: req.body.contractId,
       isDone: 0
     };
+    console.log(complaint);
     db.createComplaint(complaint)
       .then(index => {
         if (index != 0) {
@@ -42,12 +43,14 @@ module.exports = {
             state: 5
           };
 
-          db_contract.updateStateContract(contract);
-          res
-            .status(200)
-            .json({
-              message: "Thêm khiếu nại thành công và cập nhật state hợp đồng"
-            });
+          db_contract.updateStateContract(contract).then(() => {
+            res
+              .status(200)
+              .json({
+                message: "Thêm khiếu nại thành công và cập nhật state hợp đồng"
+              });
+          });
+
         } else {
           res.status(400).json({ message: "Thất bại" });
         }
