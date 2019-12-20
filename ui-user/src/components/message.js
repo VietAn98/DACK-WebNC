@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { realtimedb } from '../firebase/index';
+import jwtDecode from 'jwt-decode';
 export default class Form extends Component {
   constructor(props) {
     super(props);
+    const tokenn = localStorage.token;
+    const decoded = jwtDecode(tokenn);
     this.state = {
-      userName: "Sebastian",
+      userName: decoded.name,
       message: "",
       list: []
     };
