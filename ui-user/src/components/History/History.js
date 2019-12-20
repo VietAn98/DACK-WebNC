@@ -72,20 +72,21 @@ class History extends React.PureComponent {
       filterContractsOfTeacher,
       filterContractsOfStudent
     } = this.props;
-
+    // console.log('obnj',obj);
+    const page = -1
     // eslint-disable-next-line radix
     if (parseInt(obj.target.value) === 0) {
       if (decoded.categoryUser === 0) {
-        await getContractByUserId(decoded.userId);
+        await getContractByUserId(decoded.userId, page);
       } else {
-        await getContractByTeacherId(decoded.userId);
+        await getContractByTeacherId(decoded.userId, page);
       }
     } else {
       // eslint-disable-next-line no-lonely-if
       if (decoded.categoryUser === 1) {
-        await filterContractsOfTeacher(decoded.userId, obj.target.value);
+        await filterContractsOfTeacher(decoded.userId, obj.target.value,page);
       } else {
-        await filterContractsOfStudent(decoded.userId, obj.target.value);
+        await filterContractsOfStudent(decoded.userId, obj.target.value,page);
       }
     }
   }
@@ -114,10 +115,11 @@ class History extends React.PureComponent {
     } = contractByIdUser;
     // eslint-disable-next-line radix
     const index = parseInt(page);
-    const stt = offset;
+    let stt = offset;
+    // console.log('numberPages', numberPages)
     const arrPage = [];
     for (let j = 1; j <= numberPages; j += 1) {
-      arrPage.push(i);
+      arrPage.push(j);
     }
     // console.log('contractByIdUser', contractByIdUser);
     return (
@@ -180,7 +182,7 @@ class History extends React.PureComponent {
                     {contractByIdUser.hasOwnProperty('limitHistory')
                       ? limitHistory.map((item) => (
                         <tr className="cursor-pointer" onClick={this.onClickRow.bind(this, item.idContract)}>
-                          <td className="text-center">{i += 1}</td>
+                          <td className="text-center">{stt += 1}</td>
                           {/* <td className="pl-5">
                             {decoded.categoryUser === 1 ? `Yêu cầu thứ ${i}` : `Hợp đồng thứ ${i}`}
                           </td> */}

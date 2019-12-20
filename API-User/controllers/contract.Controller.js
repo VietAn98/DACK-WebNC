@@ -5,7 +5,7 @@ module.exports = {
   getContractByUser: (req, res) => {
     let id = req.params.id;
     var page = req.query.page || 1;
-    var limit = 5;
+    var limit = 4;
     if (page < 1) page = 1;
     var offset = (page - 1) * limit;
     Promise.all([
@@ -37,7 +37,7 @@ module.exports = {
   getContractByTeacher: async (req, res) => {
     let id = req.params.id;
     var page = req.query.page || 1;
-    var limit = 5;
+    var limit = 4;
     if (page < 1) page = 1;
     var offset = (page - 1) * limit;
     Promise.all([
@@ -99,38 +99,39 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  filterListContractStudent: async (req, res) => {
+  filterListContractStudent:  (req, res) => {
     const idUser = req.params.idUser;
     const idState = req.query.idState;
-    return await db
-      .filterListContractStudent(idUser, idState)
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
+    var page = req.query.page || 1;
+    var limit = 4;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountStudentLimit(idUser, idState),
+      db.filterListContractStudent(idUser, idState,limit, offset)
+    ]).then(([sumHistory, limitHistory]) => {
+      var numberPages = parseInt(sumHistory[0].sumT / limit);
+      if (sumHistory[0].sumT % limit > 0) numberPages += 1;
+      res.status(200).json({ numberPages, limitHistory, offset, page });
+    });
   },
 
-  filterListContractTeacher: async (req, res) => {
+  filterListContractTeacher: (req, res) => {
     const idUser = req.params.idUser;
     const idState = req.query.idState;
-    return await db
-      .filterListContractTeacher(idUser,idState)
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
+    var page = req.query.page || 1;
+    console.log('page',req.query.page);
+    var limit = 4;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountTeacherLimitByState(idUser, idState),
+      db.filterListContractTeacher(idUser, idState,limit, offset)
+    ]).then(([sumHistory, limitHistory]) => {
+      var numberPages = parseInt(sumHistory[0].sumT / limit);
+      if (sumHistory[0].sumT % limit > 0) numberPages += 1;
+      res.status(200).json({ numberPages, limitHistory, offset, page });
+    });
   },
 
   detailContract: (req, res) => {

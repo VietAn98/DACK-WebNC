@@ -775,8 +775,8 @@ export const updateStateContract = (
   // .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
   .catch((err) => console.log('Error updateStateContract occured', err));
 
-export const filterContractsOfStudent = (idUser, idState) => (dispatch) => fetch(
-  `${API.FILTER_LIST_CONTRACT_STUDENT + idUser}?idState=${idState}`, {
+export const filterContractsOfStudent = (idUser, idState,page) => (dispatch) => fetch(
+  `${API.FILTER_LIST_CONTRACT_STUDENT + idUser}?idState=${idState}&page=${page}`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -794,8 +794,8 @@ export const filterContractsOfStudent = (idUser, idState) => (dispatch) => fetch
   })
   .catch((err) => console.log('Error filterContractsOfStudent occured', err));
 
-export const filterContractsOfTeacher = (idUser, idState) => (dispatch) => fetch(
-  `${API.FILTER_LIST_CONTRACT_TEACHER + idUser}?idState=${idState}`, {
+export const filterContractsOfTeacher = (idUser, idState, page) => (dispatch) => fetch(
+  `${API.FILTER_LIST_CONTRACT_TEACHER + idUser}?idState=${idState}&page=${page}`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'

@@ -52,23 +52,42 @@ module.exports = {
     return db.add("contract", contract);
   },
 
-  filterListContractStudent: (idUser, idState) => {
+  filterListContractStudent: (idUser, idState, limit, offset) => {
     return db.load(`SELECT * FROM 
     (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
       (select ct.*, acc.name as StudentName, 
         acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
       as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
-      as bb WHERE bb.studentId="${idUser}" AND bb.state="${idState}"`)
+      as bb WHERE bb.studentId="${idUser}" AND bb.state="${idState}" LIMIT ${limit}  OFFSET ${offset}`)
   },
 
-  filterListContractTeacher: (idUser, idState) => {
+  getCountStudentLimit: (idUser,idState) => {
+    return db.load(`SELECT COUNT(*) as sumT FROM (SELECT * FROM 
+      (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
+        (select ct.*, acc.name as StudentName, 
+          acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+        as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
+        as bb WHERE bb.studentId="${idUser}" AND bb.state="${idState}") as tb`)
+  },
+
+  filterListContractTeacher: (idUser, idState, limit, offset) => {
     return db.load(`SELECT * FROM 
     (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
       (select ct.*, acc.name as StudentName,
         acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
       as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
-      as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}"`)
+      as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}" LIMIT ${limit}  OFFSET ${offset}`)
   },
+
+  getCountTeacherLimitByState: (idUser,idState) => {
+    return db.load(`SELECT COUNT(*) as sumT FROM (SELECT * FROM 
+      (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
+        (select ct.*, acc.name as StudentName, 
+          acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+        as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
+        as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}") as tb`)
+  },
+
 
   detailContract: (id) => {
     return db.load(`SELECT * FROM contract WHERE idContract = ${id}`)
