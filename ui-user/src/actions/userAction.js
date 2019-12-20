@@ -691,8 +691,8 @@ export const createContract = (
 //   })
 //   .catch((err) => console.log('Error getAllContracts occured', err));
 
-export const getContractByUserId = (idUser) => (dispatch) => fetch(
-  API.GET_CONTRACT_BY_USER_ID + idUser, {
+export const getContractByUserId = (idUser, page) => (dispatch) => fetch(
+  `${API.GET_CONTRACT_BY_USER_ID + idUser }?page=${page}`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -701,13 +701,14 @@ export const getContractByUserId = (idUser) => (dispatch) => fetch(
 )
   .then((respond) => respond.json())
   .then((res) => {
+    console.log('1111111111111111111222222222',res);
     // console.log('getContractByUserId', res);
     dispatch({ type: 'GET_CONTRACT_BY_USER_ID', contractByIdUser: res });
   })
   .catch((err) => console.log('Error getContractByUserId occured', err));
 
-export const getContractByTeacherId = (idUser) => (dispatch) => fetch(
-  API.GET_CONTRACT_BY_TEACHER_ID + idUser, {
+export const getContractByTeacherId = (idUser, page) => (dispatch) => fetch(
+  `${API.GET_CONTRACT_BY_TEACHER_ID + idUser }?page=${page}`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'

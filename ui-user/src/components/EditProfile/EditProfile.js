@@ -54,13 +54,12 @@ class EditProfile extends React.PureComponent {
     getDistrictByIdCity(e.target.value);
   };
 
-  onChangeImage = async () => {
+  onChangeImage = () => {
     const { userLogin, currentUser } = this.props;
-    await userLogin({
+    userLogin({
       ...currentUser,
       avatar: ''
     });
-    console.log('currentUsercurrentUser', currentUser)
   };
 
   onHandleChange = async (e) => {
@@ -93,11 +92,9 @@ class EditProfile extends React.PureComponent {
 
     const { gmail } = user;
 
-    let avatar = null;
-    if (nameAvatar.name) {
-      if (currentUser.avatar === '' || currentUser.avatar === null) {
-        avatar = `http://localhost:3001/images/${nameAvatar.name}`;
-      }
+    let avatar = '';
+    if (currentUser.avatar === '' || currentUser.avatar === null) {
+      avatar = `http://localhost:3001/images/${nameAvatar.name}`;
     } else {
       avatar = currentUser.avatar;
     }
@@ -105,11 +102,10 @@ class EditProfile extends React.PureComponent {
     const name = document.getElementById('name').value;
     const genderSelected = document.getElementById('selectGender').value;
     const idDistrict = document.getElementById('selectDistrict').value;
-    const address = document.getElementById('address').value;
 
     if (user.categoryUser === 0) {
       Promise.resolve(
-        updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar, address)
+        updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar)
       ).then(() => {
         Swal.fire({
           icon: 'success',
@@ -144,8 +140,7 @@ class EditProfile extends React.PureComponent {
           intro,
           stringSkill,
           price,
-          avatar,
-          address
+          avatar
         )
       ).then(() => {
         Swal.fire({
@@ -267,6 +262,7 @@ class EditProfile extends React.PureComponent {
                       <b>Chọn ảnh đại diện:</b>
                     </h5>
                     <input
+                      required
                       className="mt-5"
                       type="file"
                       onChange={this.onGetAvatar}
@@ -307,8 +303,7 @@ class EditProfile extends React.PureComponent {
                       <input
                         type="text"
                         id="address"
-                        value={currentUser.address}
-                        onChange={this.onHandleChange}
+                      // value={user.}
                       />
                     </div>
                     <div className="col-md-3 col-sm-3 mt-4">
@@ -387,7 +382,7 @@ class EditProfile extends React.PureComponent {
                       </Form.Control>
                     </div>
                   </div>
-                ) : (
+) : (
                   <div>
                     <div className="col-md-7 col-sm-7 contact_left_grid mt-4 pt-1">
                       <h5 className="float-left text-white">
@@ -396,8 +391,7 @@ class EditProfile extends React.PureComponent {
                       <input
                         type="text"
                         id="address"
-                        value={currentUser.address}
-                        onChange={this.onHandleChange}
+                      // value={user.}
                       />
                     </div>
                     <div className="col-md-4 col-sm-4 mt-4">
