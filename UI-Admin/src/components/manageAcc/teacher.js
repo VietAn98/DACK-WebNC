@@ -1,6 +1,11 @@
-import React from "react";
-import { Table, Pagination, Button, Spinner } from "react-bootstrap";
-import history from "../../history";
+/* eslint-disable max-len */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable radix */
+import React from 'react';
+import {
+ Table, Pagination, Button, Spinner
+} from 'react-bootstrap';
+import history from '../../history';
 
 class student extends React.PureComponent {
   constructor(props) {
@@ -11,11 +16,11 @@ class student extends React.PureComponent {
     getListLimitTeacher(page);
   }
 
-  onnclicks = index => {
+  onnclicks = (index) => {
     history.push(`/manage-student-teacher/detail/${index}`);
   };
 
-  changePage = iPage => {
+  changePage = (iPage) => {
     const { getListLimitTeacher } = this.props;
     getListLimitTeacher(iPage);
   };
@@ -23,7 +28,9 @@ class student extends React.PureComponent {
   render() {
     const { teachers } = this.props;
     // console.log('11111111111', teachers);
-    const { numberPages, limitTeacher, offset, page } = teachers;
+    const {
+ numberPages, limitTeacher, offset, page
+} = teachers;
     const index = parseInt(page);
     let stt = offset;
     const arrPage = [];
@@ -31,13 +38,14 @@ class student extends React.PureComponent {
       arrPage.push(i);
     }
     return (
-      <div style={{ padding: "10px" }}>
+      <div style={{ padding: '10px' }}>
         <h1
-          style={{ textAlign: "center", marginBottom: "20px", padding: "20px" }}
+          style={{ textAlign: 'center', marginBottom: '20px', padding: '20px' }}
         >
-          <b>Danh sách giáo viên</b>
+          <b>Danh Sách Giáo Viên</b>
         </h1>
-        {teachers.hasOwnProperty("limitTeacher") ? null : (<div style={{ textAlign: "center" }}>
+        {teachers.hasOwnProperty('limitTeacher') ? null : (
+<div style={{ textAlign: 'center' }}>
           <Spinner animation="grow" variant="primary" />
           <Spinner animation="grow" variant="secondary" />
           <Spinner animation="grow" variant="success" />
@@ -45,28 +53,28 @@ class student extends React.PureComponent {
           <Spinner animation="grow" variant="warning" />
           <Spinner animation="grow" variant="info" />
           <Spinner animation="grow" variant="dark" />
-        </div>)
-        }
-        <Table striped bordered hover className="ml-1">
-          <thead style={{ background: "#88888A" }}>
-            <tr style={{ textAlign: "center" }}>
-              <th style={{ textAlign: "center", width: "5%" }}>STT</th>
-              <th style={{ textAlign: "center" }} placeholder="Chưa cập  nhật">
+</div>
+)}
+        <Table striped bordered hover className="ml-2">
+          <thead style={{ background: '#FF9C43' }}>
+            <tr style={{ textAlign: 'center' }}>
+              <th style={{ textAlign: 'center', width: '5%' }}>STT</th>
+              <th style={{ textAlign: 'center' }} placeholder="Chưa cập  nhật">
                 Họ Tên
               </th>
-              <th style={{ textAlign: "center" }}>Gmail</th>
-              <th style={{ textAlign: "center" }}>Giới tính</th>
-              <th style={{ textAlign: "center" }} placeholder="Chưa cập  nhật">
+              <th style={{ textAlign: 'center' }}>Gmail</th>
+              <th style={{ textAlign: 'center' }}>Giới tính</th>
+              <th style={{ textAlign: 'center' }} placeholder="Chưa cập  nhật">
                 Giá (/h)
               </th>
             </tr>
           </thead>
           <tbody>
-            {teachers.hasOwnProperty("limitTeacher")
-              ? // eslint-disable-next-line no-return-assign
-              limitTeacher.map(tch => (
+            {teachers.hasOwnProperty('limitTeacher')
+               // eslint-disable-next-line no-return-assign
+              ? limitTeacher.map((tch) => (
                 <tr onClick={this.onnclicks.bind(this, tch.userId)}>
-                  <td style={{ textAlign: "center" }}>{(stt += 1)}</td>
+                  <td style={{ textAlign: 'center' }}>{(stt += 1)}</td>
                   <td>{tch.name}</td>
                   <td>{tch.gmail}</td>
                   <td>{tch.gender}</td>
@@ -76,10 +84,10 @@ class student extends React.PureComponent {
               : null}
           </tbody>
         </Table>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <Pagination>
             <Pagination.First onClick={() => this.changePage(index - 1)} />
-            {arrPage.map(number => (
+            {arrPage.map((number) => (
               <Pagination.Item active={number === index || false} onClick={() => this.changePage(number)}>
                 {number}
               </Pagination.Item>
