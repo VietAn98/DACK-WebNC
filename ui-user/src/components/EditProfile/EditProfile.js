@@ -54,9 +54,9 @@ class EditProfile extends React.PureComponent {
     getDistrictByIdCity(e.target.value);
   };
 
-  onChangeImage = async () => {
+  onChangeImage = () => {
     const { userLogin, currentUser } = this.props;
-    await userLogin({
+    userLogin({
       ...currentUser,
       avatar: ''
     });
@@ -94,11 +94,9 @@ class EditProfile extends React.PureComponent {
 
     const { gmail } = user;
 
-    let avatar = null;
-    if (nameAvatar.name) {
-      if (currentUser.avatar === '' || currentUser.avatar === null) {
-        avatar = `http://localhost:3001/images/${nameAvatar.name}`;
-      }
+    let avatar = '';
+    if (currentUser.avatar === '' || currentUser.avatar === null) {
+      avatar = `http://localhost:3001/images/${nameAvatar.name}`;
     } else {
       avatar = currentUser.avatar;
     }
@@ -106,11 +104,10 @@ class EditProfile extends React.PureComponent {
     const name = document.getElementById('name').value;
     const genderSelected = document.getElementById('selectGender').value;
     const idDistrict = document.getElementById('selectDistrict').value;
-    const address = document.getElementById('address').value;
 
     if (user.categoryUser === 0) {
       Promise.resolve(
-        updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar, address)
+        updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar)
       ).then(() => {
         document.getElementById('loader').style.display = 'none';
         Swal.fire({
@@ -146,8 +143,7 @@ class EditProfile extends React.PureComponent {
           intro,
           stringSkill,
           price,
-          avatar,
-          address
+          avatar
         )
       ).then(() => {
         document.getElementById('loader').style.display = 'none';

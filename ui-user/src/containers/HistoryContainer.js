@@ -13,8 +13,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getContractByUserId: (idUser) => dispatch(getContractByUserId(idUser)),
-    getContractByTeacherId: (id) => dispatch(getContractByTeacherId(id)),
+    getContractByUserId: (idUser, page) => dispatch(getContractByUserId(idUser, page)),
+    getContractByTeacherId: (id, page) => dispatch(getContractByTeacherId(id, page)),
     filterContractsOfTeacher: (idUser, idState) => dispatch(
         filterContractsOfTeacher(idUser, idState)
     ),

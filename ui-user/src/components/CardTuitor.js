@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import numeral from 'numeral';
-import Swal from 'sweetalert2';
-import history from '../history';
-import './CardTuitor.css';
-import avatar from '../public/images/avatar.jpg';
+import React, { Component } from "react";
+import { Button } from "react-bootstrap";
+import numeral from "numeral";
+import Swal from "sweetalert2";
+import history from "../history";
+import "./CardTuitor.css";
+import avatar from "../public/images/avatar.jpg";
 
 class Card extends React.PureComponent {
   // constructor(props) {
@@ -13,22 +13,22 @@ class Card extends React.PureComponent {
   //   // listNameSkill(listTeachers.userId);
   // }
 
-  onnclicks = (id) => {
+  onnclicks = id => {
     history.push(`/teacher-info/${id}`);
     window.location.reload();
   };
 
-  onClickHire = (id) => {
+  onClickHire = id => {
     const tokenn = localStorage.token;
     // console.log('tokennn', tokenn);
     if (tokenn) {
       history.push(`/contract/teacher-${id}`);
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Bạn chưa đăng nhập!',
-        footer: '<a href>Tiến hành Đăng nhập</a>'
+        icon: "error",
+        title: "Oops...",
+        text: "Bạn chưa đăng nhập!",
+        footer: "<a href>Tiến hành Đăng nhập</a>"
       });
     }
   };
@@ -41,98 +41,117 @@ class Card extends React.PureComponent {
       <div style={style}>
         {listTeachers ? (
           <div className="cardTuitor">
-            <img src={listTeachers.avatar ? listTeachers.avatar : avatar} alt="avatar" />
+            <img
+              src={listTeachers.avatar ? listTeachers.avatar : avatar}
+              alt="avatar"
+            />
             <div className="cardCaption">
               <div className="cardInfo">
                 <h6>{listTeachers.name}</h6>
                 {/* {nameSkill ? (<div>{nameSkill.name}</div>) : null} */}
                 <div>
-                  Giá thuê:
-{' '}
-                  {numeral(`${listTeachers.price}`).format('(0,0)')}
-                  {' '}
+                  Giá thuê: {numeral(`${listTeachers.price}`).format("(0,0)")}{" "}
                   VND/giờ
                 </div>
-                {listTeachers.rateSuccess <= 20
-                  && listTeachers.rateSuccess > 0 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                    </div>
-                  ) : null}
-                {listTeachers.rateSuccess <= 40
-                  && listTeachers.rateSuccess > 20 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                    </div>
-                  ) : null}
-                {listTeachers.rateSuccess <= 60
-                  && listTeachers.rateSuccess > 40 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                    </div>
-                  ) : null}
-                {listTeachers.rateSuccess <= 80
-                  && listTeachers.rateSuccess > 60 ? (
-                    <div className="stars mt-2">
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star" aria-hidden="true" />
-                      </li>
-                      <li>
-                        <span className="fa fa-star-o" aria-hidden="true" />
-                      </li>
-                    </div>
-                  ) : null}
+                {listTeachers.rateSuccess === null ? (
+                  <div className="stars mt-2">
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                  </div>
+                ) : null}
+                {listTeachers.rateSuccess <= 20 &&
+                listTeachers.rateSuccess > 0 ? (
+                  <div className="stars mt-2">
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                  </div>
+                ) : null}
+                {listTeachers.rateSuccess <= 40 &&
+                listTeachers.rateSuccess > 20 ? (
+                  <div className="stars mt-2">
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                  </div>
+                ) : null}
+                {listTeachers.rateSuccess <= 60 &&
+                listTeachers.rateSuccess > 40 ? (
+                  <div className="stars mt-2">
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                  </div>
+                ) : null}
+                {listTeachers.rateSuccess <= 80 &&
+                listTeachers.rateSuccess > 60 ? (
+                  <div className="stars mt-2">
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star" aria-hidden="true" />
+                    </li>
+                    <li>
+                      <span className="fa fa-star-o" aria-hidden="true" />
+                    </li>
+                  </div>
+                ) : null}
                 {listTeachers.rateSuccess > 80 ? (
                   <div className="stars mt-2">
                     <li>
@@ -152,7 +171,7 @@ class Card extends React.PureComponent {
                     </li>
                   </div>
                 ) : null}
-                <div style={{ marginTop: '2.5rem' }}>
+                <div style={{ marginTop: "2.5rem" }}>
                   <Button
                     variant="primary"
                     className="mx-2"
