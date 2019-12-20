@@ -18,7 +18,7 @@ import Chat from './components/message';
 
 export class App extends React.PureComponent {
 	render() {
-		 // localStorage.clear();
+		// localStorage.clear();
 		return (
 			<main>
 				<Header />

@@ -16,10 +16,7 @@ class AfterLogin extends React.PureComponent {
 
 	render() {
 		const tokenn = localStorage.token;
-		// let decoded = null;
-		// if (tokenn) {
-		// 	decoded = jwtDecode(tokenn);
-		// }
+
 		const { signOut, userProfiles } = this.props;
 		// console.log('userProfiles', userProfiles);
 		return (
