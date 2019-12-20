@@ -30,7 +30,7 @@ class AfterLogin extends React.PureComponent {
 							<div className="d-flex flex-row justify-content-around ">
 								<div style={{ width: '40px' }}>
 									<img
-										style={{ width: '100%', borderRadius: '50%' }}
+										style={{ width: '100%', borderRadius: '10px' }}
 										alt="avatar"
 										src={userProfiles.avatar ? `${userProfiles.avatar}` : `${avatar1}`}
 									/>

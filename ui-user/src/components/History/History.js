@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-return-assign */
@@ -10,6 +11,7 @@ import moment from 'moment';
 import jwtDecode from 'jwt-decode';
 import './History.css';
 import history from '../../history';
+import avatar1 from '../../public/images/avatar.jpg';
 
 const status = [
     { value: 1, text: 'Đang chờ xác nhận' },
@@ -24,6 +26,7 @@ let decoded = null;
 
 const today = new Date();
 const Today = moment(today).format('DD-MM-YYYY');
+// let isShow = false;
 
 class History extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
@@ -48,10 +51,11 @@ class History extends React.PureComponent {
                     const dateend = Number(parts[2] + parts[1] + parts[0]);
                     parts = Today.split('-');
                     const datenow = Number(parts[2] + parts[1] + parts[0]);
-                    if (datenow - dateend > 3) {
+                    if (datenow - dateend <= 3) {
                         const { updateStateContract } = this.props;
                         await updateStateContract(row.idContract, 3);
-                        console.log('dateend - datenow', dateend - datenow);
+                        // console.log('dateend - datenow', dateend - datenow);
+                        // isShow = true;
                     }
                 }
             });
@@ -124,7 +128,7 @@ class History extends React.PureComponent {
                                         >
                                             <option value="0">
                                                 Tất cả
-                                </option>
+                                            </option>
                                             {status.map((item) => (
                                                 <option value={item.value}>
                                                     {' '}
@@ -152,8 +156,24 @@ class History extends React.PureComponent {
                                         {contractByIdUser.length !== 0 ? contractByIdUser.map((item) => (
                                             <tr className="cursor-pointer" onClick={this.onClickRow.bind(this, item.idContract)}>
                                                 <td className="text-center">{i += 1}</td>
-                                                <td className="pl-5">
+                                                {/* <td className="pl-5">
                                                     {decoded.categoryUser === 1 ? `Yêu cầu thứ ${i}` : `Hợp đồng thứ ${i}`}
+                                                </td> */}
+                                                <td style={{ width: '5%' }}>
+                                                    {decoded.categoryUser === 1
+                                                    ? (
+                                                        <img
+                                                                src={item.studentAvatar ? `${item.studentAvatar}` : `${avatar1}`}
+                                                            alt="avatar"
+                                                            style={{ width: '200%' }}
+                                                        />
+                                                        ) : (
+                                                            <img
+                                                                src={item.teacherAvatar ? `${item.teacherAvatar}` : `${avatar1}`}
+                                                                alt="avatar"
+                                                                style={{ width: '200%' }}
+                                                            />
+                                                        )}
                                                 </td>
                                                 <td className="pl-5">
                                                     {decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}
@@ -164,7 +184,7 @@ class History extends React.PureComponent {
                                                         || item.state === 3
                                                         || item.state === 5
                                                         ? `${item.endDay}` : null}
-                                                    {/* <span className="sm-tag">End</span> */}
+                                                    {isShow ? <span className="sm-tag">End</span> : null}
                                                 </td>
                                                 <td className="text-center">{item.Status}</td>
                                                 <td className="text-center">

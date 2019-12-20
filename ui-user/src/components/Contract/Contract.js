@@ -225,7 +225,7 @@ class Contract extends React.PureComponent {
                       <Form.Label>
                         <h3>
                           <b>
-                            <u>Bên A:</u>
+                            <u>Học Viên:</u>
                           </b>
                         </h3>
                       </Form.Label>
@@ -320,7 +320,7 @@ class Contract extends React.PureComponent {
                       <Form.Label>
                         <h3>
                           <b>
-                            <u>Bên B:</u>
+                            <u>Giáo Viên:</u>
                           </b>
                         </h3>
                       </Form.Label>

@@ -19,6 +19,7 @@ import stampDenied from '../../public/images/denied-stamp.jpg';
 // import stampPaid from '../../public/images/paid-stamp.png';
 import stampComplaint from '../../public/images/complaint-stamp.jpg';
 // import stampCanceled from '../../public/images/cancelled-stamp.jpg';
+import avatar1 from '../../public/images/avatar.jpg';
 
 // const today = new Date();
 // const Today = moment(today).format('DD-MM-YYYY');
@@ -64,6 +65,7 @@ class ReadOnlyContract extends React.PureComponent {
                     if (datenow - dateend <= 3) {
                         isShow = true;
                     }
+                    // console.log('datenow - dateend', datenow - dateend);
                 }
             } else {
                 await getInforUserById(contractByIdContract.detailContract[0].studentId);
@@ -146,6 +148,10 @@ class ReadOnlyContract extends React.PureComponent {
 
     onSubmitCommentForm = (e) => {
         e.preventDefault();
+
+        document.getElementById('btnSend').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+
         const { contractByIdContract } = this.props;
         if (contractByIdContract.hasOwnProperty('detailContract')) {
             const { sendComment, starNumber } = this.props;
@@ -160,7 +166,12 @@ class ReadOnlyContract extends React.PureComponent {
                     title: 'Xin hãy thực hiện phần Đánh giá',
                 });
             } else {
-                sendComment(studentId, content, starsNumber, teacherId, idContract);
+                Promise.resolve(sendComment(studentId, content, starsNumber, teacherId, idContract))
+                    .then(() => {
+                        document.getElementById('btnSend').style.display = 'none';
+                        document.getElementById('loader').style.display = 'none';
+                        document.getElementById('textarea-comment').disabled = true;
+                    });
             }
         }
     }
@@ -246,9 +257,25 @@ class ReadOnlyContract extends React.PureComponent {
                                                     </Form.Label>
                                                     <br />
                                                 </div>
-                                                <Form.Group className="col-md-12 col-sm-12">
-                                                    <Form.Label>Họ tên:</Form.Label>
-                                                    <Form.Control id="formcontract" disabled type="text" value={userProfiles.name} />
+                                                <Form.Group>
+                                                    <div className="col-md-9 col-sm-9">
+                                                        <Form.Label>Họ tên:</Form.Label>
+                                                        <Form.Control
+                                                            id="formcontract"
+                                                            disabled
+                                                            type="text"
+                                                            value={userProfiles.name}
+                                                            style={{ width: '100%' }}
+                                                        />
+                                                    </div>
+
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <img
+                                                            src={userProfiles.avatar ? `${userProfiles.avatar}` : `${avatar1}`}
+                                                            alt="avatar"
+                                                            style={{ width: '100%', border: '1px dashed grey', padding: '2%', objectFit: 'fit' }}
+                                                        />
+                                                    </div>
                                                 </Form.Group>
                                                 <Form.Group className="col-md-12 col-sm-12">
                                                     <Form.Label>Email:</Form.Label>
@@ -345,14 +372,24 @@ class ReadOnlyContract extends React.PureComponent {
                                                     </Form.Label>
                                                     <br />
                                                 </div>
-                                                <Form.Group className="col-md-12 col-sm-12">
-                                                    <Form.Label>Họ tên:</Form.Label>
-                                                    <Form.Control
-                                                        id="formcontract"
-                                                        type="text"
-                                                        value={userInfor.name}
-                                                        disabled
-                                                    />
+                                                <Form.Group>
+                                                    <div className="col-md-9 col-sm-9">
+                                                        <Form.Label>Họ tên:</Form.Label>
+                                                        <Form.Control
+                                                            id="formcontract"
+                                                            type="text"
+                                                            value={userInfor.name}
+                                                            disabled
+                                                            style={{ width: '100%' }}
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <img
+                                                            src={userInfor.avatar ? `${userInfor.avatar}` : `${avatar1}`}
+                                                            alt="avatar"
+                                                            style={{ width: '100%', border: '1px dashed grey', padding: '2%' }}
+                                                        />
+                                                    </div>
                                                 </Form.Group>
                                                 <Form.Group className="col-md-12 col-sm-12">
                                                     <Form.Label>Email:</Form.Label>
@@ -704,7 +741,7 @@ class ReadOnlyContract extends React.PureComponent {
                                             as="textarea"
                                             placeholder="(Không bắt buộc)"
                                             style={{ height: '93px' }}
-                                            id="formcontract"
+                                            id="textarea-comment"
                                         />
                                     </div>
                                 </div>
@@ -716,10 +753,13 @@ class ReadOnlyContract extends React.PureComponent {
                                 </div>
                             </div>
                             <div className="col-md-12 col-sm-12 justify-center mt-5">
+                                <div className="loader mt-5" id="loader" style={{ margin: 'auto', display: 'none' }} />
                                 <Button
+                                    id="btnSend"
                                     size="lg"
                                     type="submit"
                                     variant="dark"
+                                    style={{ display: 'block' }}
                                 >
                                     Gửi
                                 </Button>
