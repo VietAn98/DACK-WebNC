@@ -718,7 +718,11 @@ export const getContractByTeacherId = (idUser, page) => (dispatch) => fetch(
   .then((respond) => respond.json())
   .then((res) => {
     console.log('getContractByTeacherId', res);
-    dispatch({ type: 'GET_CONTRACT_BY_TEACHER_ID', contractByIdTeacher: res });
+    if (!res.message) {
+      dispatch({ type: 'GET_CONTRACT_BY_TEACHER_ID', contractByIdTeacher: res });
+    } else {
+      dispatch({ type: 'GET_CONTRACT_BY_TEACHER_ID', contractByIdTeacher: [] });
+    }
   })
   .catch((err) => console.log('Error getContractByTeacherId occured', err));
 

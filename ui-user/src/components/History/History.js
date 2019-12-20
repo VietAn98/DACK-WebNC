@@ -1,36 +1,39 @@
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-return-assign */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from "react";
+import React from 'react';
 // import Swal from 'sweetalert2';
-import { Table, Form, Button, Pagination } from "react-bootstrap";
-import moment from "moment";
-import jwtDecode from "jwt-decode";
-import "./History.css";
-import history from "../../history";
+import {
+  Table, Form, Button, Pagination
+} from 'react-bootstrap';
+import moment from 'moment';
+import jwtDecode from 'jwt-decode';
+import './History.css';
+import history from '../../history';
 
 const status = [
-  { value: 1, text: "Đang chờ xác nhận" },
-  { value: 2, text: "Đã xác nhận dạy" },
-  { value: 3, text: "Đã hoàn thành" },
-  { value: 4, text: "Đã từ chối" },
-  { value: 5, text: "Đang khiếu nại" }
+  { value: 1, text: 'Đang chờ xác nhận' },
+  { value: 2, text: 'Đã xác nhận dạy' },
+  { value: 3, text: 'Đã hoàn thành' },
+  { value: 4, text: 'Đã từ chối' },
+  { value: 5, text: 'Đang khiếu nại' }
 ];
 
 const tokenn = localStorage.token;
 let decoded = null;
-if (tokenn) {
-  decoded = jwtDecode(tokenn);
-}
 
 const today = new Date();
-const Today = moment(today).format("DD-MM-YYYY");
+const Today = moment(today).format('DD-MM-YYYY');
 
 class History extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated
   componentWillMount = async () => {
+    if (tokenn) {
+      decoded = jwtDecode(tokenn);
+    }
     const { getContractByUserId, getContractByTeacherId } = this.props;
     const page = -1;
     if (decoded.categoryUser === 0) {
@@ -42,17 +45,17 @@ class History extends React.PureComponent {
     const { contractByIdUser } = this.props;
     const { limitHistory } = contractByIdUser;
     if (limitHistory) {
-      limitHistory.map(async row => {
+      limitHistory.map(async (row) => {
         // console.log('dateend, datenow', dateend, datenow);
         if (row.state === 2) {
-          let parts = row.endDay.split("-");
+          let parts = row.endDay.split('-');
           const dateend = Number(parts[2] + parts[1] + parts[0]);
-          parts = Today.split("-");
+          parts = Today.split('-');
           const datenow = Number(parts[2] + parts[1] + parts[0]);
           if (datenow - dateend > 3) {
             const { updateStateContract } = this.props;
             await updateStateContract(row.idContract, 3);
-            console.log("dateend - datenow", dateend - datenow);
+            console.log('dateend - datenow', dateend - datenow);
           }
         }
       });
@@ -60,58 +63,13 @@ class History extends React.PureComponent {
     }
   };
 
-  // onClickRefuse = (idContract, state) => {
-  //     Swal.fire({
-  //         title: 'Bạn chắc chắn chứ?',
-  //         text: 'Bạn sẽ không thể chỉnh sửa lại thao tác nếu đã từ chối!',
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#3085d6',
-  //         cancelButtonColor: '#d33',
-  //         confirmButtonText: 'Xác nhận xóa'
-  //     }).then((result) => {
-  //         if (result.value) {
-  //             Swal.fire(
-  //                 'Đã từ chối!',
-  //                 'Yêu cầu của người học đã bị từ chối.',
-  //                 'success'
-  //             );
-  //         }
-  //     });
-  // }
-
-  // onClickAgree = (idContract, state) => {
-  //     Swal.fire({
-  //         title: 'Đồng ý?',
-  //         text: 'Bạn sẽ không thể chỉnh sửa lại thao tác nếu đã đồng ý!',
-  //         icon: 'warning',
-  //         showCancelButton: true,
-  //         confirmButtonColor: '#3085d6',
-  //         cancelButtonColor: '#d33',
-  //         confirmButtonText: 'Xác nhận!'
-  //     }).then((result) => {
-  //         if (result.value) {
-  //             Swal.fire(
-  //                 'Đã xác nhận!',
-  //                 'Yêu cầu của người học đã được đồng ý.',
-  //                 'success'
-  //             );
-  //         }
-  //     });
-  // }
-
-  // onClickAccept = (idContract, state) => {
-
-  // }
-
-  onChangeStatus = async obj => {
+  onChangeStatus = async (obj) => {
     const {
       getContractByUserId,
       getContractByTeacherId,
       filterContractsOfTeacher,
       filterContractsOfStudent
     } = this.props;
-    
 
     // eslint-disable-next-line radix
     if (parseInt(obj.target.value) === 0) {
@@ -128,15 +86,7 @@ class History extends React.PureComponent {
         await filterContractsOfStudent(decoded.userId, obj.target.value);
       }
     }
-
-    // if (obj.target.value === 1) {
-    //     if (decoded.categoryUser === 0) {
-    //         getContractsAwait(decoded.userId);
-    //     } else {
-    //         getContractsAwait(decoded.userId);
-    //     }
-    // }
-  };
+  }
 
   changePage = (iPage) => {
     const { getContractByUserId, getContractByTeacherId } = this.props;
@@ -147,162 +97,149 @@ class History extends React.PureComponent {
     }
   };
 
-  onClickRow = idRow => {
+  onClickRow = (idRow) => {
     history.push(`/contract-${idRow}`);
   };
 
   render() {
     const { contractByIdUser } = this.props;
-    const { numberPages, limitHistory, offset, page } = contractByIdUser;
+    let i = 0;
+
+    const {
+      numberPages,
+      limitHistory,
+      offset, page
+    } = contractByIdUser;
+    // eslint-disable-next-line radix
     const index = parseInt(page);
-    let stt = offset;
+    const stt = offset;
     const arrPage = [];
-    for (let i = 1; i <= numberPages; i += 1) {
+    for (let j = 1; j <= numberPages; j += 1) {
       arrPage.push(i);
     }
-    console.log('1111111111111111',contractByIdUser);
-    // let i = 0;
-    // console.log("contractByIdUser", contractByIdUser);
+    // console.log('contractByIdUser', contractByIdUser);
     return (
       <div
         style={{
-          backgroundColor: "rgba(0,0,0,0.5)",
-          borderRadius: "20px",
-          marginRight: "3rem",
-          paddingBottom: "3rem"
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          borderRadius: '20px',
+          marginRight: '3rem',
+          paddingBottom: '3rem'
         }}
       >
-        <h3 className="w3layouts-heading text-white">
-          <span>
-            {decoded.categoryUser === 1
-              ? "Lịch Sử Yêu Cầu"
-              : "Lịch Sử Hợp Đồng"}
-          </span>
-        </h3>
-        <div className="w3-agile_mail_grids justify-right mb-3">
-          <div className="col-md-12 col-sm-12 mb-4">
-            <div className="col-md-7 col-sm-7" />
-            <div className="col-md-2 col-sm-2">
-              <p className="text-white float-right">Lọc trạng thái:</p>
-            </div>
-            <div className="col-md-3 col-sm-3">
-              <Form.Control
-                as="select"
-                id="status"
-                // eslint-disable-next-line react/jsx-no-bind
-                onChange={this.onChangeStatus.bind(this)}
-                required
-                style={{ height: "100%" }}
-              >
-                <option value="0">Tất cả</option>
-                {status.map(item => (
-                  <option value={item.value}> {item.text}</option>
-                ))}
-              </Form.Control>
-            </div>
-          </div>
-        </div>
-        <div className="w3-agile_mail_grids justify-center pr-2 pl-2">
-          <Table
-            responsive
-            variant="light"
-            hover
-            className="col-md-12 col-sm-12"
-          >
-            <thead>
-              <tr>
-                <th className="text-center">#</th>
-                <th className="text-center">Tên</th>
-                <th className="text-center">
-                  {decoded.categoryUser === 1 ? "Người gửi" : "Người nhận"}
-                </th>
-                <th className="text-center">Ngày gửi</th>
-                <th className="text-center">Ngày kết thúc</th>
-                <th className="text-center">Trạng thái</th>
-                <th className="text-center">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              {contractByIdUser.hasOwnProperty("limitHistory")
-                ? limitHistory.map(item => (
-                    <tr
-                      className="cursor-pointer"
-                      onClick={this.onClickRow.bind(this, item.idContract)}
+        {decoded
+          ? (
+            <div>
+              <h3 className="w3layouts-heading text-white">
+                <span>{decoded.categoryUser === 1 ? 'Lịch Sử Yêu Cầu' : 'Lịch Sử Hợp Đồng'}</span>
+              </h3>
+              <div className="w3-agile_mail_grids justify-right mb-3">
+                <div className="col-md-12 col-sm-12 mb-4">
+                  <div className="col-md-7 col-sm-7" />
+                  <div className="col-md-2 col-sm-2">
+                    <p className="text-white float-right">Lọc trạng thái:</p>
+                  </div>
+                  <div className="col-md-3 col-sm-3">
+                    <Form.Control
+                      as="select"
+                      id="status"
+                      // eslint-disable-next-line react/jsx-no-bind
+                      onChange={this.onChangeStatus.bind(this)}
+                      required
+                      style={{ height: '100%' }}
                     >
-                      <td className="text-center">{(stt += 1)}</td>
-                      <td className="pl-5">
-                        {decoded.categoryUser === 1
-                          ? `Yêu cầu thứ ${stt}`
-                          : `Hợp đồng thứ ${stt}`}
-                      </td>
-                      <td className="pl-5">
-                        {decoded.categoryUser === 1
-                          ? `${item.StudentName}`
-                          : `${item.TeacherName}`}
-                      </td>
-                      <td className="text-center">{item.dateCreate}</td>
-                      <td className="text-center">
-                        {item.state === 2 ||
-                        item.state === 3 ||
-                        item.state === 5
-                          ? `${item.endDay}`
-                          : null}
-                        {/* <span className="sm-tag">End</span> */}
-                      </td>
-                      <td className="text-center">{item.Status}</td>
-                      <td className="text-center">
-                        {decoded.categoryUser === 1 ? (
-                          <div>
-                            {/* <i className="fas fa-check mr-3" title="Chấp nhận yêu cầu" onClick={this.onClickAccept.bind(this, item.idContract, item.state)} /> */}
-                            <i
-                              className="fas fa-sms mr-3"
-                              title="Liên hệ"
-                              onClick={this.onClickInbox}
-                            />
-                            {/* <i className="fas fa-times" title="Từ chối yêu cầu" onClick={this.onClickRefuse.bind(this, item.idContract, item.state)} /> */}
-                          </div>
-                        ) : (
-                          <div>
-                            {/* {item.state === 2
-                                                        ? (
-                                                            <Button onClick={this.onClickSetStatus} variant="outline-light" className="justify-center">
-                                                                <i className="fas fa-check mr-3" title="Đã hoàn thành khóa học" />
-                                                            </Button>
-                                                        ) : null} */}
-
-                            <Button
-                              onClick={this.onClickInbox}
-                              variant="outline-light"
-                            >
-                              <i className="fas fa-sms mr-3" title="Liên hệ" />
-                            </Button>
-                            {/* <i className="fas fa-exclamation-circle" title="Khiếu nại" /> */}
-                          </div>
-                        )}
-                      </td>
+                      <option value="0">
+                        Tất cả
+                      </option>
+                      {status.map((item) => (
+                        <option value={item.value}>
+                          {' '}
+                          {item.text}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </div>
+                </div>
+              </div>
+              <div className="w3-agile_mail_grids justify-center pr-2 pl-2">
+                <Table responsive variant="light" hover className="col-md-12 col-sm-12">
+                  <thead>
+                    <tr>
+                      <th className="text-center">#</th>
+                      <th className="text-center">Tên</th>
+                      <th className="text-center">{decoded.categoryUser === 1 ? 'Người gửi' : 'Người nhận'}</th>
+                      <th className="text-center">Ngày gửi</th>
+                      <th className="text-center">Ngày kết thúc</th>
+                      <th className="text-center">Trạng thái</th>
+                      <th className="text-center">Thao tác</th>
                     </tr>
-                  ))
-                : null}
-            </tbody>
-          </Table>
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <Pagination>
-            <Pagination.First onClick={() => this.changePage(index - 1)} />
-            {arrPage.map((number) => (
-              <Pagination.Item
-                active={number === index || false}
-                onClick={() => this.changePage(number)}
-              >
-                {number}
-              </Pagination.Item>
-            ))}
-            <Pagination.Last
-              disabled={numberPages === 1 || numberPages === index || false}
-              onClick={() => this.changePage(index + 1)}
-            />
-          </Pagination>
-        </div>
+                  </thead>
+                  <tbody>
+                    {contractByIdUser.hasOwnProperty('limitHistory')
+                      ? limitHistory.map((item) => (
+                        <tr className="cursor-pointer" onClick={this.onClickRow.bind(this, item.idContract)}>
+                          <td className="text-center">{i += 1}</td>
+                          <td className="pl-5">
+                            {decoded.categoryUser === 1 ? `Yêu cầu thứ ${i}` : `Hợp đồng thứ ${i}`}
+                          </td>
+                          <td className="pl-5">
+                            {decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}
+                          </td>
+                          <td className="text-center">{item.dateCreate}</td>
+                          <td className="text-center">
+                            {item.state === 2
+                              || item.state === 3
+                              || item.state === 5
+                              ? `${item.endDay}` : null}
+                            {/* <span className="sm-tag">End</span> */}
+                          </td>
+                          <td className="text-center">{item.Status}</td>
+                          <td className="text-center">
+                            {decoded.categoryUser === 1
+                              ? (
+                                <div>
+                                  {/* <i className="fas fa-check mr-3" title="Chấp nhận yêu cầu" onClick={this.onClickAccept.bind(this, item.idContract, item.state)} /> */}
+                                  <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
+                                  {/* <i className="fas fa-times" title="Từ chối yêu cầu" onClick={this.onClickRefuse.bind(this, item.idContract, item.state)} /> */}
+                                </div>
+                              )
+                              : (
+                                <div>
+                                  <Button
+                                    onClick={this.onClickInbox}
+                                    variant="outline-light"
+                                  >
+                                    <i className="fas fa-sms mr-3" title="Liên hệ" />
+                                  </Button>
+                                  {/* <i className="fas fa-exclamation-circle" title="Khiếu nại" /> */}
+                                </div>
+                              )}
+                          </td>
+                        </tr>
+                      ))
+                      : null}
+                  </tbody>
+                </Table>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <Pagination>
+                  <Pagination.First onClick={() => this.changePage(index - 1)} />
+                  {arrPage.map((number) => (
+                    <Pagination.Item
+                      active={number === index || false}
+                      onClick={() => this.changePage(number)}
+                    >
+                      {number}
+                    </Pagination.Item>
+                  ))}
+                  <Pagination.Last
+                    disabled={numberPages === 1 || numberPages === index || false}
+                    onClick={() => this.changePage(index + 1)}
+                  />
+                </Pagination>
+              </div>
+            </div>
+) : null}
       </div>
     );
   }
