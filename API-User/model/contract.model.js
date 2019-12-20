@@ -3,18 +3,23 @@ var db = require("../utils/connectDB");
 module.exports = {
   getContractByUser: idUser => {
     return db.load(`SELECT * FROM 
-    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
-      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
-      as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
-      as bb WHERE bb.studentId="${idUser}"`);
+    (SELECT new2.*, st.name as Status from 
+      (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
+        (select ct.*, acc.name as StudentName, acc.avatar as studentAvatar from contract as ct 
+          JOIN account as acc on ct.studentId = acc.userId) 
+          as new JOIN account as acc2 ON new.teacherId = acc2.userId) 
+          as new2 JOIN state_contract as st on st.id = new2.state) 
+          as bb WHERE bb.studentId="${idUser}"`);
   },
 
   getContractByTeacher: idUser => {
     return db.load(`SELECT * FROM 
-    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
-      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
-      as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
-      as bb WHERE bb.teacherId="${idUser}"`);
+    (SELECT new2.*, st.name as Status from 
+      (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
+        (select ct.*, acc.name as StudentName, 
+          acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+          as new JOIN account as acc2 ON new.teacherId = acc2.userId) 
+          as new2 JOIN state_contract as st on st.id = new2.state) as bb WHERE bb.teacherId="${idUser}"`);
   },
 
   getAllContract: () => {
@@ -30,16 +35,18 @@ module.exports = {
 
   filterListContractStudent: (idUser, idState) => {
     return db.load(`SELECT * FROM 
-    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
-      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
+      (select ct.*, acc.name as StudentName, 
+        acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
       as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
       as bb WHERE bb.studentId="${idUser}" AND bb.state="${idState}"`)
   },
 
   filterListContractTeacher: (idUser, idState) => {
     return db.load(`SELECT * FROM 
-    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName from 
-      (select ct.*, acc.name as StudentName from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
+    (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
+      (select ct.*, acc.name as StudentName,
+        acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
       as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
       as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}"`)
   },
