@@ -2,36 +2,52 @@ const db = require("../model/contract.model");
 const dbSkill_teacher = require("../model/skill_teacher.model");
 
 module.exports = {
-  getContractByUser: async (req, res) => {
+  getContractByUser: (req, res) => {
     let id = req.params.id;
-    return await db
-      .getContractByUser(id)
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
+    var page = req.query.page || 1;
+    var limit = 5;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountUserLimit(id),
+      db.getContractByUser(id ,limit, offset)
+    ]).then(([sumHistory, limitHistory]) => {
+      var numberPages = parseInt(sumHistory[0].sumT / limit);
+      if (sumHistory[0].sumT % limit > 0) numberPages += 1;
+      res.status(200).json({ numberPages, limitHistory, offset, page });
+    });
   },
+
+  // getContractByUser: async (req, res) => {
+  //   let id = req.params.id;
+  //   return await db
+  //     .getContractByUser(id)
+  //     .then(contract => {
+  //       if (contract.length > 0) {
+  //         res.status(200).json(contract);
+  //       } else {
+  //         res.status(400).json({ message: "Hợp đồng không tồn tại" });
+  //       }
+  //     })
+  //     .catch(err =>
+  //       res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
+  //     );
+  // },
 
   getContractByTeacher: async (req, res) => {
     let id = req.params.id;
-    return await db
-      .getContractByTeacher(id)
-      .then(contract => {
-        if (contract.length > 0) {
-          res.status(200).json(contract);
-        } else {
-          res.status(400).json({ message: "Hợp đồng không tồn tại" });
-        }
-      })
-      .catch(err =>
-        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-      );
+    var page = req.query.page || 1;
+    var limit = 5;
+    if (page < 1) page = 1;
+    var offset = (page - 1) * limit;
+    Promise.all([
+      db.getCountTeacherLimit(id),
+      db.getContractByTeacher(id ,limit, offset)
+    ]).then(([sumHistory, limitHistory]) => {
+      var numberPages = parseInt(sumHistory[0].sumT / limit);
+      if (sumHistory[0].sumT % limit > 0) numberPages += 1;
+      res.status(200).json({ numberPages, limitHistory, offset, page });
+    });
   },
 
 
