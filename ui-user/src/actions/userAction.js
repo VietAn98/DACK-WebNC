@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Swal from 'sweetalert2';
 import API from '../service/api';
 import history from '../history';
@@ -408,12 +409,15 @@ export const sortDecreaseByPrice = () => (dispatch) => fetch(API.GET_TEACHERS_PR
     dispatch({ type: 'GET_TEACHERS_PRICE_DECREASE', teacher });
   })
   .catch((err) => console.log('Error getListTeacher occured', err));
-export const sortDecreaseByRateSuccess = () => (dispatch) => fetch(API.GET_TEACHERS_REATESUCCESS_DECREASE, {
+
+export const sortDecreaseByRateSuccess = () => (dispatch) => fetch(
+  API.GET_TEACHERS_REATESUCCESS_DECREASE, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
-})
+}
+)
   .then((respond) => respond.json())
   .then((teacher) => {
     // console.log('getListTeacher', res);
@@ -701,7 +705,7 @@ export const getContractByUserId = (idUser, page) => (dispatch) => fetch(
 )
   .then((respond) => respond.json())
   .then((res) => {
-    console.log('1111111111111111111222222222',res);
+    console.log('1111111111111111111222222222', res);
     // console.log('getContractByUserId', res);
     dispatch({ type: 'GET_CONTRACT_BY_USER_ID', contractByIdUser: res });
   })
@@ -775,7 +779,7 @@ export const updateStateContract = (
   // .then((status) => dispatch(userProfile(name, gmail, categoryUser)))
   .catch((err) => console.log('Error updateStateContract occured', err));
 
-export const filterContractsOfStudent = (idUser, idState,page) => (dispatch) => fetch(
+export const filterContractsOfStudent = (idUser, idState, page) => (dispatch) => fetch(
   `${API.FILTER_LIST_CONTRACT_STUDENT + idUser}?idState=${idState}&page=${page}`, {
   method: 'GET',
   headers: {
@@ -916,6 +920,23 @@ export const getMailByKeyPass = (keypass) => (dispatch) => fetch(
   .then((response) => response.json())
   .then((result) => {
     dispatch({ type: 'GET_KEY_PASS', result });
+  })
+  .catch((error) => {
+    throw error;
+  });
+
+export const getMoneyEachDay = (idTeacher) => (dispatch) => fetch(
+  API.GET_SUM_MONEY_EACH_DAY + idTeacher, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+}
+)
+  .then((response) => response.json())
+  .then((moneyEachDay) => {
+    console.log('moneyEachDay action', moneyEachDay);
+    dispatch({ type: 'MONEY_EACH_DAY', moneyEachDay });
   })
   .catch((error) => {
     throw error;

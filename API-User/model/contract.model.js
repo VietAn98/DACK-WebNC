@@ -88,6 +88,11 @@ module.exports = {
         as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}") as tb`)
   },
 
+  getSumPriceByDate: (isTeacher, date) => 
+  {
+    return db.load(`SELECT SUM(ct.price) as sumPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3 AND ct.endDay="${date}"`)
+  },
+
 
   detailContract: (id) => {
     return db.load(`SELECT * FROM contract WHERE idContract = ${id}`)

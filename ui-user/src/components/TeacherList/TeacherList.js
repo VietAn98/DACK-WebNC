@@ -5,7 +5,6 @@ import React from 'react';
 import {
   Container, Row, Col, Form
 } from 'react-bootstrap';
-import LazyLoad from 'react-lazyload';
 import './TeacherList.css';
 import CardTuitor from '../CardTuitor';
 import star from '../../public/images/star.png';
@@ -378,21 +377,19 @@ class TeacherList extends React.PureComponent {
               </Col>
             </Row>
           </div>
-          <LazyLoad height={350} offset={100}>
-            <div className="col-md-9 col-sm-9 mt-5 mb-5">
-              {listTeachers.length !== 0 ? (
-                listTeachers.map((item) => (
+          <div className="col-md-9 col-sm-9 mt-5 mb-5">
+            {listTeachers.length !== 0 ? (
+              listTeachers.map((item) => (
 
-                  <div className="col-md-4 col-sm-4">
-                    <CardTuitor listTeachers={item} />
-                  </div>
+                <div className="col-md-4 col-sm-4">
+                  <CardTuitor listTeachers={item} />
+                </div>
 
-                ))
-              ) : (
-                  <div className="loader" style={{ margin: 'auto' }} />
-                )}
-            </div>
-          </LazyLoad>
+              ))
+            ) : (
+                <div className="loader" style={{ margin: 'auto' }} />
+              )}
+          </div>
         </div>
       </Container>
     );

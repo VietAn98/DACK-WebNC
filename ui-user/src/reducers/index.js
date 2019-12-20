@@ -38,11 +38,11 @@ export const keyPass = (state = [], action) => {
   switch (action.type) {
     case 'GET_KEY_PASS': {
       return action.result;
-    } 
+    }
     default:
       return state;
   }
-}
+};
 
 export const userInfor = (state = {}, action) => {
   switch (action.type) {
@@ -335,6 +335,16 @@ export const starNumber = (state = 0, action) => {
   switch (action.type) {
     case 'RATE_STAR': {
       return action.star;
+    }
+    default:
+      return state;
+  }
+};
+
+export const moneyEachDay = (state = {}, action) => {
+  switch (action.type) {
+    case 'MONEY_EACH_DAY': {
+      return action.moneyEachDay;
     }
     default:
       return state;

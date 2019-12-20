@@ -1,5 +1,8 @@
 const db = require("../model/contract.model");
 const dbSkill_teacher = require("../model/skill_teacher.model");
+const moment = require('moment');
+
+
 
 module.exports = {
   getContractByUser: (req, res) => {
@@ -10,7 +13,7 @@ module.exports = {
     var offset = (page - 1) * limit;
     Promise.all([
       db.getCountUserLimit(id),
-      db.getContractByUser(id ,limit, offset)
+      db.getContractByUser(id, limit, offset)
     ]).then(([sumHistory, limitHistory]) => {
       var numberPages = parseInt(sumHistory[0].sumT / limit);
       if (sumHistory[0].sumT % limit > 0) numberPages += 1;
@@ -42,7 +45,7 @@ module.exports = {
     var offset = (page - 1) * limit;
     Promise.all([
       db.getCountTeacherLimit(id),
-      db.getContractByTeacher(id ,limit, offset)
+      db.getContractByTeacher(id, limit, offset)
     ]).then(([sumHistory, limitHistory]) => {
       var numberPages = parseInt(sumHistory[0].sumT / limit);
       if (sumHistory[0].sumT % limit > 0) numberPages += 1;
@@ -53,17 +56,17 @@ module.exports = {
 
   getAllContract: (req, res) => {
     return db
-    .getAllContract()
-    .then(contract => {
-      if (contract.length > 0) {
-        res.status(200).json(contract);
-      } else {
-        res.status(400).json({ message: "Hợp đồng không tồn tại" });
-      }
-    })
-    .catch(err =>
-      res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
-    );
+      .getAllContract()
+      .then(contract => {
+        if (contract.length > 0) {
+          res.status(200).json(contract);
+        } else {
+          res.status(400).json({ message: "Hợp đồng không tồn tại" });
+        }
+      })
+      .catch(err =>
+        res.status(400).json({ message: "Hợp đồng không tồn tại", error: err })
+      );
   },
 
   createContract: (req, res) => {
@@ -99,7 +102,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  filterListContractStudent:  (req, res) => {
+  filterListContractStudent: (req, res) => {
     const idUser = req.params.idUser;
     const idState = req.query.idState;
     var page = req.query.page || 1;
@@ -108,7 +111,7 @@ module.exports = {
     var offset = (page - 1) * limit;
     Promise.all([
       db.getCountStudentLimit(idUser, idState),
-      db.filterListContractStudent(idUser, idState,limit, offset)
+      db.filterListContractStudent(idUser, idState, limit, offset)
     ]).then(([sumHistory, limitHistory]) => {
       var numberPages = parseInt(sumHistory[0].sumT / limit);
       if (sumHistory[0].sumT % limit > 0) numberPages += 1;
@@ -120,13 +123,13 @@ module.exports = {
     const idUser = req.params.idUser;
     const idState = req.query.idState;
     var page = req.query.page || 1;
-    console.log('page',req.query.page);
+    console.log('page', req.query.page);
     var limit = 4;
     if (page < 1) page = 1;
     var offset = (page - 1) * limit;
     Promise.all([
       db.getCountTeacherLimitByState(idUser, idState),
-      db.filterListContractTeacher(idUser, idState,limit, offset)
+      db.filterListContractTeacher(idUser, idState, limit, offset)
     ]).then(([sumHistory, limitHistory]) => {
       var numberPages = parseInt(sumHistory[0].sumT / limit);
       if (sumHistory[0].sumT % limit > 0) numberPages += 1;
@@ -140,8 +143,8 @@ module.exports = {
       .then(([detailContract, skills]) => {
         if (detailContract.length > 0) {
           console.log("----", detailContract);
-          console.log("++++",skills);
-          res.status(200).json({detailContract,skills});
+          console.log("++++", skills);
+          res.status(200).json({ detailContract, skills });
         } else {
           res.status(400).json({ message: "Hợp đồng không tồn tại" });
         }
@@ -159,12 +162,40 @@ module.exports = {
     }
     db.updateStateContract(state).then(id => {
       // trùng state thì k được
-      if(id === 1){
-        res.status(200).json({message: 'Cập nhật trạng thái thành công'});
+      if (id === 1) {
+        res.status(200).json({ message: 'Cập nhật trạng thái thành công' });
       }
       else {
-        res.status(400).json({message: 'Cập nhật trạng thái thất bại'});
+        res.status(400).json({ message: 'Cập nhật trạng thái thất bại' });
       }
     })
+  },
+
+
+  
+
+  getSumPriceByDate: async (req, res) => {
+    const id = req.params.id;
+    const arrDate = [];
+    for (let i = 1; i <= 7; i += 1) {
+      const nowDate = new Date();
+      const tempDate = nowDate.setDate(nowDate.getDate() - i)
+      const resultDate = moment(tempDate).format('DD-MM-YYYY')
+      await db.getSumPriceByDate(id, resultDate).then(resp  => {
+        if(resp.length !== 0){
+          const item = {
+            "sumPrice": null,
+            "endDay": resultDate,
+          }
+          arrDate.push(item)
+        }
+        else {
+          arrDate.push(resp[0]);
+        }
+      
+      })
+    }
+
+    res.status(200).json({arrDate})
   }
 };
