@@ -142,9 +142,7 @@ module.exports = {
     return Promise.all([db.detailContract(id), db.getSkillByContract(id)])
       .then(([detailContract, skills]) => {
         if (detailContract.length > 0) {
-          console.log("----", detailContract);
-          console.log("++++", skills);
-          res.status(200).json({ detailContract, skills });
+          res.status(200).json({detailContract,skills});
         } else {
           res.status(400).json({ message: "Hợp đồng không tồn tại" });
         }

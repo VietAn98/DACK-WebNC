@@ -32,54 +32,58 @@ const Today = moment(today).format('DD-MM-YYYY');
 class ReadOnlyContract extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
     componentWillMount = async () => {
-        const {
-            getListCity,
-            getListDisctrict,
-            getUserInfor,
-            // listNameSkill,
-            getCityByIdDistrict,
-            getCityByIdDistrictForTeacher,
-            getDetailContractByIdContract,
-            getInforUserById
-        } = this.props;
-        const path = window.location.pathname.split('-');
-        const id = path[path.length - 1];
-        // const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            const {
+                getListCity,
+                getListDisctrict,
+                getUserInfor,
+                // listNameSkill,
+                getCityByIdDistrict,
+                getCityByIdDistrictForTeacher,
+                getDetailContractByIdContract,
+                getInforUserById
+            } = this.props;
+            const path = window.location.pathname.split('-');
+            const id = path[path.length - 1];
+            // const user = JSON.parse(localStorage.getItem('user'));
 
-        getListCity();
-        await getDetailContractByIdContract(id);
-        getListDisctrict();
-        await getUserInfor(user.userId);
-        // listNameSkill(id);
+            getListCity();
+            await getDetailContractByIdContract(id);
+            getListDisctrict();
+            await getUserInfor(user.userId);
+            // listNameSkill(id);
 
-        const { contractByIdContract } = this.props;
-        // eslint-disable-next-line no-prototype-builtins
-        if (contractByIdContract.hasOwnProperty('detailContract')) {
-            if (user.categoryUser === 0) {
-                await getInforUserById(contractByIdContract.detailContract[0].teacherId);
-                if (contractByIdContract.detailContract[0].state === 2) {
-                    let parts = contractByIdContract.detailContract[0].endDay.split('-');
-                    const dateend = Number(parts[2] + parts[1] + parts[0]);
-                    parts = Today.split('-');
-                    const datenow = Number(parts[2] + parts[1] + parts[0]);
-                    if (datenow - dateend <= 3) {
-                        isShow = true;
+            const { contractByIdContract } = this.props;
+            // eslint-disable-next-line no-prototype-builtins
+            if (contractByIdContract.hasOwnProperty('detailContract')) {
+                if (user.categoryUser === 0) {
+                    await getInforUserById(contractByIdContract.detailContract[0].teacherId);
+                    if (contractByIdContract.detailContract[0].state === 2) {
+                        let parts = contractByIdContract.detailContract[0].endDay.split('-');
+                        const dateend = Number(parts[2] + parts[1] + parts[0]);
+                        parts = Today.split('-');
+                        const datenow = Number(parts[2] + parts[1] + parts[0]);
+                        if (datenow - dateend <= 3) {
+                            isShow = true;
+                        }
+                        // console.log('datenow - dateend', datenow - dateend);
                     }
-                    // console.log('datenow - dateend', datenow - dateend);
+                } else {
+                    await getInforUserById(contractByIdContract.detailContract[0].studentId);
                 }
-            } else {
-                await getInforUserById(contractByIdContract.detailContract[0].studentId);
+
+                if (contractByIdContract.detailContract[0].state === 5) {
+                    const { getComplaintByIdContract } = this.props;
+                    await getComplaintByIdContract(contractByIdContract.detailContract[0].idContract);
+                }
             }
 
-            if (contractByIdContract.detailContract[0].state === 5) {
-                const { getComplaintByIdContract } = this.props;
-                await getComplaintByIdContract(contractByIdContract.detailContract[0].idContract);
-            }
+            const { userProfiles, userInfor } = this.props;
+            getCityByIdDistrict(userProfiles.districtId);
+            getCityByIdDistrictForTeacher(userInfor.districtId);
+
+
         }
-
-        const { userProfiles, userInfor } = this.props;
-        getCityByIdDistrict(userProfiles.districtId);
-        getCityByIdDistrictForTeacher(userInfor.districtId);
     };
 
     onClickAccept = (idContract, state) => {
