@@ -17,4 +17,7 @@ module.exports = app => {
     // get all contract
     app.get('/api/getAllContract', contractController.getAllContract)
 
+    // doanh thu
+    app.get('/api/get-sum-price-by-days/:id', contractController.getSumPriceByDate)
+
 }
