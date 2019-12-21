@@ -65,6 +65,11 @@ class History extends React.PureComponent {
     }
   };
 
+  onClickInbox = (obj) => {
+    // alert(obj);
+    history.push(`/chat/${obj}`);
+  }
+
   onChangeStatus = async (obj) => {
     const {
       getContractByUserId,
@@ -84,9 +89,9 @@ class History extends React.PureComponent {
     } else {
       // eslint-disable-next-line no-lonely-if
       if (decoded.categoryUser === 1) {
-        await filterContractsOfTeacher(decoded.userId, obj.target.value,page);
+        await filterContractsOfTeacher(decoded.userId, obj.target.value, page);
       } else {
-        await filterContractsOfStudent(decoded.userId, obj.target.value,page);
+        await filterContractsOfStudent(decoded.userId, obj.target.value, page);
       }
     }
   }
@@ -121,7 +126,7 @@ class History extends React.PureComponent {
     for (let j = 1; j <= numberPages; j += 1) {
       arrPage.push(j);
     }
-    // console.log('contractByIdUser', contractByIdUser);
+    console.log('contractByIdUser', limitHistory);
     return (
       <div
         style={{
@@ -181,12 +186,12 @@ class History extends React.PureComponent {
                   <tbody>
                     {contractByIdUser.hasOwnProperty('limitHistory')
                       ? limitHistory.map((item) => (
-                        <tr className="cursor-pointer" onClick={this.onClickRow.bind(this, item.idContract)}>
-                          <td className="text-center">{stt += 1}</td>
+                        <tr className="cursor-pointer">
+                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>{stt += 1}</td>
                           {/* <td className="pl-5">
                             {decoded.categoryUser === 1 ? `Yêu cầu thứ ${i}` : `Hợp đồng thứ ${i}`}
                           </td> */}
-                          <td style={{ width: '5%' }}>
+                          <td style={{ width: '5%' }} onClick={this.onClickRow.bind(this, item.idContract)}>
                             {decoded.categoryUser === 1
                               ? (
                                 <img
@@ -202,29 +207,35 @@ class History extends React.PureComponent {
                                 />
                               )}
                           </td>
-                          <td className="text-center">{decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}</td>
-                          <td className="text-center">{item.dateCreate}</td>
-                          <td className="text-center">
+                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)} >{decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}</td>
+                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>{item.dateCreate}</td>
+                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>
                             {item.state === 2
                               || item.state === 3
                               || item.state === 5
                               ? `${item.endDay}` : null}
                             {/* <span className="sm-tag">End</span> */}
                           </td>
-                          <td className="text-center">{item.Status}</td>
+                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>{item.Status}</td>
                           <td className="text-center">
                             {decoded.categoryUser === 1
                               ? (
                                 <div>
                                   {/* <i className="fas fa-check mr-3" title="Chấp nhận yêu cầu" onClick={this.onClickAccept.bind(this, item.idContract, item.state)} /> */}
-                                  <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} />
+                                  <Button
+                                    onClick={this.onClickInbox.bind(this, item.studentId)}
+                                    variant="outline-light"
+                                  >
+                                    <i className="fas fa-sms mr-3" title="Liên hệ" />
+                                  </Button>
+                                  {/* <i className="fas fa-sms mr-3" title="Liên hệ" onClick={this.onClickInbox} /> */}
                                   {/* <i className="fas fa-times" title="Từ chối yêu cầu" onClick={this.onClickRefuse.bind(this, item.idContract, item.state)} /> */}
                                 </div>
                               )
                               : (
                                 <div>
                                   <Button
-                                    onClick={this.onClickInbox}
+                                    onClick={this.onClickInbox.bind(this, item.teacherId)}
                                     variant="outline-light"
                                   >
                                     <i className="fas fa-sms mr-3" title="Liên hệ" />
