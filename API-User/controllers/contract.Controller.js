@@ -1,7 +1,7 @@
 const db = require("../model/contract.model");
 const dbSkill_teacher = require("../model/skill_teacher.model");
 const moment = require('moment');
-
+const numeral = require('numeral');
 
 
 module.exports = {
@@ -172,19 +172,27 @@ module.exports = {
   },
 
 
-  
+
 
   getSumPriceByDate: async (req, res) => {
     const id = req.params.id;
     const arrDate = [];
-    for (let i = 1; i <= 7; i += 1) {
+    // const nowDate = new Date();
+    // const tempDate = nowDate.setDate(nowDate.getDate() - 1)
+    // const resultDate = moment(tempDate).format('DD-MM-YYYY')
+    // db.getSumPriceByDate(id, resultDate.toString()).then(resp  => {
+    //   console.log(resp);
+    //   })
+
+    for (let i = 0; i < 7; i += 1) {
       const nowDate = new Date();
       const tempDate = nowDate.setDate(nowDate.getDate() - i)
       const resultDate = moment(tempDate).format('DD-MM-YYYY')
-      await db.getSumPriceByDate(id, resultDate).then(resp  => {
-        if(resp.length !== 0){
+    await  db.getSumPriceByDate(id, resultDate.toString()).then(resp => {
+        
+        if (resp[0].sumPrice === null) {
           const item = {
-            "sumPrice": null,
+            "sumPrice": 0,
             "endDay": resultDate,
           }
           arrDate.push(item)
@@ -192,10 +200,11 @@ module.exports = {
         else {
           arrDate.push(resp[0]);
         }
-      
+        //console.log(arrDate);
       })
+     
     }
-
+    // console.log(arrDate);
     res.status(200).json({arrDate})
   }
 };

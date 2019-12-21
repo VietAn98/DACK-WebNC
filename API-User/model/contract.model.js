@@ -93,6 +93,10 @@ module.exports = {
     return db.load(`SELECT SUM(ct.price) as sumPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3 AND ct.endDay="${date}"`)
   },
 
+  getMaxPriceByIdTeacher: (isTeacher) => {
+    return db.load(`SELECT MAX(ct.price) as maxPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3`)
+  },
+
 
   detailContract: (id) => {
     return db.load(`SELECT * FROM contract WHERE idContract = ${id}`)
