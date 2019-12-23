@@ -97,7 +97,7 @@ class TeacherList extends React.PureComponent {
     } = this.props;
     // console.log("listSkillslistSkillslistSkills", listTeachers);
     return (
-      <Container>
+      <Container className="bodyChat">
         <div className="flex-nowrap">
           <div className="mt-5em">
             <div className="title">
