@@ -4,7 +4,7 @@ import {
     Container, Row, Col, Form
 } from 'react-bootstrap';
 import jwtDecode from 'jwt-decode';
-// import numeral from 'numeral';
+import numeral from 'numeral';
 import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
@@ -45,8 +45,9 @@ if (tokenn) {
 class Statistics extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
     componentWillMount = async () => {
-        const { getMoneyEachDay } = this.props;
+        const { getMoneyEachDay, getTotalContracts } = this.props;
         await getMoneyEachDay(decoded.userId);
+        await getTotalContracts(decoded.userId);
         document.getElementById('div').style.display = 'none';
         document.getElementById('div2').style.display = 'none';
         document.getElementById('div3').style.display = 'none';
@@ -54,7 +55,7 @@ class Statistics extends React.PureComponent {
     }
 
     render() {
-        const { moneyEachDay } = this.props;
+        const { moneyEachDay, totalContracts } = this.props;
         // console.log('moneyEachDay', moneyEachDay);
         let arrDate = [];
 
@@ -88,34 +89,32 @@ class Statistics extends React.PureComponent {
                                                     <div className="sm-title mb-4">
                                                         <p className="text-center ">Thống Kê</p>
                                                     </div>
-                                                    <div className="pl-4 column-flex mb-3 ">
+                                                    <div className="pl-5 column-flex mb-3 ">
                                                         <Form>
                                                             <Form.Check
+                                                                defaultChecked
                                                                 custom
-                                                                inline
-                                                                label="Giá tiền/giờ tăng dần"
+                                                                label="Theo ngày"
                                                                 type="radio"
                                                                 id="custom-inline-radio-1"
                                                                 name="radSort"
-                                                                onClick={this.sortPriceIncrease}
+                                                            // onClick={this.sotrtPriceIncrease}
                                                             />
                                                             <Form.Check
                                                                 custom
-                                                                inline
-                                                                label="Giá tiền/giờ giảm dần"
+                                                                label="Theo tháng"
                                                                 type="radio"
                                                                 id="custom-inline-radio-2"
                                                                 name="radSort"
-                                                                onClick={this.sortPriceDecrease}
+                                                            // onClick={this.sortPriceDecrease}
                                                             />
                                                             <Form.Check
                                                                 custom
-                                                                inline
-                                                                label="Phổ biến nhất"
+                                                                label="Theo năm"
                                                                 type="radio"
                                                                 id="custom-inline-radio-3"
                                                                 name="radSort"
-                                                                onClick={this.sortDecreaseByRateSuccess}
+                                                            // onClick={this.sortDecreaseByRateSuccess}
                                                             />
                                                         </Form>
                                                     </div>
@@ -140,7 +139,7 @@ class Statistics extends React.PureComponent {
                                         style={{ display: 'none' }}
                                     >
                                         <div className="d-flex flex-nowrap mb-5">
-                                           <div>
+                                            <div>
                                                 <AreaChart
 
                                                     width={800}
@@ -163,33 +162,55 @@ class Statistics extends React.PureComponent {
                                                         fill="#8884d8"
                                                     />
                                                 </AreaChart>
-                                           </div>
+                                            </div>
                                         </div>
                                         <div className="col-md-12 col-sm-12 mb-5">
                                             <div className="col-md-3 col-sm-3">
                                                 <p style={{ fontSize: '13px' }}>Doanh thu cao nhất:</p>
-                                                <h4><b>0 Đồng</b></h4>
+                                                <h4>
+                                                    <b>
+                                                        {numeral(`${moneyEachDay.maxPrice}`).format('(0,0)')}
+                                                        {' '}
+                                                        VND
+                                                    </b>
+                                                </h4>
                                             </div>
                                             <div className="col-md-3 col-sm-3">
                                                 <p style={{ fontSize: '13px' }}>Doanh thu thấp nhất:</p>
-                                                <h4><b>0 Đồng</b></h4>
+                                                <h4>
+                                                    <b>
+                                                        {numeral(`${moneyEachDay.minPrice}`).format('(0,0)')}
+                                                        {' '}
+                                                        VND
+                                                    </b>
+                                                </h4>
                                             </div>
                                             <div className="col-md-3 col-sm-3">
-                                                <p style={{ fontSize: '13px' }}>Tổng số hợp đồng:</p>
-                                                <h4><b>0 Đồng</b></h4>
+                                                <p style={{ fontSize: '13px' }}>Số hợp đồng nhiều nhất:</p>
+                                                <h4>
+                                                    <b>
+                                                        {totalContracts.maxTotal}
+                                                        {' '}
+                                                    </b>
+                                                </h4>
                                             </div>
                                             <div className="col-md-3 col-sm-3">
-                                                <p style={{ fontSize: '13px' }}>Tỉ lệ thành công:</p>
-                                                <h4><b>0 Đồng</b></h4>
+                                                <p style={{ fontSize: '13px' }}>Số hợp đồng ít nhất:</p>
+                                                <h4>
+                                                    <b>
+                                                        {totalContracts.minTotal}
+                                                        {' '}
+                                                    </b>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="col-md-3 col-sm-3" />
+                                {/* <div className="col-md-3 col-sm-3" />
                                 <div className="col-md-9 col-sm-9 mb-5 divWrap">
                                     <h2>Tổng Quát</h2>
-                                </div>
+                                </div> */}
                             </div>
                         </Container>
                     )

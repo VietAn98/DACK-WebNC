@@ -350,3 +350,13 @@ export const moneyEachDay = (state = {}, action) => {
       return state;
   }
 };
+
+export const totalContracts = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_TOTAL_CONTRACTS': {
+      return action.total;
+    }
+    default:
+      return state;
+  }
+};

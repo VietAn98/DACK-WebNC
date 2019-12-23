@@ -660,9 +660,9 @@ export const createContract = (
     numberHour
   })
 })
-  .then((respond) => {
+  .then(async (respond) => {
     if (respond.status === 200) {
-      Swal.fire({
+      await Swal.fire({
         icon: 'success',
         title: 'Đăng Kí Thành Công',
         text:
@@ -937,6 +937,23 @@ export const getMoneyEachDay = (idTeacher) => (dispatch) => fetch(
   .then((moneyEachDay) => {
     console.log('moneyEachDay action', moneyEachDay);
     dispatch({ type: 'MONEY_EACH_DAY', moneyEachDay });
+  })
+  .catch((error) => {
+    throw error;
+  });
+
+export const getTotalContracts = (idTeacher) => (dispatch) => fetch(
+  API.GET_TOTAL_CONTRACTS + idTeacher, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+}
+)
+  .then((response) => response.json())
+  .then((total) => {
+    console.log('getTotalContracts action', total);
+    dispatch({ type: 'GET_TOTAL_CONTRACTS', total });
   })
   .catch((error) => {
     throw error;

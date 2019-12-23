@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import React from 'react';
 import Swal from 'sweetalert2';
 import { Container, Form, Button } from 'react-bootstrap';
@@ -136,8 +137,8 @@ class Contract extends React.PureComponent {
       const soTuan = document.getElementById('soTuan').value;
       const soNgay = document.getElementById('number').value;
       const soGio = document.getElementById('numberHour').value;
-      const price = document.getElementById('price').value;
-
+      const price = numeral(document.getElementById('price').innerHTML)._value;
+      console.log('price', price);
       if (
         dateFrom === ''
         || soTuan === ''
@@ -166,13 +167,14 @@ class Contract extends React.PureComponent {
           // eslint-disable-next-line radix
           parseInt(idTeacher),
           user.userId,
-          price,
+          // eslint-disable-next-line radix
+          price.toString(),
           startDay,
           endLearnDay,
           dateCreate,
           skills,
-          soNgay,
-          soGio
+          parseInt(soNgay),
+          parseInt(soGio)
         );
       }
     } else {
