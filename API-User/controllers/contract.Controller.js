@@ -82,7 +82,8 @@ module.exports = {
       dateCreate: req.body.dateCreate,
       numberDay: req.body.numberDay,
       numberHour: req.body.numberHour,
-      state: 1
+      state: 1,
+      isDanhGia: 0
     };
 
     return db
@@ -142,7 +143,7 @@ module.exports = {
     return Promise.all([db.detailContract(id), db.getSkillByContract(id)])
       .then(([detailContract, skills]) => {
         if (detailContract.length > 0) {
-          res.status(200).json({detailContract,skills});
+          res.status(200).json({ detailContract, skills });
         } else {
           res.status(400).json({ message: "Hợp đồng không tồn tại" });
         }
@@ -169,25 +170,17 @@ module.exports = {
     })
   },
 
-
-
-
   getSumPriceByDate: async (req, res) => {
     const id = req.params.id;
     const arrDate = [];
-    // const nowDate = new Date();
-    // const tempDate = nowDate.setDate(nowDate.getDate() - 1)
-    // const resultDate = moment(tempDate).format('DD-MM-YYYY')
-    // db.getSumPriceByDate(id, resultDate.toString()).then(resp  => {
-    //   console.log(resp);
-    //   })
+    let maxPrice = 0;
+    let minPrice = 0;
 
     for (let i = 0; i < 7; i += 1) {
       const nowDate = new Date();
       const tempDate = nowDate.setDate(nowDate.getDate() - i)
       const resultDate = moment(tempDate).format('DD-MM-YYYY')
-    await  db.getSumPriceByDate(id, resultDate.toString()).then(resp => {
-        
+      await db.getSumPriceByDate(id, resultDate.toString()).then(resp => {
         if (resp[0].sumPrice === null) {
           const item = {
             "sumPrice": 0,
@@ -196,13 +189,81 @@ module.exports = {
           arrDate.push(item)
         }
         else {
+          if (resp[0].sumPrice > maxPrice) {
+            maxPrice = resp[0].sumPrice;
+          } else {
+            minPrice = resp[0].sumPrice;
+          }
           arrDate.push(resp[0]);
         }
-        //console.log(arrDate);
       })
-     
     }
-    // console.log(arrDate);
-    res.status(200).json({arrDate})
+
+    // console.log(maxPrice);
+    res.status(200).json({ arrDate, maxPrice, minPrice })
+  },
+
+  getTotalContracts: async (req, res) => {
+    const id = req.params.idTeacher;
+    const arrTotal = [];
+    let maxTotal = 0;
+    let minTotal = 0;
+
+    for (let i = 0; i < 7; i += 1) {
+      const nowDate = new Date();
+      const tempDate = nowDate.setDate(nowDate.getDate() - i);
+      const resultDate = moment(tempDate).format('DD-MM-YYYY');
+      await db.getTotalContracts(id, resultDate.toString()).then(resp => {
+        if (resp[0].totalContracts === 0) {
+          const item = {
+            "totalContracts": 0,
+            "endDay": resultDate,
+          }
+          arrTotal.push(item)
+        }
+        else {
+          if (resp[0].totalContracts > maxTotal) {
+            maxTotal = resp[0].totalContracts;
+          } else {
+            minTotal = resp[0].totalContracts;
+          }
+          arrTotal.push(resp[0]);
+        }
+        // console.log('resp', resp);
+      })
+    }
+
+    // console.log(maxPrice);
+    res.status(200).json({ arrTotal, maxTotal, minTotal })
+  },
+
+  getSumPriceEachMonthByYear: async (req, res) => {
+    const id = req.params.idTeacher;
+    const arr = [];
+
+
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getYear());
+    const resultDate = moment(tempDate).format('YYYY');
+    await db.sumPriceEachMonthByYear(id, 2019).then(resp => {
+      for (let i = 0; i <= 12; i += 1) {
+        resp.forEach((item) => {
+          if (parseInt(item.month) === i) {
+            if (!arr.includes(item.month)) {
+              arr.push(item);
+            }
+          } else {
+            const temp = {
+              "sum": 0,
+              "month": i
+            }
+            arr.push(temp);
+          }
+        })
+      }
+    })
+
+    console.log(arr);
+    res.status(200).json({ arr })
   }
-};
+}
