@@ -47,8 +47,9 @@ module.exports = {
   getDetailTeacher: id => {
     return db.load(`SELECT * FROM account where userId= ${id}`);
   },
+  //
   getDetailSingleTeacher: id => {
-    return db.load(`select DISTINCT 100*(select sum(starNumber) from comment c1 where idTeacher = c.idTeacher)/((SELECT COUNT(*) FROM comment WHERE idTeacher = c.idTeacher)*5) as rateSuccess, a.* from comment c right join account a on c.idTeacher = a.userId and a.adLock=1 where a.userId = '${id}' and a.adLock=1 and a.categoryUser = 1`);
+    return db.load(`select DISTINCT 100*(select sum(starNumber) from comment c1 where idTeacher = c.idTeacher)/((SELECT COUNT(*) FROM comment WHERE idTeacher = c.idTeacher)*5) as rateSuccess, (100*(SELECT Count(*) as sumSuccess FROM contract where state = 3 and teacherId = a.userId)/(SELECT COUNT(*) as sumAll from contract where teacherId = a.userId and (state = 4 || state = 3))) as rateCS, a.* from comment c right join account a on c.idTeacher = a.userId and a.adLock=1 where a.userId = ${id} and a.adLock=1 and a.categoryUser = 1`);
   },
   getDetailStudent: id => {
     return db.load(`select * from account where userId = '${id}' and adLock=1`);

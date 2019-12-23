@@ -12,7 +12,7 @@ import TeacherInfoPage from './containers/TeacherInforContainer';
 import TeacherList from './containers/TeacherListContainer';
 import NewPassword from './containers/NewPasswordContainer';
 import Contract from './containers/ContractContainer';
-import Chat from './components/messenger/message';
+import Chat from './containers/messageContainer';
 import Statistics from './containers/StatisticsContainer';
 
 

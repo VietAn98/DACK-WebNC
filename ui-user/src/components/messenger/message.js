@@ -17,7 +17,9 @@ export default class FormMessage extends Component {
     this.state = {
       userName: decoded.userId,
       message: '',
-      list: []
+      list: [],
+      listKey: [],
+      // listFriend: {},
     };
     // this.messageRef = realtimedb.ref().child(`${decoded.userId}+${decoded.userId}`);
     // console.log('111111111', decoded)
@@ -27,12 +29,16 @@ export default class FormMessage extends Component {
       this.messageRef = realtimedb.ref().child(`chatchit/${idReceive}+${decoded.userId}`);
     }
     this.listenMessages();
+    // this.listenFriendByFB();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user) {
       this.setState({ userName: nextProps.user.displayName });
     }
+  }
+
+  componentWillUnmount = () => {
   }
 
   handleChange(event) {
@@ -56,17 +62,23 @@ export default class FormMessage extends Component {
     this.handleSend();
   }
 
+  // listenFriendByFB = async () => {
+  //   const array = [];
+  //   await realtimedb.ref().child('chatchit').on('child_added', (item) => {
+  //     // console.log('aaaaaaaaaaaaaaa', `${item.key }aaa`);
+  //     const idArr = item.toString().split('+');
+  //     array.push(idArr[1]);
+  //     this.setState({
+  //       listKey: array
+  //     });
+  //   });
+  // }
+
   listenMessages() {
     // get danh sách chat
-    const array = [];
-    realtimedb.ref().child('chatchit').on('child_added', (item) => {
-      array.push(item.ref_.key);
-    });
-    console.log('aaaaaaaaaaaaaaa', array.length);
-
     this.messageRef.limitToLast(10).on('value', (message) => {
       // console.log(Object.values(message.val()));
-      console.log('11111', message.val());
+      // console.log('11111', message.val());
       if (message.val() !== null) {
         this.setState({
           list: Object.values(message.val())
@@ -78,6 +90,8 @@ export default class FormMessage extends Component {
   render() {
     const tokenn = localStorage.token;
     const decoded = jwtDecode(tokenn);
+    // console.log('listttttttt11111', this.state.listKey);
+
     return (
       <div>
         <div style={{ marginTop: '20px', marginBottom: '20px' }} className="container py-5 px-4">
@@ -96,44 +110,22 @@ export default class FormMessage extends Component {
 
                 <div className="messages-box">
                   <div className="list-group rounded-0">
-                    <a href="#" className="list-group-item list-group-item-action active text-white rounded-0">
-                      <div className="media">
-                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
-                        <div className="media-body ml-4">
-                          <div className="d-flex align-items-center justify-content-between mb-1">
-                            <h6 className="mb-0">Jason Doe</h6>
-                            <small className="small font-weight-bold">25 Dec</small>
+                    {this.state.listKey.map((item) => {
+                      return (
+                        <a href="#" className="list-group-item list-group-item-action active text-white rounded-0">
+                          <div className="media">
+                            <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
+                            <div className="media-body ml-4">
+                              <div className="d-flex align-items-center justify-content-between mb-1">
+                                <h6 className="mb-0">{item}</h6>
+                                <small className="small font-weight-bold">25 Dec</small>
+                              </div>
+                              <p className="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                            </div>
                           </div>
-                          <p className="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a href="#" className="list-group-item list-group-item-action list-group-item-light rounded-0">
-                      <div className="media">
-                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
-                        <div className="media-body ml-4">
-                          <div className="d-flex align-items-center justify-content-between mb-1">
-                            <h6 className="mb-0">Jason Doe</h6>
-                            <small className="small font-weight-bold">14 Dec</small>
-                          </div>
-                          <p className="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur. incididunt ut labore.</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a href="#" className="list-group-item list-group-item-action list-group-item-light rounded-0">
-                      <div className="media">
-                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
-                        <div className="media-body ml-4">
-                          <div className="d-flex align-items-center justify-content-between mb-1">
-                            <h6 className="mb-0">Jason Doe</h6>
-                            <small className="small font-weight-bold">9 Nov</small>
-                          </div>
-                          <p className="font-italic text-muted mb-0 text-small">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                        </div>
-                      </div>
-                    </a>
+                        </a>
+                      )
+                    })}
                   </div>
                 </div>
               </div>
