@@ -19,7 +19,7 @@ export default class FormMessage extends Component {
       message: '',
       list: [],
       listKey: [],
-      // listFriend: {},
+      listFriend: {},
     };
     // this.messageRef = realtimedb.ref().child(`${decoded.userId}+${decoded.userId}`);
     // console.log('111111111', decoded)
@@ -29,7 +29,7 @@ export default class FormMessage extends Component {
       this.messageRef = realtimedb.ref().child(`chatchit/${idReceive}+${decoded.userId}`);
     }
     this.listenMessages();
-    // this.listenFriendByFB();
+    this.listenFriendByFB();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -62,17 +62,26 @@ export default class FormMessage extends Component {
     this.handleSend();
   }
 
-  // listenFriendByFB = async () => {
-  //   const array = [];
-  //   await realtimedb.ref().child('chatchit').on('child_added', (item) => {
-  //     // console.log('aaaaaaaaaaaaaaa', `${item.key }aaa`);
-  //     const idArr = item.toString().split('+');
-  //     array.push(idArr[1]);
-  //     this.setState({
-  //       listKey: array
-  //     });
-  //   });
-  // }
+  listenFriendByFB = () => {
+    const array = [];
+    const { getChatInforUserById } = this.props;
+    realtimedb.ref().child('chatchit').on('child_added', (item) => {
+      realtimedb.ref().child(`chatchit/${item.key}`).limitToLast(1).on('value', (message) => {
+        const endMess = Object.values(message.val());
+        const idArr = item.key.toString().split('+');
+        // array.push(idArr[1]);
+        Promise.resolve(getChatInforUserById(idArr[1])).then(() => {
+          const { chatUserInfor } = this.props;
+          array.push({ chatUserInfor, endMess });
+          this.setState({
+            listKey: array,
+          });
+        });
+      });
+      // console.log('aaaaaaaaaaaaaaa', `${item.key }aaa`);
+
+    });
+  }
 
   listenMessages() {
     // get danh sách chat
@@ -87,10 +96,18 @@ export default class FormMessage extends Component {
     });
   }
 
+  onClickChat = () => { }
+
   render() {
     const tokenn = localStorage.token;
     const decoded = jwtDecode(tokenn);
-    // console.log('listttttttt11111', this.state.listKey);
+    // const { userInfor } = this.props;
+    // let messageEnd = null;
+    // if (this.state.list.length !== 0) {
+    //   messageEnd = this.state.list[this.state.list.length - 1].message;
+    // }
+
+    console.log('listttttttt11111', this.state.listKey);
 
     return (
       <div>
@@ -107,27 +124,31 @@ export default class FormMessage extends Component {
                 <div className="bg-gray px-4 py-2 bg-light">
                   <p className="h5 mb-0 py-1">Recent</p>
                 </div>
+                {this.state.listKey ? (
+                  <div className="messages-box">
+                    <div className="list-group rounded-0">
+                      {this.state.listKey.map((item) => {
+                        return (
+                          <Button onClick={this.onClickChat} className="list-group-item list-group-item-action active text-white rounded-0">
+                            <div className="media">
+                              <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
+                              <div className="media-body ml-4">
+                                <div className="d-flex align-items-center justify-content-between mb-1">
+                                  <h6 className="mb-0">{item.chatUserInfor.name}</h6>
+                                  <small className="small font-weight-bold">25 Dec</small>
+                                </div>
 
-                <div className="messages-box">
-                  <div className="list-group rounded-0">
-                    {this.state.listKey.map((item) => {
-                      return (
-                        <a href="#" className="list-group-item list-group-item-action active text-white rounded-0">
-                          <div className="media">
-                            <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
-                            <div className="media-body ml-4">
-                              <div className="d-flex align-items-center justify-content-between mb-1">
-                                <h6 className="mb-0">{item}</h6>
-                                <small className="small font-weight-bold">25 Dec</small>
+                                <p className="font-italic mb-0 text-small">{item.endMess[0].message}</p>
                               </div>
-                              <p className="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
                             </div>
-                          </div>
-                        </a>
-                      )
-                    })}
+                          </Button>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
+                ) : null}
+
+
               </div>
             </div>
             <div className="col-7 px-0">

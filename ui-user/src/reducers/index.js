@@ -54,6 +54,16 @@ export const userInfor = (state = {}, action) => {
   }
 };
 
+export const chatUserInfor = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_CHAT_USER_INFO_BY_ID': {
+      return action.userInfor;
+    }
+    default:
+      return state;
+  }
+};
+
 export const nameAvatar = (state = {}, action) => {
   switch (action.type) {
     case 'AVATAR_NAME': {

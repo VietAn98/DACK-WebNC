@@ -354,8 +354,21 @@ export const getInforUserById = (id) => (dispatch) => fetch(
 }
 ).then((respond) => respond.json())
   .then(async (userInfor) => {
-    console.log('getInforUserById', userInfor);
+    // console.log('getInforUserById', userInfor);
     await dispatch({ type: 'GET_USER_INFO_BY_ID', userInfor });
+  }).catch((err) => console.log('Error getInforUserById occured', err));
+
+export const getChatInforUserById = (id) => (dispatch) => fetch(
+  API.GET_USER_INFO_BY_ID + id, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+}
+).then((respond) => respond.json())
+  .then(async (userInfor) => {
+    // console.log('getInforUserById', userInfor);
+    await dispatch({ type: 'GET_CHAT_USER_INFO_BY_ID', userInfor });
   }).catch((err) => console.log('Error getInforUserById occured', err));
 
 export const listTeacherTop = () => (dispatch) => fetch(API.GET_TEACHERS_TOP, {
@@ -696,7 +709,7 @@ export const createContract = (
 //   .catch((err) => console.log('Error getAllContracts occured', err));
 
 export const getContractByUserId = (idUser, page) => (dispatch) => fetch(
-  `${API.GET_CONTRACT_BY_USER_ID + idUser }?page=${page}`, {
+  `${API.GET_CONTRACT_BY_USER_ID + idUser}?page=${page}`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -712,7 +725,7 @@ export const getContractByUserId = (idUser, page) => (dispatch) => fetch(
   .catch((err) => console.log('Error getContractByUserId occured', err));
 
 export const getContractByTeacherId = (idUser, page) => (dispatch) => fetch(
-  `${API.GET_CONTRACT_BY_TEACHER_ID + idUser }?page=${page}`, {
+  `${API.GET_CONTRACT_BY_TEACHER_ID + idUser}?page=${page}`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
