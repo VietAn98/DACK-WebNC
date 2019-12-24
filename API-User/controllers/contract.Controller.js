@@ -245,10 +245,10 @@ module.exports = {
     const arr = [];
 
 
-    const nowDate = new Date();
-    const tempDate = nowDate.setDate(nowDate.getYear());
-    const resultDate = moment(tempDate).format('YYYY');
-    await db.sumPriceEachMonthByYear(id, 2019).then(resp => {
+    const nowDate = moment().format();
+    // const tempDate = nowDate.setDate(nowDate.getYear());
+    const resultDate = moment(nowDate).year();
+    await db.sumPriceEachMonthByYear(id, resultDate).then(resp => {
 
       resp.forEach((item) => {
         arr.push(item)
@@ -267,7 +267,7 @@ module.exports = {
         
       }
     })
-    console.log(arr);
+    // console.log(resultDate);
     res.status(200).json(arr);
 
   }
