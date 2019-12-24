@@ -38,7 +38,7 @@ class Header extends React.PureComponent {
 												</NavLink>
 											)
 											: (
-												<NavLink to="/abc" className="nav-link">
+												<NavLink to="/statistics" className="nav-link">
 													Thống Kê Doanh Thu Dạy
 												</NavLink>
 											)}

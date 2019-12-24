@@ -61,7 +61,7 @@ module.exports = {
       as bb WHERE bb.studentId="${idUser}" AND bb.state="${idState}" LIMIT ${limit}  OFFSET ${offset}`)
   },
 
-  getCountStudentLimit: (idUser,idState) => {
+  getCountStudentLimit: (idUser, idState) => {
     return db.load(`SELECT COUNT(*) as sumT FROM (SELECT * FROM 
       (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
         (select ct.*, acc.name as StudentName, 
@@ -79,13 +79,21 @@ module.exports = {
       as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}" LIMIT ${limit}  OFFSET ${offset}`)
   },
 
-  getCountTeacherLimitByState: (idUser,idState) => {
+  getCountTeacherLimitByState: (idUser, idState) => {
     return db.load(`SELECT COUNT(*) as sumT FROM (SELECT * FROM 
       (SELECT new2.*, st.name as Status from (select new.*, acc2.name as TeacherName, acc2.avatar as teacherAvatar from 
         (select ct.*, acc.name as StudentName, 
           acc.avatar as studentAvatar from contract as ct JOIN account as acc on ct.studentId = acc.userId) 
         as new JOIN account as acc2 ON new.teacherId = acc2.userId) as new2 JOIN state_contract as st on st.id = new2.state) 
         as bb WHERE bb.teacherId="${idUser}" AND bb.state="${idState}") as tb`)
+  },
+
+  getSumPriceByDate: (isTeacher, date) => {
+    return db.load(`SELECT SUM(ct.price) as sumPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3 AND ct.endDay="${date}"`)
+  },
+
+  getMaxPriceByIdTeacher: (isTeacher) => {
+    return db.load(`SELECT MAX(ct.price) as maxPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3`)
   },
 
 
@@ -99,6 +107,16 @@ module.exports = {
 
   updateStateContract: (contract) => {
     return db.update("contract", "idContract", contract);
-  }
+  },
 
+  getTotalContracts: (idTeacher, date) => {
+    return db.load(`SELECT COUNT(*) as totalContracts, endDay FROM contract WHERE teacherId = ${idTeacher} and endDay = '${date}' and state = 3`);
+  },
+  // lay tong doanh thu tung thang theo nam
+  sumPriceEachMonthByYear: (idTeacher, year) => {
+    return db.load(`SELECT SUM(price) as sum,
+     SUBSTRING(endDay, 4, 2) as month FROM contract WHERE teacherId = ${idTeacher} 
+     and state = 3 AND SUBSTRING(endDay, 7, 4) = ${year} 
+     GROUP BY SUBSTRING(endDay, 4, 2) ORDER BY month ASC`);
+  }
 };

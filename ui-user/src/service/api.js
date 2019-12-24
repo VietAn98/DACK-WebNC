@@ -57,6 +57,10 @@ const APIService = {
   SEND_COMPLAINT: `${URL}/api/create-complaint`,
   SEND_COMMENT: `${URL}/api/create-comment`,
   GET_COMLAINT_BY_IDCONTRACT: `${URL}/api/get-complaint-by-contract/`,
+
+  // thong ke
+  GET_SUM_MONEY_EACH_DAY: `${URL}/api/get-sum-price-by-days/`,
+  GET_TOTAL_CONTRACTS: `${URL}/api/get-total-contracts-eachday/`,
 };
 
 export default APIService;

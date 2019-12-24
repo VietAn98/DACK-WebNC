@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import firebase from 'firebase';
 import Header from './containers/HeaderContainer';
 import HomePage from './containers/HomePageContainer';
 import SignInPage from './pages/SignInPage';
@@ -13,17 +12,21 @@ import TeacherInfoPage from './containers/TeacherInforContainer';
 import TeacherList from './containers/TeacherListContainer';
 import NewPassword from './containers/NewPasswordContainer';
 import Contract from './containers/ContractContainer';
-import Chat from './components/message';
+import Chat from './containers/messageContainer';
+import Statistics from './containers/StatisticsContainer';
 
 
 export class App extends React.PureComponent {
 	render() {
-		 // localStorage.clear();
+		// localStorage.clear();
 		return (
 			<main>
 				<Header />
 				<Switch>
-					<Route path="/chat" exact component={Chat} />
+					<Route path="/chat/:id">
+						{localStorage.token ? <Chat /> : <PageNotFound /> }
+					</Route>
+					<Route path="/statistics" exact component={Statistics} />
 					<Route path="/contract-:id" exact component={Contract('ReadOnlyContract')} />
 					<Route path="/contract/teacher-:id" exact component={Contract('Contract')} />
 					<Route path="/teacherslist" exact component={TeacherList} />

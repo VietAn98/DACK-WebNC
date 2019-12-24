@@ -103,6 +103,7 @@ module.exports = {
     return db
       .getDetailSingleTeacher(id)
       .then(teacher => {
+        teacher[0].rateCS = parseInt(teacher[0].rateCS);
         res.status(200).json(teacher[0]);
       })
       .catch(err => {
