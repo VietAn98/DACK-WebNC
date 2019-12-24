@@ -971,3 +971,20 @@ export const getTotalContracts = (idTeacher) => (dispatch) => fetch(
   .catch((error) => {
     throw error;
   });
+
+export const getSumEachMonth = (idTeacher) => (dispatch) => fetch(
+  API.GET_SUM_EACHMONTH + idTeacher, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+}
+)
+  .then((response) => response.json())
+  .then((total) => {
+    console.log('getSumEachMonth action', total);
+    dispatch({ type: 'GET_SUM_EACHMONTH', total });
+  })
+  .catch((error) => {
+    throw error;
+  });

@@ -370,3 +370,13 @@ export const totalContracts = (state = {}, action) => {
       return state;
   }
 };
+
+export const sumEachMonth = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_SUM_EACHMONTH': {
+      return action.total;
+    }
+    default:
+      return state;
+  }
+};

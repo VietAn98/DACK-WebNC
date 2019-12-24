@@ -61,6 +61,7 @@ const APIService = {
   // thong ke
   GET_SUM_MONEY_EACH_DAY: `${URL}/api/get-sum-price-by-days/`,
   GET_TOTAL_CONTRACTS: `${URL}/api/get-total-contracts-eachday/`,
+  GET_SUM_EACHMONTH: `${URL}/api/get-sum-eachmonth-byyear/`,
 };
 
 export default APIService;
