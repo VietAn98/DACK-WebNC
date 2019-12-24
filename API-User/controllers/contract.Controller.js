@@ -193,7 +193,7 @@ module.exports = {
         else {
           if (resp[0].sumPrice > maxPrice) {
             maxPrice = resp[0].sumPrice;
-          } else {
+          } else if (resp[0].sumPrice < minPrice) {
             minPrice = resp[0].sumPrice;
           }
           arrDate.push(resp[0]);
@@ -238,7 +238,6 @@ module.exports = {
     // console.log(maxPrice);
     res.status(200).json({ arrTotal, maxTotal, minTotal })
   },
-
 
 
   getSumPriceEachMonthByYear: async (req, res) => {
@@ -301,6 +300,15 @@ module.exports = {
     }
     res.status(200).json(arrYear);
 
+  },
+
+  getPriceAndContract: (req, res) => {
+    const id = req.params.id;
+    const nowDate = moment().format();
+    const currentYear = moment(nowDate).year();
+    db.sumPriceByYear(id, currentYear).then(resp => {
+      res.status(200).json(resp);
+    })
   }
 }
 

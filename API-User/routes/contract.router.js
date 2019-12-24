@@ -22,4 +22,5 @@ module.exports = app => {
     app.get('/api/get-total-contracts-eachday/:idTeacher', contractController.getTotalContracts)
     app.get('/api/get-sum-eachmonth-byyear/:idTeacher', contractController.getSumPriceEachMonthByYear)
     app.get('/app/getsum-price-by-year/:id', contractController.getSumPriceByYear)
+    app.get('/api/get-sum-price-and-contract/:id', contractController.getPriceAndContract)
 }

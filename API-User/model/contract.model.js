@@ -131,6 +131,7 @@ module.exports = {
      GROUP BY SUBSTRING(endDay, 4, 2) ORDER BY month ASC`);
   },
 
+
   sumPriceByYear: (id,year) => {
     return db.load(`SELECT COUNT(*) as numberContract, SUM(price) as sumPrice, SUBSTRING(endDay, 7, 4) as year FROM contract WHERE teacherId = ${id} and state = 3 AND SUBSTRING(endDay, 7, 4) = ${year} GROUP by SUBSTRING(endDay, 7, 4)`)
   }
