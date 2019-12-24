@@ -1,3 +1,4 @@
+const moment = require('moment');
 const db = require("../model/contract.model");
 const db_account = require("../model/account.model");
 const db_complaint = require("../model/complaint.model");
@@ -55,7 +56,7 @@ module.exports = {
           res.status(200).json({ contract, teacher, student, skills });
         });
       })
-      .catch(e => {});
+      .catch(e => { });
   },
 
   updateContract: (req, res) => {
@@ -76,5 +77,79 @@ module.exports = {
       );
       res.status(200).json({ mesage: "cập nhật thành công" });
     });
+  },
+
+  revenueByDate: async (req, res) => {
+    const arr = [];
+    for (let i = 0; i < 7; i += 1) {
+      const nowDate = new Date();
+      const tempDate = nowDate.setDate(nowDate.getDate() - i);
+      const resultDate = moment(tempDate).format('DD-MM-YYYY');
+      await db.revenueByDate(resultDate).then((resp) => {
+        if (resp[0].sumPrice === null) {
+          const temp = {
+            "sumPrice": 0,
+            "endDay": resultDate
+          }
+          console.log(temp);
+          arr.push(temp);
+        }
+        else {
+          arr.push(resp[0]);
+        }
+      })
+    }
+    res.status(200).json(arr);
+
+  },
+
+  revenueByMonth: async (req, res) => {
+    const id = req.params.idTeacher;
+    const arr = [];
+    const nowDate = moment().format();
+    const resultYear = moment(nowDate).year();
+    await db.revenueByMonth(resultYear).then(resp => {
+      for (let i = 1; i <= 12; i += 1) {
+        if (!db.isCheck(i, resp)) {
+          const temp = {
+            "sum": 0,
+            "month": i,
+          }
+          arr.push(temp);
+        }
+        else {
+          const temp = db.isCheck(i, resp);
+          temp.month = parseInt(temp.month)
+          arr.push(temp);
+        }
+      }
+    })
+    res.status(200).json(arr);
+
+  },
+
+  revenueByYear: async (req, res) => {
+    const id = req.params.id;
+    const nowDate = moment().format();
+    const currentYear = moment(nowDate).year();
+    const arrYear = [];
+    for (let i = 0; i < 7; i += 1) {
+      await db.revenueByYear(currentYear - i).then(resp => {
+        console.log(resp);
+        if (resp.length === 0) {
+          const yearTemp = {
+            "sumPrice": 0,
+            "year": currentYear - i,
+            "numberContract": 0
+          }
+          arrYear.push(yearTemp)
+        }
+        else {
+          arrYear.push(resp[0])
+        }
+      })
+    }
+    res.status(200).json(arrYear);
+
   }
 };
