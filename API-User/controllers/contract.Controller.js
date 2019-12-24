@@ -243,20 +243,10 @@ module.exports = {
   getSumPriceEachMonthByYear: async (req, res) => {
     const id = req.params.idTeacher;
     const arr = [];
-
-
     const nowDate = moment().format();
-    // const tempDate = nowDate.setDate(nowDate.getYear());
     const resultDate = moment(nowDate).year();
     await db.sumPriceEachMonthByYear(id, resultDate).then(resp => {
-
-      // resp.forEach((item) => {
-      //   arr.push(item)
-      // })
-
       for (let i = 1; i <= 12; i += 1) {
-        console.log('1111111111', db.isCheck(i, resp))
-
         if (!db.isCheck(i, resp)) {
           const temp = {
             "sum": 0,
@@ -269,10 +259,8 @@ module.exports = {
           console.log('1111111111', temp);
           arr.push(temp);
         }
-
       }
     })
-    // console.log(resultDate);
     res.status(200).json(arr);
 
   },
