@@ -100,7 +100,7 @@ module.exports = {
   },
 
   getSumPriceByDate: (isTeacher, date) => {
-    return db.load(`SELECT SUM(ct.price) as sumPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3 AND ct.endDay="${date}"`)
+    return db.load(`SELECT  SUM(ct.price) as sumPrice, ct.endDay FROM contract as ct WHERE ct.teacherId = ${isTeacher} AND ct.state=3 AND ct.endDay="${date}"`)
   },
 
   getMaxPriceByIdTeacher: (isTeacher) => {
@@ -129,5 +129,9 @@ module.exports = {
      SUBSTRING(endDay, 4, 2) as month FROM contract WHERE teacherId = ${idTeacher} 
      and state = 3 AND SUBSTRING(endDay, 7, 4) = ${year} 
      GROUP BY SUBSTRING(endDay, 4, 2) ORDER BY month ASC`);
+  },
+
+  sumPriceByYear: (id,year) => {
+    return db.load(`SELECT COUNT(*) as numberContract, SUM(price) as sumPrice, SUBSTRING(endDay, 7, 4) as year FROM contract WHERE teacherId = ${id} and state = 3 AND SUBSTRING(endDay, 7, 4) = ${year} GROUP by SUBSTRING(endDay, 7, 4)`)
   }
 };
