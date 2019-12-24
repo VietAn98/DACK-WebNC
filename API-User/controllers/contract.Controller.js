@@ -250,9 +250,9 @@ module.exports = {
     const resultDate = moment(tempDate).format('YYYY');
     await db.sumPriceEachMonthByYear(id, 2019).then(resp => {
 
-      resp.forEach((item) => {
-        arr.push(item)
-      })
+      // resp.forEach((item) => {
+      //   arr.push(item)
+      // })
 
       for (let i = 1; i <= 12; i += 1) {
         console.log('1111111111',db.isCheck(i, resp))
@@ -262,6 +262,11 @@ module.exports = {
             "sum": 0,
             "month": `${i}`,
           }
+          arr.push(temp);
+        }
+        else {
+          const temp = db.isCheck(i, resp);
+          console.log('1111111111',temp);
           arr.push(temp);
         }
         
