@@ -219,3 +219,18 @@
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
   height: 100%;
 }
+
+.lg-title {
+  margin-top: 3%;
+	position: relative;
+	font-size: 30px;
+}
+.lg-title:after {
+	content: '';
+	position: absolute;
+	background: #EE4540;
+	bottom: -5px;
+	left: 29%;
+	width: 42%;
+	height: 4px;
+}

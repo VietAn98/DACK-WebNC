@@ -380,3 +380,23 @@ export const sumEachMonth = (state = {}, action) => {
       return state;
   }
 };
+
+export const sumEachYear = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_SUM_EACHYEAR': {
+      return action.sum;
+    }
+    default:
+      return state;
+  }
+};
+
+export const totalPriceNContract = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_TOTAL_PRICE_AND_CONTRACT': {
+      return action.total;
+    }
+    default:
+      return state;
+  }
+};

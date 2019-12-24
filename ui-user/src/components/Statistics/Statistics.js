@@ -18,30 +18,6 @@ if (tokenn) {
     // console.log('decoded', decoded);
 }
 
-const data = [
-    {
-        name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-    },
-    {
-        name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-    },
-    {
-        name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-    },
-    {
-        name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-    },
-    {
-        name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-    },
-    {
-        name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-    },
-    {
-        name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-    },
-];
-
 class Statistics extends React.PureComponent {
     // eslint-disable-next-line react/no-deprecated
     componentWillMount = async () => {
@@ -49,6 +25,7 @@ class Statistics extends React.PureComponent {
 
     OnShowDayWrap = async () => {
         document.getElementById('title').style.display = 'none';
+        document.getElementById('YearWrap').style.display = 'none';
         document.getElementById('DayWrap').style.display = 'block';
         document.getElementById('MonthWrap').style.display = 'none';
 
@@ -64,16 +41,45 @@ class Statistics extends React.PureComponent {
     OnShowMonthWrap = () => {
         document.getElementById('title').style.display = 'none';
         document.getElementById('DayWrap').style.display = 'none';
+        document.getElementById('YearWrap').style.display = 'none';
         document.getElementById('MonthWrap').style.display = 'block';
 
         const { getSumEachMonth } = this.props;
-        getSumEachMonth(decoded.userId);
+
+        Promise.resolve(getSumEachMonth(decoded.userId)).then(async () => {
+            const { getTotalPriceAndContract } = this.props;
+            await getTotalPriceAndContract(decoded.userId);
+            document.getElementById('div4').style.display = 'none';
+            document.getElementById('div5').style.display = 'none';
+            document.getElementById('div6').style.display = 'none';
+            document.getElementById('barMonth').style.display = 'block';
+        });
     }
 
+    OnShowYearWrap = () => {
+        document.getElementById('title').style.display = 'none';
+        document.getElementById('DayWrap').style.display = 'none';
+        document.getElementById('YearWrap').style.display = 'block';
+        document.getElementById('MonthWrap').style.display = 'none';
+
+        const { getSumEachYear } = this.props;
+        Promise.resolve(getSumEachYear(decoded.userId)).then(() => {
+            document.getElementById('div7').style.display = 'none';
+            document.getElementById('div8').style.display = 'none';
+            document.getElementById('div9').style.display = 'none';
+            document.getElementById('barYear').style.display = 'block';
+        });
+    }
 
     render() {
-        const { moneyEachDay, totalContracts, sumEachMonth } = this.props;
-        // console.log('sumEachMonth', sumEachMonth);
+        const {
+            moneyEachDay,
+            totalContracts,
+            sumEachMonth,
+            sumEachYear,
+            totalPriceNContract
+        } = this.props;
+        console.log('totalPriceNContract', totalPriceNContract);
         let arrDate = [];
 
         // eslint-disable-next-line no-prototype-builtins
@@ -145,7 +151,7 @@ class Statistics extends React.PureComponent {
                                     id="title"
                                     style={{ display: 'block' }}
                                 >
-                                    <h3>Hãy chọn thống kê doanh thu</h3>
+                                    <h3>Hãy chọn loại thống kê</h3>
                                 </div>
 
                                 {/* theo ngày */}
@@ -154,8 +160,8 @@ class Statistics extends React.PureComponent {
                                     id="DayWrap"
                                     style={{ display: 'none' }}
                                 >
-                                    <div className="sm-title mb-3">
-                                        <p className="text-center ">Doanh Thu Theo Ngày</p>
+                                    <div className="lg-title mb-3">
+                                        <p className="text-center "><b>Doanh Thu Theo Ngày</b></p>
                                     </div>
                                     <div className="d-flex flex-nowrap justify-center mb-5">
                                         <span className="div" id="div" style={{ display: 'block' }} />
@@ -172,7 +178,7 @@ class Statistics extends React.PureComponent {
                                             <div>
                                                 <AreaChart
                                                     width={800}
-                                                    height={200}
+                                                    height={250}
                                                     // eslint-disable-next-line no-prototype-builtins
                                                     data={arrDate || null}
                                                     margin={{
@@ -242,26 +248,26 @@ class Statistics extends React.PureComponent {
                                     id="MonthWrap"
                                     style={{ display: 'none' }}
                                 >
-                                    <div className="sm-title mb-3">
-                                        <p className="text-center ">Doanh Thu Theo Tháng</p>
+                                    <div className="lg-title mb-3">
+                                        <p className="text-center "><b>Doanh Thu Theo Tháng</b></p>
                                     </div>
                                     <div className="d-flex flex-nowrap justify-center mb-5">
-                                        {/* <span className="div" id="div" style={{ display: 'block' }} />
-                                        <span className="div2" id="div2" style={{ display: 'block' }} />
-                                        <span className="div3" id="div3" style={{ display: 'block' }} /> */}
+                                        <span className="div" id="div4" style={{ display: 'block' }} />
+                                        <span className="div2" id="div5" style={{ display: 'block' }} />
+                                        <span className="div3" id="div6" style={{ display: 'block' }} />
                                         {/* <div className="div4" style={{ display: 'none' }} />
                                     <div className="div5" style={{ display: 'none' }} /> */}
                                     </div>
 
                                     <div
-                                    // id="chart"
-                                    // style={{ display: 'none' }}
+                                        id="barMonth"
+                                        style={{ display: 'none' }}
                                     >
                                         <div className="d-flex flex-nowrap mb-5">
                                             <div>
                                                 <BarChart
                                                     width={800}
-                                                    height={200}
+                                                    height={250}
                                                     data={sumEachMonth.length !== 0 ? sumEachMonth : null}
                                                     margin={{
                                                         top: 5, right: 30, left: 20, bottom: 5,
@@ -279,9 +285,12 @@ class Statistics extends React.PureComponent {
                                         </div>
                                         <div className="col-md-12 col-sm-12 mb-5">
                                             <div className="col-md-3 col-sm-3">
-                                                <p style={{ fontSize: '13px' }}>Doanh thu cao nhất:</p>
+                                                <p style={{ fontSize: '13px' }}>Số hợp đồng hoàn thành:</p>
                                                 <h4>
                                                     <b>
+                                                        {totalPriceNContract.length !== 0
+                                                            ? totalPriceNContract[0].numberContract
+                                                            : null}
                                                         {/* {numeral(`${moneyEachDay.maxPrice}`).format('(0,0)')}
                                                         {' '}
                                                         VND */}
@@ -289,30 +298,14 @@ class Statistics extends React.PureComponent {
                                                 </h4>
                                             </div>
                                             <div className="col-md-3 col-sm-3">
-                                                <p style={{ fontSize: '13px' }}>Doanh thu thấp nhất:</p>
+                                                <p style={{ fontSize: '13px' }}>Tổng doanh thu:</p>
                                                 <h4>
                                                     <b>
-                                                        {/* {numeral(`${moneyEachDay.minPrice}`).format('(0,0)')}
+                                                        {totalPriceNContract.length !== 0
+                                                            ? numeral(`${totalPriceNContract[0].sumPrice}`).format('(0,0)')
+                                                            : null}
                                                         {' '}
-                                                        VND */}
-                                                    </b>
-                                                </h4>
-                                            </div>
-                                            <div className="col-md-3 col-sm-3">
-                                                <p style={{ fontSize: '13px' }}>Số hợp đồng nhiều nhất:</p>
-                                                <h4>
-                                                    <b>
-                                                        {/* {totalContracts.maxTotal}
-                                                        {' '} */}
-                                                    </b>
-                                                </h4>
-                                            </div>
-                                            <div className="col-md-3 col-sm-3">
-                                                <p style={{ fontSize: '13px' }}>Số hợp đồng ít nhất:</p>
-                                                <h4>
-                                                    <b>
-                                                        {/* {totalContracts.minTotal}
-                                                        {' '} */}
+                                                        VND
                                                     </b>
                                                 </h4>
                                             </div>
@@ -320,10 +313,58 @@ class Statistics extends React.PureComponent {
                                     </div>
                                 </div>
 
-                                {/* <div className="col-md-3 col-sm-3" />
+                                {/* theo nam */}
+                                <div
+                                    className="col-md-9 col-sm-9 mt-5 mb-5 divWrap"
+                                    id="YearWrap"
+                                    style={{ display: 'none' }}
+                                >
+                                    <div className="lg-title mb-3">
+                                        <p className="text-center "><b>Doanh Thu Theo Năm</b></p>
+                                    </div>
+                                    <div className="d-flex flex-nowrap justify-center mb-5">
+                                        <span className="div" id="div7" style={{ display: 'block' }} />
+                                        <span className="div2" id="div8" style={{ display: 'block' }} />
+                                        <span className="div3" id="div9" style={{ display: 'block' }} />
+                                        {/* <div className="div4" style={{ display: 'none' }} />
+                                    <div className="div5" style={{ display: 'none' }} /> */}
+                                    </div>
+
+                                    <div
+                                        id="barYear"
+                                        style={{ display: 'none' }}
+                                    >
+                                        <div className="d-flex flex-nowrap mb-5">
+                                            <div>
+                                                <BarChart
+                                                    width={800}
+                                                    height={250}
+                                                    // eslint-disable-next-line no-prototype-builtins
+                                                    data={sumEachYear.hasOwnProperty('arrYear') ? sumEachYear.arrYear : null}
+                                                    margin={{
+                                                        top: 5, right: 30, left: 20, bottom: 5,
+                                                    }}
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="year" />
+                                                    <YAxis />
+                                                    <Tooltip />
+                                                    <Legend />
+                                                    <Bar dataKey="sumPrice" fill="#82ca9d" />
+                                                    <Bar dataKey="numberContract" fill="#8884d8" />
+                                                </BarChart>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-md-3 col-sm-3" />
                                 <div className="col-md-9 col-sm-9 mb-5 divWrap">
                                     <h2>Tổng Quát</h2>
-                                </div> */}
+                                    <div className="col-md-3 col-sm-3 mt-3 mb-5">
+                                        <p>Tổng số yêu cầu đã hoàn thành:</p>
+                                    </div>
+                                </div>
                             </div>
                         </Container>
                     )

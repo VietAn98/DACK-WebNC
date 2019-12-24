@@ -62,6 +62,8 @@ const APIService = {
   GET_SUM_MONEY_EACH_DAY: `${URL}/api/get-sum-price-by-days/`,
   GET_TOTAL_CONTRACTS: `${URL}/api/get-total-contracts-eachday/`,
   GET_SUM_EACHMONTH: `${URL}/api/get-sum-eachmonth-byyear/`,
+  GET_SUM_EACHYEAR: `${URL}/api/getsum-price-by-year/`,
+  GET_TOTAL_PRICE_AND_CONTRACT: `${URL}/api/get-sum-price-and-contract/`,
 };
 
 export default APIService;

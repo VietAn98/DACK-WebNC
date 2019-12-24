@@ -988,3 +988,37 @@ export const getSumEachMonth = (idTeacher) => (dispatch) => fetch(
   .catch((error) => {
     throw error;
   });
+
+export const getSumEachYear = (idTeacher) => (dispatch) => fetch(
+  API.GET_SUM_EACHYEAR + idTeacher, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+}
+)
+  .then((response) => response.json())
+  .then((sum) => {
+    console.log('getSumEachYear action', sum);
+    dispatch({ type: 'GET_SUM_EACHYEAR', sum });
+  })
+  .catch((error) => {
+    throw error;
+  });
+
+export const getTotalPriceAndContract = (idTeacher) => (dispatch) => fetch(
+  API.GET_TOTAL_PRICE_AND_CONTRACT + idTeacher, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  }
+}
+)
+  .then((response) => response.json())
+  .then((total) => {
+    console.log('getTotalPriceAndContract action', total);
+    dispatch({ type: 'GET_TOTAL_PRICE_AND_CONTRACT', total });
+  })
+  .catch((error) => {
+    throw error;
+  });
