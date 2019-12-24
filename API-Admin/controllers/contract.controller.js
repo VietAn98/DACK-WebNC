@@ -86,7 +86,7 @@ module.exports = {
       const tempDate = nowDate.setDate(nowDate.getDate() - i);
       const resultDate = moment(tempDate).format('DD-MM-YYYY');
       await db.revenueByDate(resultDate).then((resp) => {
-        if(resp[0].sumPrice  === null) {
+        if (resp[0].sumPrice === null) {
           const temp = {
             "sumPrice": 0,
             "endDay": resultDate
@@ -128,7 +128,28 @@ module.exports = {
 
   },
 
-  revenueByYear: (req, res) => {
-    
+  revenueByYear: async (req, res) => {
+    const id = req.params.id;
+    const nowDate = moment().format();
+    const currentYear = moment(nowDate).year();
+    const arrYear = [];
+    for (let i = 0; i < 7; i += 1) {
+      await db.revenueByYear(currentYear - i).then(resp => {
+        console.log(resp);
+        if (resp.length === 0) {
+          const yearTemp = {
+            "sumPrice": 0,
+            "year": currentYear - i,
+            "numberContract": 0
+          }
+          arrYear.push(yearTemp)
+        }
+        else {
+          arrYear.push(resp[0])
+        }
+      })
+    }
+    res.status(200).json(arrYear);
+
   }
 };
