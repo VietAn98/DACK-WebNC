@@ -1,6 +1,17 @@
 var db = require("../utils/connectDB");
 
 module.exports = {
+  isCheck : (i, arrays) => {
+    for(let j = 0; j < arrays.length; j +=1){
+      const a = parseInt(arrays[j].month);
+      if (i ===  a) {
+        // check = true
+        return true;
+      }
+    }
+    return false;
+  },
+
   getContractByUser: (idUser, limit, offset) => {
     return db.load(`SELECT * FROM 
     (SELECT new2.*, st.name as Status from

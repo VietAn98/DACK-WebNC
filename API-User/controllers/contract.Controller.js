@@ -4,6 +4,7 @@ const moment = require('moment');
 const numeral = require('numeral');
 
 
+
 module.exports = {
   getContractByUser: (req, res) => {
     let id = req.params.id;
@@ -237,6 +238,8 @@ module.exports = {
     res.status(200).json({ arrTotal, maxTotal, minTotal })
   },
 
+ 
+
   getSumPriceEachMonthByYear: async (req, res) => {
     const id = req.params.idTeacher;
     const arr = [];
@@ -246,24 +249,27 @@ module.exports = {
     const tempDate = nowDate.setDate(nowDate.getYear());
     const resultDate = moment(tempDate).format('YYYY');
     await db.sumPriceEachMonthByYear(id, 2019).then(resp => {
+
+      resp.forEach((item) => {
+        arr.push(item)
+      })
+
       for (let i = 1; i <= 12; i += 1) {
-        resp.forEach((item) => {
-          if (parseInt(item.month) === i) {
-            if (!arr.includes(item.month)) {
-              arr.push(item);
-            }
-          } else {
-            const temp = {
-              "sum": 0,
-              "month": i
-            }
-            arr.push(temp);
+        console.log('1111111111',db.isCheck(i, resp))
+
+        if (!db.isCheck(i, resp)) {
+          const temp = {
+            "sum": 0,
+            "month": `${i}`,
           }
-        })
+          arr.push(temp);
+        }
+        
       }
     })
-
     console.log(arr);
-    res.status(200).json({ arr })
+    res.status(200).json(arr);
+
   }
 }
+
