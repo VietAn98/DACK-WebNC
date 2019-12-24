@@ -246,7 +246,7 @@ module.exports = {
     const tempDate = nowDate.setDate(nowDate.getYear());
     const resultDate = moment(tempDate).format('YYYY');
     await db.sumPriceEachMonthByYear(id, 2019).then(resp => {
-      for (let i = 0; i <= 12; i += 1) {
+      for (let i = 1; i <= 12; i += 1) {
         resp.forEach((item) => {
           if (parseInt(item.month) === i) {
             if (!arr.includes(item.month)) {
