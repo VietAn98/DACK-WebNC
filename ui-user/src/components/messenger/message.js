@@ -66,17 +66,20 @@ export default class FormMessage extends Component {
     const array = [];
     const { getChatInforUserById } = this.props;
     realtimedb.ref().child('chatchit').on('child_added', (item) => {
-      realtimedb.ref().child(`chatchit/${item.key}`).limitToLast(1).on('value', (message) => {
-        const endMess = Object.values(message.val());
-        const idArr = item.key.toString().split('+');
-        // array.push(idArr[1]);
-        Promise.resolve(getChatInforUserById(idArr[1])).then(() => {
-          const { chatUserInfor } = this.props;
-          array.push({ chatUserInfor, endMess });
-          this.setState({
-            listKey: array,
-          });
+      const TempEndMess = Object.values(item.val());
+      const endMess = TempEndMess[TempEndMess.length - 1];
+      const idArr = item.key.toString().split('+');
+      console.log('aaaaaaaaaa',endMess);
+
+      // array.push(idArr[1]);
+      Promise.resolve(getChatInforUserById(idArr[1])).then(() => {
+        const { chatUserInfor } = this.props;
+        //lỗi ở đây
+        array.push({ chatUserInfor, endMess });
+        this.setState({
+          listKey: array,
         });
+
       });
       // console.log('aaaaaaaaaaaaaaa', `${item.key }aaa`);
 
@@ -138,7 +141,7 @@ export default class FormMessage extends Component {
                                   <small className="small font-weight-bold">25 Dec</small>
                                 </div>
 
-                                <p className="font-italic mb-0 text-small">{item.endMess[0].message}</p>
+                                <p className="font-italic mb-0 text-small">{item.endMess.message}</p>
                               </div>
                             </div>
                           </Button>
