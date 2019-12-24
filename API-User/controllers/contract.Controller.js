@@ -182,6 +182,7 @@ module.exports = {
       const tempDate = nowDate.setDate(nowDate.getDate() - i)
       const resultDate = moment(tempDate).format('DD-MM-YYYY')
       await db.getSumPriceByDate(id, resultDate.toString()).then(resp => {
+        console.log(resp.length);
         if (resp[0].sumPrice === null) {
           const item = {
             "sumPrice": 0,
@@ -192,7 +193,7 @@ module.exports = {
         else {
           if (resp[0].sumPrice > maxPrice) {
             maxPrice = resp[0].sumPrice;
-          } else {
+          } else if (resp[0].sumPrice < minPrice) {
             minPrice = resp[0].sumPrice;
           }
           arrDate.push(resp[0]);
@@ -238,7 +239,6 @@ module.exports = {
     res.status(200).json({ arrTotal, maxTotal, minTotal })
   },
 
- 
 
   getSumPriceEachMonthByYear: async (req, res) => {
     const id = req.params.idTeacher;
@@ -255,7 +255,7 @@ module.exports = {
       // })
 
       for (let i = 1; i <= 12; i += 1) {
-        console.log('1111111111',db.isCheck(i, resp))
+        console.log('1111111111', db.isCheck(i, resp))
 
         if (!db.isCheck(i, resp)) {
           const temp = {
@@ -266,15 +266,49 @@ module.exports = {
         }
         else {
           const temp = db.isCheck(i, resp);
-          console.log('1111111111',temp);
+          console.log('1111111111', temp);
           arr.push(temp);
         }
-        
+
       }
     })
     // console.log(resultDate);
     res.status(200).json(arr);
 
+  },
+
+  getSumPriceByYear: async (req, res) => {
+    const id = req.params.id;
+    const nowDate = moment().format();
+    const currentYear = moment(nowDate).year();
+    const arrYear = [];
+    for (let i = 0; i < 7; i += 1) {
+      await db.sumPriceByYear(id, currentYear - i).then(resp => {
+        console.log(resp);
+        if (resp.length === 0) {
+          const yearTemp = {
+            "sumPrice": 0,
+            "year": currentYear - i,
+            "numberContract" : 0
+          }
+          arrYear.push(yearTemp)          
+        }
+        else {
+          arrYear.push(resp[0])
+        }
+      })
+    }
+    res.status(200).json(arrYear);
+
+  },
+
+  getPriceAndContract: (req, res) => {
+    const id = req.params.id;
+    const nowDate = moment().format();
+    const currentYear = moment(nowDate).year();
+    db.sumPriceByYear(id, currentYear).then(resp => {
+      res.status(200).json(resp);
+    })
   }
 }
 
