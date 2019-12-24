@@ -287,9 +287,9 @@ module.exports = {
         console.log(resp);
         if (resp.length === 0) {
           const yearTemp = {
+            "numberContract" : 0,
             "sumPrice": 0,
-            "year": currentYear - i,
-            "numberContract" : 0
+            "year": (currentYear - i).toString(),
           }
           arrYear.push(yearTemp)          
         }
@@ -298,7 +298,7 @@ module.exports = {
         }
       })
     }
-    res.status(200).json(arrYear);
+    res.status(200).json({arrYear});
 
   },
 
