@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import jwtDecode from 'jwt-decode';
@@ -32,7 +33,8 @@ export default class FormMessage extends Component {
     this.listenFriendByFB();
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line react/no-deprecated
+  componentWillReceiveProps = (nextProps) => {
     if (nextProps.user) {
       this.setState({ userName: nextProps.user.displayName });
     }
@@ -41,11 +43,11 @@ export default class FormMessage extends Component {
   componentWillUnmount = () => {
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ message: event.target.value });
   }
 
-  handleSend() {
+  handleSend = () => {
     console.log(this.state.message);
     if (this.state.message) {
       const newItem = {
@@ -57,7 +59,7 @@ export default class FormMessage extends Component {
     }
   }
 
-  handleKeyPress(event) {
+  handleKeyPress = (event) => {
     if (event.key !== 'Enter') return;
     this.handleSend();
   }
@@ -79,11 +81,10 @@ export default class FormMessage extends Component {
         });
       });
       // console.log('aaaaaaaaaaaaaaa', `${item.key }aaa`);
-
     });
   }
 
-  listenMessages() {
+  listenMessages = () => {
     // get danh sách chat
     this.messageRef.limitToLast(10).on('value', (message) => {
       // console.log(Object.values(message.val()));
@@ -110,8 +111,8 @@ export default class FormMessage extends Component {
     console.log('listttttttt11111', this.state.listKey);
 
     return (
-      <div>
-        <div style={{ marginTop: '20px', marginBottom: '20px' }} className="container py-5 px-4">
+      <div className="messageBody">
+        <div className="container py-5 px-4">
           <header className="text-center">
             <h1 className="display-4 text-white">WEB gia sư online</h1>
             <p className="text-white lead mb-0">Hãy nói theo cách của bạn</p>
@@ -127,8 +128,7 @@ export default class FormMessage extends Component {
                 {this.state.listKey ? (
                   <div className="messages-box">
                     <div className="list-group rounded-0">
-                      {this.state.listKey.map((item) => {
-                        return (
+                      {this.state.listKey.map((item) => (
                           <Button onClick={this.onClickChat} className="list-group-item list-group-item-action active text-white rounded-0">
                             <div className="media">
                               <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
@@ -142,8 +142,7 @@ export default class FormMessage extends Component {
                               </div>
                             </div>
                           </Button>
-                        )
-                      })}
+                        ))}
                     </div>
                   </div>
                 ) : null}
@@ -152,7 +151,7 @@ export default class FormMessage extends Component {
               </div>
             </div>
             <div className="col-7 px-0">
-              <div className="px-4 py-5 chat-box bg-white">
+              <div ref={(node) => { this.chatbox = node; }} className="px-4 py-5 chat-box bg-white">
                 {this.state.list.map((item, index) => {
                   if (item.userName !== decoded.userId) {
                     return (
@@ -177,10 +176,10 @@ export default class FormMessage extends Component {
                       </div>
                     </div>
                   );
-                }
-                )}
+                })}
               </div>
-              <Form action="#" className="bg-light">
+
+              <Form style={{ transform: 'translateY(-27px)' }} onSubmit={(e) => { e.preventDefault(); }} className="bg-light">
                 <div className="input-group">
                   <input
                     type="text"
@@ -189,12 +188,9 @@ export default class FormMessage extends Component {
                     onChange={this.handleChange.bind(this)}
                     onKeyPress={this.handleKeyPress.bind(this)}
                     placeholder="Type a message"
-                    aria-describedby="button-addon2"
                     className="form-control rounded-0 border-0 py-4 bg-light"
                   />
-                  <div className="input-group-append">
-                    <Button id="button-addon2" type="submit" className="btn btn-link"><i className="fa fa-paper-plane" /></Button>
-                  </div>
+                  <Button type="submit" onClick={() => this.handleSend()} className="btn btn-link"><i className="fa fa-paper-plane" /></Button>
                 </div>
               </Form>
 
