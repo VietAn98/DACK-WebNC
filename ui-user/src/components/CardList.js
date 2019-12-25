@@ -7,12 +7,12 @@ class CardList extends React.PureComponent {
     return (
       <div>
         <div className="row">
-          {listTeachers
+          {listTeachers.length !== 0
             ? listTeachers.map((item) => (
-                <div className="col-md-4 col-sm-4" key={item.userId}>
-                  <CardTuitor listTeachers={item} />
-                </div>
-              ))
+              <div className="col-md-4 col-sm-4" key={item.userId}>
+                <CardTuitor listTeachers={item} />
+              </div>
+            ))
             : null}
         </div>
       </div>
