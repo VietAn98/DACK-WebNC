@@ -111,7 +111,8 @@ export class TeacherInfoPage extends React.PureComponent {
                     Địa chỉ:
                   </span>
                   {detailTeacher.address}
-                  {listDistrict
+                  ,
+{listDistrict
                     ? listDistrict.map((item) => {
                       if (item.districtId === detailTeacher.districtId) {
                         return (
@@ -329,19 +330,19 @@ export class TeacherInfoPage extends React.PureComponent {
                           </li>
                         </p>
                         {detailTeacher.rateCS ? (
-                        <span
-                          style={{
-                            fontWeight: '200',
-                            fontSize: 'small',
-                            marginLeft: '5px'
-                          }}
-                        >
-                          Tỉ lệ thành công:
+                          <span
+                            style={{
+                              fontWeight: '200',
+                              fontSize: 'small',
+                              marginLeft: '5px'
+                            }}
+                          >
+                            Tỉ lệ thành công:
                         {' '}
-                          {detailTeacher.rateCS}
-                          %
+                            {detailTeacher.rateCS}
+                            %
                         </span>
-                      ) : null}
+                        ) : null}
                       </div>
                     ) : null}
                   {detailTeacher.rateSuccess <= 40
@@ -363,19 +364,19 @@ export class TeacherInfoPage extends React.PureComponent {
                           <span className="fa fa-star-o" aria-hidden="true" />
                         </li>
                         {detailTeacher.rateCS ? (
-                        <span
-                          style={{
-                            fontWeight: '200',
-                            fontSize: 'small',
-                            marginLeft: '5px'
-                          }}
-                        >
-                          Tỉ lệ thành công:
+                          <span
+                            style={{
+                              fontWeight: '200',
+                              fontSize: 'small',
+                              marginLeft: '5px'
+                            }}
+                          >
+                            Tỉ lệ thành công:
                         {' '}
-                          {detailTeacher.rateCS}
-                          %
+                            {detailTeacher.rateCS}
+                            %
                         </span>
-                      ) : null}
+                        ) : null}
                       </div>
                     ) : null}
                   {detailTeacher.rateSuccess <= 60
@@ -397,19 +398,19 @@ export class TeacherInfoPage extends React.PureComponent {
                           <span className="fa fa-star-o" aria-hidden="true" />
                         </li>
                         {detailTeacher.rateCS ? (
-                        <span
-                          style={{
-                            fontWeight: '200',
-                            fontSize: 'small',
-                            marginLeft: '5px'
-                          }}
-                        >
-                          Tỉ lệ thành công:
+                          <span
+                            style={{
+                              fontWeight: '200',
+                              fontSize: 'small',
+                              marginLeft: '5px'
+                            }}
+                          >
+                            Tỉ lệ thành công:
                         {' '}
-                          {detailTeacher.rateCS}
-                          %
+                            {detailTeacher.rateCS}
+                            %
                         </span>
-                      ) : null}
+                        ) : null}
                       </div>
                     ) : null}
                   {detailTeacher.rateSuccess <= 80
@@ -434,19 +435,19 @@ export class TeacherInfoPage extends React.PureComponent {
                           </li>
                         </p>
                         {detailTeacher.rateCS ? (
-                        <span
-                          style={{
-                            fontWeight: '200',
-                            fontSize: 'small',
-                            marginLeft: '5px'
-                          }}
-                        >
-                          Tỉ lệ thành công:
+                          <span
+                            style={{
+                              fontWeight: '200',
+                              fontSize: 'small',
+                              marginLeft: '5px'
+                            }}
+                          >
+                            Tỉ lệ thành công:
                         {' '}
-                          {detailTeacher.rateCS}
-                          %
+                            {detailTeacher.rateCS}
+                            %
                         </span>
-                      ) : null}
+                        ) : null}
                       </div>
                     ) : null}
                   {detailTeacher.rateSuccess > 80 ? (
