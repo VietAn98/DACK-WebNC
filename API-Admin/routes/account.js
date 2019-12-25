@@ -15,4 +15,7 @@ module.exports = (app) => {
     app.post("/api-admin/forget-password", admin.forgetPassw);
     app.post("/api-admin/update-new-password", admin.updateNewPassw);
     app.get("/api-admin/get-keypass",admin.getMailByKeyPass)
+
+    //
+    app.get("/api-admin/sum-teacher-admin-student", admin.sumAdminTeacherstudent)
 }

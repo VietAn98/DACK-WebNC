@@ -71,7 +71,19 @@ module.exports = {
 
   updateState: state => {
     return db.update("account", "userId", state);
-  }
+  },
+
+  getSumAdmin: () => {
+    return db.load("SELECT count(*) as SumAd FROM `account` WHERE categoryUser = 2")
+  },
+
+  getSumTeacher: () => {
+    return db.load("SELECT count(*) as SumGv FROM `account` WHERE categoryUser = 1")
+  },
+
+  getSumstudent: () => {
+    return db.load("SELECT count(*) as SumHs FROM `account` WHERE categoryUser = 0")
+  },
 
 
 };

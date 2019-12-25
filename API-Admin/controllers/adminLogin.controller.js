@@ -173,5 +173,16 @@ module.exports = {
     db.getAccAdminByKeyPass(req.query.keyPass).then(result => {
       res.status(200).json(result);
     })
+  },
+
+  sumAdminTeacherstudent: (req, res) => {
+    Promise.all([
+      db.getSumAdmin(),
+      db.getSumTeacher(),
+      db.getSumstudent(),
+    ]).then(([admin,teacher,student]) => {
+      console.log(admin);
+      res.status(200).json({admin, teacher, student})
+    })
   }
 };

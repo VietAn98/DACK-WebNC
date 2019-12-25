@@ -53,6 +53,8 @@ const APIService = {
   TEACHER_TOP10_30_DAY: `${URL}/api-admin/top-ten-in-30-day`,
   TEACHER_TOP10_90_DAY: `${URL}/api-admin/top-ten-in-90-day`,
   TEACHER_TOP10_ALL: `${URL}/api-admin/top-ten-in-all-day`,
+
+  GET_SUM_USER: `${URL}/api-admin/sum-teacher-admin-student`,
 };
 
 export default APIService;

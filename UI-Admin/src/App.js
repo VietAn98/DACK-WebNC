@@ -36,7 +36,7 @@ export class App extends React.PureComponent {
                 <Route path="/signin" exact component={SignInPage} />
                 <Route path="/signup" exact component={SignUpPage} /> */}
 
-                    <Route path="/message">
+                    <Route path="/message/:idContract/:stdId/:tchid">
                       <Message />
                     </Route>
                     <Route path="/manage-student-teacher/detail/:id">

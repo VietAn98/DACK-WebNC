@@ -5,7 +5,7 @@
 /* eslint-disable no-prototype-builtins */
 import React from 'react';
 import {
- Table, Button, Pagination, Spinner, Form, Col
+  Table, Button, Pagination, Spinner, Form, Col
 } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import history from '../../history';
@@ -13,7 +13,7 @@ import history from '../../history';
 class Complaint extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { getListLimitComplaint, getListContract } = this.props;
+    const { getListLimitComplaint } = this.props;
     const page = -1;
     getListLimitComplaint(page);
     // getListContract();
@@ -37,8 +37,8 @@ class Complaint extends React.PureComponent {
   render() {
     const { listComplaint } = this.props;
     const {
- numberPages, limitComplaint, offset, page
-} = listComplaint;
+      numberPages, limitComplaint, offset, page
+    } = listComplaint;
     const index = parseInt(page);
     let stt = offset;
     const arrPage = [];
@@ -53,16 +53,16 @@ class Complaint extends React.PureComponent {
           <b>Danh Sách Các Khiếu Nại</b>
         </h1>
         {listComplaint.hasOwnProperty('limitComplaint') ? null : (
-<div style={{ textAlign: 'center' }}>
-          <Spinner animation="grow" variant="primary" />
-          <Spinner animation="grow" variant="secondary" />
-          <Spinner animation="grow" variant="success" />
-          <Spinner animation="grow" variant="danger" />
-          <Spinner animation="grow" variant="warning" />
-          <Spinner animation="grow" variant="info" />
-          <Spinner animation="grow" variant="dark" />
-</div>
-)}
+          <div style={{ textAlign: 'center' }}>
+            <Spinner animation="grow" variant="primary" />
+            <Spinner animation="grow" variant="secondary" />
+            <Spinner animation="grow" variant="success" />
+            <Spinner animation="grow" variant="danger" />
+            <Spinner animation="grow" variant="warning" />
+            <Spinner animation="grow" variant="info" />
+            <Spinner animation="grow" variant="dark" />
+          </div>
+        )}
 
         <Table striped bordered hover className="ml-2">
           <thead style={{ background: '#FF9C43' }}>
@@ -76,14 +76,14 @@ class Complaint extends React.PureComponent {
           </thead>
           <tbody>
             {listComplaint.hasOwnProperty('limitComplaint')
-               // eslint-disable-next-line no-return-assign
+              // eslint-disable-next-line no-return-assign
               ? limitComplaint.map((sk) => (
                 <tr onClick={this.contractClick.bind(this, sk.contractId)}>
                   <td style={{ textAlign: 'center' }}>{(stt += 1)}</td>
                   <td style={{ cursor: 'pointer' }}>{sk.nameStudent}</td>
                   <td style={{ cursor: 'pointer' }}>{sk.nameTeacher}</td>
                   <td style={{ cursor: 'pointer' }}>{sk.reason}</td>
-                  <td style={{ textAlign: 'center', color: 'red' }}>{sk.isDone ? <i className="fa fa-check" /> : <i className="fa fa-times-circle" /> }</td>
+                  <td style={{ textAlign: 'center', color: 'red' }}>{sk.isDone ? <i className="fa fa-check" /> : <i className="fa fa-times-circle" />}</td>
                 </tr>
               ))
               : null}

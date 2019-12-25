@@ -30,9 +30,10 @@ class HomePage extends React.PureComponent {
       topTeacherIn7Day,
       topTeacherIn30Day,
       topTeacherIn90Day,
-      topTeacherAll
+      topTeacherAll,
+      getListUser,
     } = this.props;
-
+    getListUser();
     revenueByDay();
     revenueByMonth();
     revenueByYear();
@@ -77,7 +78,11 @@ class HomePage extends React.PureComponent {
       topTeacher30Days,
       topTeacher90Days,
       topTeachersAll,
+      sumUser,
     } = this.props;
+
+    console.log('11111111111111111111', sumUser);
+    const { admin, teacher, student } = sumUser;
 
     return (
       <div className="inner-block" style={{ padding: '8em 1em 1em 1em' }}>
@@ -85,9 +90,10 @@ class HomePage extends React.PureComponent {
           <div className="col-md-4 market-update-gd">
             <div className="market-update-block clr-block 1">
               <div className="col-md-8 market-update-left">
-                <h3>83</h3>
-                <h4>Registered User</h4>
-                <p>Other hand, we denounce</p>
+                <h4>Tổng số học sinh đã đăng kí</h4>
+
+                {sumUser.hasOwnProperty('student')
+                  ? <h3>{student[0].SumHs}</h3> : null}
               </div>
               <div className="col-md-4 market-update-right">
                 <i className="fa fa-file-text-o"> </i>
@@ -98,9 +104,10 @@ class HomePage extends React.PureComponent {
           <div className="col-md-4 market-update-gd">
             <div className="market-update-block clr-block-2">
               <div className="col-md-8 market-update-left">
-                <h3>135</h3>
-                <h4>Daily Visitors</h4>
-                <p>Other hand, we denounce</p>
+                <h4>Số giáo viên đã đăng kí:</h4>
+
+                {sumUser.hasOwnProperty('teacher')
+                  ? <h3>{teacher[0].SumGv}</h3> : null}
               </div>
               <div className="col-md-4 market-update-right">
                 <i className="fa fa-eye"> </i>
@@ -111,9 +118,10 @@ class HomePage extends React.PureComponent {
           <div className="col-md-4 market-update-gd">
             <div className="market-update-block clr-block-3">
               <div className="col-md-8 market-update-left">
-                <h3>23</h3>
-                <h4>New Messages</h4>
-                <p>Other hand, we denounce</p>
+                <h4>Số admin:</h4>
+
+                {sumUser.hasOwnProperty('admin')
+                  ? <h3>{admin[0].SumAd}</h3> : null}
               </div>
               <div className="col-md-4 market-update-right">
                 <i className="fa fa-envelope-o"> </i>
