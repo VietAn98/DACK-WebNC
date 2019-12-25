@@ -77,3 +77,53 @@ export const skillsAllDays = (state = [], action) => {
             return state;
     }
 };
+
+export const topTeacherADay = (state = [], action) => {
+    switch (action.type) {
+        case 'TEACHER_TOP10_A_DAY': {
+            return action.teacher;
+        }
+        default:
+            return state;
+    }
+};
+
+export const topTeacher7Days = (state = [], action) => {
+    switch (action.type) {
+        case 'TEACHER_TOP10_7_DAY': {
+            return action.teacher;
+        }
+        default:
+            return state;
+    }
+};
+
+export const topTeacher30Days = (state = [], action) => {
+    switch (action.type) {
+        case 'TEACHER_TOP10_30_DAY': {
+            return action.teacher;
+        }
+        default:
+            return state;
+    }
+};
+
+export const topTeacher90Days = (state = [], action) => {
+    switch (action.type) {
+        case 'TEACHER_TOP10_90_DAY': {
+            return action.teacher;
+        }
+        default:
+            return state;
+    }
+};
+
+export const topTeachersAll = (state = [], action) => {
+    switch (action.type) {
+        case 'TEACHER_TOP10_ALL': {
+            return action.teacher;
+        }
+        default:
+            return state;
+    }
+};

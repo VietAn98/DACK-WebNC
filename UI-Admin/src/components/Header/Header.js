@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import jwtDecode from 'jwt-decode';
 
@@ -19,7 +20,8 @@ class Header extends React.PureComponent {
         <div className="">
           <div className="logo-name">
             <a href="/">
-              <h1>Gia Sư Online</h1>
+              <h1><span>AH!</span></h1>
+              <h2 className="text-black">UberForTuitor</h2>
             </a>
             <div className="search-box">
               <form>
@@ -282,7 +284,7 @@ class Header extends React.PureComponent {
                             <i className="fa fa-cog" />
                             {' '}
                             Thay đổi mật khẩu
-                            </a>
+                          </a>
                           {' '}
                         </li>
                         {/* <li>
@@ -301,7 +303,7 @@ class Header extends React.PureComponent {
                             <i className="fa fa-sign-out" />
                             {' '}
                             Đăng xuất
-                            </a>
+                          </a>
                           {' '}
                         </li>
                       </ul>

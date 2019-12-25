@@ -62,16 +62,16 @@ module.exports = {
   },
 
   topTenInAllDay: () => {
-    return db.load(`SELECT tb1.*, ac.name FROM (SELECT DISTINCT teacherId, SUM(price) as price FROM contract WHERE state = 3 GROUP by teacherId LIMIT 5) as tb1 JOIN account as ac on tb1.teacherId = ac.userId order by price DESC`)
+    return db.load(`SELECT tb1.*, ac.name, ac.avatar FROM (SELECT DISTINCT teacherId, SUM(price) as price FROM contract WHERE state = 3 GROUP by teacherId LIMIT 5) as tb1 JOIN account as ac on tb1.teacherId = ac.userId order by price DESC`)
   },
 
   topTenInOneDay: (date) => {
-    return db.load(`SELECT temp.*, ac.name FROM (SELECT DISTINCT teacherId, SUM(price) as price FROM contract WHERE state = 3 and endDay = '${date}' GROUP by teacherId LIMIT 5)
+    return db.load(`SELECT temp.*, ac.name, ac.avatar FROM (SELECT DISTINCT teacherId, SUM(price) as price FROM contract WHERE state = 3 and endDay = '${date}' GROUP by teacherId LIMIT 5)
     as temp JOIN account as ac on temp.teacherId = ac.userId order by price DESC`)
   },
 
   topTenInXXXDay: (date) => {
-    return db.load(`SELECT tb3.*, ct.name FROM(SELECT DISTINCT tb2.teacherId, SUM(price) as price FROM (SELECT * FROM (SELECT *, STR_TO_DATE(endDay,'%d-%m-%Y') as matDate FROM contract) as tb1 where tb1.matDate > '${date}' and state = 3 ) as tb2 GROUP by teacherId LIMIT 5) as tb3 JOIN account as ct on ct.userId = tb3.teacherId order by price DESC`)
+    return db.load(`SELECT tb3.*, ct.name, ct.avatar FROM(SELECT DISTINCT tb2.teacherId, SUM(price) as price FROM (SELECT * FROM (SELECT *, STR_TO_DATE(endDay,'%d-%m-%Y') as matDate FROM contract) as tb1 where tb1.matDate > '${date}' and state = 3 ) as tb2 GROUP by teacherId LIMIT 5) as tb3 JOIN account as ct on ct.userId = tb3.teacherId order by price DESC`)
   },
 
   topSkillInOneDay: (date) =>{

@@ -1,0 +1,9 @@
+.color-orage {
+  /* color: orange !important; */
+  border-bottom: 2px dashed orange;
+  width: fit-content;
+}
+
+.badge.badge-info {
+    font-size: 14px;
+}

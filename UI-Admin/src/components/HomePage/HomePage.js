@@ -1,19 +1,16 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   ResponsiveContainer
 } from 'recharts';
+import numeral from 'numeral';
+import history from '../../history';
 import { Spinner, Tabs, Tab } from 'react-bootstrap';
+import { avatar } from '../../images/avatar.png';
 import './HomePage.css';
-
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 class HomePage extends React.PureComponent {
   // eslint-disable-next-line react/no-deprecated
@@ -22,40 +19,71 @@ class HomePage extends React.PureComponent {
       revenueByDay,
       revenueByMonth,
       revenueByYear,
+
       skillsInADay,
       skillsIn7Day,
       skillsIn30Day,
       skillsIn90Day,
       skillsInAllDay,
+
+      topTeacherInADay,
+      topTeacherIn7Day,
+      topTeacherIn30Day,
+      topTeacherIn90Day,
+      topTeacherAll
     } = this.props;
 
     revenueByDay();
     revenueByMonth();
     revenueByYear();
+
     skillsInADay();
     skillsIn7Day();
     skillsIn30Day();
     skillsIn90Day();
     skillsInAllDay();
+
+    topTeacherInADay();
+    topTeacherIn7Day();
+    topTeacherIn30Day();
+    topTeacherIn90Day();
+    topTeacherAll();
+  }
+
+  OnClickRow = (id) => {
+    history.push(`/manage-student-teacher/detail/${id}`);
   }
 
   render() {
+    let i = 0;
+    let j = 0;
+    let k = 0;
+    let z = 0;
+    let u = 0;
+
     const {
       dayRevenue,
       monthRevenue,
       yearRevenue,
+
       skillsADay,
       skills7Days,
       skills30Days,
       skills90Days,
-      skillsAllDays
+      skillsAllDays,
+
+      topTeacherADay,
+      topTeacher7Days,
+      topTeacher30Days,
+      topTeacher90Days,
+      topTeachersAll,
     } = this.props;
 
     return (
       <div className="inner-block" style={{ padding: '8em 1em 1em 1em' }}>
         <div className="market-updates">
           <div className="col-md-4 market-update-gd">
-            <div className="market-update-block clr-block-1">
+            <div className="market-update-block clr-block 1">
               <div className="col-md-8 market-update-left">
                 <h3>83</h3>
                 <h4>Registered User</h4>
@@ -100,7 +128,285 @@ class HomePage extends React.PureComponent {
           <div className="col-md-6">
             <div className="glocy-chart">
               <div className="span-2c">
-                <h3 className="tlt">
+                <h3 className="tlt color-orage">
+                  TOP 10 Giáo viên
+                </h3>
+              </div>
+              <Tabs defaultActiveKey="day" transition={false} id="noanim-tab-example">
+                <Tab eventKey="day" title="Trong Ngày">
+                  <div className="table-responsive" style={{ height: 300 }}>
+                    {topTeacherADay.length === 0
+                      ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      )
+                      : (
+                        <table className="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th />
+                              <th>Tên Giáo Viên</th>
+                              <th>Doanh thu</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topTeacherADay.map((item) => (
+                              <tr
+                                onClick={this.OnClickRow.bind(this, item.teacherId)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <td>{i += 1}</td>
+                                <td style={{ width: '15%' }}>
+                                  <img
+                                    src={item.avatar ? `${item.avatar}` : `${avatar}`}
+                                    alt="avatar"
+                                    style={{ width: '100%' }}
+                                  />
+                                </td>
+                                <td style={{ fontSize: '18px' }}>{item.name}</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    {numeral(`${item.price}`).format('(0,0)')}
+                                    {' '}
+                                    VND
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                  </div>
+                </Tab>
+                <Tab eventKey="7days" title="7 Ngày">
+                  <div className="table-responsive" style={{ height: 300 }}>
+                    {topTeacher7Days.length === 0
+                      ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      )
+                      : (
+                        <table className="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th />
+                              <th>Tên Giáo Viên</th>
+                              <th>Doanh thu</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topTeacher7Days.map((item) => (
+                              <tr
+                                onClick={this.OnClickRow.bind(this, item.teacherId)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <td>{u += 1}</td>
+                                <td style={{ width: '15%' }}>
+                                  <img
+                                    src={item.avatar ? `${item.avatar}` : `${avatar}`}
+                                    alt="avatar"
+                                    style={{ width: '100%' }}
+                                  />
+                                </td>
+                                <td style={{ fontSize: '18px' }}>{item.name}</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    {numeral(`${item.price}`).format('(0,0)')}
+                                    {' '}
+                                    VND
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                  </div>
+                </Tab>
+                <Tab eventKey="30days" title="30 Ngày">
+                  <div className="table-responsive" style={{ height: 300 }}>
+                    {topTeacher30Days.length === 0
+                      ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      )
+                      : (
+                        <table className="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th />
+                              <th>Tên Giáo Viên</th>
+                              <th>Doanh thu</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topTeacher30Days.map((item) => (
+                              <tr
+                                onClick={this.OnClickRow.bind(this, item.teacherId)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <td>{z += 1}</td>
+                                <td style={{ width: '15%' }}>
+                                  <img
+                                    src={item.avatar ? `${item.avatar}` : `${avatar}`}
+                                    alt="avatar"
+                                    style={{ width: '100%' }}
+                                  />
+                                </td>
+                                <td style={{ fontSize: '18px' }}>{item.name}</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    {numeral(`${item.price}`).format('(0,0)')}
+                                    {' '}
+                                    VND
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                  </div>
+                </Tab>
+                <Tab eventKey="90days" title="90 Ngày">
+                  <div className="table-responsive" style={{ height: 300 }}>
+                    {topTeacher90Days.length === 0
+                      ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      )
+                      : (
+                        <table className="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th />
+                              <th>Tên Giáo Viên</th>
+                              <th>Doanh thu</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topTeacher90Days.map((item) => (
+                              <tr
+                                onClick={this.OnClickRow.bind(this, item.teacherId)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <td>{k += 1}</td>
+                                <td style={{ width: '15%' }}>
+                                  <img
+                                    src={item.avatar ? `${item.avatar}` : `${avatar}`}
+                                    alt="avatar"
+                                    style={{ width: '100%' }}
+                                  />
+                                </td>
+                                <td style={{ fontSize: '18px' }}>{item.name}</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    {numeral(`${item.price}`).format('(0,0)')}
+                                    {' '}
+                                    VND
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                  </div>
+                </Tab>
+                <Tab eventKey="allteacher" title="Tất Cả">
+                  <div className="table-responsive" style={{ height: 300 }}>
+                    {topTeachersAll.length === 0
+                      ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      )
+                      : (
+                        <table className="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th />
+                              <th>Tên Giáo Viên</th>
+                              <th>Doanh thu</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topTeachersAll.map((item) => (
+                              <tr
+                                onClick={this.OnClickRow.bind(this, item.teacherId)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <td>{j += 1}</td>
+                                <td style={{ width: '15%' }}>
+                                  <img
+                                    src={item.avatar ? `${item.avatar}` : `${avatar}`}
+                                    alt="avatar"
+                                    style={{ width: '100%' }}
+                                  />
+                                </td>
+                                <td style={{ fontSize: '18px' }}>{item.name}</td>
+                                <td>
+                                  <span className="badge badge-info">
+                                    {numeral(`${item.price}`).format('(0,0)')}
+                                    {' '}
+                                    VND
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )}
+                  </div>
+                </Tab>
+              </Tabs>
+            </div>
+          </div>
+
+
+          <div className="col-md-6">
+            <div className="glocy-chart">
+              <div className="span-2c">
+                <h3 className="tlt color-orage">
                   Doanh Thu
                 </h3>
               </div>
@@ -213,7 +519,7 @@ class HomePage extends React.PureComponent {
 
           <div className="col-md-12 mt-5 mb-5 chit-chat-layer1-left">
             <div className="glocy-chart">
-              <h3 className="tlt">kỹ năng</h3>
+              <h3 className="tlt color-orage">kỹ năng</h3>
               <div className="table-responsive">
                 <Tabs defaultActiveKey="day" transition={false} id="noanim-tab-examplesss">
                   <Tab eventKey="day" title="Trong Ngày">

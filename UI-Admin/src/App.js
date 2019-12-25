@@ -16,7 +16,7 @@ import DetailContract from './containers/detailContractContainer';
 import ChangePassword from './containers/changePasswContainer';
 import ForgotPassw from './containers/forgotPasswordContainer';
 import ManageComplaint from './containers/ManageComplaintContainer';
-
+import Message from './components/Messages/messages';
 
 import './App.css';
 
@@ -35,6 +35,10 @@ export class App extends React.PureComponent {
                     {/* <Route path="/settings" exact component={Settings} />
                 <Route path="/signin" exact component={SignInPage} />
                 <Route path="/signup" exact component={SignUpPage} /> */}
+
+                    <Route path="/message">
+                      <Message />
+                    </Route>
                     <Route path="/manage-student-teacher/detail/:id">
                       <DetailsUser />
                     </Route>

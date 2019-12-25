@@ -5,8 +5,10 @@ class PageNotFound extends React.PureComponent {
   render() {
     return (
       <div>
-        <h1>This is 404</h1>
-        <Link to="/">Go back to Home Page</Link>
+        <div className="page-error" />
+        <div className="text-center">
+          <Link to="/" style={{ color: 'orange', fontWeight: 700, fontSize: '20px' }}>Go back to Home Page</Link>
+        </div>
       </div>
     );
   }

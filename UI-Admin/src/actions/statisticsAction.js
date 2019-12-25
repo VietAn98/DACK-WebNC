@@ -119,3 +119,78 @@ export const skillsInAllDay = () => (dispatch) => fetch(API.SKILLS_ALL, {
     .catch((error) => {
         throw error;
     });
+
+export const topTeacherInADay = () => (dispatch) => fetch(API.TEACHER_TOP10_A_DAY, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+})
+    .then((response) => response.json())
+    .then((teacher) => {
+        console.log('topTeacherInADay', teacher);
+        dispatch({ type: 'TEACHER_TOP10_A_DAY', teacher });
+    })
+    .catch((error) => {
+        throw error;
+    });
+
+export const topTeacherIn7Day = () => (dispatch) => fetch(API.TEACHER_TOP10_7_DAY, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+})
+    .then((response) => response.json())
+    .then((teacher) => {
+        console.log('topTeacherIn7Day', teacher);
+        dispatch({ type: 'TEACHER_TOP10_7_DAY', teacher });
+    })
+    .catch((error) => {
+        throw error;
+    });
+
+export const topTeacherIn30Day = () => (dispatch) => fetch(API.TEACHER_TOP10_30_DAY, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+})
+    .then((response) => response.json())
+    .then((teacher) => {
+        console.log('topTeacherIn30Day', teacher);
+        dispatch({ type: 'TEACHER_TOP10_30_DAY', teacher });
+    })
+    .catch((error) => {
+        throw error;
+    });
+
+export const topTeacherIn90Day = () => (dispatch) => fetch(API.TEACHER_TOP10_90_DAY, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+})
+    .then((response) => response.json())
+    .then((teacher) => {
+        console.log('topTeacherIn90Day', teacher);
+        dispatch({ type: 'TEACHER_TOP10_90_DAY', teacher });
+    })
+    .catch((error) => {
+        throw error;
+    });
+
+export const topTeacherAll = () => (dispatch) => fetch(API.TEACHER_TOP10_ALL, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+})
+    .then((response) => response.json())
+    .then((teacher) => {
+        console.log('topTeacherAll', teacher);
+        dispatch({ type: 'TEACHER_TOP10_ALL', teacher });
+    })
+    .catch((error) => {
+        throw error;
+    });
