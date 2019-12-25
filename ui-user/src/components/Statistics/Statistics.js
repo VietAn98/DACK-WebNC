@@ -358,13 +358,13 @@ class Statistics extends React.PureComponent {
                                     </div>
                                 </div>
 
-                                <div className="col-md-3 col-sm-3" />
+                                {/* <div className="col-md-3 col-sm-3" />
                                 <div className="col-md-9 col-sm-9 mb-5 divWrap">
                                     <h2>Tổng Quát</h2>
                                     <div className="col-md-3 col-sm-3 mt-3 mb-5">
                                         <p>Tổng số yêu cầu đã hoàn thành:</p>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </Container>
                     )
