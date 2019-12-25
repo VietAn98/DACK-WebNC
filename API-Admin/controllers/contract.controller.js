@@ -207,7 +207,7 @@ module.exports = {
     //const tempDate = nowDate.setDate(nowDate.getDate() - 0);
     const SubDate = moment(nowDate).format('YYYY-MM-DD');
     console.log(SubDate);
-    db.topSkillInXXXDay(SubDate).then((resp) => {
+    db.topSkillInOneDay(SubDate).then((resp) => {
       res.status(200).json(resp);
     }).catch((err) => { res.status(400).json(err) })
 

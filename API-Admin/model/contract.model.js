@@ -74,6 +74,10 @@ module.exports = {
     return db.load(`SELECT tb3.*, ct.name FROM(SELECT DISTINCT tb2.teacherId, SUM(price) as price FROM (SELECT * FROM (SELECT *, STR_TO_DATE(endDay,'%d-%m-%Y') as matDate FROM contract) as tb1 where tb1.matDate > '${date}' and state = 3 ) as tb2 GROUP by teacherId LIMIT 5) as tb3 JOIN account as ct on ct.userId = tb3.teacherId order by price DESC`)
   },
 
+  topSkillInOneDay: (date) =>{
+    return db.load(`SELECT DISTINCT tb3.idSkill,tb3.name, SUM(price) as price FROM (SELECT * from (SELECT tb1.*, STR_TO_DATE(endDay,'%d-%m-%Y') as matDate FROM (select tb.idSkill, tb.name, ct.* from (SELECT sc.*, sk.name FROM skill_contract as sc JOIN skill as sk WHERE sc.idSkill =  sk.skillId) as tb JOIN contract as ct on tb.idContract = ct.idContract) as tb1 )  as tb2 WHERE tb2.matDate = '${date}' and tb2.state = 3 ) as tb3 GROUP by tb3.idSkill  ORDER BY price DESC LIMIT 5`)
+  },
+
   topSkillInXXXDay: (date) => {
     return db.load(`SELECT DISTINCT tb3.idSkill,tb3.name, SUM(price) as price FROM (SELECT * from (SELECT tb1.*, STR_TO_DATE(endDay,'%d-%m-%Y') as matDate FROM (select tb.idSkill, tb.name, ct.* from (SELECT sc.*, sk.name FROM skill_contract as sc JOIN skill as sk WHERE sc.idSkill =  sk.skillId) as tb JOIN contract as ct on tb.idContract = ct.idContract) as tb1 )  as tb2 WHERE tb2.matDate > '${date}' and tb2.state = 3 ) as tb3 GROUP by tb3.idSkill  ORDER BY price DESC LIMIT 5`)
   },
