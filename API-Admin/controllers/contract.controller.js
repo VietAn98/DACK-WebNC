@@ -81,7 +81,7 @@ module.exports = {
 
   revenueByDate: async (req, res) => {
     const arr = [];
-    for (let i = 0; i < 7; i += 1) {
+    for (let i = 6; i >= 0; i -= 1) {
       const nowDate = new Date();
       const tempDate = nowDate.setDate(nowDate.getDate() - i);
       const resultDate = moment(tempDate).format('DD-MM-YYYY');
@@ -131,7 +131,7 @@ module.exports = {
     const nowDate = moment().format();
     const currentYear = moment(nowDate).year();
     const arrYear = [];
-    for (let i = 0; i < 7; i += 1) {
+    for (let i = 6; i >= 0; i -= 1) {
       await db.revenueByYear(currentYear - i).then(resp => {
         console.log(resp);
         if (resp.length === 0) {
