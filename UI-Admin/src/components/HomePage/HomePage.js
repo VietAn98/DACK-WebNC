@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
+  ResponsiveContainer
 } from 'recharts';
 import { Spinner, Tabs, Tab } from 'react-bootstrap';
 import './HomePage.css';
@@ -100,96 +101,110 @@ class HomePage extends React.PureComponent {
             <div className="glocy-chart">
               <div className="span-2c">
                 <h3 className="tlt">
-                  Thống Kê Doanh Thu
+                  Doanh Thu
                 </h3>
               </div>
               <Tabs defaultActiveKey="day" transition={false} id="noanim-tab-example">
                 <Tab eventKey="day" title="Theo Ngày">
-                  {dayRevenue.length === 0 ? (
-                    <div style={{ textAlign: 'center' }}>
-                      <Spinner animation="grow" variant="primary" />
-                      <Spinner animation="grow" variant="secondary" />
-                      <Spinner animation="grow" variant="success" />
-                      <Spinner animation="grow" variant="danger" />
-                      <Spinner animation="grow" variant="warning" />
-                      <Spinner animation="grow" variant="info" />
-                      <Spinner animation="grow" variant="dark" />
-                    </div>
-                  ) : (
-                      <AreaChart
-                        width={550}
-                        height={300}
-                        data={dayRevenue.length !== 0 ? dayRevenue : null}
-                        margin={{
-                          top: 10, right: 30, left: 0, bottom: 0,
-                        }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="endDay" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Area type="monotone" dataKey="sumPrice" name="Tổng tiền (VND)" stroke="#852529" fill="#852529" />
-                      </AreaChart>
-                    )}
+                  <div style={{ width: '100%', height: 300 }}>
+                    <ResponsiveContainer>
+                      {dayRevenue.length === 0 ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      ) : (
+                          <AreaChart
+                            cy={300}
+                            width={550}
+                            height={500}
+                            data={dayRevenue.length !== 0 ? dayRevenue : null}
+                            margin={{
+                              top: 10, right: 30, left: 0, bottom: 0,
+                            }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="endDay" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Area type="monotone" dataKey="sumPrice" name="Tổng tiền (VND)" stroke="#852529" fill="#852529" />
+                          </AreaChart>
+                        )}
+                    </ResponsiveContainer>
+                  </div>
+
                 </Tab>
                 <Tab eventKey="month" title="Theo Tháng">
-                  {monthRevenue.length === 0 ? (
-                    <div style={{ textAlign: 'center' }}>
-                      <Spinner animation="grow" variant="primary" />
-                      <Spinner animation="grow" variant="secondary" />
-                      <Spinner animation="grow" variant="success" />
-                      <Spinner animation="grow" variant="danger" />
-                      <Spinner animation="grow" variant="warning" />
-                      <Spinner animation="grow" variant="info" />
-                      <Spinner animation="grow" variant="dark" />
-                    </div>
-                  ) : (
-                      <AreaChart
-                        width={550}
-                        height={300}
-                        data={monthRevenue.length !== 0 ? monthRevenue : null}
-                        margin={{
-                          top: 10, right: 30, left: 0, bottom: 0,
-                        }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Area type="monotone" dataKey="sum" name="Tổng tiền (VND)" stroke="#7DD818" fill="#93FF1C" />
-                      </AreaChart>
-                    )}
+                  <div style={{ width: '100%', height: 300 }}>
+                    <ResponsiveContainer>
+                      {monthRevenue.length === 0 ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      ) : (
+                          <AreaChart
+                            width={550}
+                            height={300}
+                            data={monthRevenue.length !== 0 ? monthRevenue : null}
+                            margin={{
+                              top: 10, right: 30, left: 0, bottom: 0,
+                            }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="month" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Area type="monotone" dataKey="sum" name="Tổng tiền (VND)" stroke="#7DD818" fill="#93FF1C" />
+                          </AreaChart>
+                        )}
+                    </ResponsiveContainer>
+                  </div>
                 </Tab>
                 <Tab eventKey="year" title="Theo Năm">
-                  {yearRevenue.length === 0 ? (
-                    <div style={{ textAlign: 'center' }}>
-                      <Spinner animation="grow" variant="primary" />
-                      <Spinner animation="grow" variant="secondary" />
-                      <Spinner animation="grow" variant="success" />
-                      <Spinner animation="grow" variant="danger" />
-                      <Spinner animation="grow" variant="warning" />
-                      <Spinner animation="grow" variant="info" />
-                      <Spinner animation="grow" variant="dark" />
-                    </div>
-                  ) : (
-                      <AreaChart
-                        width={550}
-                        height={300}
-                        data={yearRevenue.length !== 0 ? yearRevenue : null}
-                        margin={{
-                          top: 10, right: 30, left: 0, bottom: 0,
-                        }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" name="Năm" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Area type="monotone" dataKey="sumPrice" name="Tổng tiền (VND)" stroke="#08D8C8" fill="#00FEEB" />
-                      </AreaChart>
-                    )}
+                  <div style={{ width: '100%', height: 300 }}>
+                    <ResponsiveContainer>
+                      {yearRevenue.length === 0 ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <Spinner animation="grow" variant="primary" />
+                          <Spinner animation="grow" variant="secondary" />
+                          <Spinner animation="grow" variant="success" />
+                          <Spinner animation="grow" variant="danger" />
+                          <Spinner animation="grow" variant="warning" />
+                          <Spinner animation="grow" variant="info" />
+                          <Spinner animation="grow" variant="dark" />
+                        </div>
+                      ) : (
+                          <AreaChart
+                            width={550}
+                            height={320}
+                            data={yearRevenue.length !== 0 ? yearRevenue : null}
+                            margin={{
+                              top: 10, right: 30, left: 0, bottom: 0,
+                            }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" name="Năm" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Area type="monotone" dataKey="sumPrice" name="Tổng tiền (VND)" stroke="#08D8C8" fill="#00FEEB" />
+                          </AreaChart>
+                        )}
+                    </ResponsiveContainer>
+                  </div>
                 </Tab>
               </Tabs>
             </div>
@@ -197,138 +212,159 @@ class HomePage extends React.PureComponent {
 
 
           <div className="col-md-12 mt-5 mb-5 chit-chat-layer1-left">
-            <div className="work-progres">
-              <h3 className="tlt">Thống kê kỹ năng</h3>
+            <div className="glocy-chart">
+              <h3 className="tlt">kỹ năng</h3>
               <div className="table-responsive">
                 <Tabs defaultActiveKey="day" transition={false} id="noanim-tab-examplesss">
                   <Tab eventKey="day" title="Trong Ngày">
-                    {skillsADay.length === 0 ? (
-                      <div style={{ textAlign: 'center' }}>
-                        <Spinner animation="grow" variant="primary" />
-                        <Spinner animation="grow" variant="secondary" />
-                        <Spinner animation="grow" variant="success" />
-                        <Spinner animation="grow" variant="danger" />
-                        <Spinner animation="grow" variant="warning" />
-                        <Spinner animation="grow" variant="info" />
-                        <Spinner animation="grow" variant="dark" />
-                      </div>
-                    ) : (
-                        <RadarChart
-                          outerRadius={150}
-                          width={1200}
-                          height={350}
-                          data={skillsADay}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="name" />
-                          <PolarRadiusAxis />
-                          <Radar name="Tổng giá" dataKey="price" stroke="#0088FE" fill="#0088FE" fillOpacity={0.6} />
-                        </RadarChart>
-                      )}
+                    <div style={{ width: '100%', height: 400 }}>
+                      <ResponsiveContainer>
+                        {skillsADay.length === 0 ? (
+                          <div style={{ textAlign: 'center' }}>
+                            <Spinner animation="grow" variant="primary" />
+                            <Spinner animation="grow" variant="secondary" />
+                            <Spinner animation="grow" variant="success" />
+                            <Spinner animation="grow" variant="danger" />
+                            <Spinner animation="grow" variant="warning" />
+                            <Spinner animation="grow" variant="info" />
+                            <Spinner animation="grow" variant="dark" />
+                          </div>
+                        ) : (
+                            <RadarChart
+                              outerRadius={150}
+                              width={1200}
+                              height={350}
+                              data={skillsADay}
+                            >
+                              <PolarGrid />
+                              <PolarAngleAxis dataKey="name" />
+                              <PolarRadiusAxis />
+                              <Radar name="Tổng giá" dataKey="price" stroke="#0088FE" fill="#0088FE" fillOpacity={0.6} />
+                            </RadarChart>
+                          )}
+                      </ResponsiveContainer>
+                    </div>
                   </Tab>
                   <Tab eventKey="7day" title="7 Ngày">
-                    {skills7Days.length === 0 ? (
-                      <div style={{ textAlign: 'center' }}>
-                        <Spinner animation="grow" variant="primary" />
-                        <Spinner animation="grow" variant="secondary" />
-                        <Spinner animation="grow" variant="success" />
-                        <Spinner animation="grow" variant="danger" />
-                        <Spinner animation="grow" variant="warning" />
-                        <Spinner animation="grow" variant="info" />
-                        <Spinner animation="grow" variant="dark" />
-                      </div>
-                    ) : (
-                        <RadarChart
-                          outerRadius={150}
-                          width={1200}
-                          height={350}
-                          data={skills7Days}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="name" />
-                          <PolarRadiusAxis />
-                          <Tooltip />
-                          <Radar name="Tổng giá" dataKey="price" stroke="#FF871C" fill="#FF8042" fillOpacity={0.6} />
-                        </RadarChart>
-                      )}
+                    <div style={{ width: '100%', height: 400 }}>
+                      <ResponsiveContainer>
+                        {skills7Days.length === 0 ? (
+                          <div style={{ textAlign: 'center' }}>
+                            <Spinner animation="grow" variant="primary" />
+                            <Spinner animation="grow" variant="secondary" />
+                            <Spinner animation="grow" variant="success" />
+                            <Spinner animation="grow" variant="danger" />
+                            <Spinner animation="grow" variant="warning" />
+                            <Spinner animation="grow" variant="info" />
+                            <Spinner animation="grow" variant="dark" />
+                          </div>
+                        ) : (
+                            <RadarChart
+                              outerRadius={150}
+                              width={1200}
+                              height={350}
+                              data={skills7Days}
+                            >
+                              <PolarGrid />
+                              <PolarAngleAxis dataKey="name" />
+                              <PolarRadiusAxis />
+                              <Tooltip />
+                              <Radar name="Tổng giá" dataKey="price" stroke="#FF871C" fill="#FF8042" fillOpacity={0.6} />
+                            </RadarChart>
+                          )}
+                      </ResponsiveContainer>
+                    </div>
                   </Tab>
                   <Tab eventKey="30day" title="30 Ngày">
-                    {skills30Days.length === 0 ? (
-                      <div style={{ textAlign: 'center' }}>
-                        <Spinner animation="grow" variant="primary" />
-                        <Spinner animation="grow" variant="secondary" />
-                        <Spinner animation="grow" variant="success" />
-                        <Spinner animation="grow" variant="danger" />
-                        <Spinner animation="grow" variant="warning" />
-                        <Spinner animation="grow" variant="info" />
-                        <Spinner animation="grow" variant="dark" />
-                      </div>
-                    ) : (
-                        <RadarChart
-                          outerRadius={150}
-                          width={1200}
-                          height={350}
-                          data={skills30Days}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="name" />
-                          <PolarRadiusAxis />
-                          <Tooltip />
-                          <Radar name="Tổng giá" dataKey="price" stroke="#D80072" fill="#FF1C94" fillOpacity={0.6} />
-                        </RadarChart>
-                      )}
+                    <div style={{ width: '100%', height: 400 }}>
+                      <ResponsiveContainer>
+                        {skills30Days.length === 0 ? (
+                          <div style={{ textAlign: 'center' }}>
+                            <Spinner animation="grow" variant="primary" />
+                            <Spinner animation="grow" variant="secondary" />
+                            <Spinner animation="grow" variant="success" />
+                            <Spinner animation="grow" variant="danger" />
+                            <Spinner animation="grow" variant="warning" />
+                            <Spinner animation="grow" variant="info" />
+                            <Spinner animation="grow" variant="dark" />
+                          </div>
+                        ) : (
+                            <RadarChart
+                              outerRadius={150}
+                              width={1200}
+                              height={350}
+                              data={skills30Days}
+                            >
+                              <PolarGrid />
+                              <PolarAngleAxis dataKey="name" />
+                              <PolarRadiusAxis />
+                              <Tooltip />
+                              <Radar name="Tổng giá" dataKey="price" stroke="#D80072" fill="#FF1C94" fillOpacity={0.6} />
+                            </RadarChart>
+                          )}
+                      </ResponsiveContainer>
+                    </div>
                   </Tab>
                   <Tab eventKey="90day" title="90 Ngày">
-                    {skills90Days.length === 0 ? (
-                      <div style={{ textAlign: 'center' }}>
-                        <Spinner animation="grow" variant="primary" />
-                        <Spinner animation="grow" variant="secondary" />
-                        <Spinner animation="grow" variant="success" />
-                        <Spinner animation="grow" variant="danger" />
-                        <Spinner animation="grow" variant="warning" />
-                        <Spinner animation="grow" variant="info" />
-                        <Spinner animation="grow" variant="dark" />
-                      </div>
-                    ) : (
-                        <RadarChart
-                          outerRadius={150}
-                          width={1200}
-                          height={350}
-                          data={skills90Days}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="name" />
-                          <PolarRadiusAxis />
-                          <Tooltip />
-                          <Radar name="Tổng giá" dataKey="price" stroke="#7318D8" fill="#7318D8" fillOpacity={0.6} />
-                        </RadarChart>
-                      )}
+                    <div style={{ width: '100%', height: 400 }}>
+                      <ResponsiveContainer>
+                        {skills90Days.length === 0 ? (
+                          <div style={{ textAlign: 'center' }}>
+                            <Spinner animation="grow" variant="primary" />
+                            <Spinner animation="grow" variant="secondary" />
+                            <Spinner animation="grow" variant="success" />
+                            <Spinner animation="grow" variant="danger" />
+                            <Spinner animation="grow" variant="warning" />
+                            <Spinner animation="grow" variant="info" />
+                            <Spinner animation="grow" variant="dark" />
+                          </div>
+                        ) : (
+                            <RadarChart
+                              outerRadius={150}
+                              width={1200}
+                              height={350}
+                              data={skills90Days}
+                            >
+                              <PolarGrid />
+                              <PolarAngleAxis dataKey="name" />
+                              <PolarRadiusAxis />
+                              <Tooltip />
+                              <Radar name="Tổng giá" dataKey="price" stroke="#7318D8" fill="#7318D8" fillOpacity={0.6} />
+                            </RadarChart>
+                          )}
+                      </ResponsiveContainer>
+                    </div>
+
                   </Tab>
                   <Tab eventKey="allday" title="Tất Cả">
-                    {skillsAllDays.length === 0 ? (
-                      <div style={{ textAlign: 'center' }}>
-                        <Spinner animation="grow" variant="primary" />
-                        <Spinner animation="grow" variant="secondary" />
-                        <Spinner animation="grow" variant="success" />
-                        <Spinner animation="grow" variant="danger" />
-                        <Spinner animation="grow" variant="warning" />
-                        <Spinner animation="grow" variant="info" />
-                        <Spinner animation="grow" variant="dark" />
-                      </div>
-                    ) : (
-                        <RadarChart
-                          outerRadius={150}
-                          width={1200}
-                          height={350}
-                          data={skillsAllDays}
-                        >
-                          <PolarGrid />
-                          <PolarAngleAxis dataKey="name" />
-                          <PolarRadiusAxis />
-                          <Tooltip />
-                          <Radar name="Tổng giá" dataKey="price" stroke="#00D866" fill="#42FF9B" fillOpacity={0.6} />
-                        </RadarChart>
-                      )}
+                    <div style={{ width: '100%', height: 400 }}>
+                      <ResponsiveContainer>
+                        {skillsAllDays.length === 0 ? (
+                          <div style={{ textAlign: 'center' }}>
+                            <Spinner animation="grow" variant="primary" />
+                            <Spinner animation="grow" variant="secondary" />
+                            <Spinner animation="grow" variant="success" />
+                            <Spinner animation="grow" variant="danger" />
+                            <Spinner animation="grow" variant="warning" />
+                            <Spinner animation="grow" variant="info" />
+                            <Spinner animation="grow" variant="dark" />
+                          </div>
+                        ) : (
+                            <RadarChart
+                              outerRadius={150}
+                              width={1200}
+                              height={350}
+                              data={skillsAllDays}
+                            >
+                              <PolarGrid />
+                              <PolarAngleAxis dataKey="name" />
+                              <PolarRadiusAxis />
+                              <Tooltip />
+                              <Radar name="Tổng giá" dataKey="price" stroke="#00D866" fill="#42FF9B" fillOpacity={0.6} />
+                            </RadarChart>
+                          )}
+                      </ResponsiveContainer>
+                    </div>
                   </Tab>
                 </Tabs>
               </div>

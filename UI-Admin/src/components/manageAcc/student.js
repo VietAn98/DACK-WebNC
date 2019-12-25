@@ -34,7 +34,7 @@ class student extends React.PureComponent {
     }
     return (
       <div
-        style={{ padding: '10px' }}
+        style={{ padding: '8em 2em 4em 2em' }}
       //   styles={{transform:`translateY(-50%)` }}
       >
         <h1

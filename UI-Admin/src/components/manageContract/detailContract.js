@@ -55,8 +55,8 @@ class detailContract extends React.PureComponent {
     });
 
     return (
-      <div style={{ padding: '2em' }}>
-        <div className="div-container ml-3">
+      <div style={{ padding: '8em 6em 4em 2em' }}>
+        <Container className="div-container">
           {detailContracts.hasOwnProperty('contract') ? (
             <Container className="contract-container">
               {contract[0].state === 2 ? <img src={unpaid} alt="stamp" /> : null}
@@ -382,7 +382,7 @@ class detailContract extends React.PureComponent {
                 <Spinner animation="grow" variant="dark" />
               </div>
             )}
-        </div>
+        </Container>
       </div>
     );
   }
