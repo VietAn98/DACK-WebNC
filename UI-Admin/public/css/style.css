@@ -246,8 +246,11 @@ a:hover {
 /*--nav strip start here--*/
 .header-main {
     background:#fff;
-    padding: 1em 2em;
+    padding: 1em 1em;
     box-shadow: 0 1px 6px 1px rgba(0,0,0,0.15);
+    position: fixed;
+    width: 88%;
+    z-index: 6;
     /* border-bottom: 2px solid rgba(131, 59, 0, 0.15); */
 }
 .header-right {
@@ -810,7 +813,7 @@ ul.dropdown-menu.drp-mnu li {
 /*--header strip end here-*/
 /*inner-block--*/
 .inner-block {
-    padding: 2em 2em 4em 2em;
+    padding: 8em 2em 4em 2em;
     background:rgba(255, 180, 131, 0.1);
 }
 .market-update-block {
