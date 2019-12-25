@@ -1,5 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import React from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import numeral from 'numeral';
 import Swal from 'sweetalert2';
 import history from '../history';

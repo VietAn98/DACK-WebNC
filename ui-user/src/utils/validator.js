@@ -16,13 +16,12 @@ class Validator {
     if (state.newPass !== '') {
       this.rules[3].args[0] = state.newPass;
     }
-    console.log('rules',this.rules);
-    this.rules.forEach(rule => {
+    console.log('rules', this.rules);
+    this.rules.forEach((rule) => {
       if (this.errors[rule.field]) return;
       const fieldValue = state[rule.field] || '';
       const args = rule.args || [];
-      const validationMethod =
-        typeof rule.method === 'string' ? methods[rule.method] : rule.method;
+      const validationMethod = typeof rule.method === 'string' ? methods[rule.method] : rule.method;
       if (validationMethod(fieldValue, ...args, state) !== rule.validWhen) {
         this.errors[rule.field] = rule.message;
         this.isValid = false;

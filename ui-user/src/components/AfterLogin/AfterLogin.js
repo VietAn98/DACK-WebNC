@@ -10,7 +10,7 @@ class AfterLogin extends React.PureComponent {
 	componentWillMount = () => {
 		const { getUserInfor } = this.props;
 		const user = JSON.parse(localStorage.getItem('user'));
-		console.log('user', user);
+		// console.log('user', user);
 		getUserInfor(user.userId);
 	}
 

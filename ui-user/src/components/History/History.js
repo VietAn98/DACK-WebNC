@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
 /* eslint-disable no-undef */
 /* eslint-disable no-prototype-builtins */
@@ -57,7 +59,7 @@ class History extends React.PureComponent {
           if (datenow - dateend > 3) {
             const { updateStateContract } = this.props;
             await updateStateContract(row.idContract, 3);
-            console.log('dateend - datenow', dateend - datenow);
+            // console.log('dateend - datenow', dateend - datenow);
           }
         }
       });
@@ -78,7 +80,7 @@ class History extends React.PureComponent {
       filterContractsOfStudent
     } = this.props;
     // console.log('obnj',obj);
-    const page = -1
+    const page = -1;
     // eslint-disable-next-line radix
     if (parseInt(obj.target.value) === 0) {
       if (decoded.categoryUser === 0) {
@@ -111,7 +113,7 @@ class History extends React.PureComponent {
 
   render() {
     const { contractByIdUser } = this.props;
-    let i = 0;
+    // let i = 0;
 
     const {
       numberPages,
@@ -126,7 +128,7 @@ class History extends React.PureComponent {
     for (let j = 1; j <= numberPages; j += 1) {
       arrPage.push(j);
     }
-    console.log('contractByIdUser', limitHistory);
+    // console.log('contractByIdUser', limitHistory);
     return (
       <div
         style={{
@@ -207,7 +209,7 @@ class History extends React.PureComponent {
                                 />
                               )}
                           </td>
-                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)} >{decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}</td>
+                          <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>{decoded.categoryUser === 1 ? `${item.StudentName}` : `${item.TeacherName}`}</td>
                           <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>{item.dateCreate}</td>
                           <td className="text-center" onClick={this.onClickRow.bind(this, item.idContract)}>
                             {item.state === 2

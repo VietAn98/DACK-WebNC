@@ -78,7 +78,7 @@ class Login extends React.PureComponent {
       inputPlaceholder: 'Enter your email address'
     });
     if (email) {
-      console.log(email);
+      // console.log(email);
       const { forgotPassword } = this.props;
       forgotPassword(email);
     }
@@ -89,13 +89,13 @@ class Login extends React.PureComponent {
     const tokenn = localStorage.token;
 
     const responseFacebook = (response) => {
-      console.log(response);
+      // console.log(response);
       const tokenBlob = new Blob(
         [JSON.stringify({ access_token: response.accessToken }, null, 2)],
         { type: 'application/json' }
       );
-      console.log('response', tokenBlob);
-      console.log('response', response.accessToken);
+      // console.log('response', tokenBlob);
+      // console.log('response', response.accessToken);
 
       const options = {
         method: 'POST',
@@ -109,10 +109,10 @@ class Login extends React.PureComponent {
       };
       fetch('http://localhost:3001/api/auth/facebook', options).then((r) => {
         const token = r.headers.get('x-auth-token');
-        r.json().then((user) => {
+        r.json().then(() => {
           if (token) {
             // this.setState({ isAuthenticated: true, user, token });
-            console.log('--------------------', token, user);
+            // console.log('--------------------', token, user);
           }
         });
       });
@@ -130,7 +130,7 @@ class Login extends React.PureComponent {
     };
 
     const responseGoogle = (response) => {
-      console.log('responseGG', response);
+      // console.log('responseGG', response);
 
       const { loginRequest } = this.props;
 

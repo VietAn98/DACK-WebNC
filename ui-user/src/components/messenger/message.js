@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import firebase from 'firebase';
@@ -20,10 +21,9 @@ export default class FormMessage extends Component {
       message: '',
       list: [],
       listKey: [],
+      // eslint-disable-next-line react/no-unused-state
       listFriend: {},
     };
-    // this.messageRef = realtimedb.ref().child(`${decoded.userId}+${decoded.userId}`);
-    // console.log('111111111', decoded)
     if (decoded.categoryUser === 0) {
       this.messageRef = realtimedb.ref().child(`chatchit/${decoded.userId}+${idReceive}`);
     } else {
@@ -48,7 +48,7 @@ export default class FormMessage extends Component {
   }
 
   handleSend = () => {
-    console.log(this.state.message);
+    // console.log(this.state.message);
     if (this.state.message) {
       const newItem = {
         userName: this.state.userName,
@@ -71,17 +71,16 @@ export default class FormMessage extends Component {
       const TempEndMess = Object.values(item.val());
       const endMess = TempEndMess[TempEndMess.length - 1];
       const idArr = item.key.toString().split('+');
-      console.log('aaaaaaaaaa',endMess);
+      // console.log('aaaaaaaaaa', endMess);
 
       // array.push(idArr[1]);
       Promise.resolve(getChatInforUserById(idArr[1])).then(() => {
         const { chatUserInfor } = this.props;
-        //lỗi ở đây
+        // lỗi ở đây
         array.push({ chatUserInfor, endMess });
         this.setState({
           listKey: array,
         });
-
       });
       // console.log('aaaaaaaaaaaaaaa', `${item.key }aaa`);
     });
@@ -111,7 +110,7 @@ export default class FormMessage extends Component {
     //   messageEnd = this.state.list[this.state.list.length - 1].message;
     // }
 
-    console.log('listttttttt11111', this.state.listKey);
+    // console.log('listttttttt11111', this.state.listKey);
 
     return (
       <div className="messageBody">

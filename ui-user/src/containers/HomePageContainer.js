@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import HomePage from '../pages/HomePage';
-import { getListTeacher, listSixTeacherTop } from '../actions/userAction';
+import { listSixTeacherTop } from '../actions/userAction';
 
 const mapStateToProps = (state) => ({
     listTeachers: state.listTeachers

@@ -51,7 +51,7 @@ class Register extends React.PureComponent {
     const tokenn = localStorage.token;
 
     const responseFacebook = (response) => {
-      console.log('responseFb', response);
+      // console.log('responseFb', response);
 
       const { registerRequest } = this.props;
 
@@ -75,7 +75,7 @@ class Register extends React.PureComponent {
     };
 
     const responseGoogle = (response) => {
-      console.log('responseGG', response);
+      // console.log('responseGG', response);
 
       const { registerRequest } = this.props;
 

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header/Header';
 // import { loginRequest } from '../actions/userAction';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = () => ({
 	// userProfile: state.userProfile
 });
 

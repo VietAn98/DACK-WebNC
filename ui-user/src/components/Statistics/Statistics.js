@@ -79,7 +79,7 @@ class Statistics extends React.PureComponent {
             sumEachYear,
             totalPriceNContract
         } = this.props;
-        console.log('totalPriceNContract', totalPriceNContract);
+        // console.log('totalPriceNContract', totalPriceNContract);
         let arrDate = [];
 
         // eslint-disable-next-line no-prototype-builtins

@@ -81,8 +81,6 @@ class ReadOnlyContract extends React.PureComponent {
             const { userProfiles, userInfor } = this.props;
             getCityByIdDistrict(userProfiles.districtId);
             getCityByIdDistrictForTeacher(userInfor.districtId);
-
-
         }
     };
 
@@ -108,6 +106,7 @@ class ReadOnlyContract extends React.PureComponent {
             inputAttributes: {
                 'aria-label': 'Type your message here'
             },
+            // eslint-disable-next-line consistent-return
             inputValidator: (value) => {
                 if (!value) {
                     return 'Bạn hãy viết gì đó vào đây!';
@@ -277,7 +276,12 @@ class ReadOnlyContract extends React.PureComponent {
                                                         <img
                                                             src={userProfiles.avatar ? `${userProfiles.avatar}` : `${avatar1}`}
                                                             alt="avatar"
-                                                            style={{ width: '100%', border: '1px dashed grey', padding: '2%', objectFit: 'fit' }}
+                                                            style={{
+                                                                width: '100%',
+                                                                border: '1px dashed grey',
+                                                                padding: '2%',
+                                                                bjectFit: 'fit'
+                                                            }}
                                                         />
                                                     </div>
                                                 </Form.Group>

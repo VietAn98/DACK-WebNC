@@ -2,12 +2,10 @@ import { connect } from 'react-redux';
 import SignUp from '../components/SignUp/SignUp';
 import { registerRequest, getListCity, getDistrictByIdCity } from '../actions/userAction';
 
-const mapStateToProps = (state) => {
-  return {
-    listCity: state.listCity,
-    districtNames: state.districtNames
-  };
-};
+const mapStateToProps = (state) => ({
+	listCity: state.listCity,
+	districtNames: state.districtNames
+});
 
 const mapDispatchToProps = (dispatch) => ({
 	registerRequest: (

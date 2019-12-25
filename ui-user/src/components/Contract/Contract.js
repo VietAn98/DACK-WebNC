@@ -138,7 +138,7 @@ class Contract extends React.PureComponent {
       const soNgay = document.getElementById('number').value;
       const soGio = document.getElementById('numberHour').value;
       const price = numeral(document.getElementById('price').innerHTML)._value;
-      console.log('price', price);
+      // console.log('price', price);
       if (
         dateFrom === ''
         || soTuan === ''
