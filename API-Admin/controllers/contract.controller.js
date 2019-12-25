@@ -104,7 +104,6 @@ module.exports = {
   },
 
   revenueByMonth: async (req, res) => {
-    const id = req.params.idTeacher;
     const arr = [];
     const nowDate = moment().format();
     const resultYear = moment(nowDate).year();
@@ -129,7 +128,6 @@ module.exports = {
   },
 
   revenueByYear: async (req, res) => {
-    const id = req.params.id;
     const nowDate = moment().format();
     const currentYear = moment(nowDate).year();
     const arrYear = [];
@@ -151,5 +149,56 @@ module.exports = {
     }
     res.status(200).json(arrYear);
 
+  },
+
+  topTenInOneDay: async (req, res) => {
+    const nowDate = new Date();
+    const date = req.query.date || moment(nowDate).format('DD-MM-YYYY');
+    console.log(date);
+    db.topTenInOneDay(date).then(resp => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+
+  },
+
+  topTenIn7Days: async (req, res) => {
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getDate() - 7);
+    const SubDate = moment(tempDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topTenInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+  },
+
+
+  topTenIn30Days: async (req, res) => {
+    // const date = req.params.date;
+    // const date = req.query.date || moment(nowDate).format('DD-MM-YYYY');
+
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getDate() - 30);
+    const SubDate = moment(tempDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topTenInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+
+  },
+
+  topTenIn90Days: async (req, res) => {
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getDate() - 90);
+    const SubDate = moment(tempDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topTenInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+  },
+
+  topTenInAllDay: async (req, res) => {
+    db.topTenInAllDay().then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
   }
 };

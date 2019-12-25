@@ -59,6 +59,23 @@ module.exports = {
 
   revenueByYear: (year) => {
     return db.load(`SELECT COUNT(*) as numberContract, SUM(price) as sumPrice, SUBSTRING(endDay, 7, 4) as year FROM contract WHERE state = 3 AND SUBSTRING(endDay, 7, 4) = ${year} GROUP by SUBSTRING(endDay, 7, 4)`)
+  },
+
+  topTenInAllDay: () => {
+    return db.load(`SELECT tb1.*, ac.name FROM (SELECT DISTINCT teacherId, SUM(price) as price FROM contract WHERE state = 3 GROUP by teacherId LIMIT 5) as tb1 JOIN account as ac on tb1.teacherId = ac.userId`)
+  },
+
+  topTenInOneDay: (date) => {
+    return db.load(`SELECT temp.*, ac.name FROM (SELECT DISTINCT teacherId, SUM(price) as price FROM contract WHERE state = 3 and endDay = '${date}' GROUP by teacherId LIMIT 5)
+    as temp JOIN account as ac on temp.teacherId = ac.userId`)
+  },
+
+  topTenInXXXDay: (date) => {
+    return db.load(`SELECT tb3.*, ct.name FROM(SELECT DISTINCT tb2.teacherId, SUM(price) as price FROM (SELECT * FROM (SELECT *, STR_TO_DATE(endDay,'%d-%m-%Y') as matDate FROM contract) as tb1 where tb1.matDate > '${date}' and state = 3 ) as tb2 GROUP by teacherId LIMIT 5) as tb3 JOIN account as ct on ct.userId = tb3.teacherId`)
   }
+
+
+  //SELECT tb3.*, ct.name FROM(SELECT DISTINCT tb2.teacherId, SUM(price) as price, tb2.endDate FROM (SELECT * FROM (SELECT *, DATE_SUB(STR_TO_DATE(endDay,'%d-%m-%Y'), INTERVAL 30 DAY) as matDate FROM contract) as tb1 where tb1.matDate > '2019-11-19' and state = 3 ) as tb2 GROUP by teacherId LIMIT 5) as tb3 JOIN account as ct on ct.userId = tb3.teacherId
+  
 
 }
