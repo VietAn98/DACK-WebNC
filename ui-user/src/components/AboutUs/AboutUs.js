@@ -16,7 +16,7 @@ class AboutUs extends React.PureComponent {
               style={{ fontSize: '2rem', marginTop: '1rem' }}
               className="decription"
             >
-              <span>Gia Sư Online</span>
+              <span>AH! UberForTuitor</span>
               {' '}
 là cầu nối giữa các
               {' '}

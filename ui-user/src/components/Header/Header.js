@@ -21,7 +21,8 @@ class Header extends React.PureComponent {
 						<Container>
 							<NavLink to="/">
 								<Navbar.Brand style={{ fontWeight: 'bold', fontSize: '2rem' }}>
-									GIA SƯ ONLINE
+									<span style={{ fontSize: '1.5em' }}>AH!</span>
+									UberForTuiTor
 								</Navbar.Brand>
 							</NavLink>
 							<Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Button } from 'react-bootstrap';
 import './Banner.css';
 
 import banner1 from '../../public/images/banner1.png';
@@ -14,23 +14,19 @@ class Banner extends React.PureComponent {
 				<Carousel className="banner">
 					<Carousel.Item>
 						<img className="d-block w-100" src={banner1} alt="First slide" />
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-						</Carousel.Caption>
 					</Carousel.Item>
 					<Carousel.Item>
 						<img className="d-block w-100" src={banner2} alt="Second slide" />
-						<Carousel.Caption>
-							<h3>Second slide label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<Carousel.Caption style={{ height: '70%', backgroundColor: 'rgba(0, 0, 0, 0.0)' }}>
+							<h3>Tham gia ngay để trải nghiệm một môi trường mới dành cho các bạn.</h3>
+							<Button variant="warning">Đăng ký ngay!</Button>
 						</Carousel.Caption>
 					</Carousel.Item>
 					<Carousel.Item>
 						<img className="d-block w-100" src={banner3} alt="Third slide" />
 						<Carousel.Caption>
-							<h3>Third slide label</h3>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+							<h3>WEBSITE DÀNH CHO CÁC BẠN GIA SƯ VÀ NHỮNG BẠN ĐANG TÌM KIỂM GIA SƯ</h3>
+							<p>Chúng tôi cam kết mang lại cho bạn những trải nghiệm thú vị nhất.</p>
 						</Carousel.Caption>
 					</Carousel.Item>
 				</Carousel>

@@ -20,16 +20,18 @@ class Footer extends React.PureComponent {
         >
           <Container>
             <div className="d-flex justify-content-between p-3">
-              <h2 style={{ marginTop: '0' }}>Liên hệ</h2>
+              <div>
+                <h3 style={{ marginTop: '0', borderBottom: '1px dashed #ED3833', width: 'fit-content' }}>Developer</h3>
+                <div className="ml-5" style={{ fontSize: 18 }}>
+                  <p>1612241 - Lê Công Hưng</p>
+                  <p>1612907 - Nguyễn Thị Việt An</p>
+                </div>
+              </div>
+
               <div className="d-flex justify-content-between social-group">
                 <div className="p-3">
                   <a href="facebook.com">
                     <i className="fab fa-facebook-square" />
-                  </a>
-                </div>
-                <div className="p-3">
-                  <a href="youtube.com">
-                    <i className="fab fa-youtube-square" />
                   </a>
                 </div>
                 <div className="p-3">
@@ -39,8 +41,13 @@ class Footer extends React.PureComponent {
                 </div>
               </div>
             </div>
-            <p className="d-flex text-light ">
-              Gia Sư Online with -
+            <p className="d-flex text-light float-right">
+              <b>
+                AH!UberForTuitor
+{' '}
+              </b>
+              &nbsp;
+              with -
               <Jello forever>
                 <FaHeart size={24} style={{ color: '#ed3833' }} />
               </Jello>

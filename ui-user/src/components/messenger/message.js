@@ -2,6 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import moment from 'moment';
 import jwtDecode from 'jwt-decode';
 import {
   Button, Form
@@ -15,10 +16,12 @@ export default class FormMessage extends Component {
     const tokenn = localStorage.token;
     const decoded = jwtDecode(tokenn);
     const path = window.location.pathname.split('/');
+    // const newTime = new Date();
     const idReceive = path[path.length - 1];
     this.state = {
       userName: decoded.userId,
       message: '',
+      timeNow: '',
       list: [],
       listKey: [],
       // eslint-disable-next-line react/no-unused-state
@@ -50,7 +53,9 @@ export default class FormMessage extends Component {
   handleSend = () => {
     // console.log(this.state.message);
     if (this.state.message) {
+      const time = new Date();
       const newItem = {
+        timeNow: (moment(time).format('lll')).toString(),
         userName: this.state.userName,
         message: this.state.message
       };
@@ -104,20 +109,13 @@ export default class FormMessage extends Component {
   render() {
     const tokenn = localStorage.token;
     const decoded = jwtDecode(tokenn);
-    // const { userInfor } = this.props;
-    // let messageEnd = null;
-    // if (this.state.list.length !== 0) {
-    //   messageEnd = this.state.list[this.state.list.length - 1].message;
-    // }
-
-    // console.log('listttttttt11111', this.state.listKey);
 
     return (
       <div className="messageBody">
-        <div className="container py-5 px-4">
-          <header className="text-center">
-            <h1 className="display-4 text-white">WEB gia sư online</h1>
-            <p className="text-white lead mb-0">Hãy nói theo cách của bạn</p>
+        <div className="container" style={{ padding: '4em' }}>
+          <header className="text-center mt-5">
+            <h1 className="display-4 text-white"><b>CHATBOX</b></h1>
+            <p className="text-white lead mb-5">Hãy nói theo cách của bạn</p>
           </header>
 
           <div className="row rounded-lg overflow-hidden shadow">
@@ -131,20 +129,20 @@ export default class FormMessage extends Component {
                   <div className="messages-box">
                     <div className="list-group rounded-0">
                       {this.state.listKey.map((item) => (
-                          <Button onClick={this.onClickChat} className="list-group-item list-group-item-action active text-white rounded-0">
-                            <div className="media">
-                              <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
-                              <div className="media-body ml-4">
-                                <div className="d-flex align-items-center justify-content-between mb-1">
-                                  <h6 className="mb-0">{item.chatUserInfor.name}</h6>
-                                  <small className="small font-weight-bold">25 Dec</small>
-                                </div>
-
-                                <p className="font-italic mb-0 text-small">{item.endMess.message}</p>
+                        <Button onClick={this.onClickChat} className="list-group-item list-group-item-action active text-white rounded-0">
+                          <div className="media">
+                            <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" className="rounded-circle" />
+                            <div className="media-body ml-4">
+                              <div className="d-flex align-items-center justify-content-between mb-1">
+                                <h6 className="mb-0">{item.chatUserInfor.name}</h6>
+                                <small className="small font-weight-bold">25 Dec</small>
                               </div>
+
+                              <p className="font-italic mb-0 text-small">{item.endMess.message}</p>
                             </div>
-                          </Button>
-                        ))}
+                          </div>
+                        </Button>
+                      ))}
                     </div>
                   </div>
                 ) : null}
@@ -163,7 +161,7 @@ export default class FormMessage extends Component {
                           <div className="bg-light rounded py-2 px-3 mb-2">
                             <p className="text-small mb-0 text-muted">{item.message}</p>
                           </div>
-                          <p className="small text-muted">12:00 PM | Aug 13</p>
+                          <p className="small text-muted">{item.timeNow}</p>
                         </div>
                       </div>
                     );
@@ -174,7 +172,7 @@ export default class FormMessage extends Component {
                         <div className="bg-primary rounded py-2 px-3 mb-2">
                           <p className="text-small mb-0 text-white">{item.message}</p>
                         </div>
-                        <p className="small text-muted">12:00 PM | Aug 13</p>
+                        <p className="small text-muted">{item.timeNow}</p>
                       </div>
                     </div>
                   );
@@ -185,14 +183,14 @@ export default class FormMessage extends Component {
                 <div className="input-group">
                   <input
                     type="text"
-                    style={{ color: 'black' }}
+                    style={{ color: 'black', width: '86%' }}
                     value={this.state.message}
                     onChange={this.handleChange.bind(this)}
                     onKeyPress={this.handleKeyPress.bind(this)}
                     placeholder="Type a message"
-                    className="form-control rounded-0 border-0 py-4 bg-light"
+                    className="form-control rounded-0 border-0 py-4 bg-light text-small"
                   />
-                  <Button type="submit" onClick={() => this.handleSend()} className="btn btn-link"><i className="fa fa-paper-plane" /></Button>
+                  <Button type="submit" onClick={() => this.handleSend()} className="btn btn-link float-right"><i className="fa fa-paper-plane" /></Button>
                 </div>
               </Form>
 
