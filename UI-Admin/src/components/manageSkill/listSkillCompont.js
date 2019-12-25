@@ -108,7 +108,7 @@ class ListSkill extends React.PureComponent {
       arrPage.push(i);
     }
     return (
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '8em 2em 4em 2em' }}>
         <h1
           style={{ textAlign: 'center', marginBottom: '20px', padding: '20px' }}
         >

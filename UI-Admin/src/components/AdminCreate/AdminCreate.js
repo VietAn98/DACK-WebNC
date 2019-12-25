@@ -20,8 +20,8 @@ export class AdminCreate extends React.PureComponent {
 
   render() {
     return (
-      <div className="adminSignUp inner-block" style={{ padding: '2em 2em 2em 1em' }}>
-        <Container className="my-container">
+      <div className="adminSignUp inner-block" style={{ padding: '8em 2em 4em 2em' }}>
+        <Container className="my-container" style={{ width: '90%' }}>
           <div
             style={{
               // border: "1px dashed black",

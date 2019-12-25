@@ -37,12 +37,22 @@ const APIService = {
   //  complaint
   GET_LIMIT_COMPLAINT: `${URL}/api-admin/get-list-complaint`,
 
-//   GET_INFO: `${URL}/api/current-user-profile`,
-//   CHANGE_INFO: `${URL}/api/updateInfor`,
-//   // CHANGE_AVATAR: `${URL}/user/uploadavatar`,
- 
-//   GET_LIST_FIELD_BY_DIST: `${URL}/api/get-list-field-`,
-//   GET_LIST_DISTRICT: `${URL}/api/list-district-in-city-`
+  // Statistics Thống kê
+  REVENUE_BY_DAY: `${URL}/api-admin/revenue-by-date`,
+  REVENUE_BY_MONTH: `${URL}/api-admin/revenue-by-month`,
+  REVENUE_BY_YEAR: `${URL}/api-admin/revenue-by-year`,
+
+  SKILLS_IN_A_DAY: `${URL}/api-admin/top-revenue-by-skill-in-one-day`,
+  SKILLS_IN_7_DAY: `${URL}/api-admin/top-revenue-by-skill-in-7-day`,
+  SKILLS_IN_30_DAY: `${URL}/api-admin/top-revenue-by-skill-in-30-day`,
+  SKILLS_IN_90_DAY: `${URL}/api-admin/top-revenue-by-skill-in-90-day`,
+  SKILLS_ALL: `${URL}/api-admin/top-revenue-by-skill-in-all-day`,
+
+  TEACHER_TOP10_A_DAY: `${URL}/api-admin/top-ten-in-one-day`,
+  TEACHER_TOP10_7_DAY: `${URL}/api-admin/top-ten-in-7-day`,
+  TEACHER_TOP10_30_DAY: `${URL}/api-admin/top-ten-in-30-day`,
+  TEACHER_TOP10_90_DAY: `${URL}/api-admin/top-ten-in-90-day`,
+  TEACHER_TOP10_ALL: `${URL}/api-admin/top-ten-in-all-day`,
 };
 
 export default APIService;

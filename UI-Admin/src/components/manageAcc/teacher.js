@@ -38,7 +38,7 @@ class student extends React.PureComponent {
       arrPage.push(i);
     }
     return (
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '8em 2em 4em 2em' }}>
         <h1
           style={{ textAlign: 'center', marginBottom: '20px', padding: '20px' }}
         >
@@ -73,7 +73,7 @@ class student extends React.PureComponent {
             {teachers.hasOwnProperty('limitTeacher')
                // eslint-disable-next-line no-return-assign
               ? limitTeacher.map((tch) => (
-                <tr onClick={this.onnclicks.bind(this, tch.userId)}>
+                <tr style={{ cursor: 'pointer' }} onClick={this.onnclicks.bind(this, tch.userId)}>
                   <td style={{ textAlign: 'center' }}>{(stt += 1)}</td>
                   <td>{tch.name}</td>
                   <td>{tch.gmail}</td>
