@@ -200,5 +200,52 @@ module.exports = {
     db.topTenInAllDay().then((resp) => {
       res.status(200).json(resp);
     }).catch((err) => { res.status(400).json(err) })
+  },
+
+  topSkillInonelDay: async (req, res) => {
+    const nowDate = new Date();
+    //const tempDate = nowDate.setDate(nowDate.getDate() - 0);
+    const SubDate = moment(nowDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topSkillInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+
+  },
+  topSkillIn7Days: async (req, res) => {
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getDate() - 7);
+    const SubDate = moment(tempDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topSkillInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+
+  },
+  topSkillIn30Days: async (req, res) => {
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getDate() - 30);
+    const SubDate = moment(tempDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topSkillInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+
+  },
+  topSkillIn90Days: async (req, res) => {
+    const nowDate = new Date();
+    const tempDate = nowDate.setDate(nowDate.getDate() - 90);
+    const SubDate = moment(tempDate).format('YYYY-MM-DD');
+    console.log(SubDate);
+    db.topSkillInXXXDay(SubDate).then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
+
+  },
+  topSkillInAllDays: async (req, res) => {
+    db.topSkillInAllDay().then((resp) => {
+      res.status(200).json(resp);
+    }).catch((err) => { res.status(400).json(err) })
   }
+
 };

@@ -18,4 +18,13 @@ module.exports = (app) => {
     app.get('/api-admin/top-ten-in-30-day', contractController.topTenIn30Days)
     app.get('/api-admin/top-ten-in-90-day', contractController.topTenIn90Days)
     app.get('/api-admin/top-ten-in-all-day', contractController.topTenInAllDay)
+
+    // Thống kê top revenue by skill
+    app.get('/api-admin/top-revenue-by-skill-in-one-day', contractController.topSkillInonelDay)
+    app.get('/api-admin/top-revenue-by-skill-in-7-day', contractController.topSkillIn7Days)
+    app.get('/api-admin/top-revenue-by-skill-in-30-day', contractController.topSkillIn30Days)
+    app.get('/api-admin/top-revenue-by-skill-in-90-day', contractController.topSkillIn90Days)
+    app.get('/api-admin/top-revenue-by-skill-in-all-day', contractController.topSkillInAllDays)
+
+
 }
