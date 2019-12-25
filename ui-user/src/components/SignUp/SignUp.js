@@ -31,13 +31,19 @@ class Register extends React.PureComponent {
     const name = document.getElementById('name').value;
     const gmail = document.getElementById('gmail').value;
     const password = document.getElementById('password').value;
+    const repassword = document.getElementById('re-password').value;
     const districtId = document.getElementById('district').value;
     const gender = document.getElementById('selectGender').value;
     const categoryUser = document.getElementById('categoryUser').value;
     const address = document.getElementById('address').value;
-    registerRequest(name, gmail, password, districtId, gender, categoryUser, address);
-    Swal.fire('Đang kiểm tra tài khoản');
-    Swal.showLoading();
+
+    if (password !== repassword) {
+      Swal.fire('Thông báo', 'Mật khâu không giống nhau', 'error');
+    } else {
+      registerRequest(name, gmail, password, districtId, gender, categoryUser, address);
+      Swal.fire('Đang kiểm tra tài khoản');
+      Swal.showLoading();
+    }
   };
 
   render() {

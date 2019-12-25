@@ -14,7 +14,12 @@ class ChangePassword extends React.PureComponent {
     const decoded = jwtDecode(tokenn);
     const oldPass = document.getElementById('oldPass').value;
     const newPass = document.getElementById('newPass').value;
-    changeOldPassword(decoded.gmail, newPass, oldPass);
+    const rePass = document.getElementById('rePass').value;
+    if (rePass === newPass) {
+      changeOldPassword(decoded.gmail, newPass, oldPass);
+    } else {
+      Swal.fire('Thông báo', 'Nhập lại mật khẩu bị sai!', 'error');
+    }
   };
 
   render() {
