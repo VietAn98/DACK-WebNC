@@ -194,3 +194,17 @@ export const topTeacherAll = () => (dispatch) => fetch(API.TEACHER_TOP10_ALL, {
     .catch((error) => {
         throw error;
     });
+
+export const getListUser = () => (dispatch) => fetch(API.GET_SUM_USER, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    }
+})
+    .then((response) => response.json())
+    .then((user) => {
+        dispatch({ type: 'GET_SUM_USER', user });
+    })
+    .catch((error) => {
+        throw error;
+    });

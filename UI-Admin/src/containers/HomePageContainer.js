@@ -9,7 +9,7 @@ import {
   skillsIn30Day,
   skillsIn90Day,
   skillsInAllDay,
-
+  getListUser,
   topTeacherInADay,
   topTeacherIn7Day,
   topTeacherIn30Day,
@@ -32,6 +32,8 @@ const mapStateToProps = (state) => ({
   topTeacher30Days: state.topTeacher30Days,
   topTeacher90Days: state.topTeacher90Days,
   topTeachersAll: state.topTeachersAll,
+
+  sumUser: state.sumUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -50,6 +52,8 @@ const mapDispatchToProps = (dispatch) => ({
   topTeacherIn30Day: () => dispatch(topTeacherIn30Day()),
   topTeacherIn90Day: () => dispatch(topTeacherIn90Day()),
   topTeacherAll: () => dispatch(topTeacherAll()),
+
+  getListUser: () => dispatch(getListUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

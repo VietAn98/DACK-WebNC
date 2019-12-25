@@ -2,14 +2,12 @@
 /* eslint-disable no-prototype-builtins */
 import React from 'react';
 import {
-  Table,
   Button,
-  Pagination,
   Form,
-  Col,
   Spinner,
   Container
 } from 'react-bootstrap';
+import numeral from 'numeral';
 import Swal from 'sweetalert2';
 import history from '../../history';
 import unpaid from '../../images/unpaid.jpg';
@@ -32,14 +30,22 @@ class detailContract extends React.PureComponent {
     updateContract(id, 5);
   };
 
-  onChangeContract = (obj) => {
+  seeMessage = (idStudent, idTeacher) => {
+    const path = window.location.pathname.split('/');
+    const id = path[path.length - 1];
+
+    history.push(`/message/${id}/${idStudent}/${idTeacher}`);
+  }
+
+  onChangeContract = async (obj) => {
     Swal.fire('Đang cập nhật');
     Swal.showLoading();
     const idState = obj.target.value;
     const path = window.location.pathname.split('/');
     const id = path[path.length - 1];
     const { updateContract } = this.props;
-    updateContract(id, idState);
+    await updateContract(id, idState);
+    window.location.reload();
   };
 
   render() {
@@ -56,11 +62,29 @@ class detailContract extends React.PureComponent {
 
     return (
       <div style={{ padding: '8em 6em 4em 2em' }}>
+        <div style={{ width: '100%' }}>
+          <div className="float-left" style={{ width: '20%' }}>
+            {detailContracts.hasOwnProperty('student')
+              ? (
+                <Button
+                  style={{ width: '100%' }}
+                  type="button"
+                  onClick={this.seeMessage.bind(this, student[0].userId, teacher[0].userId)}
+                  className="mb-3 float-left"
+                  variant="success"
+                >
+                  <i className="fa fa-comments" />
+                  {' '}
+                  Quá trình thảo luận
+                </Button>
+              ) : null}
+          </div>
+        </div>
         <Container className="div-container">
           {detailContracts.hasOwnProperty('contract') ? (
             <Container className="contract-container">
               {contract[0].state === 2 ? <img src={unpaid} alt="stamp" /> : null}
-              <h1 className="text-center mb-2">
+              <h1 className="text-center mb-2 mt-4">
                 <b>HỢP ĐỒNG THUÊ GIÁO VIÊN</b>
               </h1>
               <p className="text-center mb-5">
@@ -279,8 +303,8 @@ class detailContract extends React.PureComponent {
                     <div className="col-sm-2 col-md-2 text-center mt-3">
                       <p className="color-red">
                         {detailContracts.hasOwnProperty('contract')
-                        ? contract[0].startDay
-                        : null}
+                          ? contract[0].startDay
+                          : null}
                       </p>
                     </div>
                     <div className="col-sm-2 col-md-2 text-center mt-3">
@@ -293,16 +317,16 @@ class detailContract extends React.PureComponent {
                     <div className="col-sm-2 col-md-2 text-center mt-3">
                       <p className="color-red">
                         {detailContracts.hasOwnProperty('teacher')
-                          ? teacher[0].price
+                          ? numeral(`${teacher[0].price}`).format('(0,0)')
                           : null}
-                      đ
+                        VND
                       </p>
                     </div>
                     <div className="col-sm-2 col-md-2 text-center">
                       <h2 className="color-red mt-3">
                         <b style={{ color: 'red' }}>
                           {detailContracts.hasOwnProperty('contract')
-                            ? contract[0].price
+                            ? numeral(`${contract[0].price}`).format('(0,0)')
                             : null}
                         </b>
                       </h2>
@@ -357,6 +381,7 @@ class detailContract extends React.PureComponent {
                     <Form.Group controlId="exampleForm.ControlSelect1">
                       <Form.Label>Thay đổi trang thái</Form.Label>
                       <Form.Control
+                        style={{ width: '30%' }}
                         as="select"
                         onChange={this.onChangeContract.bind(this)}
                       >

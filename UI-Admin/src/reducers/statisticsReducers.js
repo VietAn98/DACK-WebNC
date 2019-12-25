@@ -127,3 +127,13 @@ export const topTeachersAll = (state = [], action) => {
             return state;
     }
 };
+
+export const sumUser = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_SUM_USER': {
+            return action.user;
+        }
+        default:
+            return state;
+    }
+};
