@@ -42,11 +42,17 @@ class EditProfile extends React.PureComponent {
 
   onGetAvatar = (e) => {
     const { avatarName, uploadAvatar } = this.props;
-    avatarName(e.target.files[0]);
+    avatarName(e.target.files[0].name);
 
     const fd = new FormData();
     fd.append('avatar', e.target.files[0], e.target.files[0].name);
     uploadAvatar(fd);
+
+    // const { userLogin, currentUser, nameAvatar } = this.props;
+    // userLogin({
+    //   ...currentUser,
+    //   avatar: nameAvatar
+    // });
   };
 
   onChangeCity = (e) => {
@@ -96,7 +102,7 @@ class EditProfile extends React.PureComponent {
 
     let avatar = '';
     if (currentUser.avatar === '' || currentUser.avatar === null) {
-      avatar = `http://localhost:3001/images/${nameAvatar.name}`;
+      avatar = `http://localhost:3001/images/${nameAvatar}`;
     } else {
       avatar = currentUser.avatar;
     }
@@ -104,10 +110,11 @@ class EditProfile extends React.PureComponent {
     const name = document.getElementById('name').value;
     const genderSelected = document.getElementById('selectGender').value;
     const idDistrict = document.getElementById('selectDistrict').value;
+    const Address = document.getElementById('address').value;
 
     if (user.categoryUser === 0) {
       Promise.resolve(
-        updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar)
+        updateStudentInfor(gmail, name, genderSelected, idDistrict, avatar, Address)
       ).then(() => {
         document.getElementById('loader').style.display = 'none';
         Swal.fire({
@@ -143,7 +150,8 @@ class EditProfile extends React.PureComponent {
           intro,
           stringSkill,
           price,
-          avatar
+          avatar,
+          Address
         )
       ).then(() => {
         document.getElementById('loader').style.display = 'none';
@@ -170,6 +178,11 @@ class EditProfile extends React.PureComponent {
       currentUser,
       listSkills
     } = this.props;
+
+    // const { nameAvatar } = this.props;
+    // console.log('e.nameAvatar', nameAvatar);
+
+    // console.log('currentUser', currentUser);
 
     const arraty = [];
     listSkills.forEach((item) => {
@@ -210,8 +223,8 @@ class EditProfile extends React.PureComponent {
         <div className="w3-agile_mail_grids justify-center">
           <div className="col-md-12 w3-agile_mail_grid_right">
             {listSkills.length === 0 ? (
-            <div className="loader" id="loader" style={{ margin: 'auto', zIndex: '99999' }} />)
-            : (
+              <div className="loader" id="loader" style={{ margin: 'auto', zIndex: '99999' }} />)
+              : (
                 <Form
                   action="#"
                   method="post"
@@ -572,7 +585,7 @@ class EditProfile extends React.PureComponent {
                     <input type="submit" value="Hoàn thành" className="mt-5" />
                   </div>
                 </Form>
-            )}
+              )}
 
           </div>
         </div>

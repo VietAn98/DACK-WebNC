@@ -86,12 +86,30 @@ class ReadOnlyContract extends React.PureComponent {
 
     onClickAccept = (idContract, state) => {
         const { updateStateContract } = this.props;
-        updateStateContract(idContract, state);
+        Promise.resolve(updateStateContract(idContract, state))
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã xác nhận',
+                });
+            })
+            .then(() => {
+                window.location.reload();
+            });
     }
 
     onClickDeny = (idContract, state) => {
         const { updateStateContract } = this.props;
-        updateStateContract(idContract, state);
+        Promise.resolve(updateStateContract(idContract, state))
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đã Từ chối',
+                });
+            })
+            .then(() => {
+                window.location.reload();
+            });
     }
 
     onClickBack = () => {
@@ -109,7 +127,7 @@ class ReadOnlyContract extends React.PureComponent {
             // eslint-disable-next-line consistent-return
             inputValidator: (value) => {
                 if (!value) {
-                    return 'Bạn hãy viết gì đó vào đây!';
+                    return 'Bạn hãy cho đánh giá!';
                 }
             },
             showCancelButton: true

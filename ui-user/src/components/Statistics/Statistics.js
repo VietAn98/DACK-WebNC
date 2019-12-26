@@ -192,6 +192,7 @@ class Statistics extends React.PureComponent {
                                                     <Area
                                                         type="monotone"
                                                         dataKey="sumPrice"
+                                                        name="Tổng tiền"
                                                         // dataKey={numeral("sumPrice").format('(0,0)')}
                                                         stroke="#8884d8"
                                                         fill="#8884d8"
@@ -278,7 +279,7 @@ class Statistics extends React.PureComponent {
                                                     <YAxis />
                                                     <Tooltip />
                                                     <Legend />
-                                                    <Bar dataKey="sum" fill="#82ca9d" />
+                                                    <Bar dataKey="sum" name="Tổng tiền" fill="#82ca9d" />
                                                     {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
                                                 </BarChart>
                                             </div>
@@ -350,8 +351,8 @@ class Statistics extends React.PureComponent {
                                                     <YAxis />
                                                     <Tooltip />
                                                     <Legend />
-                                                    <Bar dataKey="sumPrice" fill="#82ca9d" />
-                                                    <Bar dataKey="numberContract" fill="#8884d8" />
+                                                    <Bar dataKey="sumPrice" name="Tổng tiền" fill="#82ca9d" />
+                                                    <Bar dataKey="numberContract" name="Tổng hợp đồng" fill="#8884d8" />
                                                 </BarChart>
                                             </div>
                                         </div>
